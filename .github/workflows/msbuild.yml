@@ -9,9 +9,14 @@ on:
   
 jobs:
 
-  build:
-  
-    runs-on: windows-2022
+  build:  
+    name: ${{ matrix.os }} ${{ matrix.platform }} ${{ matrix.configuration }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+       matrix:
+          os: [windows-2022]
+          platform: [x86, x64]
+          configuration: [Debug, Release]
 
     steps:
   
@@ -24,29 +29,16 @@ jobs:
       - name: Setup VSTest to PATH
         uses: darenm/Setup-VSTest@v1.2
 
-      - name: Run MSBuild Debug
-        run: msbuild build/RetroCode/RetroCode.sln -property:Configuration=Debug -property:Platform=x64
-            
-      - name: Run MSBuild Release
-        run: msbuild build/RetroCode/RetroCode.sln -property:Configuration=Release -property:Platform=x64
+      - name: Run MSBuild
+        run: msbuild build/RetroCode/RetroCode.sln -property:Configuration=${{ matrix.configuration }} -property:Platform=${{ matrix.platform }}
 
-      - name: Run Debug Tests (for memory leaks)
-        run: vstest.console.exe build/RetroCode/x64/Debug/RetroCore.Test.dll
-
-      - name: Run Release Tests (client version)
-        run: vstest.console.exe build/RetroCode/x64/Release/RetroCore.Test.dll
+      - name: Run Tests
+        run: vstest.console.exe build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCore.Test.dll
       
-      - name: Install Doxygen
-        uses: ssciwr/doxygen-install@v1.2.0
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: RetroCode-artifact
+          name: RetroCode-${{ matrix.os }}-${{ matrix.os }}-${{ matrix.platform }}-${{ matrix.configuration }}
           path: |
-              include
-              build/RetroCode/x64/Release/RetroCore.dll
-              build/RetroCode/x64/Release/RetroCore.lib
-              build/RetroCode/x64/Debug/RetroCore.dll
-              build/RetroCode/x64/Debug/RetroCore.pdb
-              build/RetroCode/x64/Debug/RetroCore.lib
+              build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCore.dll
+              build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCore.lib
