@@ -8,5 +8,6 @@
 #define PCH_H
 
 // ajouter les en-têtes à précompiler ici
+#include <RetroCode\Core.h>
 
 #endif //PCH_H
