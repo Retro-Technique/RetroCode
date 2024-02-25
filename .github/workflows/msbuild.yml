@@ -1,44 +1,52 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: MSBuild
 
 on:
-  push:
-    branches: [ "main" ]
+
   pull_request:
-    branches: [ "main" ]
-
-env:
-  # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: .
-
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-  BUILD_CONFIGURATION: Release
-
-permissions:
-  contents: read
-
+    branches:
+      - main
+  workflow_dispatch:
+  
 jobs:
+
   build:
-    runs-on: windows-latest
+  
+    runs-on: windows-2022
 
     steps:
-    - uses: actions/checkout@v3
+  
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+      - name: Setup VSTest to PATH
+        uses: darenm/Setup-VSTest@v1.2
 
-    - name: Restore NuGet packages
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+      - name: Run MSBuild Debug
+        run: msbuild build/RetroCode/RetroCore.sln -property:Configuration=Debug -property:Platform=x64
+            
+      - name: Run MSBuild Release
+        run: msbuild build/RetroCode/RetroCore.sln -property:Configuration=Release -property:Platform=x64
 
-    - name: Build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
-      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      - name: Run Debug Tests (for memory leaks)
+        run: vstest.console.exe build/RetroCode/x64/Debug/RetroCore.Test.dll
+
+      - name: Run Release Tests (client version)
+        run: vstest.console.exe build/RetroCode/x64/Release/RetroCore.Test.dll
+      
+      - name: Install Doxygen
+        uses: ssciwr/doxygen-install@v1.2.0
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: RetroCode-artifact
+          path: |
+              include
+              build/RetroCode/x64/Release/RetroCore.dll
+              build/RetroCode/x64/Release/RetroCore.lib
+              build/RetroCode/x64/Debug/RetroCore.dll
+              build/RetroCode/x64/Debug/RetroCore.pdb
+              build/RetroCode/x64/Debug/RetroCore.lib

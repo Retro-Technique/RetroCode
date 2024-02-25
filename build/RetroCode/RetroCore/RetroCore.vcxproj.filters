@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="local">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{8b08d96f-a80b-4f60-bef7-7421afe7c51c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include\Core">
+      <UniqueIdentifier>{d8c1c5fa-4da7-4e8c-ada4-03be3dc209af}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="RetroCore.cpp">
+      <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Base64.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Clock.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Color.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\i18n.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Interpolation.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Logger.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\LogLevel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\LogManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\ObjectEx.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\PerlinNoise.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\PrefPath.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Random.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Resource.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Shuffle.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\StopWatch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\System.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Timer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\RetroCore.rc2">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="RetroCore.def">
+      <Filter>local</Filter>
+    </None>
+    <None Include="..\..\..\include\RetroCode\Core\Circular.inl">
+      <Filter>include\Core</Filter>
+    </None>
+    <None Include="..\..\..\include\RetroCode\Core\MessageQueue.inl">
+      <Filter>include\Core</Filter>
+    </None>
+    <None Include="..\..\..\include\RetroCode\Core\Operation.inl">
+      <Filter>include\Core</Filter>
+    </None>
+    <None Include="..\..\..\include\RetroCode\Core\Queue.inl">
+      <Filter>include\Core</Filter>
+    </None>
+    <None Include="..\..\..\include\RetroCode\Core\Rect.inl">
+      <Filter>include\Core</Filter>
+    </None>
+    <None Include="..\..\..\include\RetroCode\Core\Stack.inl">
+      <Filter>include\Core</Filter>
+    </None>
+    <None Include="..\..\..\include\RetroCode\Core\StaticArray.inl">
+      <Filter>include\Core</Filter>
+    </None>
+    <None Include="..\..\..\include\RetroCode\Core\Vector2.inl">
+      <Filter>include\Core</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>local</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\RetroCode\Core\LogManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Base64.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Circular.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Clock.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Color.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\i18n.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\ILogObserver.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Interpolation.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Logger.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\LogLevel.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\MessageQueue.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\ObjectEx.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Operation.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\PerlinNoise.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\PrefPath.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Queue.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Random.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Rect.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Resource.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Shuffle.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Stack.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\StaticArray.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\StopWatch.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\System.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Timer.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Vector2.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RetroCore.rc">
+      <Filter>Fichiers de ressources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
