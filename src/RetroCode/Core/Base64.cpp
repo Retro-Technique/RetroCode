@@ -36,19 +36,19 @@ namespace retro
         constexpr const CHAR CB64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         constexpr const CHAR CD64[] = "|$$$}rstuvwxyz{$$$$$$$>?@ABCDEFGHIJKLMNOPQRSTUVW$$$$$$XYZ[\\]^_`abcdefghijklmnopq";
 
-        static inline void EncodeBlock(const BYTE lpszIn[3], BYTE lpszOut[4], size_t uLength)
+        static inline void EncodeBlock(const BYTE pszIn[3], BYTE pszOut[4], size_t uLength)
         {
-            lpszOut[0] = CB64[lpszIn[0] >> 2];
-            lpszOut[1] = CB64[((lpszIn[0] & 0x03) << 4) | ((lpszIn[1] & 0xf0) >> 4)];
-            lpszOut[2] = static_cast<BYTE>(uLength > 1 ? CB64[((lpszIn[1] & 0x0f) << 2) | ((lpszIn[2] & 0xc0) >> 6)] : '=');
-            lpszOut[3] = static_cast<BYTE>(uLength > 2 ? CB64[lpszIn[2] & 0x3f] : '=');
+            pszOut[0] = CB64[pszIn[0] >> 2];
+            pszOut[1] = CB64[((pszIn[0] & 0x03) << 4) | ((pszIn[1] & 0xf0) >> 4)];
+            pszOut[2] = static_cast<BYTE>(uLength > 1 ? CB64[((pszIn[1] & 0x0f) << 2) | ((pszIn[2] & 0xc0) >> 6)] : '=');
+            pszOut[3] = static_cast<BYTE>(uLength > 2 ? CB64[pszIn[2] & 0x3f] : '=');
         }
 
-        static inline void DecodeBlock(const BYTE lpszIn[4], BYTE lpszOut[3])
+        static inline void DecodeBlock(const BYTE pszIn[4], BYTE pszOut[3])
         {
-            lpszOut[0] = static_cast<BYTE>(lpszIn[0] << 2 | lpszIn[1] >> 4);
-            lpszOut[1] = static_cast<BYTE>(lpszIn[1] << 4 | lpszIn[2] >> 2);
-            lpszOut[2] = static_cast<BYTE>(((lpszIn[2] << 6) & 0xc0) | lpszIn[3]);
+            pszOut[0] = static_cast<BYTE>(pszIn[0] << 2 | pszIn[1] >> 4);
+            pszOut[1] = static_cast<BYTE>(pszIn[1] << 4 | pszIn[2] >> 2);
+            pszOut[2] = static_cast<BYTE>(((pszIn[2] << 6) & 0xc0) | pszIn[3]);
         }
 
         HRESULT Base64Encode(LPCVOID pBuffer, UINT_PTR uSize, CString& strOut)
@@ -60,7 +60,7 @@ namespace retro
 
             BYTE in[3], out[4];
             const BYTE* pInput = reinterpret_cast<const BYTE*>(pBuffer);
-            LPTSTR lpszOutput = strOut.GetBufferSetLength(static_cast<INT>(uSize + 3 - uSize % 3) * 4 / 3 + 1);
+            LPTSTR pszOutput = strOut.GetBufferSetLength(static_cast<INT>(uSize + 3 - uSize % 3) * 4 / 3 + 1);
             UINT uPos = 0;
 
             UINT_PTR j = 0;
@@ -87,7 +87,7 @@ namespace retro
                     for (INT i = 0; i < 4; i++)
                     {
                         CHAR a = out[i];
-                        lpszOutput[uPos++] = a;
+                        pszOutput[uPos++] = a;
                     }
                 }
             }
@@ -97,35 +97,35 @@ namespace retro
             return S_OK;
         }
 
-        HRESULT Base64Encode(LPCTSTR lpszIn, CString& strOut)
+        HRESULT Base64Encode(LPCTSTR pszIn, CString& strOut)
         {
-            if (!lpszIn)
+            if (!pszIn)
             {
                 return E_INVALIDARG;
             }
           
             UINT_PTR uLength = 0;
-            HRESULT hr = StringCchLength(lpszIn, STRSAFE_MAX_CCH, &uLength);
+            HRESULT hr = StringCchLength(pszIn, STRSAFE_MAX_CCH, &uLength);
             if (FAILED(hr))
             {
                 return hr;
             }
 
-            LPCVOID pBuffer = reinterpret_cast<LPCVOID>(lpszIn);
+            LPCVOID pBuffer = reinterpret_cast<LPCVOID>(pszIn);
             const UINT_PTR uSize = (uLength + 1) * sizeof(TCHAR);
 
             return Base64Encode(pBuffer, uSize, strOut);
         }
 
-        UINT_PTR Base64QuerySize(LPCTSTR lpszIn)
+        UINT_PTR Base64QuerySize(LPCTSTR pszIn)
         {
-            if (!lpszIn)
+            if (!pszIn)
             {
                 return 0;
             }
 
             UINT_PTR uLength = 0;
-            HRESULT hr = StringCchLength(lpszIn, STRSAFE_MAX_CCH, &uLength);
+            HRESULT hr = StringCchLength(pszIn, STRSAFE_MAX_CCH, &uLength);
             if (FAILED(hr))
             {
                 return 0;
@@ -136,9 +136,9 @@ namespace retro
             return uSizeOut;
         }
 
-        HRESULT Base64Decode(LPCTSTR lpszIn, LPVOID pBuffer, UINT_PTR uSize)
+        HRESULT Base64Decode(LPCTSTR pszIn, LPVOID pBuffer, UINT_PTR uSize)
         {
-            if (!lpszIn)
+            if (!pszIn)
             {
                 return E_INVALIDARG;
             }
@@ -152,16 +152,16 @@ namespace retro
             BYTE* pResult = reinterpret_cast<BYTE*>(pBuffer);
             UINT_PTR uPos = 0;
 
-            while (*lpszIn)
+            while (*pszIn)
             {
                 INT nLen = 0;
-                for (INT i = 0; i < 4 && *lpszIn; ++i)
+                for (INT i = 0; i < 4 && *pszIn; ++i)
                 {
                     INT v = 0;
 
-                    while (*lpszIn && v == 0)
+                    while (*pszIn && v == 0)
                     {
-                        v = static_cast<BYTE>(*lpszIn);
+                        v = static_cast<BYTE>(*pszIn);
                         v = static_cast<BYTE>((v < 43 || v > 122) ? 0 : CD64[v - 43]);
 
                         if (v)
@@ -169,10 +169,10 @@ namespace retro
                             v = static_cast<BYTE>((v == '$') ? 0 : v - 61);
                         }
 
-                        lpszIn++;
+                        pszIn++;
                     }
 
-                    if (*lpszIn || v)
+                    if (*pszIn || v)
                     {
                         nLen++;
 

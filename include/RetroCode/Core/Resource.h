@@ -83,12 +83,12 @@ namespace retro
 			/**
 			 * @brief Loads a resource from a file
 			 * 
-			 * @param lpszFileName The name of the file to load the resource from
+			 * @param pszFileName The name of the file to load the resource from
 			 * 
 			 * @return A HRESULT value indicating the success or failure of the operation
 			 *
 			 */
-			virtual HRESULT LoadFromFile(LPCTSTR lpszFileName);
+			virtual HRESULT LoadFromFile(LPCTSTR pszFileName);
 
 			/**
 			 * @brief Loads a resource from a memory buffer
@@ -104,24 +104,24 @@ namespace retro
 			/**
 			 * @brief Loads a resource from a module name
 			 *
-			 * @param lpszModule		The name of the module that contains the resource
-			 * @param lpszResourceName	The name of the resource to load
+			 * @param pszModule		The name of the module that contains the resource
+			 * @param pszResourceName	The name of the resource to load
 			 *
 			 * @return A HRESULT value indicating the success or failure of the operation
 			 *
 			 */
-			virtual HRESULT LoadFromResource(LPCTSTR lpszModule, LPCTSTR lpszResourceName);
+			virtual HRESULT LoadFromResource(LPCTSTR pszModule, LPCTSTR pszResourceName);
 
 			/**
 			 * @brief Loads a resource from a module handle
 			 *
 			 * @param hModule			A handle to the module that contains the resource
-			 * @param lpszResourceName	The name of the resource to load
+			 * @param pszResourceName	The name of the resource to load
 			 *
 			 * @return A HRESULT value indicating the success or failure of the operation
 			 *
 			 */
-			virtual HRESULT LoadFromResource(HMODULE hModule, LPCTSTR lpszResourceName);
+			virtual HRESULT LoadFromResource(HMODULE hModule, LPCTSTR pszResourceName);
 
 		public:
 

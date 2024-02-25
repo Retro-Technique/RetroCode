@@ -34,34 +34,34 @@ namespace retro
 	namespace core
 	{
 
-		void Log(LPCTSTR lpszMessage, ELogLevel eLogLevel)
+		void Log(LPCTSTR pszMessage, ELogLevel eLogLevel)
 		{
-			if (!lpszMessage)
+			if (!pszMessage)
 			{
 				return;
 			}
 
-			LogManager.Log(lpszMessage, eLogLevel);
+			LogManager.Log(pszMessage, eLogLevel);
 		}
 
-		void LogInterfaceError(LPCTSTR lpszMessage, HRESULT hr, ELogLevel eLogLevel)
+		void LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel)
 		{
-			if (!lpszMessage)
+			if (!pszMessage)
 			{
 				return;
 			}
 
-			LogManager.LogInterfaceError(lpszMessage, hr, eLogLevel);
+			LogManager.LogInterfaceError(pszMessage, hr, eLogLevel);
 		}
 
-		void LogWinError(LPCTSTR lpszMessage, DWORD dwError, ELogLevel eLogLevel)
+		void LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel)
 		{
-			if (!lpszMessage)
+			if (!pszMessage)
 			{
 				return;
 			}
 
-			LogManager.LogWinError(lpszMessage, dwError, eLogLevel);
+			LogManager.LogWinError(pszMessage, dwError, eLogLevel);
 		}
 
 		HRESULT RegisterLogObserver(ILogObserver* pObserver, BOOL bFlush)

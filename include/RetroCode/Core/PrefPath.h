@@ -40,14 +40,14 @@ namespace retro
 		 * The function uses APPDATA environment variable as the base directory
 		 * and append the organization and application names as subdirectories.
 		 *
-		 * @param lpszOrg		The name of the organization that provides the application
-		 * @param lpszApp		The name of the application
+		 * @param pszOrg		The name of the organization that provides the application
+		 * @param pszApp		The name of the application
 		 * @param strPrefPath	A reference to a CString object that will receive the preferred path
 		 *
 		 * @return S_OK if the preferred path was retrieved successfully
 		 *
 		 */
-		HRESULT AFX_EXT_API QueryApplicationPrefPath(LPCTSTR lpszOrg, LPCTSTR lpszApp, CString& strPrefPath);
+		HRESULT AFX_EXT_API QueryApplicationPrefPath(LPCTSTR pszOrg, LPCTSTR pszApp, CString& strPrefPath);
 
 	}
 }

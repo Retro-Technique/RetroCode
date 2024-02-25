@@ -50,13 +50,13 @@ namespace retro
 		 * @ingroup core
 		 * @brief Encode to Base64 format
 		 *
-		 * @param lpszIn	String to encode
+		 * @param pszIn	String to encode
 		 * @param strOut	Encoding result
 		 *
 		 * @return S_OK if succeeded
 		 *
 		 */
-		HRESULT AFX_EXT_API Base64Encode(LPCTSTR lpszIn, CString& strOut);
+		HRESULT AFX_EXT_API Base64Encode(LPCTSTR pszIn, CString& strOut);
 
 		/**
 		 * @ingroup core
@@ -66,20 +66,20 @@ namespace retro
 		 * to know the size of the buffer that will contain the decoding
 		 * result.
 		 *
-		 * @param lpszIn	Base64 string to decode
+		 * @param pszIn	Base64 string to decode
 		 *
 		 * @return Required buffer size
 		 *
 		 * @see Base64Decode
 		 *
 		 */
-		UINT_PTR AFX_EXT_API Base64QuerySize(LPCTSTR lpszIn);
+		UINT_PTR AFX_EXT_API Base64QuerySize(LPCTSTR pszIn);
 
 		/**
 		 * @ingroup core
 		 * @brief Decode from Base64 format
 		 *
-		 * @param lpszIn	Base64 string to decode
+		 * @param pszIn	Base64 string to decode
 		 * @param pBuffer	Buffer previously allocated by you
 		 * @param uSize	Size of the buffer \a pBuffer
 		 *
@@ -88,7 +88,7 @@ namespace retro
 		 * @see Base64QuerySize
 		 *
 		 */
-		HRESULT AFX_EXT_API Base64Decode(LPCTSTR lpszIn, LPVOID pBuffer, UINT_PTR uSize);
+		HRESULT AFX_EXT_API Base64Decode(LPCTSTR pszIn, LPVOID pBuffer, UINT_PTR uSize);
 
 	}
 }

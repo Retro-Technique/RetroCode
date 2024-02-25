@@ -21,11 +21,11 @@ namespace retro
 		{
 			CString strVersion;
 
-			TCHAR lpszFullPath[1024];
-			GetModuleFileName(g_hInstance, lpszFullPath, ARRAYSIZE(lpszFullPath));
+			TCHAR pszFullPath[1024];
+			GetModuleFileName(g_hInstance, pszFullPath, ARRAYSIZE(pszFullPath));
 
 			DWORD uVerHnd = 0;
-			const DWORD dwVerInfoSize = GetFileVersionInfoSize(lpszFullPath, &uVerHnd);
+			const DWORD dwVerInfoSize = GetFileVersionInfoSize(pszFullPath, &uVerHnd);
 			if (dwVerInfoSize)
 			{
 				if (uVerHnd != 0)
@@ -39,14 +39,14 @@ namespace retro
 					return strVersion;
 				}
 
-				LPSTR lpszVffInfo = reinterpret_cast<CHAR*>(::GlobalLock(hMem));
-				if (!lpszVffInfo)
+				LPSTR pszVffInfo = reinterpret_cast<CHAR*>(::GlobalLock(hMem));
+				if (!pszVffInfo)
 				{
 					GlobalFree(hMem);
 					return strVersion;
 				}
 
-				GetFileVersionInfo(lpszFullPath, uVerHnd, dwVerInfoSize, lpszVffInfo);
+				GetFileVersionInfo(pszFullPath, uVerHnd, dwVerInfoSize, pszVffInfo);
 
 				struct LANGANDCODEPAGE
 				{
@@ -56,7 +56,7 @@ namespace retro
 
 				UINT uTranslate = 0;
 
-				BOOL bRet = VerQueryValue(lpszVffInfo,
+				BOOL bRet = VerQueryValue(pszVffInfo,
 					_T("\\VarFileInfo\\Translation"),
 					reinterpret_cast<LPVOID*>(&pTranslate),
 					&uTranslate);
@@ -67,8 +67,8 @@ namespace retro
 
 				struct
 				{
-					LPCTSTR lpszSubBlock;
-					LPCTSTR lpszBuffer;
+					LPCTSTR pszSubBlock;
+					LPCTSTR pszBuffer;
 					UINT nBufferLen;
 
 				} Queries[] =
@@ -87,11 +87,11 @@ namespace retro
 						strSubBlock.Format(_T("\\StringFileInfo\\%04x%04x\\%s"),
 							pTranslate[j].uLanguage,
 							pTranslate[j].uCodePage,
-							Queries[i].lpszSubBlock);
+							Queries[i].pszSubBlock);
 
-						bRet = VerQueryValue(reinterpret_cast<LPVOID>(lpszVffInfo),
+						bRet = VerQueryValue(reinterpret_cast<LPVOID>(pszVffInfo),
 							strSubBlock.GetString(),
-							(LPVOID*)&Queries[i].lpszBuffer,
+							(LPVOID*)&Queries[i].pszBuffer,
 							&Queries[i].nBufferLen);
 						if (bRet)
 						{
@@ -101,11 +101,11 @@ namespace retro
 
 					if (!bRet)
 					{
-						Queries[i].lpszBuffer = _T("???");
+						Queries[i].pszBuffer = _T("???");
 					}
 				}
 
-				strVersion.Format(_T("%s v%s"), Queries[1].lpszBuffer, Queries[0].lpszBuffer);
+				strVersion.Format(_T("%s v%s"), Queries[1].pszBuffer, Queries[0].pszBuffer);
 
 				GlobalUnlock(hMem);
 				GlobalFree(hMem);

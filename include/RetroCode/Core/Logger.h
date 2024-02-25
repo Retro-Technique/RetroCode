@@ -37,39 +37,39 @@ namespace retro
 		 * @ingroup core
 		 * @brief Logs a message with a given log level
 		 *
-		 * @param lpszMessage	The text of the message to log
+		 * @param pszMessage	The text of the message to log
 		 * @param eLogLevel		The log level of the message
 		 *
 		 * @note The default log level value is ELogLevel_Information
 		 *
 		 */
-		void AFX_EXT_API Log(LPCTSTR lpszMessage, ELogLevel eLogLevel = ELogLevel_Information);
+		void AFX_EXT_API Log(LPCTSTR pszMessage, ELogLevel eLogLevel = ELogLevel_Information);
 
 		/**
 		 * @ingroup core
 		 * @brief Logs an error message with a given HRESULT code
 		 *
-		 * @param lpszMessage	The text of the message to log
+		 * @param pszMessage	The text of the message to log
 		 * @param hr			The HRESULT code of the error
 		 * @param eLogLevel		The log level of the message
 		 *
 		 * @note The default log level value is ELogLevel_Error
 		 *
 		 */
-		void AFX_EXT_API LogInterfaceError(LPCTSTR lpszMessage, HRESULT hr, ELogLevel eLogLevel = ELogLevel_Error);
+		void AFX_EXT_API LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel = ELogLevel_Error);
 
 		/**
 		 * @ingroup core
 		 * @brief Logs an error message with a given Windows error code
 		 *
-		 * @param lpszMessage	The text of the message to log
+		 * @param pszMessage	The text of the message to log
 		 * @param hr			The Windows error code of the error
 		 * @param eLogLevel		The log level of the message
 		 *
 		 * @note The default log level value is ELogLevel_Error
 		 *
 		 */
-		void AFX_EXT_API LogWinError(LPCTSTR lpszMessage, DWORD dwError, ELogLevel eLogLevel = ELogLevel_Error);
+		void AFX_EXT_API LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel = ELogLevel_Error);
 
 		/**
 		 * @ingroup core

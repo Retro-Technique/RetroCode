@@ -76,13 +76,13 @@ namespace retro
 			m_Observers.RemoveAll();
 		}
 
-		void CLogManager::Log(LPCTSTR lpszMessage, ELogLevel eLogLevel)
+		void CLogManager::Log(LPCTSTR pszMessage, ELogLevel eLogLevel)
 		{
-			ASSERT(lpszMessage);
+			ASSERT(AfxIsValidString(pszMessage));
 
 			m_Mutex.Lock();
 			
-			if (StrCmp(m_strLastMessage.GetString(), lpszMessage) == 0)
+			if (StrCmp(m_strLastMessage.GetString(), pszMessage) == 0)
 			{
 				m_nRepeatedMessageCount++;
 				return;
@@ -100,28 +100,32 @@ namespace retro
 				m_nRepeatedMessageCount = 0;
 			}
 
-			m_strLastMessage = lpszMessage;
+			m_strLastMessage = pszMessage;
 
-			DispatchLogs(dtNow, eLogLevel, lpszMessage);
+			DispatchLogs(dtNow, eLogLevel, pszMessage);
 
 			m_Mutex.Unlock();
 		}
 
-		void CLogManager::LogInterfaceError(LPCTSTR lpszMessage, HRESULT hr, ELogLevel eLogLevel)
+		void CLogManager::LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel)
 		{
-			ASSERT(lpszMessage);
+			ASSERT(AfxIsValidString(pszMessage));
 
 			_com_error Error(hr);
+			CString strError;
 
-			Log(Error.ErrorMessage(), eLogLevel);
+			strError += pszMessage;
+			strError += Error.ErrorMessage();
+
+			Log(strError.GetString(), eLogLevel);
 		}
 
-		void CLogManager::LogWinError(LPCTSTR lpszMessage, DWORD dwError, ELogLevel eLogLevel)
+		void CLogManager::LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel)
 		{
-			ASSERT(lpszMessage);
+			ASSERT(AfxIsValidString(pszMessage));
 
 			HRESULT hr = __HRESULT_FROM_WIN32(dwError);
-			LogInterfaceError(lpszMessage, hr, eLogLevel);
+			LogInterfaceError(pszMessage, hr, eLogLevel);
 		}
 
 		void CLogManager::Flush()
@@ -156,14 +160,14 @@ namespace retro
 			m_Mutex.Unlock();
 		}
 
-		void CLogManager::DispatchLogs(const CTime& dtNow, ELogLevel eLogLevel, LPCTSTR lpszMessage)
+		void CLogManager::DispatchLogs(const CTime& dtNow, ELogLevel eLogLevel, LPCTSTR pszMessage)
 		{
-			ASSERT(lpszMessage);
+			ASSERT(pszMessage);
 
 			TLog Entry;
 			Entry.dtDate = dtNow;
 			Entry.eLevel = eLogLevel;
-			Entry.strMessage = lpszMessage;
+			Entry.strMessage = pszMessage;
 
 			m_Historic.AddTail(Entry);
 
@@ -173,7 +177,7 @@ namespace retro
 				ILogObserver* pObserver = m_Observers.GetNext(pos);
 				if (pObserver)
 				{
-					pObserver->OnMessage(dtNow, eLogLevel, lpszMessage);
+					pObserver->OnMessage(dtNow, eLogLevel, pszMessage);
 				}
 			}
 		}

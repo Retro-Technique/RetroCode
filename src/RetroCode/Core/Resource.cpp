@@ -45,9 +45,9 @@ namespace retro
 
 		}
 
-		HRESULT CResource::LoadFromFile(LPCTSTR lpszFileName)
+		HRESULT CResource::LoadFromFile(LPCTSTR pszFileName)
 		{
-			UNREFERENCED_PARAMETER(lpszFileName);
+			UNREFERENCED_PARAMETER(pszFileName);
 
 			return E_NOTIMPL;
 		}
@@ -60,14 +60,14 @@ namespace retro
 			return E_NOTIMPL;
 		}
 
-		HRESULT CResource::LoadFromResource(LPCTSTR lpszModule, LPCTSTR lpszResourceName)
+		HRESULT CResource::LoadFromResource(LPCTSTR pszModule, LPCTSTR pszResourceName)
 		{
-			if (!lpszModule)
+			if (!pszModule)
 			{
 				return E_INVALIDARG;
 			}
 
-			if (!lpszResourceName)
+			if (!pszResourceName)
 			{
 				return E_INVALIDARG;
 			}
@@ -77,14 +77,14 @@ namespace retro
 
 			do
 			{
-				hModule = AfxLoadLibrary(lpszModule);
+				hModule = AfxLoadLibrary(pszModule);
 				if (!hModule)
 				{
 					hr = GetLastError();
 					break;
 				}
 
-				hr = LoadFromResource(hModule, lpszResourceName);
+				hr = LoadFromResource(hModule, pszResourceName);
 
 			} while (RETRO_NULL_WHILE_LOOP_CONDITION);
 
@@ -96,19 +96,19 @@ namespace retro
 			return hr;
 		}
 
-		HRESULT CResource::LoadFromResource(HMODULE hModule, LPCTSTR lpszResourceName)
+		HRESULT CResource::LoadFromResource(HMODULE hModule, LPCTSTR pszResourceName)
 		{
 			if (!hModule)
 			{
 				return E_INVALIDARG;
 			}
 
-			if (!lpszResourceName)
+			if (!pszResourceName)
 			{
 				return E_INVALIDARG;
 			}
 
-			HRSRC hrSrc = FindResource(hModule, lpszResourceName, RT_RCDATA);
+			HRSRC hrSrc = FindResource(hModule, pszResourceName, RT_RCDATA);
 			if (!hrSrc)
 			{
 				return GetLastError();

@@ -33,32 +33,32 @@ namespace retro
 	namespace core
 	{
 
-		HRESULT QueryApplicationPrefPath(LPCTSTR lpszOrg, LPCTSTR lpszApp, CString& strPrefPath)
+		HRESULT QueryApplicationPrefPath(LPCTSTR pszOrg, LPCTSTR pszApp, CString& strPrefPath)
 		{
-			if (!lpszOrg)
+			if (!pszOrg)
 			{
 				return E_INVALIDARG;
 			}
 
-			if (!lpszApp)
+			if (!pszApp)
 			{
 				return E_INVALIDARG;
 			}
 
 			HRESULT hr = S_OK;
-			LPWSTR lpszPath = NULL;
+			LPWSTR pszPath = NULL;
 
 			do
 			{
-				hr = SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_CREATE, NULL, &lpszPath);
+				hr = SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_CREATE, NULL, &pszPath);
 				if (FAILED(hr))
 				{
 					break;
 				}
 
-				strPrefPath.Append(lpszPath);
+				strPrefPath.Append(pszPath);
 				strPrefPath += _T('\\');
-				strPrefPath += lpszOrg;
+				strPrefPath += pszOrg;
 
 				BOOL bRet = CreateDirectory(strPrefPath.GetString(), NULL);
 				if (!bRet)
@@ -68,7 +68,7 @@ namespace retro
 				}
 
 				strPrefPath += _T('\\');
-				strPrefPath += lpszApp;
+				strPrefPath += pszApp;
 
 				bRet = CreateDirectory(strPrefPath.GetString(), NULL);
 				if (!bRet)
@@ -78,10 +78,10 @@ namespace retro
 
 			} while (RETRO_NULL_WHILE_LOOP_CONDITION);
 
-			if (lpszPath)
+			if (pszPath)
 			{
-				CoTaskMemFree(lpszPath);
-				lpszPath = NULL;
+				CoTaskMemFree(pszPath);
+				pszPath = NULL;
 			}
 
 			return hr;

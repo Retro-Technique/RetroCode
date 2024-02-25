@@ -45,15 +45,15 @@ namespace retro
 				HRESULT RegisterObserver(ILogObserver* pObserver);
 				void UnregisterObserver(ILogObserver* pObserver);
 				void UnregisterAll();
-				void Log(LPCTSTR lpszMessage, ELogLevel eLogLevel);
-				void LogInterfaceError(LPCTSTR lpszMessage, HRESULT hr, ELogLevel eLogLevel);
-				void LogWinError(LPCTSTR lpszMessage, DWORD dwError, ELogLevel eLogLevel);
+				void Log(LPCTSTR pszMessage, ELogLevel eLogLevel);
+				void LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel);
+				void LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel);
 				void Flush();
 				void Clear();
 
 			private:
 
-				void DispatchLogs(const CTime& dtNow, ELogLevel eLogLevel, LPCTSTR lpszMessage);
+				void DispatchLogs(const CTime& dtNow, ELogLevel eLogLevel, LPCTSTR pszMessage);
 
 			private:
 

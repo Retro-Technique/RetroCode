@@ -46,10 +46,10 @@ namespace retro
 				 *
 				 * @param dtDate		The date and time of the log message
 				 * @param eLogLevel		The log level of the log message
-				 * @param lpszMessage	The text of the log message
+				 * @param pszMessage	The text of the log message
 				 *
 				 */
-				virtual void OnMessage(const CTime& dtDate, ELogLevel eLogLevel, LPCTSTR lpszMessage) = 0;
+				virtual void OnMessage(const CTime& dtDate, ELogLevel eLogLevel, LPCTSTR pszMessage) = 0;
 
 		};
 
