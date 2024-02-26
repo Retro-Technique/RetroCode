@@ -41,3 +41,5 @@ jobs:
           path: |
               build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCore.dll
               build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCore.lib
+              build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroMFC.dll
+              build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroMFC.lib
