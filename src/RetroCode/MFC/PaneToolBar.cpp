@@ -42,7 +42,7 @@ namespace retro
 
 		CPaneToolBar::~CPaneToolBar()
 		{
-
+		
 		}
 
 		BEGIN_MESSAGE_MAP(CPaneToolBar, CMFCToolBar)
@@ -50,7 +50,7 @@ namespace retro
 
 		void CPaneToolBar::OnUpdateCmdUI(CFrameWnd*, BOOL bDisableIfNoHndler)
 		{
-			CMFCToolBar::OnUpdateCmdUI((CFrameWnd*)GetOwner(), bDisableIfNoHndler);
+			CMFCToolBar::OnUpdateCmdUI(STATIC_DOWNCAST(CFrameWnd, GetOwner()), bDisableIfNoHndler);
 		}
 
 		BOOL CPaneToolBar::AllowShowOnList() const
@@ -62,7 +62,7 @@ namespace retro
 		{
 			CMFCToolBar::AdjustLayout();
 
-			((CDockablePane*)GetParent())->AdjustLayout();
+			STATIC_DOWNCAST(CDockablePane, GetParent())->AdjustLayout();
 		}
 
 	}

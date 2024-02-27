@@ -1,7 +1,7 @@
 /**
  *
  * Retro Code
- *
+ * 
  * MIT License
  *
  * Copyright(c) 2014-2023 Retro Technique
@@ -28,39 +28,32 @@
 
 #pragma once
 
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
-
 namespace retro
 {
 	namespace mfc
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		class AFX_EXT_API CDocumentEx : public CDocument
+		{
+		protected:
+
+			CDocumentEx() noexcept;
+			DECLARE_DYNCREATE(CDocumentEx)
+
+		public:
+
+			virtual ~CDocumentEx();
+
+		public:
+
+			void SetModifiedFlag(BOOL bModified = TRUE) override;
+			BOOL DoSave(LPCTSTR pszPathName, BOOL bReplace = TRUE) override;
+
+		protected:
+
+			DECLARE_MESSAGE_MAP()
+
+		};
 
 	}
 }
-
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */

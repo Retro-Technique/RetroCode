@@ -28,39 +28,33 @@
 
 #pragma once
 
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
-
 namespace retro
 {
 	namespace mfc
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		class AFX_EXT_API CRetroWinApp : public CWinAppEx
+		{
+#pragma region Constructors
+
+			DECLARE_DYNCREATE(CRetroWinApp)
+
+		protected:
+
+			CRetroWinApp();         
+			virtual ~CRetroWinApp();
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			CString GetVersion() const;
+
+#pragma endregion
+
+		};
+
 
 	}
 }
-
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */

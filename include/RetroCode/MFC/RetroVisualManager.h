@@ -28,39 +28,42 @@
 
 #pragma once
 
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
-
 namespace retro
 {
 	namespace mfc
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		class AFX_EXT_API CRetroVisualManager : public CMFCVisualManagerOffice2007
+		{
+			DECLARE_DYNCREATE(CRetroVisualManager)
+
+		public:
+
+			CRetroVisualManager();
+			virtual ~CRetroVisualManager();
+
+		public:
+
+			void OnFillTasksPaneBackground(CDC* pDC, CRect rcWorkArea) override;
+
+		public:
+
+			static HRESULT SetWindowDarkAttribute(CWnd* pWnd);
+			static void Apply(CListCtrl* pCtrl);
+			static void Apply(CTreeCtrl* pCtrl);
+			static void Apply(CMFCPropertyGridCtrl* pCtrl);
+			static BOOL OnEraseBkgnd(CDC* pDC, CWnd* pWnd);
+			static HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT uCtlColor);
+
+		private:
+
+			static constexpr const COLORREF	DARK_BACKGROUND = RGB(32, 32, 32);
+			static constexpr const COLORREF	GRAY_BACKGROUND = RGB(83, 83, 83);
+			static constexpr const COLORREF	WHITE_FOREGROUND = RGB(245, 245, 245);
+
+		};
 
 	}
 }
 
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */
+#define RetroVisualManager retro::mfc::CRetroVisualManager

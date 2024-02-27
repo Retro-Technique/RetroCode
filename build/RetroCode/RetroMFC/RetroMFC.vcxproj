@@ -199,7 +199,10 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\RetroCode\MFC\DocumentEx.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\MFC\PaneToolBar.cpp" />
+    <ClCompile Include="..\..\..\src\RetroCode\MFC\RetroVisualManager.cpp" />
+    <ClCompile Include="..\..\..\src\RetroCode\MFC\RetroWinApp.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
@@ -227,7 +230,10 @@
     <None Include="RetroMFC.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\DocumentEx.h" />
     <ClInclude Include="..\..\..\include\RetroCode\MFC\PaneToolBar.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroVisualManager.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroWinApp.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
