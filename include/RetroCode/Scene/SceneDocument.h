@@ -28,40 +28,74 @@
 
 #pragma once
 
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/ActiveDocument.h"
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
-
 namespace retro
 {
-	namespace mfc
+	namespace scene
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		class CNode;
+
+		class CSceneDocument : public mfc::CDocumentEx
+		{
+#pragma region Constructors
+
+		protected:
+
+			CSceneDocument() noexcept;
+			DECLARE_DYNCREATE(CSceneDocument)
+
+		public:
+
+			virtual ~CSceneDocument();
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			CNode* CreateNode(LPCTSTR lpszType);
+
+#pragma endregion
+#pragma region Attributes
+
+		private:
+
+			CNode*			m_pRoot;
+			CMapStringToOb	m_Resources;
+
+#pragma endregion
+#pragma region Overridables
+
+		public:
+
+			BOOL OnNewDocument() override;
+			BOOL OnOpenDocument(LPCTSTR lpszPathName) override;
+			BOOL OnSaveDocument(LPCTSTR lpszPathName) override;
+			void OnCloseDocument() override;
+			void DeleteContents() override;
+			void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+			void AssertValid() const override;
+			void Dump(CDumpContext& dc) const override;
+#endif
+
+#pragma endregion
+#pragma region Implementations
+
+		private:
+
+			HRESULT Load();
+			void Unload();
+
+#pragma endregion 
+#pragma region Messages
+
+		protected:
+
+			DECLARE_MESSAGE_MAP()
+
+#pragma endregion 
+		};
 
 	}
 }
-
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */

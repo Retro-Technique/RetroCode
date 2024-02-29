@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -28,40 +28,14 @@
 
 #pragma once
 
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/ActiveDocument.h"
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
-
 namespace retro
 {
 	namespace mfc
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		AFX_EXT_API CDocument* GetActiveDocument(CRuntimeClass* pClass);
 
 	}
 }
 
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */
+#define GET_ACTIVE_DOCUMENT(x) STATIC_DOWNCAST(x, GetActiveDocument(RUNTIME_CLASS(x)))

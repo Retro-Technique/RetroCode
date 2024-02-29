@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -26,42 +26,46 @@
  *
  */
 
-#pragma once
-
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/ActiveDocument.h"
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
+#include "pch.h"
 
 namespace retro
 {
 	namespace mfc
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		CDocument* GetActiveDocument(CRuntimeClass* pClass)
+		{
+			ASSERT(pClass);
+			ASSERT(pClass->IsDerivedFrom(RUNTIME_CLASS(CDocument)));
+
+			CWnd* pMainWnd = AfxGetMainWnd();
+			if (!pMainWnd)
+			{
+				return NULL;
+			}
+
+			if (pMainWnd->IsKindOf(RUNTIME_CLASS(CMDIFrameWnd)))
+			{
+				CFrameWnd* pFrame = STATIC_DOWNCAST(CMDIFrameWnd, pMainWnd)->MDIGetActive();
+				if (!pFrame)
+				{
+					return NULL;
+				}
+
+				CDocument* pDocument = pFrame->GetActiveDocument();
+				if (pDocument && pDocument->IsKindOf(pClass))
+				{
+					return pDocument;
+				}
+			}
+
+			if (pMainWnd->IsKindOf(RUNTIME_CLASS(CFrameWnd)))
+			{
+				return STATIC_DOWNCAST(CFrameWnd, pMainWnd)->GetActiveDocument();
+			}
+
+			return NULL;
+		}
 
 	}
 }
-
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */

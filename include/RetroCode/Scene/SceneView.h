@@ -28,40 +28,72 @@
 
 #pragma once
 
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/ActiveDocument.h"
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
-
 namespace retro
 {
-	namespace mfc
+	namespace scene
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		class CSceneView : public CView
+		{
+#pragma region Constructors
+
+			DECLARE_DYNCREATE(CSceneView)
+
+		protected:
+
+			CSceneView();
+			virtual ~CSceneView();
+
+#pragma endregion
+#pragma region Attributes
+
+		public:
+
+			CSceneDocument* GetDocument() const;
+
+#pragma endregion
+#pragma region Overridables
+
+			BOOL PreCreateWindow(CREATESTRUCT& cs) override;
+			void OnInitialUpdate() override;
+			void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) override;
+			void OnDraw(CDC* pDC) override;   
+
+#pragma endregion
+#pragma region Implementations
+
+		private:
+
+			CNode* GetRootDocument();
+			const CNode* GetRootDocument() const;
+
+#pragma endregion
+#pragma region Messages
+
+		protected:
+
+			DECLARE_MESSAGE_MAP()
+
+		public:
+
+			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+			afx_msg LRESULT OnRecreateD2DResources(WPARAM wParam, LPARAM lParam);
+			afx_msg LRESULT OnDraw2D(WPARAM wParam, LPARAM lParam);
+			afx_msg void OnSize(UINT uType, int cx, int cy);
+
+#pragma endregion
+
+		};
+
+#ifndef _DEBUG  
+		inline CSceneDocument* CSceneView::GetDocument() const
+		{
+			return reinterpret_cast<CSceneDocument*>(m_pDocument);
+		}
+#endif
 
 	}
 }
 
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */
+
+

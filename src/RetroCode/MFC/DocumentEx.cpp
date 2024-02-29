@@ -44,7 +44,7 @@ namespace retro
 
 		CDocumentEx::CDocumentEx() noexcept
 		{
-
+			
 		}
 
 		CDocumentEx::~CDocumentEx()

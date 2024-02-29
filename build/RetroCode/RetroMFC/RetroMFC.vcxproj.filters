@@ -16,6 +16,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="include\MFC">
+      <UniqueIdentifier>{27b8630e-d30b-4f3a-8180-f9cfdcae0d9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -37,6 +40,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\RetroCode\MFC\RetroWinApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\MFC\ActiveDocument.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,17 +67,23 @@
     <ClInclude Include="pch.h">
       <Filter>local</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\RetroCode\MFC\PaneToolBar.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroWinApp.h">
+      <Filter>include\MFC</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\MFC\DocumentEx.h">
-      <Filter>include</Filter>
+      <Filter>include\MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\PaneToolBar.h">
+      <Filter>include\MFC</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroVisualManager.h">
+      <Filter>include\MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\MFC.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroWinApp.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\ActiveDocument.h">
+      <Filter>include\MFC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

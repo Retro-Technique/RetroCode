@@ -31,26 +31,22 @@
  /**
   * Headers
   */
-#include "Core.h"
+#include "MFC.h"
 
-#include <afxcontrolbars.h>
-
-#include "MFC/ActiveDocument.h"
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
+#include "Scene/SceneDocument.h"
+#include "Scene/SceneView.h"
+#include "Scene/Node.h"
 
 namespace retro
 {
-	namespace mfc
+	namespace scene
 	{
 
 		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
+		 * @ingroup scene
+		 * @brief Get Retro Scene runtime version
 		 *
-		 * @return The version of Retro MFC
+		 * @return The version of Retro Scene
 		 *
 		 */
 		AFX_EXT_API CString GetVersion();
@@ -59,9 +55,8 @@ namespace retro
 }
 
 /**
- * @defgroup mfc MFC module
+ * @defgroup scene Scene module
  *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
+ * Scene module of RetroCode, defining ready-to-use 2D scene rendering
  *
  */
