@@ -33,6 +33,19 @@ jobs:
         uses: microsoft/vstest-action@v1.0.0
         with:
           testAssembly: build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCore.Test.dll
+
+      - name: Install Doxygen
+        uses: ssciwr/doxygen-install@v1.2.0
+
+      - name: Install HTML Help Compiler
+        run: |
+            doc/htmlhelp.exe
+            sleep 1
+
+      - name: Generate Documentation
+        run: |
+            doxygen.exe doc/Doxyfile
+            sleep 1
       
       - name: Upload artifacts
         uses: actions/upload-artifact@v4.3.1
@@ -43,3 +56,4 @@ jobs:
               build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCore.lib
               build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroMFC.dll
               build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroMFC.lib
+              doc/RetroCode.chm
