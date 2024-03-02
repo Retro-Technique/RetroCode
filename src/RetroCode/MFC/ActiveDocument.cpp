@@ -46,7 +46,7 @@ namespace retro
 
 			if (pMainWnd->IsKindOf(RUNTIME_CLASS(CMDIFrameWnd)))
 			{
-				CFrameWnd* pFrame = STATIC_DOWNCAST(CMDIFrameWnd, pMainWnd)->MDIGetActive();
+				CFrameWnd* pFrame = STATIC_DOWNCAST(CMDIFrameWnd, pMainWnd)->GetActiveFrame();
 				if (!pFrame)
 				{
 					return NULL;

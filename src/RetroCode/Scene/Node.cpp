@@ -217,6 +217,11 @@ namespace retro
 #pragma endregion Operations
 #pragma region Overridables
 
+		D2D1::Matrix3x2F CNode::Get3x2Matrix() const
+		{
+			return  D2D1::Matrix3x2F::Identity();
+		}
+
 		CViewNode* CNode::GetWorldView()
 		{
 			CNode* pParent = GetParent();
@@ -243,9 +248,10 @@ namespace retro
 
 		}
 
-		void CNode::DoDraw(const CSceneView* pView) const
+		void CNode::DoDraw(CSceneView* pView, CHwndRenderTarget* pRenderTarget) const
 		{
 			UNREFERENCED_PARAMETER(pView);
+			UNREFERENCED_PARAMETER(pRenderTarget);
 		}
 
 		void CNode::DoResize(const core::TVector2i& vSize)
@@ -303,17 +309,19 @@ namespace retro
 			}
 		}
 
-		void CNode::OnDraw(const CSceneView* pView) const
+		void CNode::OnDraw(CSceneView* pView, CHwndRenderTarget* pRenderTarget) const
 		{
 			ASSERT(pView);
 			ASSERT_VALID(pView);
+			ASSERT(pRenderTarget);
+			ASSERT_VALID(pRenderTarget);
 
 			if (!m_bActive)
 			{
 				return;
 			}
 
-			DoDraw(pView);
+			DoDraw(pView, pRenderTarget);
 
 			POSITION pos = m_Children.GetHeadPosition();
 			while (pos)
@@ -323,7 +331,7 @@ namespace retro
 				const CNode* pChild = DYNAMIC_DOWNCAST(CNode, pObject);
 				if (pChild)
 				{
-					pChild->OnDraw(pView);
+					pChild->OnDraw(pView, pRenderTarget);
 				}
 			}
 		}

@@ -33,82 +33,62 @@ namespace retro
 	namespace scene
 	{
 
-		class CSceneView : public CView
+		class AFX_EXT_API CDrawableNode : public CTransformableNode
 		{
 #pragma region Constructors
 
-			DECLARE_DYNCREATE(CSceneView)
+		public:
+
+			DECLARE_SERIAL(CDrawableNode);
 
 		protected:
 
-			CSceneView();
-			virtual ~CSceneView();
-
-#pragma endregion
-#pragma region Attributes
+			CDrawableNode();
 
 		public:
 
-			CSceneDocument* GetDocument() const;
+			virtual ~CDrawableNode();
 
 		private:
 
-			core::CStack<D2D1::Matrix3x2F> m_stackMatrix;
+			CDrawableNode(const CDrawableNode& Node) = delete;
+			void operator=(const CDrawableNode& Node) = delete;
 
-#pragma endregion
-#pragma region Operations
+#pragma endregion Constructors
+#pragma region Attributes
+
+		protected:
+
+			BOOL m_bNeedUpdateCache;
+
+		private:
+
+			BOOL m_bVisible;
+			BYTE m_uAlpha;
 
 		public:
 
-			void PushMatrix();
-			void MultMatrix(const D2D1::Matrix3x2F& mMatrix);
-			void PopMatrix();
-
-#pragma endregion
+			void SetVisible(BOOL bVisible);
+			BOOL IsVisible() const;
+			void SetAlpha(BYTE uAlpha);
+			BYTE GetAlpha() const;
+			
+#pragma endregion Attributes
 #pragma region Overridables
 
 		public:
 
-			BOOL PreCreateWindow(CREATESTRUCT& cs) override;
-			void OnInitialUpdate() override;
-			void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) override;
-			void OnDraw(CDC* pDC) override;   
+			BOOL IsWorldVisible() const override;
+			void OnDraw(CSceneView* pView, CHwndRenderTarget* pRenderTarget) const override;
+			void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+			void Dump(CDumpContext& dc) const override;
+			void AssertValid() const override;
+#endif
 
-#pragma endregion
-#pragma region Implementations
-
-		private:
-
-			CNode* GetRootDocument();
-			const CNode* GetRootDocument() const;
-
-#pragma endregion
-#pragma region Messages
-
-		protected:
-
-			DECLARE_MESSAGE_MAP()
-
-		public:
-
-			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-			afx_msg LRESULT OnRecreateD2DResources(WPARAM wParam, LPARAM lParam);
-			afx_msg LRESULT OnDraw2D(WPARAM wParam, LPARAM lParam);
-			afx_msg void OnSize(UINT uType, int cx, int cy);
-
-#pragma endregion
+#pragma endregion Overridables
 
 		};
 
-#ifndef _DEBUG  
-		inline CSceneDocument* CSceneView::GetDocument() const
-		{
-			return reinterpret_cast<CSceneDocument*>(m_pDocument);
-		}
-#endif
-
 	}
 }
-
-
-

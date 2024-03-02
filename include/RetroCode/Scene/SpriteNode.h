@@ -33,82 +33,65 @@ namespace retro
 	namespace scene
 	{
 
-		class CSceneView : public CView
+		class AFX_EXT_API CSpriteNode : public CDrawableNode
 		{
 #pragma region Constructors
 
-			DECLARE_DYNCREATE(CSceneView)
+		public:
+
+			DECLARE_SERIAL(CSpriteNode);
 
 		protected:
 
-			CSceneView();
-			virtual ~CSceneView();
+			CSpriteNode();
+
+		public:
+
+			virtual ~CSpriteNode();
+
+		private:
+
+			CSpriteNode(const CSpriteNode& Node) = delete;
+			void operator=(const CSpriteNode& Node) = delete;
 
 #pragma endregion
 #pragma region Attributes
 
-		public:
+		private:
 
-			CSceneDocument* GetDocument() const;
+			CD2DBitmap* m_pD2DBitmap;
 
 		private:
 
-			core::CStack<D2D1::Matrix3x2F> m_stackMatrix;
-
-#pragma endregion
-#pragma region Operations
-
+			CString		m_strTexture;
+			BOOL		m_bUseSource;
+			CD2DRectF	m_rcSource;
+			
 		public:
 
-			void PushMatrix();
-			void MultMatrix(const D2D1::Matrix3x2F& mMatrix);
-			void PopMatrix();
+			void SetTexture(LPCTSTR pszTexture);
+			void SetUseSource(BOOL bUseSource);
+			void SetSource(const CD2DRectF& rcSource);
+			LPCTSTR GetTexture() const;
+			BOOL IsUseSource() const;
+			const CD2DRectF& GetSource() const;
 
 #pragma endregion
 #pragma region Overridables
 
 		public:
 
-			BOOL PreCreateWindow(CREATESTRUCT& cs) override;
-			void OnInitialUpdate() override;
-			void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) override;
-			void OnDraw(CDC* pDC) override;   
-
-#pragma endregion
-#pragma region Implementations
-
-		private:
-
-			CNode* GetRootDocument();
-			const CNode* GetRootDocument() const;
-
-#pragma endregion
-#pragma region Messages
-
-		protected:
-
-			DECLARE_MESSAGE_MAP()
-
-		public:
-
-			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
-			afx_msg LRESULT OnRecreateD2DResources(WPARAM wParam, LPARAM lParam);
-			afx_msg LRESULT OnDraw2D(WPARAM wParam, LPARAM lParam);
-			afx_msg void OnSize(UINT uType, int cx, int cy);
+			void DoUpdate() override;
+			void DoDraw(CSceneView* pView, CHwndRenderTarget* pRenderTarget) const override;
+			void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+			void Dump(CDumpContext& dc) const override;
+			void AssertValid() const override;
+#endif
 
 #pragma endregion
 
 		};
 
-#ifndef _DEBUG  
-		inline CSceneDocument* CSceneView::GetDocument() const
-		{
-			return reinterpret_cast<CSceneDocument*>(m_pDocument);
-		}
-#endif
-
 	}
 }
-
-
-

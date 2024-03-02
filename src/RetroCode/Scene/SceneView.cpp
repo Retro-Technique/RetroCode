@@ -70,6 +70,41 @@ namespace retro
 #endif
 
 #pragma endregion
+#pragma region Operations
+
+		void CSceneView::PushMatrix()
+		{
+			if (m_stackMatrix.IsEmpty())
+			{
+				m_stackMatrix.Push(D2D1::Matrix3x2F::Identity());
+			}
+
+			const D2D1::Matrix3x2F& mTop = m_stackMatrix.Top();
+			m_stackMatrix.Push(mTop);
+		}
+
+		void CSceneView::MultMatrix(const D2D1::Matrix3x2F& mMatrix)
+		{
+			if (m_stackMatrix.IsEmpty())
+			{
+				return;
+			}
+
+			D2D1::Matrix3x2F& mTop = m_stackMatrix.Top();
+			mTop = mTop * mMatrix;
+		}
+
+		void CSceneView::PopMatrix()
+		{
+			if (m_stackMatrix.IsEmpty())
+			{
+				return;
+			}
+
+			m_stackMatrix.Pop();
+		}
+
+#pragma endregion
 #pragma region Overridables
 
 		BOOL CSceneView::PreCreateWindow(CREATESTRUCT& cs)
@@ -171,9 +206,15 @@ namespace retro
 
 		LRESULT CSceneView::OnDraw2D(WPARAM wParam, LPARAM lParam)
 		{
-			const CNode* pRoot = GetRootDocument();
+			UNREFERENCED_PARAMETER(wParam);
 
-			pRoot->OnDraw(this);
+			CHwndRenderTarget* pRenderTarget = reinterpret_cast <CHwndRenderTarget*>(lParam);
+			ASSERT(pRenderTarget);
+			ASSERT_VALID(pRenderTarget);
+
+			const CNode* pRoot = GetRootDocument();
+	
+			pRoot->OnDraw(this, pRenderTarget);
 
 			return 0L;
 		}
