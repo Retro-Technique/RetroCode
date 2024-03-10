@@ -204,7 +204,6 @@
     <ClCompile Include="..\..\..\src\RetroCode\Core\Color.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\i18n.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\Interpolation.cpp" />
-    <ClCompile Include="..\..\..\src\RetroCode\Core\Logger.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\LogLevel.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\LogManager.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\ObjectEx.cpp" />
@@ -259,8 +258,8 @@
     <ClInclude Include="..\..\..\include\RetroCode\Core\i18n.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\ILogObserver.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\Interpolation.h" />
-    <ClInclude Include="..\..\..\include\RetroCode\Core\Logger.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\LogLevel.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\Core\LogManager.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\MessageQueue.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\ObjectEx.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\Operation.h" />
@@ -277,7 +276,6 @@
     <ClInclude Include="..\..\..\include\RetroCode\Core\System.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\Timer.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\Vector2.h" />
-    <ClInclude Include="..\..\..\src\RetroCode\Core\LogManager.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
