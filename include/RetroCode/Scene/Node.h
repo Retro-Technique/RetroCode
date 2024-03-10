@@ -96,16 +96,17 @@ namespace retro
 
 		protected:	
 
+			virtual D2D1::Matrix3x2F Get3x2Matrix() const;
 			virtual CViewNode* GetWorldView();
 			virtual const CViewNode* GetWorldView() const;
 			virtual void DoInitialUpdate();
 			virtual void DoUpdate();
-			virtual void DoDraw(const CSceneView* pView) const;
+			virtual void DoDraw(CSceneView* pView, CHwndRenderTarget* pRenderTarget) const;
 			virtual void DoResize(const core::TVector2i& vSize);
 			virtual BOOL IsWorldVisible() const;		
 			virtual void OnInitialUpdate();
 			virtual void OnUpdate();
-			virtual void OnDraw(const CSceneView* pView) const;
+			virtual void OnDraw(CSceneView* pView, CHwndRenderTarget* pRenderTarget) const;
 			virtual void OnResize(const core::TVector2i& vSize);
 
 		public:

@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2024 Retro Technique
+ * Copyright(c) 2014-2023 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -33,68 +33,61 @@ namespace retro
 	namespace scene
 	{
 
-		class CNode;
-
-		class CSceneDocument : public mfc::CDocumentEx
+		class AFX_EXT_API CDrawableNode : public CTransformableNode
 		{
 #pragma region Constructors
 
+		public:
+
+			DECLARE_SERIAL(CDrawableNode);
+
 		protected:
 
-			CSceneDocument() noexcept;
-			DECLARE_DYNCREATE(CSceneDocument)
+			CDrawableNode();
 
 		public:
 
-			virtual ~CSceneDocument();
-
-#pragma endregion
-#pragma region Operations
-
-		public:
-
-			CNode* CreateNode(LPCTSTR pszType);
-
-#pragma endregion
-#pragma region Attributes
+			virtual ~CDrawableNode();
 
 		private:
 
-			CResourceManager	m_ResourceManager;
-			CNode*				m_pRoot;
+			CDrawableNode(const CDrawableNode& Node) = delete;
+			void operator=(const CDrawableNode& Node) = delete;
 
-#pragma endregion
+#pragma endregion Constructors
+#pragma region Attributes
+
+		protected:
+
+			BOOL m_bNeedUpdateCache;
+
+		private:
+
+			BOOL m_bVisible;
+			BYTE m_uAlpha;
+
+		public:
+
+			void SetVisible(BOOL bVisible);
+			BOOL IsVisible() const;
+			void SetAlpha(BYTE uAlpha);
+			BYTE GetAlpha() const;
+			
+#pragma endregion Attributes
 #pragma region Overridables
 
 		public:
 
-			BOOL OnNewDocument() override;
-			BOOL OnOpenDocument(LPCTSTR pszPathName) override;
-			BOOL OnSaveDocument(LPCTSTR pszPathName) override;
-			void OnCloseDocument() override;
-			void DeleteContents() override;
+			BOOL IsWorldVisible() const override;
+			void OnDraw(CSceneView* pView, CHwndRenderTarget* pRenderTarget) const override;
 			void Serialize(CArchive& ar) override;
 #ifdef _DEBUG
-			void AssertValid() const override;
 			void Dump(CDumpContext& dc) const override;
+			void AssertValid() const override;
 #endif
 
-#pragma endregion
-#pragma region Implementations
+#pragma endregion Overridables
 
-		private:
-
-			HRESULT Load();
-			void Unload();
-
-#pragma endregion 
-#pragma region Messages
-
-		protected:
-
-			DECLARE_MESSAGE_MAP()
-
-#pragma endregion 
 		};
 
 	}

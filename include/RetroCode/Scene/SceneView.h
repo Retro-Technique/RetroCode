@@ -51,8 +51,23 @@ namespace retro
 
 			CSceneDocument* GetDocument() const;
 
+		private:
+
+			core::CStack<D2D1::Matrix3x2F> m_stackMatrix;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			void PushMatrix();
+			void MultMatrix(const D2D1::Matrix3x2F& mMatrix);
+			void PopMatrix();
+
 #pragma endregion
 #pragma region Overridables
+
+		public:
 
 			BOOL PreCreateWindow(CREATESTRUCT& cs) override;
 			void OnInitialUpdate() override;

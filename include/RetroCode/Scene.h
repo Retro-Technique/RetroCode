@@ -37,6 +37,9 @@
 #include "Scene/SceneDocument.h"
 #include "Scene/SceneView.h"
 #include "Scene/Node.h"
+#include "Scene/TransformableNode.h"
+#include "Scene/DrawableNode.h"
+#include "Scene/SpriteNode.h"
 
 namespace retro
 {

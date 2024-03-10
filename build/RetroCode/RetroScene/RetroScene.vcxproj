@@ -108,7 +108,7 @@
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\RetroScene.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\RetroCode\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>RetroCore.lib;RetroMFC.lib</AdditionalDependencies>
+      <AdditionalDependencies>RetroCore.lib;RetroMFC.lib;D2d1.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -134,7 +134,7 @@
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\RetroScene.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\RetroCode\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>RetroCore.lib;RetroMFC.lib</AdditionalDependencies>
+      <AdditionalDependencies>RetroCore.lib;RetroMFC.lib;D2d1.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -164,7 +164,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>.\RetroScene.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\RetroCode\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>RetroCore.lib;RetroMFC.lib</AdditionalDependencies>
+      <AdditionalDependencies>RetroCore.lib;RetroMFC.lib;D2d1.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -194,7 +194,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>.\RetroScene.def</ModuleDefinitionFile>
       <AdditionalLibraryDirectories>$(SolutionDir)..\..\build\RetroCode\$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>RetroCore.lib;RetroMFC.lib</AdditionalDependencies>
+      <AdditionalDependencies>RetroCore.lib;RetroMFC.lib;D2d1.lib</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -207,10 +207,13 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\RetroCode\Scene\DrawableNode.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Scene\Node.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Scene\ResourceManager.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Scene\SceneDocument.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Scene\SceneView.cpp" />
+    <ClCompile Include="..\..\..\src\RetroCode\Scene\SpriteNode.cpp" />
+    <ClCompile Include="..\..\..\src\RetroCode\Scene\TransformableNode.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
@@ -239,10 +242,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\RetroCode\Scene.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\Scene\DrawableNode.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Scene\Node.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Scene\ResourceManager.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Scene\SceneDocument.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Scene\SceneView.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\Scene\SpriteNode.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\Scene\TransformableNode.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />

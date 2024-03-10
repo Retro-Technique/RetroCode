@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2024 Retro Technique
+ * Copyright(c) 2014-2023 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -33,68 +33,73 @@ namespace retro
 	namespace scene
 	{
 
-		class CNode;
-
-		class CSceneDocument : public mfc::CDocumentEx
+		class AFX_EXT_API CTransformableNode : public CNode
 		{
 #pragma region Constructors
 
+		public:
+
+			DECLARE_SERIAL(CTransformableNode);
+
 		protected:
 
-			CSceneDocument() noexcept;
-			DECLARE_DYNCREATE(CSceneDocument)
+			CTransformableNode();
 
 		public:
 
-			virtual ~CSceneDocument();
+			virtual ~CTransformableNode();
 
-#pragma endregion
-#pragma region Operations
+		private:
 
-		public:
-
-			CNode* CreateNode(LPCTSTR pszType);
+			CTransformableNode(const CTransformableNode& Node) = delete;
+			void operator=(const CTransformableNode& Node) = delete;
 
 #pragma endregion
 #pragma region Attributes
 
 		private:
 
-			CResourceManager	m_ResourceManager;
-			CNode*				m_pRoot;
+			D2D1_POINT_2F	m_vOrigin;
+			D2D1_SIZE_F		m_vPosition;
+			FLOAT			m_fRotation;
+			D2D1_SIZE_F		m_vScale;
+
+		public:
+
+			void SetPosition(FLOAT fX, FLOAT fY);
+			void SetPosition(const D2D1_SIZE_F& vPosition);
+			void SetRotation(FLOAT fAngle);
+			void SetScale(FLOAT fFactorX, FLOAT fFactorY);
+			void SetScale(const D2D1_SIZE_F& vFactor);
+			void SetOrigin(FLOAT fX, FLOAT fY);
+			void SetOrigin(const D2D1_POINT_2F& vOrigin);
+			void Move(FLOAT fOffsetX, FLOAT fOffsetY);
+			void Move(const D2D1_SIZE_F& vOffset);
+			void Rotate(FLOAT fAngle);
+			void Scale(FLOAT fFactorX, FLOAT fFactorY);
+			void Scale(const D2D1_SIZE_F& vFactor);
+			const D2D1_SIZE_F& GetPosition() const;
+			D2D1_POINT_2F GetWorldPosition() const;
+			FLOAT GetRotation() const;
+			const D2D1_SIZE_F& GetScale() const;
+			const D2D1_POINT_2F& GetOrigin() const;
+			D2D1::Matrix3x2F GetWorld3x2Matrix() const;
 
 #pragma endregion
 #pragma region Overridables
 
 		public:
 
-			BOOL OnNewDocument() override;
-			BOOL OnOpenDocument(LPCTSTR pszPathName) override;
-			BOOL OnSaveDocument(LPCTSTR pszPathName) override;
-			void OnCloseDocument() override;
-			void DeleteContents() override;
+			D2D1::Matrix3x2F Get3x2Matrix() const override;
+			void OnDraw(CSceneView* pView, CHwndRenderTarget* pRenderTarget) const override;
 			void Serialize(CArchive& ar) override;
 #ifdef _DEBUG
-			void AssertValid() const override;
 			void Dump(CDumpContext& dc) const override;
+			void AssertValid() const override;
 #endif
 
 #pragma endregion
-#pragma region Implementations
-
-		private:
-
-			HRESULT Load();
-			void Unload();
-
-#pragma endregion 
-#pragma region Messages
-
-		protected:
-
-			DECLARE_MESSAGE_MAP()
-
-#pragma endregion 
+			
 		};
 
 	}

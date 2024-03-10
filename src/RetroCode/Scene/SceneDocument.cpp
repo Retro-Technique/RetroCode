@@ -58,14 +58,14 @@ namespace retro
 #pragma endregion
 #pragma region Operations
 
-		CNode* CSceneDocument::CreateNode(LPCTSTR lpszType)
+		CNode* CSceneDocument::CreateNode(LPCTSTR pszType)
 		{
-			if (!lpszType)
+			if (!pszType)
 			{
 				return NULL;
 			}
 
-			CObject* pObject = CRuntimeClass::CreateObject(lpszType);
+			CObject* pObject = CRuntimeClass::CreateObject(pszType);
 			if (!pObject)
 			{
 				return NULL;
@@ -99,9 +99,9 @@ namespace retro
 			return TRUE;
 		}
 
-		BOOL CSceneDocument::OnOpenDocument(LPCTSTR lpszPathName)
+		BOOL CSceneDocument::OnOpenDocument(LPCTSTR pszPathName)
 		{
-			if (!CDocumentEx::OnOpenDocument(lpszPathName))
+			if (!CDocumentEx::OnOpenDocument(pszPathName))
 			{
 				return FALSE;
 			}
@@ -115,10 +115,10 @@ namespace retro
 			return TRUE;
 		}
 
-		BOOL CSceneDocument::OnSaveDocument(LPCTSTR lpszPathName)
+		BOOL CSceneDocument::OnSaveDocument(LPCTSTR pszPathName)
 		{
 
-			return CDocumentEx::OnSaveDocument(lpszPathName);
+			return CDocumentEx::OnSaveDocument(pszPathName);
 		}
 
 		void CSceneDocument::OnCloseDocument()
