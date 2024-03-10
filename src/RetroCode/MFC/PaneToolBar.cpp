@@ -52,7 +52,7 @@ namespace retro
 
 		void CPaneToolBar::OnUpdateCmdUI(CFrameWnd*, BOOL bDisableIfNoHndler)
 		{
-			CMFCToolBar::OnUpdateCmdUI(STATIC_DOWNCAST(CFrameWnd, GetOwner()), bDisableIfNoHndler);
+			CMFCToolBar::OnUpdateCmdUI(static_cast<CFrameWnd*>(GetOwner()), bDisableIfNoHndler);
 		}
 
 		BOOL CPaneToolBar::AllowShowOnList() const
