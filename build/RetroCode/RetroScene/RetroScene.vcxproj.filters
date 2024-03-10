@@ -41,6 +41,9 @@
     <ClCompile Include="..\..\..\src\RetroCode\Scene\SceneDocument.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Scene\ResourceManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\RetroCode\Scene\DrawableNode.cpp">
       <Filter>src\Nodes</Filter>
     </ClCompile>
@@ -82,6 +85,9 @@
       <Filter>include\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\Scene\SceneDocument.h">
+      <Filter>include\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Scene\ResourceManager.h">
       <Filter>include\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\Scene\Node.h">

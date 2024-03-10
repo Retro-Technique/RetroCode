@@ -33,9 +33,19 @@ namespace retro
 	namespace mfc
 	{
 
+		/**
+		 * @ingroup mfc
+		 * @brief Get the active document from a MFC application
+		 * Generic function to be used either in SDI or MDI applications
+		 *
+		 * @param pClass The custom document runtime class
+		 * 
+		 * @return The active document
+		 *
+		 */
 		AFX_EXT_API CDocument* GetActiveDocument(CRuntimeClass* pClass);
 
 	}
 }
 
-#define GET_ACTIVE_DOCUMENT(x) STATIC_DOWNCAST(x, GetActiveDocument(RUNTIME_CLASS(x)))
+#define GET_ACTIVE_DOCUMENT(x) STATIC_DOWNCAST(x, retro::mfc::GetActiveDocument(RUNTIME_CLASS(x)))

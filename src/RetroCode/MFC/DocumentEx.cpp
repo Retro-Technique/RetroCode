@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -37,10 +37,9 @@ namespace retro
 	namespace mfc
 	{
 
-		IMPLEMENT_DYNCREATE(CDocumentEx, CDocument)
+#pragma region Constructors
 
-		BEGIN_MESSAGE_MAP(CDocumentEx, CDocument)
-		END_MESSAGE_MAP()
+		IMPLEMENT_DYNCREATE(CDocumentEx, CDocument)
 
 		CDocumentEx::CDocumentEx() noexcept
 		{
@@ -51,6 +50,9 @@ namespace retro
 		{
 
 		}
+
+#pragma endregion
+#pragma region Overridables
 
 		void CDocumentEx::SetModifiedFlag(BOOL bModified)
 		{
@@ -115,6 +117,14 @@ namespace retro
 
 			return FALSE;
 		}
+
+#pragma endregion
+#pragma region Messages
+
+		BEGIN_MESSAGE_MAP(CDocumentEx, CDocument)
+		END_MESSAGE_MAP()
+
+#pragma endregion
 
 	}
 }
