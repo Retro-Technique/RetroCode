@@ -33,7 +33,7 @@ namespace retro
 	namespace core
 	{
 
-		class CLogger
+		class AFX_EXT_API CLogger
 		{
 			public:
 
