@@ -37,7 +37,7 @@ namespace retro
 		 * @brief Adapted ToolBar for Panel
 		 *
 		 */
-		class CPaneToolBar : public CMFCToolBar
+		class AFX_EXT_API CPaneToolBar : public CMFCToolBar
 		{
 #pragma region Constructors
 
