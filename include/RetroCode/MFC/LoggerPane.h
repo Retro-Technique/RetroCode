@@ -28,42 +28,40 @@
 
 #pragma once
 
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/ActiveDocument.h"
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
-#include "MFC/RetroListBox.h"
-#include "MFC/LoggerPane.h"
-
 namespace retro
 {
 	namespace mfc
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		class AFX_EXT_API CLoggerPane : public CDockablePane, public core::ILogObserver
+		{
+			DECLARE_DYNAMIC(CLoggerPane)
+
+		public:
+
+			CLoggerPane();
+			virtual ~CLoggerPane();
+
+		private:
+
+			void OnMessage(const CTime& dtDate, core::ELogLevel eLogLevel, LPCTSTR lpszMessage) override;
+
+		protected:
+
+			DECLARE_MESSAGE_MAP()
+
+		private:
+
+			CPaneToolBar	m_ctrlToolBar;
+			CRetroListBox	m_ctrlListBox;
+
+		public:
+
+			afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+			afx_msg void OnSize(UINT nType, int cx, int cy);
+			afx_msg void OnClear();
+
+		};
 
 	}
 }
-
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */

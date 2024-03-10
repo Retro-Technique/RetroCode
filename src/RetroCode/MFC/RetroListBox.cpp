@@ -26,44 +26,46 @@
  *
  */
 
-#pragma once
-
- /**
-  * Headers
-  */
-#include "Core.h"
-
-#include <afxcontrolbars.h>
-
-#include "MFC/ActiveDocument.h"
-#include "MFC/RetroVisualManager.h"
-#include "MFC/RetroWinApp.h"
-#include "MFC/DocumentEx.h"
-#include "MFC/PaneToolBar.h"
-#include "MFC/RetroListBox.h"
-#include "MFC/LoggerPane.h"
+#include "pch.h"
 
 namespace retro
 {
 	namespace mfc
 	{
 
-		/**
-		 * @ingroup mfc
-		 * @brief Get Retro MFC runtime version
-		 *
-		 * @return The version of Retro MFC
-		 *
-		 */
-		AFX_EXT_API CString GetVersion();
+		IMPLEMENT_DYNAMIC(CRetroListBox, CListBox)
+
+		CRetroListBox::CRetroListBox()
+		{
+
+		}
+
+		CRetroListBox::~CRetroListBox()
+		{
+
+		}
+
+		BEGIN_MESSAGE_MAP(CRetroListBox, CListBox)
+			ON_WM_CREATE()
+			ON_WM_CTLCOLOR_REFLECT()
+		END_MESSAGE_MAP()
+
+		int CRetroListBox::OnCreate(LPCREATESTRUCT lpCreateStruct)
+		{
+			if (CListBox::OnCreate(lpCreateStruct) == -1)
+			{
+				return -1;
+			}
+
+			SetFont(&afxGlobalData.fontRegular);
+
+			return 0;
+		}
+
+		HBRUSH CRetroListBox::CtlColor(CDC* pDC, UINT uCtlColor)
+		{
+			return RetroVisualManager::OnCtlColor(pDC, NULL, uCtlColor);
+		}
 
 	}
 }
-
-/**
- * @defgroup mfc MFC module
- *
- * MFC module of RetroCode, defining ready-to-use MFC panes, dialogs,
- * and other controls.
- *
- */
