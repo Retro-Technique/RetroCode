@@ -59,7 +59,7 @@
 #include "Core/Color.h"
 #include "Core/Vector2.h"
 #include "Core/Rect.h"
-#include "Core/LogManager.h"
+#include "Core/Logger.h"
 
 namespace retro
 {
