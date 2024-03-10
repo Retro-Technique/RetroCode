@@ -48,7 +48,7 @@
     <ClCompile Include="..\..\..\src\RetroCode\Core\LogLevel.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\RetroCode\Core\LogManager.cpp">
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Logger.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\RetroCode\Core\ObjectEx.cpp">
@@ -205,7 +205,7 @@
     <ClInclude Include="..\..\..\include\RetroCode\Core\Image.h">
       <Filter>include\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\RetroCode\Core\LogManager.h">
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Logger.h">
       <Filter>include\Core</Filter>
     </ClInclude>
   </ItemGroup>

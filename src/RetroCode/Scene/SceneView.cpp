@@ -181,9 +181,9 @@ namespace retro
 			ASSERT(pRenderTarget);
 			ASSERT_VALID(pRenderTarget);
 
-			const CNode* pRoot = GetRootDocument();
+			/*const CNode* pRoot = GetRootDocument();
 	
-			pRoot->OnDraw(this, pRenderTarget);
+			pRoot->OnDraw(this, pRenderTarget);*/
 
 			return 0L;
 		}

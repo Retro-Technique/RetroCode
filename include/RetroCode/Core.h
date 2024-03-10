@@ -36,7 +36,6 @@
 #include "Core/i18n.h"
 #include "Core/LogLevel.h"
 #include "Core/ILogObserver.h"
-#include "Core/Logger.h"
 #include "Core/Operation.h"
 #include "Core/StaticArray.h"
 #include "Core/Stack.h"

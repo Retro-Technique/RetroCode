@@ -111,6 +111,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>.\RetroMFC.def</ModuleDefinitionFile>
+      <AdditionalDependencies>RetroCore.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -135,6 +137,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\RetroMFC.def</ModuleDefinitionFile>
+      <AdditionalDependencies>RetroCore.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -159,6 +163,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <ModuleDefinitionFile>.\RetroMFC.def</ModuleDefinitionFile>
+      <AdditionalDependencies>RetroCore.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -187,6 +193,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <ModuleDefinitionFile>.\RetroMFC.def</ModuleDefinitionFile>
+      <AdditionalDependencies>RetroCore.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(PlatformTarget)\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -201,6 +209,8 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\RetroCode\MFC\ActiveDocument.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\MFC\DocumentEx.cpp" />
+    <ClCompile Include="..\..\..\src\RetroCode\MFC\LoggerPane.cpp" />
+    <ClCompile Include="..\..\..\src\RetroCode\MFC\RetroListBox.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\MFC\PaneToolBar.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\MFC\RetroVisualManager.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\MFC\RetroWinApp.cpp" />
@@ -234,6 +244,8 @@
     <ClInclude Include="..\..\..\include\RetroCode\MFC.h" />
     <ClInclude Include="..\..\..\include\RetroCode\MFC\ActiveDocument.h" />
     <ClInclude Include="..\..\..\include\RetroCode\MFC\DocumentEx.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\LoggerPane.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroListBox.h" />
     <ClInclude Include="..\..\..\include\RetroCode\MFC\PaneToolBar.h" />
     <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroVisualManager.h" />
     <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroWinApp.h" />
@@ -244,6 +256,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroMFC.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="toolbar1.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

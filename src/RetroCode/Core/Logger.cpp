@@ -33,10 +33,10 @@ namespace retro
 	namespace core
 	{
 
-		CLogger::CLogger()
+		CLogger::CLogger(INT_PTR nHistoricSize)
 			: m_nRepeatedMessageCount(0)
 		{
-
+			m_Historic.SetSize(nHistoricSize);
 		}
 
 		CLogger::~CLogger()

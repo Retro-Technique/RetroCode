@@ -45,6 +45,12 @@
     <ClCompile Include="..\..\..\src\RetroCode\MFC\ActiveDocument.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\MFC\RetroListBox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\MFC\LoggerPane.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\RetroMFC.rc2">
@@ -85,10 +91,21 @@
     <ClInclude Include="..\..\..\include\RetroCode\MFC\ActiveDocument.h">
       <Filter>include\MFC</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\RetroListBox.h">
+      <Filter>include\MFC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\MFC\LoggerPane.h">
+      <Filter>include\MFC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroMFC.rc">
       <Filter>Fichiers de ressources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="toolbar1.bmp">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

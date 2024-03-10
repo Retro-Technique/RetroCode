@@ -37,7 +37,7 @@ namespace retro
 		{
 			public:
 
-				CLogger();
+				CLogger(INT_PTR nHistoricSize = 64);
 				~CLogger();
 
 			public:
@@ -69,7 +69,7 @@ namespace retro
 					CString		strMessage;
 				};
 
-				CCircular<TLog>		m_Historic;
+				CCircular<TLog>	m_Historic;
 
 		};
 
