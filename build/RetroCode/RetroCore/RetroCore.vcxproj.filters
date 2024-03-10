@@ -45,9 +45,6 @@
     <ClCompile Include="..\..\..\src\RetroCode\Core\Interpolation.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\RetroCode\Core\Logger.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\RetroCode\Core\LogLevel.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -130,9 +127,6 @@
     <ClInclude Include="pch.h">
       <Filter>local</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\RetroCode\Core\LogManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\Core\Base64.h">
       <Filter>include\Core</Filter>
     </ClInclude>
@@ -152,9 +146,6 @@
       <Filter>include\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\Core\Interpolation.h">
-      <Filter>include\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\RetroCode\Core\Logger.h">
       <Filter>include\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\Core\LogLevel.h">
@@ -212,6 +203,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\Core\Image.h">
+      <Filter>include\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Core\LogManager.h">
       <Filter>include\Core</Filter>
     </ClInclude>
   </ItemGroup>
