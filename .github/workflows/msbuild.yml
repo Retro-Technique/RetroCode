@@ -56,4 +56,5 @@ jobs:
               build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCore.lib
               build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroMFC.dll
               build/RetroCode/${{ matrix.platform }}/${{ matrix.configuration }}/RetroMFC.lib
+              include/*
               doc/RetroCode.chm
