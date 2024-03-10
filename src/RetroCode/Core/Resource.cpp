@@ -107,7 +107,7 @@ namespace retro
 			{
 				return E_INVALIDARG;
 			}
-
+			
 			HRSRC hrSrc = FindResource(hModule, pszResourceName, RT_RCDATA);
 			if (!hrSrc)
 			{

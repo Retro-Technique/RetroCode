@@ -26,75 +26,57 @@
  *
  */
 
-#include "pch.h"
-#include "LogManager.h"
+#pragma once
 
 namespace retro
 {
-	namespace core
+	namespace scene
 	{
 
-		void Log(LPCTSTR pszMessage, ELogLevel eLogLevel)
+		class AFX_EXT_API CResourceManager : public CObject
 		{
-			if (!pszMessage)
-			{
-				return;
-			}
+#pragma region Constructors
 
-			LogManager.Log(pszMessage, eLogLevel);
-		}
+		public:
 
-		void LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel)
-		{
-			if (!pszMessage)
-			{
-				return;
-			}
+			DECLARE_SERIAL(CResourceManager);
 
-			LogManager.LogInterfaceError(pszMessage, hr, eLogLevel);
-		}
+		public:
 
-		void LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel)
-		{
-			if (!pszMessage)
-			{
-				return;
-			}
+			CResourceManager();
+			virtual ~CResourceManager();
 
-			LogManager.LogWinError(pszMessage, dwError, eLogLevel);
-		}
+#pragma endregion
+#pragma region Attributes
 
-		HRESULT RegisterLogObserver(ILogObserver* pObserver, BOOL bFlush)
-		{
-			if (!pObserver)
-			{
-				return E_INVALIDARG;
-			}
+		private:
 
-			LogManager.RegisterObserver(pObserver);
+			CMapStringToOb m_Resources;
 
-			if (bFlush)
-			{
-				LogManager.Flush();
-			}
+#pragma endregion
+#pragma region Operations
 
-			return S_OK;
-		}
+		private:
 
-		void UnregisterLogObserver(ILogObserver* pObserver)
-		{
-			if (!pObserver)
-			{
-				return;
-			}
+			void OnInitialUpdate();
+			void OnUpdate();
 
-			LogManager.UnregisterObserver(pObserver);
-		}
+#pragma endregion
+#pragma region Overridables
 
-		void UnregisterAllObserver()
-		{
-			LogManager.UnregisterAll();
-		}
+		public:
+
+			void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+			void Dump(CDumpContext& dc) const override;
+			void AssertValid() const override;
+#endif
+
+#pragma endregion
+
+			friend class CSceneView;
+
+		};
 
 	}
 }

@@ -203,6 +203,7 @@
     <ClCompile Include="..\..\..\src\RetroCode\Core\Clock.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\Color.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\i18n.cpp" />
+    <ClCompile Include="..\..\..\src\RetroCode\Core\Image.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\Interpolation.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\Logger.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Core\LogLevel.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="..\..\..\include\RetroCode\Core\Color.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\i18n.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\ILogObserver.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\Core\Image.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\Interpolation.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\Logger.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Core\LogLevel.h" />

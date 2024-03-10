@@ -26,62 +26,12 @@
  *
  */
 
-#pragma once
-
-namespace retro
-{
-	namespace core
-	{
-
-		class CLogManager
-		{
-			private:
-
-				CLogManager();
-				~CLogManager();
-
-			public:
-
-				HRESULT RegisterObserver(ILogObserver* pObserver);
-				void UnregisterObserver(ILogObserver* pObserver);
-				void UnregisterAll();
-				void Log(LPCTSTR pszMessage, ELogLevel eLogLevel);
-				void LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel);
-				void LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel);
-				void Flush();
-				void Clear();
-
-			private:
-
-				void DispatchLogs(const CTime& dtNow, ELogLevel eLogLevel, LPCTSTR pszMessage);
-
-			private:
-
-				CMutex					m_Mutex;
-				CList<ILogObserver*>	m_Observers;
-				CString					m_strLastMessage;
-				INT						m_nRepeatedMessageCount;
-
-				struct TLog
-				{
-					CTime		dtDate;
-					ELogLevel	eLevel;
-					CString		strMessage;
-				};
-
-				CList<TLog>		m_Historic;
-
-			public:
-
-				static CLogManager& GetInstance();
-
-			private:
-
-				static CLogManager ms_Instance;
-
-		};
-
-#define LogManager CLogManager::GetInstance()
-
-	}
-}
+ /**
+  * \mainpage RetroCode Documentation
+  *
+  * \section welcome Welcome
+  *
+  * Welcome to the official RetroCode documentation.<br/>
+  * Here you will find a detailed view of the library.
+  * 
+  */

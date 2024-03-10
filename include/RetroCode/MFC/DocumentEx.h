@@ -4,7 +4,7 @@
  * 
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -33,25 +33,68 @@ namespace retro
 	namespace mfc
 	{
 
+		/**
+		 * @brief Extension class for MFC CDocument
+		 * The purpose of this extension is to add a '*' to the app title when
+		 * the document is currently modified
+		 * 
+		 */
 		class AFX_EXT_API CDocumentEx : public CDocument
 		{
+#pragma region Constructors
+
 		protected:
 
+			/**
+			 * @brief Protected default constructor
+			 *
+			 */
 			CDocumentEx() noexcept;
+
+			/**
+			 * @brief Enables objects of CObject-derived classes to be created dynamically at run time
+			 *
+			 */
 			DECLARE_DYNCREATE(CDocumentEx)
 
 		public:
 
+			/**
+			 * @brief Destructor
+			 *
+			 */
 			virtual ~CDocumentEx();
+
+#pragma endregion
+#pragma region Overridables
 
 		public:
 
+			/**
+			 * @brief Changes the modified state of a control
+			 * 
+			 * @param bModified The new value for the control's modified flag
+			 *
+			 */
 			void SetModifiedFlag(BOOL bModified = TRUE) override;
+
+			/**
+			 * @brief Save the document
+			 *
+			 * @param pszPathName Path of the document
+			 * @param bReplace Replacement
+			 *
+			 */
 			BOOL DoSave(LPCTSTR pszPathName, BOOL bReplace = TRUE) override;
+
+#pragma endregion
+#pragma region Messages
 
 		protected:
 
 			DECLARE_MESSAGE_MAP()
+
+#pragma endregion
 
 		};
 

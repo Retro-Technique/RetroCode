@@ -208,6 +208,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\RetroCode\Scene\Node.cpp" />
+    <ClCompile Include="..\..\..\src\RetroCode\Scene\ResourceManager.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Scene\SceneDocument.cpp" />
     <ClCompile Include="..\..\..\src\RetroCode\Scene\SceneView.cpp" />
     <ClCompile Include="dllmain.cpp">
@@ -239,6 +240,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\include\RetroCode\Scene.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Scene\Node.h" />
+    <ClInclude Include="..\..\..\include\RetroCode\Scene\ResourceManager.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Scene\SceneDocument.h" />
     <ClInclude Include="..\..\..\include\RetroCode\Scene\SceneView.h" />
     <ClInclude Include="framework.h" />

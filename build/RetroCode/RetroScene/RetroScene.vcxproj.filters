@@ -38,6 +38,9 @@
     <ClCompile Include="..\..\..\src\RetroCode\Scene\SceneDocument.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\RetroCode\Scene\ResourceManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\RetroScene.rc2">
@@ -70,6 +73,9 @@
       <Filter>include\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\RetroCode\Scene\SceneDocument.h">
+      <Filter>include\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RetroCode\Scene\ResourceManager.h">
       <Filter>include\Scene</Filter>
     </ClInclude>
   </ItemGroup>

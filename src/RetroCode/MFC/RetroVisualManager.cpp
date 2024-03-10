@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -35,6 +35,8 @@ namespace retro
 	namespace mfc
 	{
 
+#pragma region Constructors
+
 		IMPLEMENT_DYNCREATE(CRetroVisualManager, CMFCVisualManagerOffice2007)
 
 		CRetroVisualManager::CRetroVisualManager()
@@ -47,13 +49,8 @@ namespace retro
 
 		}
 
-		void CRetroVisualManager::OnFillTasksPaneBackground(CDC* pDC, CRect rcWorkArea)
-		{
-			ASSERT(pDC);
-			ASSERT_VALID(pDC);
-
-			pDC->FillSolidRect(rcWorkArea, GRAY_BACKGROUND);
-		}
+#pragma endregion
+#pragma region Operations
 
 		HRESULT CRetroVisualManager::SetWindowDarkAttribute(CWnd* pWnd)
 		{
@@ -144,6 +141,17 @@ namespace retro
 			pDC->FillSolidRect(rcClient, GRAY_BACKGROUND);
 
 			return TRUE;
+		}
+
+#pragma endregion
+#pragma region Overridables
+
+		void CRetroVisualManager::OnFillTasksPaneBackground(CDC* pDC, CRect rcWorkArea)
+		{
+			ASSERT(pDC);
+			ASSERT_VALID(pDC);
+
+			pDC->FillSolidRect(rcWorkArea, GRAY_BACKGROUND);
 		}
 
 	}

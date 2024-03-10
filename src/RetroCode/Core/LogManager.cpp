@@ -27,27 +27,24 @@
  */
 
 #include "pch.h"
-#include "LogManager.h"
 
 namespace retro
 {
 	namespace core
 	{
 
-		CLogManager CLogManager::ms_Instance;
-
-		CLogManager::CLogManager()
+		CLogger::CLogger()
 			: m_nRepeatedMessageCount(0)
 		{
 
 		}
 
-		CLogManager::~CLogManager()
+		CLogger::~CLogger()
 		{
 
 		}
 
-		HRESULT CLogManager::RegisterObserver(ILogObserver* pObserver)
+		HRESULT CLogger::RegisterObserver(ILogObserver* pObserver)
 		{
 			ASSERT(pObserver);
 
@@ -60,7 +57,7 @@ namespace retro
 			return S_OK;
 		}
 
-		void CLogManager::UnregisterObserver(ILogObserver* pObserver)
+		void CLogger::UnregisterObserver(ILogObserver* pObserver)
 		{
 			ASSERT(pObserver);
 
@@ -71,12 +68,12 @@ namespace retro
 			}
 		}
 
-		void CLogManager::UnregisterAll()
+		void CLogger::UnregisterAll()
 		{
 			m_Observers.RemoveAll();
 		}
 
-		void CLogManager::Log(LPCTSTR pszMessage, ELogLevel eLogLevel)
+		void CLogger::Log(LPCTSTR pszMessage, ELogLevel eLogLevel)
 		{
 			ASSERT(AfxIsValidString(pszMessage));
 
@@ -107,7 +104,7 @@ namespace retro
 			m_Mutex.Unlock();
 		}
 
-		void CLogManager::LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel)
+		void CLogger::LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel)
 		{
 			ASSERT(AfxIsValidString(pszMessage));
 
@@ -120,7 +117,7 @@ namespace retro
 			Log(strError.GetString(), eLogLevel);
 		}
 
-		void CLogManager::LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel)
+		void CLogger::LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel)
 		{
 			ASSERT(AfxIsValidString(pszMessage));
 
@@ -128,19 +125,20 @@ namespace retro
 			LogInterfaceError(pszMessage, hr, eLogLevel);
 		}
 
-		void CLogManager::Flush()
+		void CLogger::Flush()
 		{
 			m_Mutex.Lock();
 
-			POSITION logpos = m_Historic.GetHeadPosition();
-			while (logpos)
-			{
-				const TLog& Entry = m_Historic.GetNext(logpos);
+			const INT_PTR nLogCount = m_Historic.GetCount();
 
-				POSITION obspos = m_Observers.GetHeadPosition();
-				while (obspos)
+			for (INT_PTR i = 0; i < nLogCount; i++)
+			{
+				const TLog& Entry = m_Historic.GetAt(i);
+
+				POSITION pos = m_Observers.GetHeadPosition();
+				while (pos)
 				{
-					ILogObserver* pObserver = m_Observers.GetNext(obspos);
+					ILogObserver* pObserver = m_Observers.GetNext(pos);
 					if (pObserver)
 					{
 						pObserver->OnMessage(Entry.dtDate, Entry.eLevel, Entry.strMessage.GetString());
@@ -151,7 +149,7 @@ namespace retro
 			m_Mutex.Unlock();
 		}
 
-		void CLogManager::Clear()
+		void CLogger::Clear()
 		{
 			m_Mutex.Lock();
 
@@ -160,7 +158,7 @@ namespace retro
 			m_Mutex.Unlock();
 		}
 
-		void CLogManager::DispatchLogs(const CTime& dtNow, ELogLevel eLogLevel, LPCTSTR pszMessage)
+		void CLogger::DispatchLogs(const CTime& dtNow, ELogLevel eLogLevel, LPCTSTR pszMessage)
 		{
 			ASSERT(pszMessage);
 
@@ -169,7 +167,7 @@ namespace retro
 			Entry.eLevel = eLogLevel;
 			Entry.strMessage = pszMessage;
 
-			m_Historic.AddTail(Entry);
+			m_Historic.Push(Entry);
 
 			POSITION pos = m_Observers.GetHeadPosition();
 			while (pos)
@@ -180,11 +178,6 @@ namespace retro
 					pObserver->OnMessage(dtNow, eLogLevel, pszMessage);
 				}
 			}
-		}
-
-		CLogManager& CLogManager::GetInstance()
-		{
-			return ms_Instance;
 		}
 
 	}
