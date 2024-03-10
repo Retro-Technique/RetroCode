@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -33,6 +33,8 @@ namespace retro
 	namespace mfc
 	{
 
+#pragma region Constructors
+
 		IMPLEMENT_DYNAMIC(CPaneToolBar, CMFCToolBar)
 
 		CPaneToolBar::CPaneToolBar()
@@ -45,8 +47,8 @@ namespace retro
 		
 		}
 
-		BEGIN_MESSAGE_MAP(CPaneToolBar, CMFCToolBar)
-		END_MESSAGE_MAP()
+#pragma endregion
+#pragma region Overridables
 
 		void CPaneToolBar::OnUpdateCmdUI(CFrameWnd*, BOOL bDisableIfNoHndler)
 		{
@@ -64,6 +66,14 @@ namespace retro
 
 			STATIC_DOWNCAST(CDockablePane, GetParent())->AdjustLayout();
 		}
+
+#pragma endregion
+#pragma region Messages
+
+		BEGIN_MESSAGE_MAP(CPaneToolBar, CMFCToolBar)
+		END_MESSAGE_MAP()
+
+#pragma endregion
 
 	}
 }

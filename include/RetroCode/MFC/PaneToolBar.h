@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -33,24 +33,72 @@ namespace retro
 	namespace mfc
 	{
 
+		/**
+		 * @brief Adapted ToolBar for Panel
+		 *
+		 */
 		class CPaneToolBar : public CMFCToolBar
 		{
+#pragma region Constructors
+
+			/**
+			 * @brief Generates the C++ header code necessary for a CObject-derived
+			 * class that can be serialized
+			 *
+			 */
 			DECLARE_DYNAMIC(CPaneToolBar)
 
 		public:
 
+			/**
+			 * @brief Protected default constructor
+			 *
+			 */
 			CPaneToolBar();
+
+			/**
+			 * @brief Destructor
+			 *
+			 */
 			virtual ~CPaneToolBar();
+
+#pragma endregion
+#pragma region Overridables
 
 		public:
 
+			/**
+			 * @brief Used internally
+			 * 
+			 * @param pTarget Used internally
+			 * @param bDisableIfNoHndler Used internally
+			 *  
+			 */
 			void OnUpdateCmdUI(CFrameWnd* pTarget, BOOL bDisableIfNoHndler) override;
+
+			/**
+			 * @brief Determines whether the toolbar is displayed in the list of toolbars on the Toolbars pane of the Customize dialog box
+			 *
+			 * @return TRUE if the toolbar object can be displayed in the list box on the toolbar customization page; otherwise FALSE
+			 *
+			 */
 			BOOL AllowShowOnList() const override;
+
+			/**
+			 * @brief Recalculates the size and position of a toolbar
+			 *
+			 */
 			void AdjustLayout() override;
+
+#pragma endregion
+#pragma region Messages
 
 		protected:
 
 			DECLARE_MESSAGE_MAP()
+
+#pragma endregion
+
 		};
 
 	}

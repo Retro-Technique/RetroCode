@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -33,6 +33,7 @@
   */
 #include "MFC.h"
 
+#include "Scene/ResourceManager.h"
 #include "Scene/SceneDocument.h"
 #include "Scene/SceneView.h"
 #include "Scene/Node.h"

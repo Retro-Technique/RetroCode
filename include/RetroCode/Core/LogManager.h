@@ -30,55 +30,48 @@
 
 namespace retro
 {
-	namespace mfc
+	namespace core
 	{
 
-		/**
-		 * @brief CWinAppEx with a getting version
-		 *
-		 */
-		class AFX_EXT_API CRetroWinApp : public CWinAppEx
+		class CLogger
 		{
-#pragma region Constructors
+			public:
 
-			/**
-			 * @brief Enables objects of CObject-derived classes to be created dynamically at run time
-			 *
-			 */
-			DECLARE_DYNCREATE(CRetroWinApp)
+				CLogger();
+				~CLogger();
 
-		protected:
+			public:
 
-			/**
-			 * @brief Protected default constructor
-			 *
-			 */
-			CRetroWinApp();     
+				HRESULT RegisterObserver(ILogObserver* pObserver);
+				void UnregisterObserver(ILogObserver* pObserver);
+				void UnregisterAll();
+				void Log(LPCTSTR pszMessage, ELogLevel eLogLevel);
+				void LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel);
+				void LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel);
+				void Flush();
+				void Clear();
 
-			/**
-			 * @brief Destructor
-			 *
-			 */
-			virtual ~CRetroWinApp();
+			private:
 
-#pragma endregion
-#pragma region Operations
+				void DispatchLogs(const CTime& dtNow, ELogLevel eLogLevel, LPCTSTR pszMessage);
 
-		public:
+			private:
 
-			/**
-			 * @brief Get the application version
-			 *
-			 * @return A string with the format '[ProductName] v[ProductVersion]' if release
-			 * or '[ProductName] v[ProductVersion] DEBUG] if debug or '???' if not found
-			 * 
-			 */
-			CString GetVersion() const;
+				CMutex					m_Mutex;
+				CList<ILogObserver*>	m_Observers;
+				CString					m_strLastMessage;
+				INT						m_nRepeatedMessageCount;
 
-#pragma endregion
+				struct TLog
+				{
+					CTime		dtDate;
+					ELogLevel	eLevel;
+					CString		strMessage;
+				};
+
+				CCircular<TLog>		m_Historic;
 
 		};
-
 
 	}
 }

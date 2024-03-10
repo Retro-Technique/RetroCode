@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -144,6 +144,8 @@ namespace retro
 			{
 				ar >> m_pRoot;
 			}
+
+			m_ResourceManager.Serialize(ar);
 		}
 
 #ifdef _DEBUG

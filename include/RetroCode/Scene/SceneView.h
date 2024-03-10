@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -73,14 +73,6 @@ namespace retro
 			void OnInitialUpdate() override;
 			void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint) override;
 			void OnDraw(CDC* pDC) override;   
-
-#pragma endregion
-#pragma region Implementations
-
-		private:
-
-			CNode* GetRootDocument();
-			const CNode* GetRootDocument() const;
 
 #pragma endregion
 #pragma region Messages

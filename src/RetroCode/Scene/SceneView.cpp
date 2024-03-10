@@ -4,7 +4,7 @@
  *
  * MIT License
  *
- * Copyright(c) 2014-2023 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files(the "Software"), to deal
@@ -116,8 +116,12 @@ namespace retro
 
 		void CSceneView::OnInitialUpdate()
 		{
-			CNode* pRoot = GetRootDocument();
+			CSceneDocument* pDocument = GetDocument();
+			
+			CNode* pRoot = NULL;
+			CResourceManager* pResourceManager = NULL;
 
+			pResourceManager->OnInitialUpdate();
 			pRoot->OnInitialUpdate();
 
 			CView::OnInitialUpdate();
@@ -129,51 +133,16 @@ namespace retro
 			UNREFERENCED_PARAMETER(lHint);
 			UNREFERENCED_PARAMETER(pHint);
 
-			CNode* pRoot = GetRootDocument();
+			CNode* pRoot = NULL;
+			CResourceManager* pResourceManager = NULL;
 
+			pResourceManager->OnUpdate();
 			pRoot->OnUpdate();
 		}
 
 		void CSceneView::OnDraw(CDC* pDC)
 		{
 			UNREFERENCED_PARAMETER(pDC);
-		}
-
-#pragma endregion
-#pragma region Implementations
-
-		CNode* CSceneView::GetRootDocument()
-		{
-			CSceneDocument* pDocument = GetDocument();
-			ASSERT(pDocument);
-			ASSERT_VALID(pDocument);
-
-			/*
-				CNode* pRoot = pDocument->GetRoot();
-				ASSERT(pRoot);
-				ASSERT_VALID(pRoot);
-
-				return pRoot;
-			*/
-
-			return NULL;
-		}
-
-		const CNode* CSceneView::GetRootDocument() const
-		{
-			CSceneDocument* pDocument = GetDocument();
-			ASSERT(pDocument);
-			ASSERT_VALID(pDocument);
-
-			/*
-				const CNode* pRoot = pDocument->GetRoot();
-				ASSERT(pRoot);
-				ASSERT_VALID(pRoot);
-
-				return pRoot;
-			*/
-
-			return NULL;
 		}
 
 #pragma endregion
@@ -223,7 +192,7 @@ namespace retro
 		{
 			CView::OnSize(uType, cx, cy);
 
-			CNode* pRoot = GetRootDocument();
+			CNode* pRoot = NULL;
 
 			pRoot->OnResize(core::TVector2i(cx, cy));
 		}
