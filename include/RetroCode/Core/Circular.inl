@@ -89,7 +89,7 @@ namespace retro
 		template<typename TYPE, typename ARG_TYPE>
 		TYPE& CCircular<TYPE, ARG_TYPE>::GetAt(INT_PTR nIndex)
 		{
-			INT_PTR uOffset = m_nLastIdx + nIndex;
+			INT_PTR uOffset = m_nFirstIdx + nIndex;
 			const INT_PTR uCount = m_Buffer.GetSize();
 
 			if (uOffset >= uCount)
@@ -103,7 +103,7 @@ namespace retro
 		template<typename TYPE, typename ARG_TYPE>
 		const TYPE& CCircular<TYPE, ARG_TYPE>::GetAt(INT_PTR nIndex) const
 		{
-			INT_PTR uOffset = m_nLastIdx + nIndex;
+			INT_PTR uOffset = m_nFirstIdx + nIndex;
 			const INT_PTR uCount = m_Buffer.GetSize();
 
 			if (uOffset >= uCount)
@@ -119,8 +119,6 @@ namespace retro
 		{
 			m_nFirstIdx = 0;
 			m_nLastIdx = 0;
-
-			m_Buffer.RemoveAll();
 		}
 
 		template<typename TYPE, typename ARG_TYPE>
