@@ -27,6 +27,7 @@
  */
 
 #include "pch.h"
+#include "resource.h"
 
 namespace retro
 {
@@ -90,7 +91,7 @@ namespace retro
 			if (m_nRepeatedMessageCount > 0)
 			{
 				CString strTmp;
-				strTmp.Format(_T("Last message repeated %d time%c"), m_nRepeatedMessageCount, m_nRepeatedMessageCount == 1 ? _T(' ') : _T('s'));
+				strTmp.FormatMessage(IDS_LOG_REPEAT_MSG, m_nRepeatedMessageCount);
 
 				DispatchLogs(dtNow, ELogLevel_Information, strTmp.GetString());
 
@@ -104,13 +105,23 @@ namespace retro
 			m_Mutex.Unlock();
 		}
 
+		void CLogger::Log(UINT uFormatID, ELogLevel eLogLevel)
+		{
+			CString strFormat;
+
+			if (strFormat.LoadString(uFormatID))
+			{
+				Log(strFormat.GetString(), eLogLevel);
+			}
+		}
+
 		void CLogger::LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel)
 		{
 			ASSERT(AfxIsValidString(pszMessage));
 
 			_com_error Error(hr);
 			CString strError;
-
+		
 			strError += pszMessage;
 			strError += Error.ErrorMessage();
 

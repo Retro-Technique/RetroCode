@@ -33,7 +33,7 @@ namespace retro
 	namespace scene
 	{
 
-		class CSceneView : public CView
+		class AFX_EXT_API CSceneView : public CView
 		{
 #pragma region Constructors
 

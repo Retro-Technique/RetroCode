@@ -12,6 +12,7 @@
 #define IDS_LVL_PROCESS                 1007
 #define IDS_LVL_WARN                    1008
 #define IDS_LVL_ERR                     1009
+#define IDS_LOG_REPEAT_MSG              1010
 
 // Next default values for new objects
 // 
