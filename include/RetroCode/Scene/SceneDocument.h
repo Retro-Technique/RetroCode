@@ -35,7 +35,7 @@ namespace retro
 
 		class CNode;
 
-		class CSceneDocument : public mfc::CDocumentEx
+		class AFX_EXT_API CSceneDocument : public mfc::CDocumentEx
 		{
 #pragma region Constructors
 

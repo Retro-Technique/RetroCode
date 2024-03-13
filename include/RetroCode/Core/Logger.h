@@ -46,6 +46,7 @@ namespace retro
 				void UnregisterObserver(ILogObserver* pObserver);
 				void UnregisterAll();
 				void Log(LPCTSTR pszMessage, ELogLevel eLogLevel);
+				void Log(UINT uFormatID, ELogLevel eLogLevel);
 				void LogInterfaceError(LPCTSTR pszMessage, HRESULT hr, ELogLevel eLogLevel);
 				void LogWinError(LPCTSTR pszMessage, DWORD dwError, ELogLevel eLogLevel);
 				void Flush();
