@@ -59,11 +59,11 @@ namespace RetroCoreTest
 			Assert::IsFalse(bEmpty);
 			Assert::AreEqual((INT_PTR)5, nSize);
 			Assert::AreEqual((INT_PTR)3, nCount);
-			Assert::AreEqual(0, nAt0);
-			Assert::AreEqual(0, nAt1);
-			Assert::AreEqual(1, nAt2);
-			Assert::AreEqual(2, nAt3);
-			Assert::AreEqual(3, nAt4);
+			Assert::AreEqual(1, nAt0);
+			Assert::AreEqual(2, nAt1);
+			Assert::AreEqual(3, nAt2);
+			Assert::AreEqual(0, nAt3);
+			Assert::AreEqual(0, nAt4);
 		}
 
 		TEST_METHOD(TestClear)
@@ -83,7 +83,7 @@ namespace RetroCoreTest
 			const INT_PTR nCount = Ints.GetCount();
 
 			Assert::IsTrue(bEmpty);
-			Assert::AreEqual((INT_PTR)0, nSize);
+			Assert::AreEqual((INT_PTR)5, nSize);
 			Assert::AreEqual((INT_PTR)0, nCount);
 		}
 
