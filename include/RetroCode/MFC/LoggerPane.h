@@ -53,7 +53,7 @@ namespace retro
 		private:
 
 			CPaneToolBar	m_ctrlToolBar;
-			CRetroListBox	m_ctrlListBox;
+			CListBox		m_ctrlListBox;
 
 		public:
 
