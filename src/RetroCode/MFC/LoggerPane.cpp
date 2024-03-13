@@ -74,6 +74,8 @@ namespace retro
 				return -1;
 			}
 
+			m_ctrlListBox.SetFont(&afxGlobalData.fontRegular);
+
 			return 0;
 		}
 
