@@ -109,9 +109,9 @@ namespace rc
 
 	};
 
-	boolean_t operator<(const CString& strLeft, const CString& strRight);
-	boolean_t operator>(const CString& strLeft, const CString& strRight);
-	boolean_t operator<=(const CString& strLeft, const CString& strRight);
-	boolean_t operator>=(const CString& strLeft, const CString& strRight);
+	RETRO_CODE_API boolean_t operator<(const CString& strLeft, const CString& strRight);
+	RETRO_CODE_API boolean_t operator>(const CString& strLeft, const CString& strRight);
+	RETRO_CODE_API boolean_t operator<=(const CString& strLeft, const CString& strRight);
+	RETRO_CODE_API boolean_t operator>=(const CString& strLeft, const CString& strRight);
 
 }

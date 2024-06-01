@@ -72,37 +72,37 @@ namespace rc
 
 	private:
 
-		friend CDuration weeks(float32_t);
-		friend CDuration days(float32_t);
-		friend CDuration hours(float32_t);
-		friend CDuration minutes(float32_t);
-		friend CDuration seconds(time_t);
+		friend CDuration RETRO_CODE_API weeks(float32_t);
+		friend CDuration RETRO_CODE_API days(float32_t);
+		friend CDuration RETRO_CODE_API hours(float32_t);
+		friend CDuration RETRO_CODE_API minutes(float32_t);
+		friend CDuration RETRO_CODE_API seconds(time_t);
 
 	};
 
-	CDuration weeks(float32_t fAmount);
-	CDuration days(float32_t fAmount);
-	CDuration hours(float32_t fAmount);
-	CDuration minutes(float32_t fAmount);
-	CDuration seconds(time_t nAmount);
+	CDuration RETRO_CODE_API weeks(float32_t fAmount);
+	CDuration RETRO_CODE_API days(float32_t fAmount);
+	CDuration RETRO_CODE_API hours(float32_t fAmount);
+	CDuration RETRO_CODE_API minutes(float32_t fAmount);
+	CDuration RETRO_CODE_API seconds(time_t nAmount);
 
-	boolean_t operator ==(CDuration Left, CDuration Right);
-	boolean_t operator !=(CDuration Left, CDuration Right);
-	boolean_t operator <(CDuration Left, CDuration Right);
-	boolean_t operator >(CDuration Left, CDuration Right);
-	boolean_t operator <=(CDuration Left, CDuration Right);
-	boolean_t operator >=(CDuration Left, CDuration Right);
-	CDuration operator +(CDuration Left, CDuration Right);
-	CDuration& operator +=(CDuration& Left, CDuration Right);
-	CDuration operator -(CDuration Left, CDuration Right);
-	CDuration& operator -=(CDuration& Left, CDuration Right);
-	CDuration operator *(CDuration Left, time_t nRight);
-	CDuration operator *(time_t nLeft, CDuration Right);
-	CDuration& operator *=(CDuration& Left, time_t nRight);
-	CDuration operator /(CDuration Left, time_t nRight);
-	CDuration& operator /=(CDuration& Left, time_t nRight);
-	time_t operator /(CDuration Left, CDuration Right);
-	CDuration operator %(CDuration Left, CDuration Right);
-	CDuration& operator %=(CDuration& Left, CDuration Right);
+	RETRO_CODE_API boolean_t operator ==(CDuration Left, CDuration Right);
+	RETRO_CODE_API boolean_t operator !=(CDuration Left, CDuration Right);
+	RETRO_CODE_API boolean_t operator <(CDuration Left, CDuration Right);
+	RETRO_CODE_API boolean_t operator >(CDuration Left, CDuration Right);
+	RETRO_CODE_API boolean_t operator <=(CDuration Left, CDuration Right);
+	RETRO_CODE_API boolean_t operator >=(CDuration Left, CDuration Right);
+	RETRO_CODE_API CDuration operator +(CDuration Left, CDuration Right);
+	RETRO_CODE_API CDuration& operator +=(CDuration& Left, CDuration Right);
+	RETRO_CODE_API CDuration operator -(CDuration Left, CDuration Right);
+	RETRO_CODE_API CDuration& operator -=(CDuration& Left, CDuration Right);
+	RETRO_CODE_API CDuration operator *(CDuration Left, time_t nRight);
+	RETRO_CODE_API CDuration operator *(time_t nLeft, CDuration Right);
+	RETRO_CODE_API CDuration& operator *=(CDuration& Left, time_t nRight);
+	RETRO_CODE_API CDuration operator /(CDuration Left, time_t nRight);
+	RETRO_CODE_API CDuration& operator /=(CDuration& Left, time_t nRight);
+	RETRO_CODE_API time_t operator /(CDuration Left, CDuration Right);
+	RETRO_CODE_API CDuration operator %(CDuration Left, CDuration Right);
+	RETRO_CODE_API CDuration& operator %=(CDuration& Left, CDuration Right);
 
 }

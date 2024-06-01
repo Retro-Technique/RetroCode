@@ -153,7 +153,7 @@ namespace rc
 		{
 			uMultiplier = TICK_COUNT_IN_AN_HOUR;
 		}
-		else if (pszValue[i] == 'j' && pszValue[i + 1] == '\0')
+		else if (pszValue[i] == 'd' && pszValue[i + 1] == '\0')
 		{
 			uMultiplier = TICK_COUNT_IN_A_DAY;
 		}
@@ -169,8 +169,6 @@ namespace rc
 
 		nSeconds = nSeconds * uMultiplier;
 		m_nSeconds = nSeconds;
-
-		return;
 	}
 
 	void CDuration::Null()
