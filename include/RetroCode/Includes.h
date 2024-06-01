@@ -1,9 +1,9 @@
 /**
- * 
+ *
  * Retro Code
  *
  * CEA CNRS INRIA LOGICIEL LIBRE
- * 
+ *
  * Copyright(c) 2014-2024 Retro Technique
  *
  * This software is a computer program whose purpose is to provide
@@ -39,8 +39,15 @@
 
 #pragma once
 
-#include "RetroCode/Includes.h"
-#include "RetroCode/Types.h"
-#include "RetroCode/Config.h"
-#include "RetroCode/String.h"
-#include "RetroCode/Duration.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <errno.h>
+#include <stdint.h>
+#include <assert.h>
+#include <string.h>
+#include <wchar.h>
+#include <time.h>
+#include <sys/timeb.h>
+#include <math.h>
+#include <ctype.h>

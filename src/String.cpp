@@ -146,8 +146,8 @@ namespace rc
 		if (pszStr)
 		{
 			const size_t uOldLength = GetLength();
-			const size_t uNewLength = uOldLength + uLength;			
-			
+			const size_t uNewLength = uOldLength + uLength;
+
 			Alloc(uNewLength);
 
 			lpstr pszTail = m_pszBuffer + uOldLength;
@@ -215,7 +215,7 @@ namespace rc
 	size_t CString::GetLength() const
 	{
 		return m_uLength;
-	}	
+	}
 
 	void CString::Empty()
 	{
@@ -246,7 +246,7 @@ namespace rc
 		{
 			return;
 		}
-		
+
 		for (size_t i = 0; i < m_uLength; i++)
 		{
 			m_pszBuffer[i] = static_cast<char_t>(tolower(m_pszBuffer[i]));
@@ -314,7 +314,7 @@ namespace rc
 			return 0;
 		}
 
-		if(uIndex >= m_uLength)
+		if (uIndex >= m_uLength)
 		{
 			return 0;
 		}
@@ -374,7 +374,7 @@ namespace rc
 				memmove(m_pszBuffer + i + uNewLength, m_pszBuffer + i + uOldLength, m_uLength - i - uOldLength);
 				memcpy(m_pszBuffer + i, pszNew, uNewLength);
 				m_uLength += uNewLength - uOldLength;
-				i += uNewLength - 1; 
+				i += uNewLength - 1;
 				uCount++;
 			}
 		}
