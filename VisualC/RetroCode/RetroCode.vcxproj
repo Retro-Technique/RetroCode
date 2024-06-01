@@ -137,9 +137,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\RetroCode.h" />
     <ClInclude Include="..\..\include\RetroCode\Config.h" />
+    <ClInclude Include="..\..\include\RetroCode\Duration.h" />
+    <ClInclude Include="..\..\include\RetroCode\Includes.h" />
     <ClInclude Include="..\..\include\RetroCode\String.h" />
+    <ClInclude Include="..\..\include\RetroCode\Types.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Duration.cpp" />
     <ClCompile Include="..\..\src\String.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
