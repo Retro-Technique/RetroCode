@@ -24,6 +24,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set locale time to Paris time
+        run: tzutil /s "Romance Standard Time"
+
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
 
