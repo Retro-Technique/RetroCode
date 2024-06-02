@@ -103,6 +103,7 @@ namespace rc
 
 		if (!IsValid())
 		{
+			strResult.Empty();
 			return;
 		}
 
