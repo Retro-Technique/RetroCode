@@ -39,10 +39,8 @@
 
 #pragma once
 
-#include "RetroCode/Includes.h"
-#include "RetroCode/Types.h"
-#include "RetroCode/Config.h"
-#include "RetroCode/String.h"
-#include "RetroCode/Duration.h"
-#include "RetroCode/DateTime.h"
-#include "RetroCode/Clock.h"
+#include "include/Includes.h"
+#include "include/Types.h"
+#include "include/Config.h"
+#include "include/String.h"
+#include "include/Duration.h"

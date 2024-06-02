@@ -21,6 +21,7 @@
     <ClCompile Include="..\..\test\String.Test.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\test\Clock.Test.cpp">
     <ClCompile Include="..\..\test\Duration.Test.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
