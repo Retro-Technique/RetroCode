@@ -9,6 +9,7 @@
 
 // ajouter les en-têtes à précompiler ici
 #include <RetroCode.h>
+#include <Windows.h>
 
 #ifdef _DEBUG
 #define BEGIN_MEMORY_CHECK \

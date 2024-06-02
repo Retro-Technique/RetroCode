@@ -1,9 +1,9 @@
 /**
- * 
+ *
  * Retro Code
  *
  * CEA CNRS INRIA LOGICIEL LIBRE
- * 
+ *
  * Copyright(c) 2014-2024 Retro Technique
  *
  * This software is a computer program whose purpose is to provide
@@ -39,10 +39,53 @@
 
 #pragma once
 
-#include "RetroCode/Includes.h"
-#include "RetroCode/Types.h"
-#include "RetroCode/Config.h"
-#include "RetroCode/String.h"
-#include "RetroCode/Duration.h"
-#include "RetroCode/DateTime.h"
-#include "RetroCode/Clock.h"
+namespace rc
+{
+
+	class RETRO_CODE_API CDateTime
+	{
+		public:
+
+			static constexpr const time_t INVALID_TIMESTAMP = -1;
+
+		public:
+
+			CDateTime();
+			explicit CDateTime(time_t nTimestamp);
+			~CDateTime();
+
+		public:
+
+			time_t GetTimestamp() const;
+			void FromDesc(const tm& Details);
+			void ToDesc(tm& Details) const;
+			boolean_t IsValid() const;
+			void Format(lpcstr pszFormat, CString& strResult) const;
+			boolean_t operator==(const CDateTime& dtOther) const;
+			boolean_t operator!=(const CDateTime& dtOther) const;
+			boolean_t operator<(const CDateTime& dtOther) const;
+			boolean_t operator>(const CDateTime& dtOther) const;
+			boolean_t operator<=(const CDateTime& dtOther) const;
+			boolean_t operator>=(const CDateTime& dtOther) const;
+			CDateTime operator+(const CDuration& durTime) const;
+			CDateTime operator-(const CDuration& durTime) const;
+			CDateTime operator+=(const CDuration& durTime);
+			CDateTime operator-=(const CDuration& durTime);
+			CDuration operator-(const CDateTime& dtOther) const;
+
+		public:
+
+			static CDateTime GetCurrentDateTime();
+
+		private:
+
+			time_t m_nTimestamp;
+
+	};
+
+	static inline CDateTime Now()
+	{
+		return CDateTime::GetCurrentDateTime();
+	}
+
+}

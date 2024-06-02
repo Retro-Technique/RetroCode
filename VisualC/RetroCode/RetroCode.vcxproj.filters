@@ -35,12 +35,24 @@
     <ClInclude Include="..\..\include\RetroCode\Duration.h">
       <Filter>include\RetroCode</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\DateTime.h">
+      <Filter>include\RetroCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Clock.h">
+      <Filter>include\RetroCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\String.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Duration.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\DateTime.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Clock.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

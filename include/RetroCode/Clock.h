@@ -1,9 +1,9 @@
 /**
- * 
+ *
  * Retro Code
  *
  * CEA CNRS INRIA LOGICIEL LIBRE
- * 
+ *
  * Copyright(c) 2014-2024 Retro Technique
  *
  * This software is a computer program whose purpose is to provide
@@ -39,10 +39,25 @@
 
 #pragma once
 
-#include "RetroCode/Includes.h"
-#include "RetroCode/Types.h"
-#include "RetroCode/Config.h"
-#include "RetroCode/String.h"
-#include "RetroCode/Duration.h"
-#include "RetroCode/DateTime.h"
-#include "RetroCode/Clock.h"
+namespace rc
+{
+
+	class RETRO_CODE_API CClock
+	{
+		public:
+
+			CClock();
+			~CClock();
+
+		public:
+
+			int32_t GetElapsedTime() const;
+			int32_t Restart();
+
+		private:
+
+			clock_t m_nStartTime;
+
+	};
+
+}

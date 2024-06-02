@@ -1,9 +1,9 @@
 /**
- * 
+ *
  * Retro Code
  *
  * CEA CNRS INRIA LOGICIEL LIBRE
- * 
+ *
  * Copyright(c) 2014-2024 Retro Technique
  *
  * This software is a computer program whose purpose is to provide
@@ -37,12 +37,37 @@
  *
  */
 
-#pragma once
+#include "../include/RetroCode.h"
 
-#include "RetroCode/Includes.h"
-#include "RetroCode/Types.h"
-#include "RetroCode/Config.h"
-#include "RetroCode/String.h"
-#include "RetroCode/Duration.h"
-#include "RetroCode/DateTime.h"
-#include "RetroCode/Clock.h"
+namespace rc
+{
+
+	CClock::CClock()
+		: m_nStartTime(clock())
+	{
+
+	}
+
+	CClock::~CClock()
+	{
+		
+	}
+
+	int32_t CClock::GetElapsedTime() const
+	{
+		const clock_t nNow = clock();
+		const int32_t nElapsedMs = (nNow - m_nStartTime) * 1000 / CLOCKS_PER_SEC;
+
+		return nElapsedMs;
+	}
+
+	int32_t CClock::Restart()
+	{
+		const clock_t nNow = clock();
+		const int32_t nElapsedMs = (nNow - m_nStartTime) * 1000 / CLOCKS_PER_SEC;
+		m_nStartTime = nNow;
+
+		return nElapsedMs;
+	}
+
+}
