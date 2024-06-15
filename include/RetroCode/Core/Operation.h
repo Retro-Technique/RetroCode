@@ -37,22 +37,30 @@
  *
  */
 
+#ifndef __RETRO_CORE_H_INCLUDED__
+#error Do not include Operation.h directly, include the Core.h file
+#endif
+
 #pragma once
 
-#include <RetroCode/Common.h>
+namespace retro
+{
+	namespace core
+	{
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#define __RETRO_CORE_H_INCLUDED__
+		template<typename T>
+		void Swap(T& a, T& b);
 
-#include <RetroCode/Core/Operation.h>
-#include <RetroCode/Core/Stack.h>
-#include <RetroCode/Core/Queue.h>
-#include <RetroCode/Core/Circular.h>
-#include <RetroCode/Core/StaticArray.h>
-#include <RetroCode/Core/Clock.h>
-#include <RetroCode/Core/StopWatch.h>
-#include <RetroCode/Core/Timer.h>
-#include <RetroCode/Core/Random.h>
-#include <RetroCode/Core/PrefPath.h>
+		template<typename T>
+		const T& Min(const T& a, const T& b);
 
-#endif
+		template<typename T>
+		const T& Max(const T& a, const T& b);
+
+		template<typename T>
+		const T& Clamp(const T& val, const T& min, const T& max);
+
+	}
+}
+
+#include "Operation.inl"

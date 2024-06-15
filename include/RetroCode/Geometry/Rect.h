@@ -37,22 +37,72 @@
  *
  */
 
+#ifndef __RETRO_GEOMETRY_H_INCLUDED__
+#error Do not include Rect.h directly, include the Geometry.h file
+#endif
+
 #pragma once
 
-#include <RetroCode/Common.h>
+namespace retro
+{
+	namespace geometry
+	{
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#define __RETRO_CORE_H_INCLUDED__
+		template<typename T>
+		class CRect
+		{
+#pragma region Constructors
 
-#include <RetroCode/Core/Operation.h>
-#include <RetroCode/Core/Stack.h>
-#include <RetroCode/Core/Queue.h>
-#include <RetroCode/Core/Circular.h>
-#include <RetroCode/Core/StaticArray.h>
-#include <RetroCode/Core/Clock.h>
-#include <RetroCode/Core/StopWatch.h>
-#include <RetroCode/Core/Timer.h>
-#include <RetroCode/Core/Random.h>
-#include <RetroCode/Core/PrefPath.h>
+		public:
 
+			CRect();
+			CRect(T x, T y, T width, T height);
+			CRect(const CVector2<T>& Point, const CVector2<T>& Size);
+			CRect(const ::CRect& rcRect);
+			template<typename U>
+			explicit CRect(const CRect<U>& Rectangle);
+			~CRect();
+
+#pragma endregion
+#pragma region Attributes
+
+		public:
+
+			CVector2<T> Point;
+			CVector2<T> Size;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			void FromRect(const ::CRect& rcRect);
+			::CRect ToRect() const;
+			const T& Left() const;
+			const T& Top() const;
+			T Right() const;
+			T Bottom() const;
+			void FromString(LPCTSTR pszValue);
+			CString ToString() const;
+			void Serialize(CArchive& ar);
+#ifdef _DEBUG
+			void Dump(CDumpContext& dc) const;
 #endif
+
+#pragma endregion
+
+		};
+
+		typedef CRect<INT>		CIntRect;
+		typedef CRect<FLOAT>	CFloatRect;
+
+		template<typename T>
+		BOOL operator==(const CRect<T>& Left, const CRect<T>& Right);
+
+		template<typename T>
+		BOOL operator!=(const CRect<T>& Left, const CRect<T>& Right);
+
+	}
+}
+
+#include "Rect.inl"

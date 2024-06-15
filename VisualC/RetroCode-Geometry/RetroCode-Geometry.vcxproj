@@ -226,6 +226,7 @@
     <None Include="RetroCode-Geometry.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\RetroCode\Geometry\Rect.h" />
     <ClInclude Include="..\..\include\RetroCode\Geometry\Vector2.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />

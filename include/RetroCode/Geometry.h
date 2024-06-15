@@ -45,5 +45,6 @@
 #define __RETRO_GEOMETRY_H_INCLUDED__
 
 #include <RetroCode/Geometry/Vector2.h>
+#include <RetroCode/Geometry/Rect.h>
 
 #endif

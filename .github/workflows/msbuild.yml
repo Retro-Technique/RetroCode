@@ -31,6 +31,8 @@ jobs:
         run: msbuild VisualC/RetroCode.sln -property:Configuration=${{ matrix.configuration }} -property:Platform=${{ matrix.platform }}  
 
       - name: Run Tests
-        uses: microsoft/vstest-action@v1.0.0
+        uses: microsoft-approved-actions/vstest@master
         with:
-          testAssembly: VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCode-Core.Test.dll      
+          testAssembly: RetroCode-*.Test.dll
+          searchFolder: VisualC/${{ matrix.platform }}/${{ matrix.configuration }}
+          runInParallel: true

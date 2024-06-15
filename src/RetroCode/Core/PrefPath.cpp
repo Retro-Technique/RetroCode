@@ -37,22 +37,66 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#include <RetroCode/Common.h>
+namespace retro
+{
+	namespace core
+	{
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#define __RETRO_CORE_H_INCLUDED__
+		HRESULT QueryApplicationPrefPath(LPCTSTR pszOrg, LPCTSTR pszApp, CString& strPrefPath)
+		{
+			if (!pszOrg)
+			{
+				return E_INVALIDARG;
+			}
 
-#include <RetroCode/Core/Operation.h>
-#include <RetroCode/Core/Stack.h>
-#include <RetroCode/Core/Queue.h>
-#include <RetroCode/Core/Circular.h>
-#include <RetroCode/Core/StaticArray.h>
-#include <RetroCode/Core/Clock.h>
-#include <RetroCode/Core/StopWatch.h>
-#include <RetroCode/Core/Timer.h>
-#include <RetroCode/Core/Random.h>
-#include <RetroCode/Core/PrefPath.h>
+			if (!pszApp)
+			{
+				return E_INVALIDARG;
+			}
 
-#endif
+			HRESULT hr = S_OK;
+			LPWSTR pszPath = NULL;
+
+			do
+			{
+				hr = SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_CREATE, NULL, &pszPath);
+				if (FAILED(hr))
+				{
+					break;
+				}
+
+				strPrefPath.Append(pszPath);
+				strPrefPath += _T('\\');
+				strPrefPath += pszOrg;
+
+				BOOL bRet = CreateDirectory(strPrefPath.GetString(), NULL);
+				if (!bRet)
+				{
+					hr = GetLastError();
+					break;
+				}
+
+				strPrefPath += _T('\\');
+				strPrefPath += pszApp;
+
+				bRet = CreateDirectory(strPrefPath.GetString(), NULL);
+				if (!bRet)
+				{
+					hr = GetLastError();
+				}
+
+			} while (RETRO_NULL_WHILE_LOOP_CONDITION);
+
+			if (pszPath)
+			{
+				CoTaskMemFree(pszPath);
+				pszPath = NULL;
+			}
+
+			return hr;
+		}
+
+	}
+}

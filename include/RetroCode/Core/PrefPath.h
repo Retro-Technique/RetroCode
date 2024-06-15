@@ -37,22 +37,18 @@
  *
  */
 
+#ifndef __RETRO_CORE_H_INCLUDED__
+#error Do not include PrefPath.h directly, include the Core.h file
+#endif
+
 #pragma once
 
-#include <RetroCode/Common.h>
+namespace retro
+{
+	namespace core
+	{
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#define __RETRO_CORE_H_INCLUDED__
+		HRESULT AFX_EXT_API QueryApplicationPrefPath(LPCTSTR pszOrg, LPCTSTR pszApp, CString& strPrefPath);
 
-#include <RetroCode/Core/Operation.h>
-#include <RetroCode/Core/Stack.h>
-#include <RetroCode/Core/Queue.h>
-#include <RetroCode/Core/Circular.h>
-#include <RetroCode/Core/StaticArray.h>
-#include <RetroCode/Core/Clock.h>
-#include <RetroCode/Core/StopWatch.h>
-#include <RetroCode/Core/Timer.h>
-#include <RetroCode/Core/Random.h>
-#include <RetroCode/Core/PrefPath.h>
-
-#endif
+	}
+}

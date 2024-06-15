@@ -37,22 +37,46 @@
  *
  */
 
-#pragma once
+namespace retro
+{
+	namespace core
+	{
 
-#include <RetroCode/Common.h>
+		template<typename T>
+		void Swap(T& a, T& b)
+		{
+			T temp = a;
+			a = b;
+			b = temp;
+		}
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#define __RETRO_CORE_H_INCLUDED__
+		template<typename T>
+		const T& Min(const T& a, const T& b)
+		{
+			return (b < a) ? b : a;
+		}
 
-#include <RetroCode/Core/Operation.h>
-#include <RetroCode/Core/Stack.h>
-#include <RetroCode/Core/Queue.h>
-#include <RetroCode/Core/Circular.h>
-#include <RetroCode/Core/StaticArray.h>
-#include <RetroCode/Core/Clock.h>
-#include <RetroCode/Core/StopWatch.h>
-#include <RetroCode/Core/Timer.h>
-#include <RetroCode/Core/Random.h>
-#include <RetroCode/Core/PrefPath.h>
+		template<typename T>
+		const T& Max(const T& a, const T& b)
+		{
+			return (b > a) ? b : a;
+		}
 
-#endif
+		template<typename T>
+		const T& Clamp(const T& val, const T& min, const T& max)
+		{
+			if (val < min)
+			{
+				return min;
+			}
+
+			if (val > max)
+			{
+				return max;
+			}
+
+			return val;
+		}
+
+	}
+}
