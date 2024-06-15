@@ -61,6 +61,12 @@
     <ClInclude Include="..\..\include\RetroCode\Geometry\Circle.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Geometry\Distance.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Geometry\Collide.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroCode-Geometry.rc">

@@ -5,37 +5,33 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace RetroCoreTest
 {
-	TEST_CLASS(QueueTest)
+	TEST_CLASS(StackTest)
 	{
 	public:
 
 		TEST_METHOD(TestPushPop)
 		{
-			retro::core::CQueue<INT> Ints;
+			retro::core::CStack<INT> Ints;
 
 			Ints.Push(1);
 			Ints.Push(2);
 
 			{
 				const INT_PTR nSize = Ints.GetSize();
-				const INT nFront = Ints.Front();
-				const INT nBack = Ints.Back();
+				const INT nTop = Ints.Top();
 
 				Assert::AreEqual((INT_PTR)2, nSize);
-				Assert::AreEqual(1, nFront);
-				Assert::AreEqual(2, nBack);
+				Assert::AreEqual(2, nTop);
 			}
 
 			Ints.Pop();
 
 			{
 				const INT_PTR nSize = Ints.GetSize();
-				const INT nFront = Ints.Front();
-				const INT nBack = Ints.Back();
+				const INT nTop = Ints.Top();
 
 				Assert::AreEqual((INT_PTR)1, nSize);
-				Assert::AreEqual(2, nFront);
-				Assert::AreEqual(2, nBack);
+				Assert::AreEqual(1, nTop);
 			}
 
 			Ints.Pop();
