@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode.Test", "RetroCode.Test\RetroCode.Test.vcxproj", "{EF7A4291-46FA-4D61-8412-0530AD962CC7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RetroCode", "RetroCode", "{07E2EC43-50F9-47B6-BE5D-83451EF97259}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode", "RetroCode\RetroCode.vcxproj", "{34326183-23A0-45B7-9B1F-C218F17A7CA2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5CFDA219-994C-497E-9FBB-694B917B1C0D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Core", "RetroCode-Core\RetroCode-Core.vcxproj", "{60122CDD-811A-42CD-8A1C-99CC34337101}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Core.Test", "RetroCode-Core.Test\RetroCode-Core.Test.vcxproj", "{D5608EB4-924C-459D-9111-23141DBBD61A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,25 +19,29 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EF7A4291-46FA-4D61-8412-0530AD962CC7}.Debug|x64.ActiveCfg = Debug|x64
-		{EF7A4291-46FA-4D61-8412-0530AD962CC7}.Debug|x64.Build.0 = Debug|x64
-		{EF7A4291-46FA-4D61-8412-0530AD962CC7}.Debug|x86.ActiveCfg = Debug|Win32
-		{EF7A4291-46FA-4D61-8412-0530AD962CC7}.Debug|x86.Build.0 = Debug|Win32
-		{EF7A4291-46FA-4D61-8412-0530AD962CC7}.Release|x64.ActiveCfg = Release|x64
-		{EF7A4291-46FA-4D61-8412-0530AD962CC7}.Release|x64.Build.0 = Release|x64
-		{EF7A4291-46FA-4D61-8412-0530AD962CC7}.Release|x86.ActiveCfg = Release|Win32
-		{EF7A4291-46FA-4D61-8412-0530AD962CC7}.Release|x86.Build.0 = Release|Win32
-		{34326183-23A0-45B7-9B1F-C218F17A7CA2}.Debug|x64.ActiveCfg = Debug|x64
-		{34326183-23A0-45B7-9B1F-C218F17A7CA2}.Debug|x64.Build.0 = Debug|x64
-		{34326183-23A0-45B7-9B1F-C218F17A7CA2}.Debug|x86.ActiveCfg = Debug|Win32
-		{34326183-23A0-45B7-9B1F-C218F17A7CA2}.Debug|x86.Build.0 = Debug|Win32
-		{34326183-23A0-45B7-9B1F-C218F17A7CA2}.Release|x64.ActiveCfg = Release|x64
-		{34326183-23A0-45B7-9B1F-C218F17A7CA2}.Release|x64.Build.0 = Release|x64
-		{34326183-23A0-45B7-9B1F-C218F17A7CA2}.Release|x86.ActiveCfg = Release|Win32
-		{34326183-23A0-45B7-9B1F-C218F17A7CA2}.Release|x86.Build.0 = Release|Win32
+		{60122CDD-811A-42CD-8A1C-99CC34337101}.Debug|x64.ActiveCfg = Debug|x64
+		{60122CDD-811A-42CD-8A1C-99CC34337101}.Debug|x64.Build.0 = Debug|x64
+		{60122CDD-811A-42CD-8A1C-99CC34337101}.Debug|x86.ActiveCfg = Debug|Win32
+		{60122CDD-811A-42CD-8A1C-99CC34337101}.Debug|x86.Build.0 = Debug|Win32
+		{60122CDD-811A-42CD-8A1C-99CC34337101}.Release|x64.ActiveCfg = Release|x64
+		{60122CDD-811A-42CD-8A1C-99CC34337101}.Release|x64.Build.0 = Release|x64
+		{60122CDD-811A-42CD-8A1C-99CC34337101}.Release|x86.ActiveCfg = Release|Win32
+		{60122CDD-811A-42CD-8A1C-99CC34337101}.Release|x86.Build.0 = Release|Win32
+		{D5608EB4-924C-459D-9111-23141DBBD61A}.Debug|x64.ActiveCfg = Debug|x64
+		{D5608EB4-924C-459D-9111-23141DBBD61A}.Debug|x64.Build.0 = Debug|x64
+		{D5608EB4-924C-459D-9111-23141DBBD61A}.Debug|x86.ActiveCfg = Debug|Win32
+		{D5608EB4-924C-459D-9111-23141DBBD61A}.Debug|x86.Build.0 = Debug|Win32
+		{D5608EB4-924C-459D-9111-23141DBBD61A}.Release|x64.ActiveCfg = Release|x64
+		{D5608EB4-924C-459D-9111-23141DBBD61A}.Release|x64.Build.0 = Release|x64
+		{D5608EB4-924C-459D-9111-23141DBBD61A}.Release|x86.ActiveCfg = Release|Win32
+		{D5608EB4-924C-459D-9111-23141DBBD61A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60122CDD-811A-42CD-8A1C-99CC34337101} = {07E2EC43-50F9-47B6-BE5D-83451EF97259}
+		{D5608EB4-924C-459D-9111-23141DBBD61A} = {5CFDA219-994C-497E-9FBB-694B917B1C0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4C3620B-A130-49E6-9B3D-E40647062312}

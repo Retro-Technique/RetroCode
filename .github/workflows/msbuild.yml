@@ -24,9 +24,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set locale time to Paris time
-        run: tzutil /s "Romance Standard Time"
-
       - name: Add MSBuild to PATH
         uses: microsoft/setup-msbuild@v1.1
 
@@ -36,4 +33,4 @@ jobs:
       - name: Run Tests
         uses: microsoft/vstest-action@v1.0.0
         with:
-          testAssembly: VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCode.Test.dll      
+          testAssembly: VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCode-Core.Test.dll      
