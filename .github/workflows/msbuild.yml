@@ -33,6 +33,4 @@ jobs:
       - name: Run Tests
         uses: rusty-bender/vstest-action@main
         with:
-          testAssembly: RetroCode-*.Test.dll
-          searchFolder: VisualC/${{ matrix.platform }}/${{ matrix.configuration }}
-          runInParallel: true
+          testAssembly: VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCode-Core.Test.dll      
