@@ -37,23 +37,22 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#include <RetroCode/Common.h>
+namespace retro
+{
+	namespace core
+	{
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#define __RETRO_CORE_H_INCLUDED__
+		CString Translate(UINT uID)
+		{
+			CString strTranslate;
 
-#include <RetroCode/Core/i18n.h>
-#include <RetroCode/Core/Operation.h>
-#include <RetroCode/Core/Stack.h>
-#include <RetroCode/Core/Queue.h>
-#include <RetroCode/Core/Circular.h>
-#include <RetroCode/Core/StaticArray.h>
-#include <RetroCode/Core/Clock.h>
-#include <RetroCode/Core/StopWatch.h>
-#include <RetroCode/Core/Timer.h>
-#include <RetroCode/Core/Random.h>
-#include <RetroCode/Core/System.h>
+			BOOL bRet = strTranslate.LoadString(uID);
+			ASSERT(bRet);
 
-#endif
+			return strTranslate;
+		}
+
+	}
+}

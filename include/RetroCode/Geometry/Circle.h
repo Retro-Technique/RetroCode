@@ -37,23 +37,65 @@
  *
  */
 
+#ifndef __RETRO_GEOMETRY_H_INCLUDED__
+#error Do not include Circle.h directly, include the Geometry.h file
+#endif
+
 #pragma once
 
-#include <RetroCode/Common.h>
+namespace retro
+{
+	namespace geometry
+	{
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#define __RETRO_CORE_H_INCLUDED__
+		template<typename T>
+		class CCircle
+		{
+#pragma region Constructors
 
-#include <RetroCode/Core/i18n.h>
-#include <RetroCode/Core/Operation.h>
-#include <RetroCode/Core/Stack.h>
-#include <RetroCode/Core/Queue.h>
-#include <RetroCode/Core/Circular.h>
-#include <RetroCode/Core/StaticArray.h>
-#include <RetroCode/Core/Clock.h>
-#include <RetroCode/Core/StopWatch.h>
-#include <RetroCode/Core/Timer.h>
-#include <RetroCode/Core/Random.h>
-#include <RetroCode/Core/System.h>
+		public:
 
+			CCircle();
+			CCircle(T CenterX, T CenterY, T Radius);
+			CCircle(const CVector2<T>& Center, T Radius);
+			template<typename U>
+			explicit CCircle(const CCircle<U>& Circle);
+			~CCircle();
+
+#pragma endregion
+#pragma region Attributes
+
+		public:
+
+			CVector2<T> Center;
+			T			Radius;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			void FromString(LPCTSTR pszValue);
+			CString ToString() const;
+			void Serialize(CArchive& ar);
+#ifdef _DEBUG
+			void Dump(CDumpContext& dc) const;
 #endif
+
+#pragma endregion
+
+		};
+
+		typedef CCircle<INT>	CIntCircle;
+		typedef CCircle<FLOAT>	CFloatCircle;
+
+		template<typename T>
+		BOOL operator==(const CCircle<T>& Left, const CCircle<T>& Right);
+
+		template<typename T>
+		BOOL operator!=(const CCircle<T>& Left, const CCircle<T>& Right);
+
+	}
+}
+
+#include "Circle.inl"

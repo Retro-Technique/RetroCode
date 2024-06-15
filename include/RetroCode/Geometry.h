@@ -46,5 +46,7 @@
 
 #include <RetroCode/Geometry/Vector2.h>
 #include <RetroCode/Geometry/Rect.h>
+#include <RetroCode/Geometry/Line.h>
+#include <RetroCode/Geometry/Circle.h>
 
 #endif

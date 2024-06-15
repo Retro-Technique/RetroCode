@@ -12,4 +12,6 @@
 
 #include <RetroCode/Core.h>
 
+#include <psapi.h>
+
 #endif //PCH_H

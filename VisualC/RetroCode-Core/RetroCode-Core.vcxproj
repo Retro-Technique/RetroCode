@@ -200,9 +200,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\RetroCode\Core\Clock.cpp" />
-    <ClCompile Include="..\..\src\RetroCode\Core\PrefPath.cpp" />
+    <ClCompile Include="..\..\src\RetroCode\Core\i18n.cpp" />
     <ClCompile Include="..\..\src\RetroCode\Core\Random.cpp" />
     <ClCompile Include="..\..\src\RetroCode\Core\StopWatch.cpp" />
+    <ClCompile Include="..\..\src\RetroCode\Core\System.cpp" />
     <ClCompile Include="..\..\src\RetroCode\Core\Timer.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -233,12 +234,14 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\RetroCode\Core\Circular.h" />
     <ClInclude Include="..\..\include\RetroCode\Core\Clock.h" />
-    <ClInclude Include="..\..\include\RetroCode\Core\PrefPath.h" />
+    <ClInclude Include="..\..\include\RetroCode\Core\i18n.h" />
+    <ClInclude Include="..\..\include\RetroCode\Core\Operation.h" />
     <ClInclude Include="..\..\include\RetroCode\Core\Queue.h" />
     <ClInclude Include="..\..\include\RetroCode\Core\Random.h" />
     <ClInclude Include="..\..\include\RetroCode\Core\Stack.h" />
     <ClInclude Include="..\..\include\RetroCode\Core\StaticArray.h" />
     <ClInclude Include="..\..\include\RetroCode\Core\StopWatch.h" />
+    <ClInclude Include="..\..\include\RetroCode\Core\System.h" />
     <ClInclude Include="..\..\include\RetroCode\Core\Timer.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />

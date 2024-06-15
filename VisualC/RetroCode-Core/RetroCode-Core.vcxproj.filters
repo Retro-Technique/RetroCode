@@ -39,7 +39,10 @@
     <ClCompile Include="..\..\src\RetroCode\Core\StopWatch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\RetroCode\Core\PrefPath.cpp">
+    <ClCompile Include="..\..\src\RetroCode\Core\System.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RetroCode\Core\i18n.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,7 +91,13 @@
     <ClInclude Include="..\..\include\RetroCode\Core\Timer.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Core\PrefPath.h">
+    <ClInclude Include="..\..\include\RetroCode\Core\Operation.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Core\System.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Core\i18n.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -38,7 +38,7 @@
  */
 
 #ifndef __RETRO_CORE_H_INCLUDED__
-#error Do not include PrefPath.h directly, include the Core.h file
+#error Do not include i18n.h directly, include the Core.h file
 #endif
 
 #pragma once
@@ -48,7 +48,9 @@ namespace retro
 	namespace core
 	{
 
-		HRESULT AFX_EXT_API QueryApplicationPrefPath(LPCTSTR pszOrg, LPCTSTR pszApp, CString& strPrefPath);
+		CString AFX_EXT_API Translate(UINT uID);
 
 	}
 }
+
+#define I18N(id) retro::core::Translate(id)

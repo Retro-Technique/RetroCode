@@ -37,23 +37,65 @@
  *
  */
 
+#ifndef __RETRO_GEOMETRY_H_INCLUDED__
+#error Do not include Line.h directly, include the Geometry.h file
+#endif
+
 #pragma once
 
-#include <RetroCode/Common.h>
+namespace retro
+{
+	namespace geometry
+	{
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#define __RETRO_CORE_H_INCLUDED__
+		template<typename T>
+		class CLine
+		{
+#pragma region Constructors
 
-#include <RetroCode/Core/i18n.h>
-#include <RetroCode/Core/Operation.h>
-#include <RetroCode/Core/Stack.h>
-#include <RetroCode/Core/Queue.h>
-#include <RetroCode/Core/Circular.h>
-#include <RetroCode/Core/StaticArray.h>
-#include <RetroCode/Core/Clock.h>
-#include <RetroCode/Core/StopWatch.h>
-#include <RetroCode/Core/Timer.h>
-#include <RetroCode/Core/Random.h>
-#include <RetroCode/Core/System.h>
+		public:
 
+			CLine();
+			CLine(T startx, T starty, T endx, T endy);
+			CLine(const CVector2<T>& Start, const CVector2<T>& End);
+			template<typename U>
+			explicit CLine(const CLine<U>& Line);
+			~CLine();
+
+#pragma endregion
+#pragma region Attributes
+
+		public:
+
+			CVector2<T> Start;
+			CVector2<T> End;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			void FromString(LPCTSTR pszValue);
+			CString ToString() const;
+			void Serialize(CArchive& ar);
+#ifdef _DEBUG
+			void Dump(CDumpContext& dc) const;
 #endif
+
+#pragma endregion
+
+		};
+
+		typedef CLine<INT>		CIntLine;
+		typedef CLine<FLOAT>	CFloatLine;
+
+		template<typename T>
+		BOOL operator==(const CLine<T>& Left, const CLine<T>& Right);
+
+		template<typename T>
+		BOOL operator!=(const CLine<T>& Left, const CLine<T>& Right);
+
+	}
+}
+
+#include "Line.inl"

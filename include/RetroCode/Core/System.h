@@ -37,66 +37,21 @@
  *
  */
 
-#include "pch.h"
+#ifndef __RETRO_CORE_H_INCLUDED__
+#error Do not include System.h directly, include the Core.h file
+#endif
+
+#pragma once
 
 namespace retro
 {
 	namespace core
 	{
 
-		HRESULT QueryApplicationPrefPath(LPCTSTR pszOrg, LPCTSTR pszApp, CString& strPrefPath)
-		{
-			if (!pszOrg)
-			{
-				return E_INVALIDARG;
-			}
-
-			if (!pszApp)
-			{
-				return E_INVALIDARG;
-			}
-
-			HRESULT hr = S_OK;
-			LPWSTR pszPath = NULL;
-
-			do
-			{
-				hr = SHGetKnownFolderPath(FOLDERID_RoamingAppData, KF_FLAG_CREATE, NULL, &pszPath);
-				if (FAILED(hr))
-				{
-					break;
-				}
-
-				strPrefPath.Append(pszPath);
-				strPrefPath += _T('\\');
-				strPrefPath += pszOrg;
-
-				BOOL bRet = CreateDirectory(strPrefPath.GetString(), NULL);
-				if (!bRet)
-				{
-					hr = GetLastError();
-					break;
-				}
-
-				strPrefPath += _T('\\');
-				strPrefPath += pszApp;
-
-				bRet = CreateDirectory(strPrefPath.GetString(), NULL);
-				if (!bRet)
-				{
-					hr = GetLastError();
-				}
-
-			} while (RETRO_NULL_WHILE_LOOP_CONDITION);
-
-			if (pszPath)
-			{
-				CoTaskMemFree(pszPath);
-				pszPath = NULL;
-			}
-
-			return hr;
-		}
+		HRESULT AFX_EXT_API QueryApplicationPrefPath(LPCTSTR pszOrg, LPCTSTR pszApp, CString& strPrefPath);
+		HRESULT AFX_EXT_API QueryRAMUsage(SIZE_T& uRAMUsage);
+		HRESULT AFX_EXT_API QueryCPUUsage(DOUBLE& fCPUUsage);
+		CString AFX_EXT_API SizeToString(SIZE_T uBytes);
 
 	}
 }
