@@ -38,7 +38,7 @@
  */
 
 #ifndef __RETRO_CORE_H_INCLUDED__
-#error Do not include Queue.h directly, include the RetroCore.h file
+#error Do not include Queue.h directly, include the Core.h file
 #endif
 
 #pragma once

@@ -37,55 +37,101 @@
  *
  */
 
-#ifndef __RETRO_CORE_H_INCLUDED__
-#error Do not include Circular.h directly, include the Core.h file
+#ifndef __RETRO_GEOMETRY_H_INCLUDED__
+#error Do not include Vector2.h directly, include the Geometry.h file
 #endif
 
 #pragma once
 
 namespace retro
 {
-	namespace core
+	namespace geometry
 	{
 
-		template<typename TYPE, typename ARG_TYPE = const TYPE&>
-		class CCircular
+		template<typename T>
+		class CVector2
 		{
 #pragma region Constructors
 
 		public:
 
-			CCircular();
-			~CCircular();
+			CVector2();
+			CVector2(T x, T y);
+			CVector2(const CPoint& ptPoint);
+			CVector2(const CSize& szSize);
+			template<typename U>
+			explicit CVector2(const CVector2<U>& Vector);
+			~CVector2();
 
 #pragma endregion
 #pragma region Attributes
 
-		private:
+		public:
 
-			CArray<TYPE, ARG_TYPE> m_arrBuffer;
-			INT_PTR m_nFirstIdx;
-			INT_PTR m_nLastIdx;
+			T X;
+			T Y;
 
 #pragma endregion
 #pragma region Operations
 
 		public:
 
-			void SetSize(INT_PTR nSize);
-			void Push(ARG_TYPE newElement);
-			INT_PTR GetSize() const;
-			INT_PTR GetCount() const;
-			TYPE& GetAt(INT_PTR nIndex);
-			const TYPE& GetAt(INT_PTR nIndex) const;
-			void RemoveAll();
-			BOOL IsEmpty() const;
+			void FromPoint(const CPoint& ptPoint);
+			void FromSize(const CSize& szSize);
+			CPoint ToPoint() const;
+			CSize ToSize() const;
+			void FromString(LPCTSTR pszValue);
+			CString ToString() const;
+			void Serialize(CArchive& ar);
+#ifdef _DEBUG
+			void Dump(CDumpContext& dc) const;
+#endif
 
 #pragma endregion
 
 		};
 
+		typedef CVector2<INT>	CVector2i;
+		typedef CVector2<FLOAT>	CVector2f;
+		typedef CVector2<UINT>	CVector2u;
+
+		template<typename T>
+		CVector2<T> operator+(const CVector2<T>& Left, const CVector2<T>& Right);
+
+		template<typename T>
+		CVector2<T>& operator+=(const CVector2<T>& Left, const CVector2<T>& Right);
+
+		template<typename T>
+		CVector2<T>& operator-=(const CVector2<T>& Left, const CVector2<T>& Right);
+
+		template<typename T>
+		CVector2<T> operator-(const CVector2<T>& Right);
+
+		template<typename T>
+		CVector2<T> operator-(const CVector2<T>& Left, const CVector2<T>& Right);
+
+		template<typename T>
+		CVector2<T> operator*(const CVector2<T>& Left, T Right);
+
+		template<typename T>
+		CVector2<T> operator*(T Left, const CVector2<T>& Right);
+
+		template<typename T>
+		CVector2<T>& operator*=(const CVector2<T>& Left, T Right);
+
+		template<typename T>
+		CVector2<T> operator/(const CVector2<T>& Left, T Right);
+
+		template<typename T>
+		CVector2<T>& operator/=(const CVector2<T>& Left, T Right);
+
+		template<typename T>
+		BOOL operator==(const CVector2<T>& Left, const CVector2<T>& Right);
+
+		template<typename T>
+		BOOL operator!=(const CVector2<T>& Left, const CVector2<T>& Right);
+
 	}
 }
 
-#include "Circular.inl"
+#include "Vector2.inl"

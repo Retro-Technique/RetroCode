@@ -39,10 +39,11 @@
 
 #pragma once
 
-#include <afxwin.h>
+#include <RetroCode/Core.h>
 
-#define RETRO_NULL_WHILE_LOOP_CONDITION (-1 == __LINE__)
+#ifndef __RETRO_GEOMETRY_H_INCLUDED__
+#define __RETRO_GEOMETRY_H_INCLUDED__
 
-#ifndef UNREFERENCED_PARAMETER
-#define UNREFERENCED_PARAMETER(P) (P)
+#include <RetroCode/Geometry/Vector2.h>
+
 #endif

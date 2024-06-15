@@ -11,6 +11,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Core", "RetroCode
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Core.Test", "RetroCode-Core.Test\RetroCode-Core.Test.vcxproj", "{D5608EB4-924C-459D-9111-23141DBBD61A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Geometry", "RetroCode-Geometry\RetroCode-Geometry.vcxproj", "{93178C50-3D55-4DD4-BAF9-48D79FE1B452}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Geometry.Test", "RetroCode-Geometry.Test\RetroCode-Geometry.Test.vcxproj", "{B97B9484-8F56-4649-BC64-1E77A57358F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -35,6 +39,22 @@ Global
 		{D5608EB4-924C-459D-9111-23141DBBD61A}.Release|x64.Build.0 = Release|x64
 		{D5608EB4-924C-459D-9111-23141DBBD61A}.Release|x86.ActiveCfg = Release|Win32
 		{D5608EB4-924C-459D-9111-23141DBBD61A}.Release|x86.Build.0 = Release|Win32
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452}.Debug|x64.ActiveCfg = Debug|x64
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452}.Debug|x64.Build.0 = Debug|x64
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452}.Debug|x86.ActiveCfg = Debug|Win32
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452}.Debug|x86.Build.0 = Debug|Win32
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452}.Release|x64.ActiveCfg = Release|x64
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452}.Release|x64.Build.0 = Release|x64
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452}.Release|x86.ActiveCfg = Release|Win32
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452}.Release|x86.Build.0 = Release|Win32
+		{B97B9484-8F56-4649-BC64-1E77A57358F9}.Debug|x64.ActiveCfg = Debug|x64
+		{B97B9484-8F56-4649-BC64-1E77A57358F9}.Debug|x64.Build.0 = Debug|x64
+		{B97B9484-8F56-4649-BC64-1E77A57358F9}.Debug|x86.ActiveCfg = Debug|Win32
+		{B97B9484-8F56-4649-BC64-1E77A57358F9}.Debug|x86.Build.0 = Debug|Win32
+		{B97B9484-8F56-4649-BC64-1E77A57358F9}.Release|x64.ActiveCfg = Release|x64
+		{B97B9484-8F56-4649-BC64-1E77A57358F9}.Release|x64.Build.0 = Release|x64
+		{B97B9484-8F56-4649-BC64-1E77A57358F9}.Release|x86.ActiveCfg = Release|Win32
+		{B97B9484-8F56-4649-BC64-1E77A57358F9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +62,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{60122CDD-811A-42CD-8A1C-99CC34337101} = {07E2EC43-50F9-47B6-BE5D-83451EF97259}
 		{D5608EB4-924C-459D-9111-23141DBBD61A} = {5CFDA219-994C-497E-9FBB-694B917B1C0D}
+		{93178C50-3D55-4DD4-BAF9-48D79FE1B452} = {07E2EC43-50F9-47B6-BE5D-83451EF97259}
+		{B97B9484-8F56-4649-BC64-1E77A57358F9} = {5CFDA219-994C-497E-9FBB-694B917B1C0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4C3620B-A130-49E6-9B3D-E40647062312}
