@@ -42,6 +42,8 @@ namespace retro
 	namespace geometry
 	{
 
+#pragma region Constructors
+
 		template<typename T>
 		CLine<T>::CLine()
 			: Start{ 0, 0 }
@@ -80,6 +82,9 @@ namespace retro
 		{
 
 		}
+
+#pragma endregion
+#pragma region Operations
 
 		template<typename T>
 		void CLine<T>::FromString(LPCTSTR pszValue)
@@ -162,6 +167,9 @@ namespace retro
 
 #endif
 
+#pragma endregion
+#pragma region Overridables
+
 		template<typename T>
 		BOOL operator==(const CLine<T>& Left, const CLine<T>& Right)
 		{
@@ -173,6 +181,8 @@ namespace retro
 		{
 			return !(Left == Right);
 		}
+
+#pragma endregion
 
 	}
 }

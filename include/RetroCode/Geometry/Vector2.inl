@@ -225,6 +225,9 @@ namespace retro
 
 #endif
 
+#pragma endregion
+#pragma region Overridables
+
 		template<typename T>
 		CVector2<T> operator+(const CVector2<T>& Left, const CVector2<T>& Right)
 		{

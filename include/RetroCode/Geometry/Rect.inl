@@ -42,6 +42,8 @@ namespace retro
 	namespace geometry
 	{
 
+#pragma region Constructors
+
 		template<typename T>
 		CRect<T>::CRect()
 			: Point{ 0, 0 }
@@ -88,6 +90,9 @@ namespace retro
 		{
 
 		}
+
+#pragma endregion
+#pragma region Operations
 
 		template<typename T>
 		void CRect<T>::FromRect(const ::CRect& rcRect)
@@ -210,6 +215,9 @@ namespace retro
 
 #endif
 
+#pragma endregion
+#pragma region Overridables
+
 		template<typename T>
 		BOOL operator==(const CRect<T>& Left, const CRect<T>& Right)
 		{
@@ -221,6 +229,8 @@ namespace retro
 		{
 			return !(Left == Right);
 		}
+
+#pragma endregion
 
 	}
 }

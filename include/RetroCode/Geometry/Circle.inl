@@ -42,6 +42,8 @@ namespace retro
 	namespace geometry
 	{
 
+#pragma region Constructors
+
 		template<typename T>
 		CCircle<T>::CCircle()
 			: Center{ 0, 0 }
@@ -80,6 +82,9 @@ namespace retro
 		{
 
 		}
+
+#pragma endregion
+#pragma region Operations
 
 		template<typename T>
 		void CCircle<T>::FromString(LPCTSTR pszValue)
@@ -168,6 +173,9 @@ namespace retro
 
 #endif
 
+#pragma endregion
+#pragma region Overridables
+
 		template<typename T>
 		BOOL operator==(const CCircle<T>& Left, const CCircle<T>& Right)
 		{
@@ -179,6 +187,8 @@ namespace retro
 		{
 			return !(Left == Right);
 		}
+
+#pragma endregion
 
 	}
 }

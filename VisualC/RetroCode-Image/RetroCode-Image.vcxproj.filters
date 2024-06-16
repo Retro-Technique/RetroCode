@@ -9,9 +9,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="include">
+    <Filter Include="src">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{dab9a7e2-7273-4a61-baf5-e3447a1de608}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,15 +24,24 @@
     <ClCompile Include="pch.cpp">
       <Filter>local</Filter>
     </ClCompile>
-    <ClCompile Include="RetroCode-Geometry.cpp">
+    <ClCompile Include="RetroCode-Image.cpp">
       <Filter>local</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RetroCode\Image\Color.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RetroCode\Image\Import.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\RetroCode\Image\Export.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\RetroCode-Geometry.rc2">
+    <None Include="res\RetroCode-Image.rc2">
       <Filter>Fichiers de ressources</Filter>
     </None>
-    <None Include="RetroCode-Geometry.def">
+    <None Include="RetroCode-Image.def">
       <Filter>local</Filter>
     </None>
   </ItemGroup>
@@ -46,27 +58,21 @@
     <ClInclude Include="pch.h">
       <Filter>local</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Geometry\Vector2.h">
+    <ClInclude Include="..\..\include\RetroCode\Image\Color.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Geometry\Rect.h">
+    <ClInclude Include="..\..\include\RetroCode\Image\Import.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Geometry\Line.h">
+    <ClInclude Include="..\..\include\RetroCode\Image\Export.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Geometry\Circle.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Geometry\Distance.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Geometry\Collide.h">
-      <Filter>include</Filter>
+    <ClInclude Include="..\..\src\RetroCode\Image\ImagingFactory.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RetroCode-Geometry.rc">
+    <ResourceCompile Include="RetroCode-Image.rc">
       <Filter>Fichiers de ressources</Filter>
     </ResourceCompile>
   </ItemGroup>
