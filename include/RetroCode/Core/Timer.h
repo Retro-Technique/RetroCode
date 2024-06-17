@@ -48,7 +48,7 @@ namespace retro
 	namespace core
 	{
 
-		class AFX_EXT_API CTimer
+		class AFX_EXT_CLASS CTimer
 		{
 #pragma region Constructors
 

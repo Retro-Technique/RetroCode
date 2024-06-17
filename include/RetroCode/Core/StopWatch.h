@@ -48,7 +48,7 @@ namespace retro
 	namespace core
 	{
 
-		class AFX_EXT_API CStopWatch
+		class AFX_EXT_CLASS CStopWatch
 		{
 #pragma region Constructors
 

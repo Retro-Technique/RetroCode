@@ -48,7 +48,7 @@ namespace retro
 	namespace core
 	{
 
-		class AFX_EXT_API CRandom
+		class AFX_EXT_CLASS CRandom
 		{
 #pragma region Constructors
 

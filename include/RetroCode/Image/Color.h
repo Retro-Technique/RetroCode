@@ -48,7 +48,7 @@ namespace retro
 	namespace image
 	{
 
-		class AFX_EXT_API CColorRGBA
+		class AFX_EXT_CLASS CColorRGBA
 		{
 		public:
 

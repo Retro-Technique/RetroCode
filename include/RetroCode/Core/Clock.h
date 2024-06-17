@@ -48,7 +48,7 @@ namespace retro
 	namespace core
 	{
 
-		class AFX_EXT_API CClock
+		class AFX_EXT_CLASS CClock
 		{
 #pragma region Constructors
 
