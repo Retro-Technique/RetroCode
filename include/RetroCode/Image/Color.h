@@ -52,11 +52,6 @@ namespace retro
 		{
 		public:
 
-			static constexpr const auto ALPHA_OPAQUE = 255;
-			static constexpr const auto ALPHA_TRANSPARENT = 0;
-
-		public:
-
 #pragma region Constructors
 
 			CColorRGBA();
@@ -67,6 +62,11 @@ namespace retro
 
 #pragma endregion
 #pragma region Attributes
+
+		public:
+
+			static constexpr const auto ALPHA_OPAQUE = 255;
+			static constexpr const auto ALPHA_TRANSPARENT = 0;
 
 		public:
 
