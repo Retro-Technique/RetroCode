@@ -40,6 +40,7 @@
 #pragma once
 
 #include <RetroCode/Common.h>
+#include <RetroCode/ErrorCode.h>
 
 #ifndef __RETRO_CORE_H_INCLUDED__
 #define __RETRO_CORE_H_INCLUDED__
