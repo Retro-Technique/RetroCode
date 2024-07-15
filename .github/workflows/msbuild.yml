@@ -34,3 +34,12 @@ jobs:
         uses: rusty-bender/vstest-action@main
         with:
           testAssembly: VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCode-Core.Test.dll      
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: binaries-artifact
+          path: |
+            include  
+            VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/*.dll
+            VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/*.lib
+            VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/*.pdb
