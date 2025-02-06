@@ -1,0 +1,3 @@
+[submodule "libs/RetroCode-Core"]
+	path = libs/RetroCode-Core
+	url = https://github.com/Retro-Technique/RetroCode-Core.git
