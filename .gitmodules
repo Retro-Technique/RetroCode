@@ -1,0 +1,5 @@
+[submodule "core"]
+	path = libs/core
+	url = ../retrocode-core.git
+	fetchRecurseSubmodules = on-demand
+	branch = .
