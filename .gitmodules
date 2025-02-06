@@ -1,4 +1,4 @@
-[submodule "core"]
-	path = core
+[submodule "RetroCode-Core"]
+	path = RetroCode-Core
 	url = https://github.com/Retro-Technique/RetroCode-Core
 	fetchRecurseSubmodules = on-demand
