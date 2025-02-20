@@ -37,16 +37,27 @@
  *
  */
 
+#ifndef __RETRO_MATH_H_INCLUDED__
+#error Do not include Distance.h directly, include the Math.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+namespace retro::math
+{
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
-#include <RetroCode/Math/Circle.h>
-#include <RetroCode/Math/Distance.h>
+	template<typename T>
+	T EuclidianDistance(const CVector2<T> vStart, const CVector2<T> vEnd);
 
-#endif
+	template<typename T>
+	T EuclidianDistance(T x1, T y1, T x2, T y2);
+
+	template<typename T>
+	T ManhattanDistance(const CVector2<T> vStart, const CVector2<T> vEnd);
+
+	template<typename T>
+	T ManhattanDistance(T x1, T y1, T x2, T y2);
+
+}
+
+#include "Distance.inl"
