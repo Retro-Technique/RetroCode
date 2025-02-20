@@ -53,7 +53,7 @@ namespace retro::memory
 	public:
 
 		CReferenceObject();
-		~CReferenceObject() = default;
+		virtual ~CReferenceObject() = default;
 
 #pragma endregion
 #pragma region Attributes
