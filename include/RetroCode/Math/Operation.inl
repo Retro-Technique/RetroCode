@@ -37,18 +37,43 @@
  *
  */
 
-#pragma once
+namespace retro::math
+{
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+	template<typename T>
+	void Swap(T& a, T& b)
+	{
+		T temp = a;
+		a = b;
+		b = temp;
+	}
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
-#include <RetroCode/Math/Circle.h>
-#include <RetroCode/Math/Operation.h>
-#include <RetroCode/Math/Distance.h>
-#include <RetroCode/Math/Collide.h>
+	template<typename T>
+	const T& Min(const T& a, const T& b)
+	{
+		return (b < a) ? b : a;
+	}
 
-#endif
+	template<typename T>
+	const T& Max(const T& a, const T& b)
+	{
+		return (b > a) ? b : a;
+	}
+
+	template<typename T>
+	const T& Clamp(const T& val, const T& min, const T& max)
+	{
+		if (val < min)
+		{
+			return min;
+		}
+
+		if (val > max)
+		{
+			return max;
+		}
+
+		return val;
+	}
+
+}

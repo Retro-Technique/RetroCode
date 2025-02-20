@@ -240,9 +240,11 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\RetroCode\Math.h" />
     <ClInclude Include="..\..\include\RetroCode\Math\Circle.h" />
+    <ClInclude Include="..\..\include\RetroCode\Math\Collide.h" />
     <ClInclude Include="..\..\include\RetroCode\Math\Distance.h" />
     <ClInclude Include="..\..\include\RetroCode\Math\Line.h" />
     <ClInclude Include="..\..\include\RetroCode\Math\MatrixStack.h" />
+    <ClInclude Include="..\..\include\RetroCode\Math\Operation.h" />
     <ClInclude Include="..\..\include\RetroCode\Math\Rect.h" />
     <ClInclude Include="..\..\include\RetroCode\Math\Vector2.h" />
     <ClInclude Include="framework.h" />

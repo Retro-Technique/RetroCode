@@ -73,6 +73,12 @@
     <ClInclude Include="..\..\include\RetroCode\Math\Distance.h">
       <Filter>include\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Math\Collide.h">
+      <Filter>include\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Math\Operation.h">
+      <Filter>include\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroCode-Math.rc">

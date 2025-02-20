@@ -37,18 +37,45 @@
  *
  */
 
+#ifndef __RETRO_MATH_H_INCLUDED__
+#error Do not include Collide.h directly, include the Math.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+namespace retro::math
+{
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
-#include <RetroCode/Math/Circle.h>
-#include <RetroCode/Math/Operation.h>
-#include <RetroCode/Math/Distance.h>
-#include <RetroCode/Math/Collide.h>
+	template<typename T>
+	BOOL IsCollidePointPoint(const CVector2<T> vLeft, const CVector2<T> vRight);
 
-#endif
+	template<typename T>
+	BOOL IsCollidePointLine(const CVector2<T> vLeft, const CLine<T> lnRight);
+
+	template<typename T>
+	BOOL IsCollidePointRect(const CVector2<T> vLeft, const CRect<T> rcRight);
+
+	template<typename T>
+	BOOL IsCollidePointCircle(const CVector2<T> vLeft, const CCircle<T> circRight);
+
+	template<typename T>
+	BOOL IsCollideLineLine(const CLine<T> lnLeft, const CLine<T> lnRight);
+
+	template<typename T>
+	BOOL IsCollideLineRect(const CLine<T> lnLeft, const CRect<T> rcRight);
+
+	template<typename T>
+	BOOL IsCollideLineCircle(const CLine<T> lnLeft, const CCircle<T> circRight);
+
+	template<typename T>
+	BOOL IsCollideRectRect(const CRect<T> rcLeft, const CRect<T> rcRight);
+
+	template<typename T>
+	BOOL IsCollideRectCircle(const CRect<T> rcLeft, const CCircle<T> circRight);
+
+	template<typename T>
+	BOOL IsCollideCircleCircle(const CCircle<T> circLeft, const CCircle<T> circRight);
+
+}
+
+#include "Collide.inl"

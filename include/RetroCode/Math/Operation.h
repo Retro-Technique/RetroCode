@@ -37,18 +37,27 @@
  *
  */
 
+#ifndef __RETRO_MATH_H_INCLUDED__
+#error Do not include Operation.h directly, include the Math.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+namespace retro::math
+{
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
-#include <RetroCode/Math/Circle.h>
-#include <RetroCode/Math/Operation.h>
-#include <RetroCode/Math/Distance.h>
-#include <RetroCode/Math/Collide.h>
+	template<typename T>
+	void Swap(T& a, T& b);
 
-#endif
+	template<typename T>
+	const T& Min(const T& a, const T& b);
+
+	template<typename T>
+	const T& Max(const T& a, const T& b);
+
+	template<typename T>
+	const T& Clamp(const T& val, const T& min, const T& max);
+
+}
+
+#include "Operation.inl"
