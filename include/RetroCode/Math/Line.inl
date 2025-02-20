@@ -37,14 +37,87 @@
  *
  */
 
-#pragma once
+namespace retro::math
+{
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+#pragma region Constructors
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
+	template<typename T>
+	CLine<T>::CLine()
+		: Start{ 0, 0 }
+		, End{ 0, 0 }
+	{
+
+	}
+
+	template<typename T>
+	CLine<T>::CLine(T startx, T starty, T endx, T endy)
+		: Start{ startx, starty }
+		, End{ endx, endy }
+	{
+
+	}
+
+	template<typename T>
+	CLine<T>::CLine(const CVector2<T>& Start, const CVector2<T>& End)
+		: Start(Start)
+		, End(End)
+	{
+
+	}
+
+	template<typename T>
+	template<typename U>
+	CLine<T>::CLine(const CLine<U>& Line)
+		: Start{ static_cast<T>(Line.Start.X), static_cast<T>(Line.Start.Y) }
+		, End{ static_cast<T>(Line.End.X), static_cast<T>(Line.End.Y) }
+	{
+
+	}
+
+#pragma endregion
+#pragma region Overridables
+
+	template<typename T>
+	void CLine<T>::Serialize(CArchive& ar)
+	{
+		CObject::Serialize(ar);
+
+		if (ar.IsStoring())
+		{
+			ar << Start << End;
+		}
+		else
+		{
+			ar >> Start >> End;
+		}
+	}
+
+#ifdef _DEBUG
+
+	template<typename T>
+	void CLine<T>::Dump(CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		dc << _T("Start: ") << Start << _T("\n");
+		dc << _T("End: ") << End << _T("\n");
+	}
 
 #endif
+
+	template<typename T>
+	BOOL operator==(const CLine<T>& Left, const CLine<T>& Right)
+	{
+		return (Left.Start.X == Right.Start.X) && (Left.Start.Y == Right.Start.Y) && (Left.End.X == Right.End.X) && (Left.End.Y == Right.End.Y);
+	}
+
+	template<typename T>
+	BOOL operator!=(const CLine<T>& Left, const CLine<T>& Right)
+	{
+		return !(Left == Right);
+	}
+
+#pragma endregion
+
+}
