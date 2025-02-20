@@ -37,15 +37,60 @@
  *
  */
 
+#ifndef __RETRO_MATH_H_INCLUDED__
+#error Do not include Circle.h directly, include the Math.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+namespace retro::math
+{
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
-#include <RetroCode/Math/Circle.h>
+	template<typename T>
+	class CCircle : public CObject
+	{
+#pragma region Constructors
 
+	public:
+
+		CCircle();
+		CCircle(T CenterX, T CenterY, T Radius);
+		CCircle(const CVector2<T>& Center, T Radius);
+		template<typename U>
+		explicit CCircle(const CCircle<U>& Circle);
+		~CCircle() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	public:
+
+		CVector2<T> Center;
+		T			Radius;
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+		void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+		void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+
+	};
+
+	typedef CCircle<INT>	CIntCircle;
+	typedef CCircle<FLOAT>	CFloatCircle;
+
+	template<typename T>
+	BOOL operator==(const CCircle<T>& Left, const CCircle<T>& Right);
+
+	template<typename T>
+	BOOL operator!=(const CCircle<T>& Left, const CCircle<T>& Right);
+
+}
+
+#include "Circle.inl"

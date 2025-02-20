@@ -37,15 +37,87 @@
  *
  */
 
-#pragma once
+namespace retro::math
+{
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+#pragma region Constructors
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
-#include <RetroCode/Math/Circle.h>
+	template<typename T>
+	CCircle<T>::CCircle()
+		: Center{ 0, 0 }
+		, Radius(0)
+	{
+
+	}
+
+	template<typename T>
+	CCircle<T>::CCircle(T CenterX, T CenterY, T Radius)
+		: Center{ CenterX, CenterY }
+		, Radius(Radius)
+	{
+
+	}
+
+	template<typename T>
+	CCircle<T>::CCircle(const CVector2<T>& Center, T Radius)
+		: Center(Center)
+		, Radius(Radius)
+	{
+
+	}
+
+	template<typename T>
+	template<typename U>
+	CCircle<T>::CCircle(const CCircle<U>& Circle)
+		: Center{ static_cast<T>(Circle.Center.X), static_cast<T>(Circle.Center.Y) }
+		, Radius{ static_cast<T>(Circle.Radius) }
+	{
+
+	}
+
+#pragma endregion
+#pragma region Overridables
+
+	template<typename T>
+	void CCircle<T>::Serialize(CArchive& ar)
+	{
+		CObject::Serialize(ar);
+
+		if (ar.IsStoring())
+		{
+			ar << Center << Radius;
+		}
+		else
+		{
+			ar >> Center >> Radius;
+		}
+	}
+
+#ifdef _DEBUG
+
+	template<typename T>
+	void CCircle<T>::Dump(CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		dc << _T("Center: ") << Center << _T("\n");
+		dc << _T("Radius: ") << Radius << _T("\n");
+	}
 
 #endif
+
+	template<typename T>
+	BOOL operator==(const CCircle<T>& Left, const CCircle<T>& Right)
+	{
+		return (Left.Center.X == Right.Center.X) && (Left.Center.Y == Right.Center.Y) && (Left.Radius == Right.Radius);
+	}
+
+	template<typename T>
+	BOOL operator!=(const CCircle<T>& Left, const CCircle<T>& Right)
+	{
+		return !(Left == Right);
+	}
+
+#pragma endregion
+
+}
