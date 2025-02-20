@@ -30,6 +30,9 @@
     <ClCompile Include="MemoryLeakChecker.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="ReferenceObject.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Memory.def">
@@ -56,6 +59,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Memory\MemoryLeakChecker.h">
+      <Filter>include\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Memory\ReferenceObject.h">
       <Filter>include\Memory</Filter>
     </ClInclude>
   </ItemGroup>
