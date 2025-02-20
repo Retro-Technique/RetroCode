@@ -47,7 +47,7 @@ namespace retro::math
 {
 
 	template<typename T>
-	class CLine : public CObject
+	class CLine
 	{
 #pragma region Constructors
 
@@ -69,11 +69,11 @@ namespace retro::math
 		CVector2<T> End;
 
 #pragma endregion
-#pragma region Overridables
+#pragma region Operations
 
-		void Serialize(CArchive& ar) override;
+		void Serialize(CArchive& ar);
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const override;
+		void Dump(CDumpContext& dc) const;
 #endif
 
 #pragma endregion

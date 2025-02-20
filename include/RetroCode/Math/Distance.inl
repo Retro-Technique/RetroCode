@@ -41,7 +41,7 @@ namespace retro::math
 {
 
 	template<typename T>
-	T EuclidianDistance(const CVector2<T> vStart, const CVector2<T> vEnd)
+	T EuclidianDistance(const CVector2<T>& vStart, const CVector2<T>& vEnd)
 	{
 		return EuclidianDistance(vStart.X, vStart.Y, vEnd.X, vEnd.Y);
 	}
@@ -65,7 +65,7 @@ namespace retro::math
 	}
 
 	template<typename T>
-	T ManhattanDistance(const CVector2<T> vStart, const CVector2<T> vEnd)
+	T ManhattanDistance(const CVector2<T>& vStart, const CVector2<T>& vEnd)
 	{
 		return ManhattanDistance(vStart.X, vStart.Y, vEnd.X, vEnd.Y);
 	}

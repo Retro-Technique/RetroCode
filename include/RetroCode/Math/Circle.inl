@@ -76,20 +76,20 @@ namespace retro::math
 	}
 
 #pragma endregion
-#pragma region Overridables
+#pragma region Operations
 
 	template<typename T>
 	void CCircle<T>::Serialize(CArchive& ar)
 	{
-		CObject::Serialize(ar);
+		Center.Serialize(ar);
 
 		if (ar.IsStoring())
 		{
-			ar << Center << Radius;
+			ar << Radius;
 		}
 		else
 		{
-			ar >> Center >> Radius;
+			ar >> Radius;
 		}
 	}
 
@@ -98,13 +98,15 @@ namespace retro::math
 	template<typename T>
 	void CCircle<T>::Dump(CDumpContext& dc) const
 	{
-		CObject::Dump(dc);
-
-		dc << _T("Center: ") << Center << _T("\n");
-		dc << _T("Radius: ") << Radius << _T("\n");
+		dc << _T("Center.X = ") << Center.X << _T("\n");
+		dc << _T("Center.Y = ") << Center.Y << _T("\n");
+		dc << _T("Radius = ") << Radius << _T("\n");
 	}
 
 #endif
+
+#pragma endregion
+#pragma region Overridables
 
 	template<typename T>
 	BOOL operator==(const CCircle<T>& Left, const CCircle<T>& Right)

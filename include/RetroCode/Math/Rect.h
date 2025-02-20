@@ -47,7 +47,7 @@ namespace retro::math
 {
 
 	template<typename T>
-	class CRect : public CObject
+	class CRect
 	{
 #pragma region Constructors
 
@@ -80,13 +80,9 @@ namespace retro::math
 		const T& Top() const;
 		T Right() const;
 		T Bottom() const;
-
-#pragma endregion
-#pragma region Overridables
-
-		void Serialize(CArchive& ar) override;
+		void Serialize(CArchive& ar);
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const override;
+		void Dump(CDumpContext& dc) const;
 #endif
 
 #pragma endregion

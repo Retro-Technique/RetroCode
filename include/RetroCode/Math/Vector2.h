@@ -47,7 +47,7 @@ namespace retro::math
 {
 
 	template<typename T>
-	class CVector2 : public CObject
+	class CVector2 
 	{
 #pragma region Constructors
 
@@ -78,13 +78,9 @@ namespace retro::math
 		void FromSize(const CSize& szSize);
 		CPoint ToPoint() const;
 		CSize ToSize() const;
-
-#pragma endregion
-#pragma region Overridables	
-
-		void Serialize(CArchive& ar) override;
+		void Serialize(CArchive& ar);
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const override;
+		void Dump(CDumpContext& dc) const;
 #endif
 
 #pragma endregion

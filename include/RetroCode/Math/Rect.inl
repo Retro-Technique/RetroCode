@@ -126,22 +126,11 @@ namespace retro::math
 		return Point.Y + Size.Y;
 	}
 
-#pragma endregion
-#pragma region Overridables
-
 	template<typename T>
 	void CRect<T>::Serialize(CArchive& ar)
 	{
-		CObject::Serialize(ar);
-
-		if (ar.IsStoring())
-		{
-			ar << Point << Size;
-		}
-		else
-		{
-			ar >> Point >> Size;
-		}
+		Point.Serialize(ar);
+		Size.Serialize(ar);
 	}
 
 #ifdef _DEBUG
@@ -149,13 +138,16 @@ namespace retro::math
 	template<typename T>
 	void CRect<T>::Dump(CDumpContext& dc) const
 	{
-		CObject::Dump(dc);
-
-		dc << _T("Point = ") << Point << _T("\n");
-		dc << _T("Size = ") << Size << _T("\n");
+		dc << _T("Point.X = ") << Point.X << _T("\n");
+		dc << _T("Point.Y = ") << Point.Y << _T("\n");
+		dc << _T("Size.X = ") << Size.X << _T("\n");
+		dc << _T("Size.Y = ") << Size.Y << _T("\n");
 	}
 
 #endif
+
+#pragma endregion
+#pragma region Overridables
 
 	template<typename T>
 	BOOL operator==(const CRect<T>& Left, const CRect<T>& Right)

@@ -144,6 +144,7 @@ namespace retro::math
 		ASSERT(m_nSackSize >= START_SIZE);
 		ASSERT((m_nSackSize & (m_nSackSize - 1)) == 0); // vérifier qu'il s'agit bien d'une puissance de 2
 		ASSERT(m_nCurrent >= 0);
+		ASSERT(m_nCurrent < m_nSackSize);
 		ASSERT_POINTER(m_pStack, D2D1::Matrix3x2F);
 	}
 
@@ -151,8 +152,8 @@ namespace retro::math
 	{
 		CObject::Dump(dc);
 
-		dc << _T("Stack Size: ") << m_nSackSize << _T("\n");
-		dc << _T("Current : ") << m_nCurrent << _T("\n");
+		dc << _T("m_nSackSize = ") << m_nSackSize << _T("\n");
+		dc << _T("m_nCurrent = ") << m_nCurrent << _T("\n");
 	}
 
 #endif

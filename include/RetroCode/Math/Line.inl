@@ -76,21 +76,13 @@ namespace retro::math
 	}
 
 #pragma endregion
-#pragma region Overridables
+#pragma region Operations
 
 	template<typename T>
 	void CLine<T>::Serialize(CArchive& ar)
 	{
-		CObject::Serialize(ar);
-
-		if (ar.IsStoring())
-		{
-			ar << Start << End;
-		}
-		else
-		{
-			ar >> Start >> End;
-		}
+		Start.Serialize(ar);
+		End.Serialize(ar);	
 	}
 
 #ifdef _DEBUG
@@ -98,13 +90,16 @@ namespace retro::math
 	template<typename T>
 	void CLine<T>::Dump(CDumpContext& dc) const
 	{
-		CObject::Dump(dc);
-
-		dc << _T("Start: ") << Start << _T("\n");
-		dc << _T("End: ") << End << _T("\n");
+		dc << _T("Start.X = ") << Start.X << _T("\n");
+		dc << _T("Start.Y = ") << Start.Y << _T("\n");
+		dc << _T("End.X = ") << End.X << _T("\n");
+		dc << _T("End.Y = ") << End.Y << _T("\n");
 	}
 
 #endif
+
+#pragma endregion
+#pragma region Overridables
 
 	template<typename T>
 	BOOL operator==(const CLine<T>& Left, const CLine<T>& Right)

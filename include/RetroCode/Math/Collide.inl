@@ -41,13 +41,13 @@ namespace retro::math
 {
 
 	template<typename T>
-	BOOL IsCollidePointPoint(const CVector2<T> vLeft, const CVector2<T> vRight)
+	BOOL IsCollidePointPoint(const CVector2<T>& vLeft, const CVector2<T>& vRight)
 	{
 		return vLeft == vRight;
 	}
 
 	template<typename T>
-	BOOL IsCollidePointLine(const CVector2<T> vLeft, const CLine<T> lnRight)
+	BOOL IsCollidePointLine(const CVector2<T>& vLeft, const CLine<T>& lnRight)
 	{
 		const T d1 = EuclidianDistance(lnRight.Start, vLeft);
 		const T d2 = EuclidianDistance(lnRight.End, vLeft);
@@ -57,7 +57,7 @@ namespace retro::math
 	}
 
 	template<typename T>
-	BOOL IsCollidePointRect(const CVector2<T> vLeft, const CRect<T> rcRight)
+	BOOL IsCollidePointRect(const CVector2<T>& vLeft, const CRect<T>& rcRight)
 	{
 		return(vLeft.X >= rcRight.Point.X) &&
 			(vLeft.X <= rcRight.Point.X + rcRight.Size.X) &&
@@ -66,7 +66,7 @@ namespace retro::math
 	}
 
 	template<typename T>
-	BOOL IsCollidePointCircle(const CVector2<T> vLeft, const CCircle<T> circRight)
+	BOOL IsCollidePointCircle(const CVector2<T>& vLeft, const CCircle<T>& circRight)
 	{
 		const T dx = vLeft.X - circRight.Center.X;
 		const T dy = vLeft.Y - circRight.Center.Y;
@@ -75,7 +75,7 @@ namespace retro::math
 	}
 
 	template<typename T>
-	BOOL IsCollideLineLine(const CLine<T> lnLeft, const CLine<T> lnRight)
+	BOOL IsCollideLineLine(const CLine<T>& lnLeft, const CLine<T>& lnRight)
 	{
 		const T nDeterminant = (lnLeft.End.X - lnLeft.Start.X) * (lnRight.End.Y - lnRight.Start.Y) -
 			(lnLeft.End.Y - lnLeft.Start.Y) * (lnRight.End.X - lnRight.Start.X);
@@ -93,7 +93,7 @@ namespace retro::math
 	}
 
 	template<typename T>
-	BOOL IsCollideLineRect(const CLine<T> lnLeft, const CRect<T> rcRight)
+	BOOL IsCollideLineRect(const CLine<T>& lnLeft, const CRect<T>& rcRight)
 	{
 		if (IsCollidePointRect(lnLeft.Start, rcRight) || IsCollidePointRect(lnLeft.End, rcRight))
 		{
@@ -121,7 +121,7 @@ namespace retro::math
 	}
 
 	template<typename T>
-	BOOL IsCollideLineCircle(const CLine<T> lnLeft, const CCircle<T> circRight)
+	BOOL IsCollideLineCircle(const CLine<T>& lnLeft, const CCircle<T>& circRight)
 	{
 		if (IsCollidePointCircle(lnLeft.Start, circRight) || IsCollidePointCircle(lnLeft.End, circRight))
 		{
@@ -130,16 +130,16 @@ namespace retro::math
 
 		const T dx = lnLeft.End.X - lnLeft.Start.X;
 		const T dy = lnLeft.End.Y - lnLeft.Start.Y;
-		const T a = dy;
-		const T b = -dx;
-		const T c = dx * lnLeft.Start.Y - dy * lnLeft.Start.X;
-		const T dist = abs(a * circRight.Center.X + b * circRight.Center.Y + c) / sqrt(a * a + b * b);
+		const DOUBLE a = dy;
+		const DOUBLE b = -dx;
+		const DOUBLE c = dx * lnLeft.Start.Y - dy * lnLeft.Start.X;
+		const DOUBLE dist = fabs(a * circRight.Center.X + b * circRight.Center.Y + c) / sqrt(a * a + b * b);
 
 		return dist <= circRight.Radius;
 	}
 
 	template<typename T>
-	BOOL IsCollideRectRect(const CRect<T> rcLeft, const CRect<T> rcRight)
+	BOOL IsCollideRectRect(const CRect<T>& rcLeft, const CRect<T>& rcRight)
 	{
 		return IsCollidePointRect(rcLeft.Point, rcRight) ||
 			IsCollidePointRect({ static_cast<T>(rcLeft.Point.X + rcLeft.Size.X), rcLeft.Point.Y }, rcRight) ||
@@ -148,7 +148,7 @@ namespace retro::math
 	}
 
 	template<typename T>
-	BOOL IsCollideRectCircle(const CRect<T> rcLeft, const CCircle<T> circRight)
+	BOOL IsCollideRectCircle(const CRect<T>& rcLeft, const CCircle<T>& circRight)
 	{
 		const T nClosestX = Max(rcLeft.Point.X, Min(circRight.Center.X, rcLeft.Point.X + rcLeft.Size.X));
 		const T nClosestY = Max(rcLeft.Point.Y, Min(circRight.Center.Y, rcLeft.Point.Y + rcLeft.Size.Y));
@@ -160,7 +160,7 @@ namespace retro::math
 	}
 
 	template<typename T>
-	BOOL IsCollideCircleCircle(const CCircle<T> circLeft, const CCircle<T> circRight)
+	BOOL IsCollideCircleCircle(const CCircle<T>& circLeft, const CCircle<T>& circRight)
 	{
 		const T fDistance = EuclidianDistance(circLeft.Center, circRight.Center);
 

@@ -47,7 +47,7 @@ namespace retro::math
 {
 
 	template<typename T>
-	class CCircle : public CObject
+	class CCircle
 	{
 #pragma region Constructors
 
@@ -69,13 +69,13 @@ namespace retro::math
 		T			Radius;
 
 #pragma endregion
-#pragma region Overridables
+#pragma region Operations
 
 	public:
 
-		void Serialize(CArchive& ar) override;
+		void Serialize(CArchive& ar);
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const override;
+		void Dump(CDumpContext& dc) const;
 #endif
 
 #pragma endregion

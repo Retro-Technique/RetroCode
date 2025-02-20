@@ -113,14 +113,9 @@ namespace retro::math
 		return CSize(static_cast<INT>(X), static_cast<INT>(Y));
 	}
 
-#pragma endregion
-#pragma region Overridables
-
 	template<typename T>
 	void CVector2<T>::Serialize(CArchive& ar)
 	{
-		CObject::Serialize(ar);
-
 		if (ar.IsStoring())
 		{
 			ar << X << Y;
@@ -136,13 +131,14 @@ namespace retro::math
 	template<typename T>
 	void CVector2<T>::Dump(CDumpContext& dc) const
 	{
-		CObject::Dump(dc);
-
 		dc << _T("X = ") << X << _T("\n");
 		dc << _T("Y = ") << Y << _T("\n");
 	}
 
 #endif
+
+#pragma endregion
+#pragma region Overridables
 
 	template<typename T>
 	CVector2<T> operator+(const CVector2<T>& Left, const CVector2<T>& Right)
