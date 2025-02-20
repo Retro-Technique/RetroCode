@@ -4,7 +4,7 @@
  *
  * CEA CNRS INRIA LOGICIEL LIBRE
  *
- * Copyright(c) 2014-2025 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * This software is a computer program whose purpose is to provide
  * minimalist "C with classes" functionalities.
@@ -37,13 +37,71 @@
  *
  */
 
+#ifndef __RETRO_MATH_H_INCLUDED__
+#error Do not include Rect.h directly, include the Math.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+namespace retro::math
+{
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
+	template<typename T>
+	class CRect : public CObject
+	{
+#pragma region Constructors
 
+	public:
+
+		CRect();
+		CRect(T x, T y, T width, T height);
+		CRect(const CVector2<T>& Point, const CVector2<T>& Size);
+		CRect(const ::CRect& rcRect);
+		template<typename U>
+		explicit CRect(const CRect<U>& Rectangle);
+		~CRect() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	public:
+
+		CVector2<T> Point;
+		CVector2<T> Size;
+
+#pragma endregion
+#pragma region Operations
+
+	public:
+
+		void FromRect(const ::CRect& rcRect);
+		::CRect ToRect() const;
+		const T& Left() const;
+		const T& Top() const;
+		T Right() const;
+		T Bottom() const;
+
+#pragma endregion
+#pragma region Overridables
+
+		void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+		void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+
+	};
+
+	typedef CRect<INT>		CIntRect;
+	typedef CRect<FLOAT>	CFloatRect;
+
+	template<typename T>
+	BOOL operator==(const CRect<T>& Left, const CRect<T>& Right);
+
+	template<typename T>
+	BOOL operator!=(const CRect<T>& Left, const CRect<T>& Right);
+
+}
+
+#include "Rect.inl"
