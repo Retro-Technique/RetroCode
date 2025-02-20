@@ -37,14 +37,58 @@
  *
  */
 
+#ifndef __RETRO_MATH_H_INCLUDED__
+#error Do not include Line.h directly, include the Math.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+namespace retro::math
+{
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
+	template<typename T>
+	class CLine : public CObject
+	{
+#pragma region Constructors
 
+	public:
+
+		CLine();
+		CLine(T startx, T starty, T endx, T endy);
+		CLine(const CVector2<T>& Start, const CVector2<T>& End);
+		template<typename U>
+		explicit CLine(const CLine<U>& Line);
+		~CLine() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	public:
+
+		CVector2<T> Start;
+		CVector2<T> End;
+
+#pragma endregion
+#pragma region Overridables
+
+		void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+		void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+
+	};
+
+	typedef CLine<INT>		CIntLine;
+	typedef CLine<FLOAT>	CFloatLine;
+
+	template<typename T>
+	BOOL operator==(const CLine<T>& Left, const CLine<T>& Right);
+
+	template<typename T>
+	BOOL operator!=(const CLine<T>& Left, const CLine<T>& Right);
+
+}
+
+#include "Line.inl"
