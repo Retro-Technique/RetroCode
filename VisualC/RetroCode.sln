@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Math", "RetroCode-Math\RetroCode-Math.vcxproj", "{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RetroCode", "RetroCode", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{02FB89E6-21ED-4E3A-8E5C-1CA567C728F1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Math.Test", "..\tests\Math\RetroCode-Math.Test\RetroCode-Math.Test.vcxproj", "{1234CCA2-D856-0E4B-901B-F8F0C0087205}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RetroCode-Memory", "RetroCode-Memory\RetroCode-Memory.vcxproj", "{95AD5D1F-FE07-A28E-2899-C20EA671801C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}.Debug|x64.ActiveCfg = Debug|x64
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}.Debug|x64.Build.0 = Debug|x64
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}.Debug|x86.ActiveCfg = Debug|Win32
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}.Debug|x86.Build.0 = Debug|Win32
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}.Release|x64.ActiveCfg = Release|x64
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}.Release|x64.Build.0 = Release|x64
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}.Release|x86.ActiveCfg = Release|Win32
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27}.Release|x86.Build.0 = Release|Win32
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205}.Debug|x64.ActiveCfg = Debug|x64
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205}.Debug|x64.Build.0 = Debug|x64
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205}.Debug|x86.ActiveCfg = Debug|Win32
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205}.Debug|x86.Build.0 = Debug|Win32
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205}.Release|x64.ActiveCfg = Release|x64
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205}.Release|x64.Build.0 = Release|x64
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205}.Release|x86.ActiveCfg = Release|Win32
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205}.Release|x86.Build.0 = Release|Win32
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C}.Debug|x64.ActiveCfg = Debug|x64
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C}.Debug|x64.Build.0 = Debug|x64
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C}.Debug|x86.ActiveCfg = Debug|Win32
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C}.Debug|x86.Build.0 = Debug|Win32
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C}.Release|x64.ActiveCfg = Release|x64
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C}.Release|x64.Build.0 = Release|x64
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C}.Release|x86.ActiveCfg = Release|Win32
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0315C405-9ED9-EC68-DC54-9FCD45FF2C27} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{1234CCA2-D856-0E4B-901B-F8F0C0087205} = {02FB89E6-21ED-4E3A-8E5C-1CA567C728F1}
+		{95AD5D1F-FE07-A28E-2899-C20EA671801C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {08140188-1456-41E4-A241-D971DE9F4391}
+	EndGlobalSection
+EndGlobal

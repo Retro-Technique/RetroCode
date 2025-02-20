@@ -1,0 +1,95 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.2.1/schemas/spdx-schema.json",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "documentNamespace": "https://spdx.org/spdxdocs/atlmfc-x64-windows-0#3-f64b525a-311f-4dfd-9c5a-6a2e01ee370b",
+  "name": "atlmfc:x64-windows@0#3 b244fb3f93893fd8d5284e09f8a00da1eeec6f45b8eea0b512f8fa584a672569",
+  "creationInfo": {
+    "creators": [
+      "Tool: vcpkg-2025-02-11-bec4296bf5289dc9ce83b4f5095943e44162f9c2"
+    ],
+    "created": "2025-02-20T10:22:48Z"
+  },
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "GENERATES",
+      "relatedSpdxElement": "SPDXRef-binary"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-0"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-1"
+    },
+    {
+      "spdxElementId": "SPDXRef-binary",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-0",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-1",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    }
+  ],
+  "packages": [
+    {
+      "name": "atlmfc",
+      "SPDXID": "SPDXRef-port",
+      "versionInfo": "0#3",
+      "downloadLocation": "git+https://github.com/microsoft/vcpkg@1a6d710d7d3ffd42089aa001571c625805f59918",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "description": "A stub package that ensures Visual Studio has ATL/MFC installed.",
+      "comment": "This is the port (recipe) consumed by vcpkg."
+    },
+    {
+      "name": "atlmfc:x64-windows",
+      "SPDXID": "SPDXRef-binary",
+      "versionInfo": "b244fb3f93893fd8d5284e09f8a00da1eeec6f45b8eea0b512f8fa584a672569",
+      "downloadLocation": "NONE",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "This is a binary package built by vcpkg."
+    }
+  ],
+  "files": [
+    {
+      "fileName": "./C:/Users/olivi/AppData/Local/vcpkg/registries/git-trees/1a6d710d7d3ffd42089aa001571c625805f59918/portfile.cmake",
+      "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "30c32dcd0617b930e3df8de91cd5baf00a638607f89ef9b15103f97c1eb1ef21"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/Users/olivi/AppData/Local/vcpkg/registries/git-trees/1a6d710d7d3ffd42089aa001571c625805f59918/vcpkg.json",
+      "SPDXID": "SPDXRef-file-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cbf5dddab6a37421f2369e016c2d815210b6922ae6d9fd9d9342032b82ef279d"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}

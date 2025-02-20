@@ -1,0 +1,18 @@
+Package: atl
+Version: 0
+Architecture: x64-windows
+Multi-Arch: same
+Abi: dcf982902bc505aa26a6a78090352b2e04859fc61fa1e851a19f867a5868d60e
+Description: A stub package that ensures Visual Studio has Active Template Library (ATL) installed.
+Status: install ok installed
+
+Package: atlmfc
+Version: 0
+Port-Version: 3
+Depends: atl
+Architecture: x64-windows
+Multi-Arch: same
+Abi: b244fb3f93893fd8d5284e09f8a00da1eeec6f45b8eea0b512f8fa584a672569
+Description: A stub package that ensures Visual Studio has ATL/MFC installed.
+Status: install ok installed
+
