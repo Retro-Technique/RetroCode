@@ -4,10 +4,10 @@
  *
  * CEA CNRS INRIA LOGICIEL LIBRE
  *
- * Copyright(c) 2014-2025 Retro Technique
+ * Copyright(c) 2014-2024 Retro Technique
  *
  * This software is a computer program whose purpose is to provide
- * minimalist "C with classes" functionalities.
+ * a 2D game engine.
  *
  * This software is governed by the CeCILL license under French law and
  * abiding by the rules of distribution of free software.  You can  use,
@@ -37,12 +37,50 @@
  *
  */
 
+#ifndef __RETRO_MEMORY_H_INCLUDED__
+#error Do not include ReferenceObject.h directly, include the Memory.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MEMORY_H_INCLUDED__
-#define __RETRO_MEMORY_H_INCLUDED__
+namespace retro::memory
+{
 
-#include <RetroCode/Memory/MemoryLeakChecker.h>
-#include <RetroCode/Memory/ReferenceObject.h>
+	class AFX_EXT_CLASS CReferenceObject : public CObject
+	{
+#pragma region Constructors
 
+	public:
+
+		CReferenceObject();
+		~CReferenceObject() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+
+		mutable volatile LONG m_nReferenceCount;
+
+#pragma endregion
+#pragma region Operations
+
+	public:
+
+		void AddRef() const;
+		BOOL Release() const;
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+#ifdef _DEBUG
+		void AssertValid() const override;
+		void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+	};
+
+}

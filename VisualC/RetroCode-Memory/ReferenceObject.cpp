@@ -7,7 +7,7 @@
  * Copyright(c) 2014-2025 Retro Technique
  *
  * This software is a computer program whose purpose is to provide
- * minimalist "C with classes" functionalities.
+ * a 2D game engine.
  *
  * This software is governed by the CeCILL license under French law and
  * abiding by the rules of distribution of free software.  You can  use,
@@ -37,12 +37,60 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#ifndef __RETRO_MEMORY_H_INCLUDED__
-#define __RETRO_MEMORY_H_INCLUDED__
+namespace retro::memory
+{
 
-#include <RetroCode/Memory/MemoryLeakChecker.h>
-#include <RetroCode/Memory/ReferenceObject.h>
+#pragma region Constructors
+
+	CReferenceObject::CReferenceObject()
+		: m_nReferenceCount(1)
+	{
+
+	}
+
+#pragma endregion
+#pragma region Operations
+
+	void CReferenceObject::AddRef() const
+	{
+		InterlockedIncrement(&m_nReferenceCount);
+	}
+
+	BOOL CReferenceObject::Release() const
+	{
+		const LONG nReferenceCount = InterlockedDecrement(&m_nReferenceCount);
+		if (0l == nReferenceCount)
+		{
+			delete this;
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
+#pragma endregion
+#pragma region Overridables
+
+#ifdef _DEBUG
+
+	void CReferenceObject::AssertValid() const
+	{
+		CObject::AssertValid();
+
+		ASSERT(0l < m_nReferenceCount);
+	}
+
+	void CReferenceObject::Dump(CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		dc << _T("m_nReferenceCount = ") << m_nReferenceCount << _T("\n");
+	}
 
 #endif
+
+#pragma endregion
+
+}
