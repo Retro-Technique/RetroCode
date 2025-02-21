@@ -42,6 +42,7 @@
 #ifndef __RETRO_MULTIMEDIA_H_INCLUDED__
 #define __RETRO_MULTIMEDIA_H_INCLUDED__
 
+#include <afxwin.h>
 #include <mmsystem.h>
 
 #include "Multimedia/MMChunk.h"

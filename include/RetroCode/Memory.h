@@ -42,6 +42,8 @@
 #ifndef __RETRO_MEMORY_H_INCLUDED__
 #define __RETRO_MEMORY_H_INCLUDED__
 
+#include <afxwin.h>
+
 #include "Memory/MemoryLeakChecker.h"
 #include "Memory/ReferenceObject.h"
 

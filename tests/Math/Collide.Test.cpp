@@ -5,6 +5,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace RetroCodeMathTest
 {
+
 	TEST_CLASS(CollideTest)
 	{
 	public:
@@ -120,4 +121,5 @@ namespace RetroCodeMathTest
 		}
 
 	};
+
 }
