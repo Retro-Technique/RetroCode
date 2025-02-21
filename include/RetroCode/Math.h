@@ -42,13 +42,13 @@
 #ifndef __RETRO_MATH_H_INCLUDED__
 #define __RETRO_MATH_H_INCLUDED__
 
-#include <RetroCode/Math/MatrixStack.h>
-#include <RetroCode/Math/Vector2.h>
-#include <RetroCode/Math/Rect.h>
-#include <RetroCode/Math/Line.h>
-#include <RetroCode/Math/Circle.h>
-#include <RetroCode/Math/Operation.h>
-#include <RetroCode/Math/Distance.h>
-#include <RetroCode/Math/Collide.h>
+#include "Math/MatrixStack.h"
+#include "Math/Vector2.h"
+#include "Math/Rect.h"
+#include "Math/Line.h"
+#include "Math/Circle.h"
+#include "Math/Operation.h"
+#include "Math/Distance.h"
+#include "Math/Collide.h"
 
 #endif

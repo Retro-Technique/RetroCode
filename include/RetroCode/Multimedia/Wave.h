@@ -39,9 +39,56 @@
 
 #pragma once
 
-#ifndef __RETRO_AUDIO_H_INCLUDED__
-#define __RETRO_AUDIO_H_INCLUDED__
-
-
-
+#ifndef __RETRO_MULTIMEDIA_H_INCLUDED__
+#error Do not include Wave.h directly, include the Multimedia.h file
 #endif
+
+namespace retro::multimedia
+{
+	
+	class AFX_EXT_CLASS CWave : public CObject
+	{
+#pragma region Constructors
+
+		DECLARE_DYNAMIC(CWave)
+
+	public:
+
+		CWave();
+		virtual ~CWave();
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+
+		LPBYTE	m_pData;
+		DWORD	m_uDataLen;
+
+#pragma endregion
+#pragma region Operations
+
+	public:
+
+		void LoadFromFile(LPCTSTR pszFileName);
+		void Unload();
+		BOOL IsValid() const;
+		BOOL Play(BOOL bAsync = TRUE, BOOL bLooped = FALSE) const;
+		BOOL GetFormat(WAVEFORMATEX& wfFormat) const;
+		DWORD GetDataLen() const;
+		DWORD GetData(LPBYTE pWaveData, DWORD uMaxToCopy) const;
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+#ifdef _DEBUG
+		void AssertValid() const override;
+		void Dump(CDumpContext& dc) const override;
+#endif
+
+#pragma endregion
+	};
+
+}
