@@ -169,7 +169,7 @@ namespace retro::math
 		LPVOID pBuffer = _aligned_malloc(START_SIZE * sizeof(D2D1::Matrix3x2F), ALIGNMENT_SIZE);
 		if (!pBuffer)
 		{
-			return;
+			AfxThrowMemoryException();
 		}
 
 		m_pStack = reinterpret_cast<D2D1::Matrix3x2F*>(pBuffer);
@@ -185,7 +185,7 @@ namespace retro::math
 		LPVOID pBuffer = _aligned_realloc(m_pStack, nNewSize * sizeof(D2D1::Matrix3x2F), ALIGNMENT_SIZE);
 		if (!pBuffer)
 		{
-			return;
+			AfxThrowMemoryException();
 		}
 
 		m_pStack = reinterpret_cast<D2D1::Matrix3x2F*>(pBuffer);
