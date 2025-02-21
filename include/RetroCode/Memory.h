@@ -42,7 +42,7 @@
 #ifndef __RETRO_MEMORY_H_INCLUDED__
 #define __RETRO_MEMORY_H_INCLUDED__
 
-#include <RetroCode/Memory/MemoryLeakChecker.h>
-#include <RetroCode/Memory/ReferenceObject.h>
+#include "Memory/MemoryLeakChecker.h"
+#include "Memory/ReferenceObject.h"
 
 #endif

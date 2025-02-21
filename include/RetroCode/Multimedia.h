@@ -44,8 +44,9 @@
 
 #include <mmsystem.h>
 
-#include <RetroCode/Multimedia/MMChunk.h>
-#include <RetroCode/Multimedia/MMIOInfo.h>
-#include <RetroCode/Multimedia/MMIO.h>
+#include "Multimedia/MMChunk.h"
+#include "Multimedia/MMIOInfo.h"
+#include "Multimedia/MMIO.h"
+#include "Multimedia/Wave.h"
 
 #endif

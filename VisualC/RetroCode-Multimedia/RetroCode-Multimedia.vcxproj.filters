@@ -39,6 +39,9 @@
     <ClCompile Include="MMIOInfo.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Wave.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Multimedia.def">
@@ -74,6 +77,9 @@
       <Filter>include\Multimedia</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Multimedia\MMChunk.h">
+      <Filter>include\Multimedia</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Multimedia\Wave.h">
       <Filter>include\Multimedia</Filter>
     </ClInclude>
   </ItemGroup>

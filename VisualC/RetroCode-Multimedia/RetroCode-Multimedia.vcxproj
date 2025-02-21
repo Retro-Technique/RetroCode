@@ -235,6 +235,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RetroCode-Multimedia.cpp" />
+    <ClCompile Include="Wave.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\RetroCode-Multimedia.rc2" />
@@ -245,6 +246,7 @@
     <ClInclude Include="..\..\include\RetroCode\Multimedia\MMChunk.h" />
     <ClInclude Include="..\..\include\RetroCode\Multimedia\MMIO.h" />
     <ClInclude Include="..\..\include\RetroCode\Multimedia\MMIOInfo.h" />
+    <ClInclude Include="..\..\include\RetroCode\Multimedia\Wave.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MMIOException.h" />
     <ClInclude Include="pch.h" />
