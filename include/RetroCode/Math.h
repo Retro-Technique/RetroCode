@@ -42,6 +42,8 @@
 #ifndef __RETRO_MATH_H_INCLUDED__
 #define __RETRO_MATH_H_INCLUDED__
 
+#include <afxwin.h>
+
 #include "Math/MatrixStack.h"
 #include "Math/Vector2.h"
 #include "Math/Rect.h"

@@ -34,9 +34,9 @@ namespace RetroCodeMathTest
 
 		HRESULT Allocate(INT nPushCount, BOOL& bIsMemDifferent)
 		{
-			retro::memory::CMemoryLeakChecker MemoryLeakChecker;
+			retro::memory::CMemoryLeakChecker mlc;
 
-			MemoryLeakChecker.Begin();
+			mlc.Begin();
 			{
 				retro::math::CMatrixStack MatrixStack;
 
@@ -72,7 +72,7 @@ namespace RetroCodeMathTest
 				}
 			}
 
-			bIsMemDifferent = MemoryLeakChecker.End();
+			bIsMemDifferent = mlc.End();
 
 			return S_OK;
 		}

@@ -5,6 +5,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace RetroCodeMathTest
 {
+
 	TEST_CLASS(DistanceTest)
 	{
 	public:
@@ -52,4 +53,5 @@ namespace RetroCodeMathTest
 		}
 
 	};
+
 }
