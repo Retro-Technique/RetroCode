@@ -76,4 +76,23 @@ namespace retro::math
 		return val;
 	}
 
+	template<typename T>
+	const T& Lerp(const T& a, const T& b, const T& t)
+	{
+		t = Clamp(t, a, b);
+
+		return a + t * (b - a);
+	}
+
+	template<typename T>
+	const T& InverseLerp(const T& a, const T& b, const T& t)
+	{
+		if (a == b)
+		{
+			return 0;
+		}
+
+		return (t - a) / (b - a);
+	}
+
 }

@@ -53,5 +53,6 @@
 #include "Math/Distance.h"
 #include "Math/Collide.h"
 #include "Math/Random.h"
+#include "Math/PerlinNoise.h"
 
 #endif

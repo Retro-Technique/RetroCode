@@ -38,7 +38,7 @@
  */
 
 #ifndef __RETRO_MATH_H_INCLUDED__
-#error Do not include Operation.h directly, include the Math.h file
+#error Do not include PerlinNoise.h directly, include the Math.h file
 #endif
 
 #pragma once
@@ -46,24 +46,8 @@
 namespace retro::math
 {
 
-	template<typename T>
-	void Swap(T& a, T& b);
+	DOUBLE AFX_EXT_API PerlinNoise(DOUBLE x, DOUBLE y);
 
-	template<typename T>
-	const T& Min(const T& a, const T& b);
-
-	template<typename T>
-	const T& Max(const T& a, const T& b);
-
-	template<typename T>
-	const T& Clamp(const T& val, const T& min, const T& max);
-
-	template<typename T>
-	const T& Lerp(const T& a, const T& b, const T& t);
-
-	template<typename T>
-	const T& InverseLerp(const T& a, const T& b, const T& t);
+	DOUBLE* AFX_EXT_API NoiseMap(DOUBLE* pNoiseMap, UINT uWidth, UINT uHeight, DOUBLE fScale, UINT uOctaveCount, FLOAT fPersistance, FLOAT fLacunarity);
 
 }
-
-#include "Operation.inl"
