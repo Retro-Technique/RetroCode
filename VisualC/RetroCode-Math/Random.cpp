@@ -37,21 +37,80 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+namespace retro::math
+{
 
-#include <afxwin.h>
+#pragma region Constructors
 
-#include "Math/MatrixStack.h"
-#include "Math/Vector2.h"
-#include "Math/Rect.h"
-#include "Math/Line.h"
-#include "Math/Circle.h"
-#include "Math/Operation.h"
-#include "Math/Distance.h"
-#include "Math/Collide.h"
-#include "Math/Random.h"
+	IMPLEMENT_DYNAMIC(CRandom, CObject);
 
-#endif
+	CRandom::CRandom()
+	{
+		const CTime dtNow = CTime::GetCurrentTime();
+		const time_t nTimestamp = dtNow.GetTime();
+		const UINT uSeed = static_cast<UINT>(nTimestamp);
+
+		Seed(uSeed);
+	}
+
+	CRandom::CRandom(UINT uSeed)
+	{
+		Seed(uSeed);
+	}
+
+#pragma endregion
+#pragma region Operations
+
+	void CRandom::Seed(UINT uSeed)
+	{
+		srand(uSeed);
+	}
+
+	INT CRandom::NextInteger() const
+	{
+		return rand();
+	}
+
+	INT CRandom::NextInteger(INT nMaxValueExcluded) const
+	{
+		return NextInteger() % nMaxValueExcluded;
+	}
+
+	INT CRandom::NextInteger(INT nMinValueIncluded, INT nMaxValueExcluded) const
+	{
+		return (NextInteger() % (nMaxValueExcluded - nMinValueIncluded)) + nMinValueIncluded;
+	}
+
+	FLOAT CRandom::NextFloat() const
+	{
+		return static_cast<FLOAT>(NextInteger()) / RAND_MAX;
+	}
+
+	DOUBLE CRandom::NextDouble() const
+	{
+		return NextInteger() / RAND_MAX;
+	}
+
+	void CRandom::NextBytes(BYTE* pBytes, UINT uByteCount) const
+	{
+		if (!AfxIsValidAddress(pBytes, uByteCount * sizeof(BYTE), TRUE))
+		{
+			AfxThrowInvalidArgException();
+		}
+
+		for (UINT i = 0; i < uByteCount; i++)
+		{
+			pBytes[i] = static_cast<BYTE>(NextInteger(0, sizeof(BYTE)));
+		}
+	}
+
+	BOOL CRandom::NextBoolean() const
+	{
+		return NextInteger() & 1;
+	}
+
+#pragma endregion
+
+}

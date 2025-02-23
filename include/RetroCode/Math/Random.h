@@ -37,21 +37,42 @@
  *
  */
 
+#ifndef __RETRO_MATH_H_INCLUDED__
+#error Do not include Random.h directly, include the Math.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MATH_H_INCLUDED__
-#define __RETRO_MATH_H_INCLUDED__
+namespace retro::math
+{
 
-#include <afxwin.h>
+	class AFX_EXT_CLASS CRandom : public CObject
+	{
+#pragma region Constructors
 
-#include "Math/MatrixStack.h"
-#include "Math/Vector2.h"
-#include "Math/Rect.h"
-#include "Math/Line.h"
-#include "Math/Circle.h"
-#include "Math/Operation.h"
-#include "Math/Distance.h"
-#include "Math/Collide.h"
-#include "Math/Random.h"
+		DECLARE_DYNAMIC(CRandom)
 
-#endif
+	public:
+
+		CRandom();
+		explicit CRandom(UINT uSeed);
+		~CRandom() = default;
+
+#pragma endregion
+#pragma region Operations
+
+	public:
+
+		void Seed(UINT uSeed);
+		INT NextInteger() const;
+		INT NextInteger(INT nMaxValueExcluded) const;
+		INT NextInteger(INT nMinValueIncluded, INT nMaxValueExcluded) const;
+		FLOAT NextFloat() const;
+		DOUBLE NextDouble() const;
+		void NextBytes(BYTE* pBytes, UINT uByteCount) const;
+		BOOL NextBoolean() const;
+
+#pragma endregion
+	};
+
+}
