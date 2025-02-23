@@ -12,6 +12,9 @@
 
 #include <RetroCode/Multimedia.h>
 
+#include <comdef.h>
+
 #pragma comment(lib, "Winmm.lib")
+#pragma comment(lib, "Vfw32.lib")
 
 #endif //PCH_H

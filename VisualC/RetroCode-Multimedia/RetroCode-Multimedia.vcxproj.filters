@@ -42,6 +42,12 @@
     <ClCompile Include="Wave.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Avi.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32Exception.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Multimedia.def">
@@ -81,6 +87,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Multimedia\Wave.h">
       <Filter>include\Multimedia</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Multimedia\Avi.h">
+      <Filter>include\Multimedia</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32Exception.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

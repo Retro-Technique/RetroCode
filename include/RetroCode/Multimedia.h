@@ -44,10 +44,12 @@
 
 #include <afxwin.h>
 #include <mmsystem.h>
+#include <vfw.h>
 
 #include "Multimedia/MMChunk.h"
 #include "Multimedia/MMIOInfo.h"
 #include "Multimedia/MMIO.h"
 #include "Multimedia/Wave.h"
+#include "Multimedia/Avi.h"
 
 #endif

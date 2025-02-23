@@ -210,6 +210,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Avi.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
@@ -236,6 +237,7 @@
     </ClCompile>
     <ClCompile Include="RetroCode-Multimedia.cpp" />
     <ClCompile Include="Wave.cpp" />
+    <ClCompile Include="Win32Exception.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\RetroCode-Multimedia.rc2" />
@@ -243,6 +245,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\RetroCode\Multimedia.h" />
+    <ClInclude Include="..\..\include\RetroCode\Multimedia\Avi.h" />
     <ClInclude Include="..\..\include\RetroCode\Multimedia\MMChunk.h" />
     <ClInclude Include="..\..\include\RetroCode\Multimedia\MMIO.h" />
     <ClInclude Include="..\..\include\RetroCode\Multimedia\MMIOInfo.h" />
@@ -252,6 +255,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Win32Exception.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroCode-Multimedia.rc" />
