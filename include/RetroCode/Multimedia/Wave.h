@@ -77,6 +77,9 @@ namespace retro::multimedia
 		BOOL GetFormat(WAVEFORMATEX& wfFormat) const;
 		DWORD GetDataLen() const;
 		DWORD GetData(LPBYTE pWaveData, DWORD uMaxToCopy) const;
+		CTimeSpan GetDuration() const;
+		WORD GetChannelCount() const;
+		DWORD GetSampleRate() const;
 
 #pragma endregion
 #pragma region Overridables

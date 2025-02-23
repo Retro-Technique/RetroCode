@@ -20,13 +20,12 @@ namespace RetroCodeMultimediaTest
 		{
 			BOOL bIsMemDifferent = FALSE;
 			TCHAR acErrorMessage[ERROR_MESSAGE_COUNT] = { _T("\0") };
-			CTimeSpan durExpectedSound(0, 0, 0, SOUNDS[0]._nSeconds);
 			CTimeSpan durActualSound;
 
 			BOOL bIsSuccess = LoadWave(SOUNDS[0]._pszFileName, durActualSound, bIsMemDifferent, acErrorMessage);
 
 			Assert::IsTrue(bIsSuccess, acErrorMessage);
-			Assert::AreEqual(durExpectedSound.GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
+			Assert::AreEqual(CTimeSpan(0, 0, 0, SOUNDS[0]._nSeconds).GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
 			Assert::IsFalse(bIsMemDifferent, _T("Memory leak"));
 		}
 
@@ -34,13 +33,12 @@ namespace RetroCodeMultimediaTest
 		{
 			BOOL bIsMemDifferent = FALSE;
 			TCHAR acErrorMessage[ERROR_MESSAGE_COUNT] = { _T("\0") };
-			CTimeSpan durExpectedSound(0, 0, 0, SOUNDS[1]._nSeconds);
 			CTimeSpan durActualSound;
 
 			BOOL bIsSuccess = LoadWave(SOUNDS[1]._pszFileName, durActualSound, bIsMemDifferent, acErrorMessage);
 
 			Assert::IsTrue(bIsSuccess, acErrorMessage);
-			Assert::AreEqual(durExpectedSound.GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
+			Assert::AreEqual(CTimeSpan(0, 0, 0, SOUNDS[1]._nSeconds).GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
 			Assert::IsFalse(bIsMemDifferent, _T("Memory leak"));
 		}
 
@@ -48,13 +46,12 @@ namespace RetroCodeMultimediaTest
 		{
 			BOOL bIsMemDifferent = FALSE;
 			TCHAR acErrorMessage[ERROR_MESSAGE_COUNT] = { _T("\0") };
-			CTimeSpan durExpectedSound(0, 0, 0, SOUNDS[2]._nSeconds);
 			CTimeSpan durActualSound;
 
 			BOOL bIsSuccess = LoadWave(SOUNDS[2]._pszFileName, durActualSound, bIsMemDifferent, acErrorMessage);
 
 			Assert::IsTrue(bIsSuccess, acErrorMessage);
-			Assert::AreEqual(durExpectedSound.GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
+			Assert::AreEqual(CTimeSpan(0, 0, 0, SOUNDS[2]._nSeconds).GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
 			Assert::IsFalse(bIsMemDifferent, _T("Memory leak"));
 		}
 
@@ -62,13 +59,12 @@ namespace RetroCodeMultimediaTest
 		{
 			BOOL bIsMemDifferent = FALSE;
 			TCHAR acErrorMessage[ERROR_MESSAGE_COUNT] = { _T("\0") };
-			CTimeSpan durExpectedSound(0, 0, 0, SOUNDS[3]._nSeconds);
 			CTimeSpan durActualSound;
 
 			BOOL bIsSuccess = LoadWave(SOUNDS[3]._pszFileName, durActualSound, bIsMemDifferent, acErrorMessage);
 
 			Assert::IsTrue(bIsSuccess, acErrorMessage);
-			Assert::AreEqual(durExpectedSound.GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
+			Assert::AreEqual(CTimeSpan(0, 0, 0, SOUNDS[3]._nSeconds).GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
 			Assert::IsFalse(bIsMemDifferent, _T("Memory leak"));
 		}
 
@@ -76,13 +72,12 @@ namespace RetroCodeMultimediaTest
 		{
 			BOOL bIsMemDifferent = FALSE;
 			TCHAR acErrorMessage[ERROR_MESSAGE_COUNT] = { _T("\0") };
-			CTimeSpan durExpectedSound(0, 0, 0, SOUNDS[4]._nSeconds);
 			CTimeSpan durActualSound;
 
 			BOOL bIsSuccess = LoadWave(SOUNDS[4]._pszFileName, durActualSound, bIsMemDifferent, acErrorMessage);
 
 			Assert::IsFalse(bIsSuccess, acErrorMessage);
-			Assert::AreEqual(durExpectedSound.GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
+			Assert::AreEqual(CTimeSpan(0, 0, 0, SOUNDS[4]._nSeconds).GetSeconds(), durActualSound.GetSeconds(), _T("Invalid duration"));
 			Assert::IsFalse(bIsMemDifferent, _T("Memory leak"));
 		}
 
@@ -119,15 +114,7 @@ namespace RetroCodeMultimediaTest
 
 				wave.LoadFromFile(pszFileName);
 
-				const DWORD uDataLen = wave.GetDataLen();
-
-				WAVEFORMATEX wfFormat = { 0 };
-				wave.GetFormat(wfFormat);
-
-				const FLOAT fSeconds = static_cast<FLOAT>(uDataLen) / (wfFormat.nAvgBytesPerSec * wfFormat.nBlockAlign);
-				const INT nSeconds = static_cast<INT>(fSeconds);
-
-				durActualSound = CTimeSpan(0, 0, 0, nSeconds);
+				durActualSound = wave.GetDuration();
 				bIsMemDifferent = mlc.End();
 			}
 			catch (CException* e)

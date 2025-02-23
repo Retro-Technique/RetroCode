@@ -21,6 +21,9 @@
     <ClCompile Include="..\..\tests\Multimedia\Wave.Test.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\tests\Multimedia\Avi.Test.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

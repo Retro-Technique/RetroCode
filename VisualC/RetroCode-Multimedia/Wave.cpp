@@ -202,6 +202,39 @@ namespace retro::multimedia
 		return uReadLen;
 	}
 
+	CTimeSpan CWave::GetDuration() const
+	{
+		ASSERT_VALID(this);
+
+		WAVEFORMATEX wfFormat = { 0 };
+		GetFormat(wfFormat);
+
+		const FLOAT fSeconds = static_cast<FLOAT>(GetDataLen()) / (wfFormat.nAvgBytesPerSec * wfFormat.nBlockAlign);
+		const INT nSeconds = static_cast<INT>(fSeconds);
+
+		return CTimeSpan(0, 0, 0, nSeconds);
+	}
+
+	WORD CWave::GetChannelCount() const
+	{
+		ASSERT_VALID(this);
+
+		WAVEFORMATEX wfFormat = { 0 };
+		GetFormat(wfFormat);
+
+		return wfFormat.nChannels;
+	}
+
+	DWORD CWave::GetSampleRate() const
+	{
+		ASSERT_VALID(this);
+
+		WAVEFORMATEX wfFormat = { 0 };
+		GetFormat(wfFormat);
+
+		return wfFormat.nSamplesPerSec;
+	}
+
 #pragma endregion
 #pragma region Overridables
 
