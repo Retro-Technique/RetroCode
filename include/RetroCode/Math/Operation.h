@@ -59,10 +59,10 @@ namespace retro::math
 	const T& Clamp(const T& val, const T& min, const T& max);
 
 	template<typename T>
-	const T& Lerp(const T& a, const T& b, const T& t);
+	T Lerp(const T& a, const T& b, const T& t);
 
 	template<typename T>
-	const T& InverseLerp(const T& a, const T& b, const T& t);
+	T InverseLerp(const T& a, const T& b, const T& t);
 
 }
 

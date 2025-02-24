@@ -37,62 +37,11 @@
  *
  */
 
-namespace retro::math
-{
+#pragma once
 
-	template<typename T>
-	void Swap(T& a, T& b)
-	{
-		T temp = a;
-		a = b;
-		b = temp;
-	}
+#ifndef __RETRO_COLLECTION_H_INCLUDED__
+#define __RETRO_COLLECTION_H_INCLUDED__
 
-	template<typename T>
-	const T& Min(const T& a, const T& b)
-	{
-		return (b < a) ? b : a;
-	}
+#include <afxwin.h>
 
-	template<typename T>
-	const T& Max(const T& a, const T& b)
-	{
-		return (b > a) ? b : a;
-	}
-
-	template<typename T>
-	const T& Clamp(const T& val, const T& min, const T& max)
-	{
-		if (val < min)
-		{
-			return min;
-		}
-
-		if (val > max)
-		{
-			return max;
-		}
-
-		return val;
-	}
-
-	template<typename T>
-	T Lerp(const T& a, const T& b, const T& t)
-	{
-		const T t_clamp = Clamp(t, a, b);
-
-		return a + t_clamp * (b - a);
-	}
-
-	template<typename T>
-	T InverseLerp(const T& a, const T& b, const T& t)
-	{
-		if (a == b)
-		{
-			return 0;
-		}
-
-		return (t - a) / (b - a);
-	}
-
-}
+#endif

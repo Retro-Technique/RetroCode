@@ -8,9 +8,6 @@
 #define PCH_H
 
 // ajouter les en-têtes à précompiler ici
-#include <RetroCode/Math.h>
-#include <RetroCode/Memory.h>
-
-#include <comdef.h>
+#include "framework.h"
 
 #endif //PCH_H

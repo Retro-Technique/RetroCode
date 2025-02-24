@@ -152,5 +152,4 @@ namespace retro::math
 		return pNoiseMap;
 	}
 
-
 }
