@@ -37,13 +37,58 @@
  *
  */
 
-#pragma once
+namespace retro::coll
+{
 
-#ifndef __RETRO_COLLECTION_H_INCLUDED__
-#define __RETRO_COLLECTION_H_INCLUDED__
+#pragma region Operations
 
-#include <afxwin.h>
+	template<typename TYPE, typename ARG_TYPE>
+	INT_PTR CStack<TYPE, ARG_TYPE>::Push(ARG_TYPE newElement)
+	{
+		return CArray<TYPE, ARG_TYPE>::Add(newElement);
+	}
 
-#include "Collection/Stack.h"
+	template<typename TYPE, typename ARG_TYPE>
+	void CStack<TYPE, ARG_TYPE>::Pop()
+	{
+		if (IsEmpty())
+		{
+			return;
+		}
 
-#endif
+		CArray<TYPE, ARG_TYPE>::RemoveAt(CArray<TYPE, ARG_TYPE>::GetUpperBound());
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	const TYPE& CStack<TYPE, ARG_TYPE>::Top() const
+	{
+		return CArray<TYPE, ARG_TYPE>::GetAt(CArray<TYPE, ARG_TYPE>::GetUpperBound());
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	TYPE& CStack<TYPE, ARG_TYPE>::Top()
+	{
+		return CArray<TYPE, ARG_TYPE>::GetAt(CArray<TYPE, ARG_TYPE>::GetUpperBound());
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	void CStack<TYPE, ARG_TYPE>::RemoveAll()
+	{
+		CArray<TYPE, ARG_TYPE>::RemoveAll();
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	INT_PTR CStack<TYPE, ARG_TYPE>::GetSize() const
+	{
+		return CArray<TYPE, ARG_TYPE>::GetSize();
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	BOOL CStack<TYPE, ARG_TYPE>::IsEmpty() const
+	{
+		return CArray<TYPE, ARG_TYPE>::IsEmpty();
+	}
+
+#pragma endregion
+
+}
