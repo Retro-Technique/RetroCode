@@ -238,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\RetroCode\Collection.h" />
+    <ClInclude Include="..\..\include\RetroCode\Collection\Queue.h" />
     <ClInclude Include="..\..\include\RetroCode\Collection\Stack.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />

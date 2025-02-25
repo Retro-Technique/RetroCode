@@ -37,14 +37,65 @@
  *
  */
 
-#pragma once
+namespace retro::coll
+{
 
-#ifndef __RETRO_COLLECTION_H_INCLUDED__
-#define __RETRO_COLLECTION_H_INCLUDED__
+#pragma region Operations
 
-#include <afxwin.h>
+	template<typename TYPE, typename ARG_TYPE>
+	INT_PTR CQueue<TYPE, ARG_TYPE>::Push(ARG_TYPE newElement)
+	{
+		return CArray<TYPE, ARG_TYPE>::Add(newElement);
+	}
 
-#include "Collection/Stack.h"
-#include "Collection/Queue.h"
+	template<typename TYPE, typename ARG_TYPE>
+	void CQueue<TYPE, ARG_TYPE>::Pop()
+	{
+		CArray<TYPE, ARG_TYPE>::RemoveAt(0);
+	}
 
-#endif
+	template<typename TYPE, typename ARG_TYPE>
+	TYPE& CQueue<TYPE, ARG_TYPE>::Front()
+	{
+		return CArray<TYPE, ARG_TYPE>::GetAt(0);
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	const TYPE& CQueue<TYPE, ARG_TYPE>::Front() const
+	{
+		return CArray<TYPE, ARG_TYPE>::GetAt(0);
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	TYPE& CQueue<TYPE, ARG_TYPE>::Back()
+	{
+		return CArray<TYPE, ARG_TYPE>::GetAt(CArray<TYPE, ARG_TYPE>::GetUpperBound());
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	const TYPE& CQueue<TYPE, ARG_TYPE>::Back() const
+	{
+		return CArray<TYPE, ARG_TYPE>::GetAt(CArray<TYPE, ARG_TYPE>::GetUpperBound());
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	void CQueue<TYPE, ARG_TYPE>::RemoveAll()
+	{
+		CArray<TYPE, ARG_TYPE>::RemoveAll();
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	INT_PTR CQueue<TYPE, ARG_TYPE>::GetSize() const
+	{
+		return CArray<TYPE, ARG_TYPE>::GetSize();
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	BOOL CQueue<TYPE, ARG_TYPE>::IsEmpty() const
+	{
+		return CArray<TYPE, ARG_TYPE>::IsEmpty();
+	}
+
+#pragma endregion
+
+}

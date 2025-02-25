@@ -37,14 +37,43 @@
  *
  */
 
+#ifndef __RETRO_COLLECTION_H_INCLUDED__
+#error Do not include Queue.h directly, include the Collection.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_COLLECTION_H_INCLUDED__
-#define __RETRO_COLLECTION_H_INCLUDED__
+namespace retro::coll
+{
 
-#include <afxwin.h>
+	template<typename TYPE, typename ARG_TYPE = const TYPE&>
+	class CQueue : protected CArray<TYPE, ARG_TYPE>
+	{
+#pragma region Constructors
 
-#include "Collection/Stack.h"
-#include "Collection/Queue.h"
+	public:
 
-#endif
+		CQueue() = default;
+		~CQueue() = default;
+
+#pragma endregion
+#pragma region Operations
+
+	public:
+
+		INT_PTR Push(ARG_TYPE newElement);
+		void Pop();
+		TYPE& Front();
+		const TYPE& Front() const;
+		TYPE& Back();
+		const TYPE& Back() const;
+		void RemoveAll();
+		INT_PTR GetSize() const;
+		BOOL IsEmpty() const;
+
+#pragma endregion
+	};
+
+}
+
+#include "Queue.inl"
