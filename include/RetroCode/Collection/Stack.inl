@@ -45,7 +45,7 @@ namespace retro::coll
 	template<typename TYPE, typename ARG_TYPE>
 	INT_PTR CStack<TYPE, ARG_TYPE>::Push(ARG_TYPE newElement)
 	{
-		return CArray<TYPE, ARG_TYPE>::Add(newElement);
+		return m_arrBuffer.Add(newElement);
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
@@ -56,38 +56,69 @@ namespace retro::coll
 			return;
 		}
 
-		CArray<TYPE, ARG_TYPE>::RemoveAt(CArray<TYPE, ARG_TYPE>::GetUpperBound());
+		m_arrBuffer.RemoveAt(m_arrBuffer.GetUpperBound());
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
 	const TYPE& CStack<TYPE, ARG_TYPE>::Top() const
 	{
-		return CArray<TYPE, ARG_TYPE>::GetAt(CArray<TYPE, ARG_TYPE>::GetUpperBound());
+		return m_arrBuffer.GetAt(m_arrBuffer.GetUpperBound());
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
 	TYPE& CStack<TYPE, ARG_TYPE>::Top()
 	{
-		return CArray<TYPE, ARG_TYPE>::GetAt(CArray<TYPE, ARG_TYPE>::GetUpperBound());
+		return m_arrBuffer.GetAt(m_arrBuffer.GetUpperBound());
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
 	void CStack<TYPE, ARG_TYPE>::RemoveAll()
 	{
-		CArray<TYPE, ARG_TYPE>::RemoveAll();
+		m_arrBuffer.RemoveAll();
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
 	INT_PTR CStack<TYPE, ARG_TYPE>::GetSize() const
 	{
-		return CArray<TYPE, ARG_TYPE>::GetSize();
+		return m_arrBuffer.GetSize();
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
 	BOOL CStack<TYPE, ARG_TYPE>::IsEmpty() const
 	{
-		return CArray<TYPE, ARG_TYPE>::IsEmpty();
+		return m_arrBuffer.IsEmpty();
 	}
+
+#pragma endregion
+#pragma region Overridables
+
+	template<typename TYPE, typename ARG_TYPE>
+	void CStack<TYPE, ARG_TYPE>::Serialize(CArchive& ar)
+	{
+		CObject::Serialize(ar);
+
+		m_arrBuffer.Serialize(ar);
+	}
+
+#ifdef _DEBUG
+
+	template<typename TYPE, typename ARG_TYPE>
+	void CStack<TYPE, ARG_TYPE>::Dump(CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		m_arrBuffer.Dump(dc);
+	}
+
+	template<typename TYPE, typename ARG_TYPE>
+	void CStack<TYPE, ARG_TYPE>::AssertValid() const
+	{
+		CObject::AssertValid();
+
+		m_arrBuffer.AssertValid();
+	}
+
+#endif
 
 #pragma endregion
 

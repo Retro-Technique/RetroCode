@@ -38,7 +38,7 @@
  */
 
 #ifndef __RETRO_COLLECTION_H_INCLUDED__
-#error Do not include Stack.h directly, include the Collection.h file
+#error Do not include Circular.h directly, include the Collection.h file
 #endif
 
 #pragma once
@@ -47,14 +47,14 @@ namespace retro::coll
 {
 
 	template<typename TYPE, typename ARG_TYPE = const TYPE&>
-	class CStack : public CObject 
+	class CCircular : public CObject
 	{
 #pragma region Constructors
 
 	public:
 
-		CStack() = default;
-		~CStack() = default;
+		CCircular();
+		~CCircular() = default;
 
 #pragma endregion
 #pragma region Attributes
@@ -62,16 +62,19 @@ namespace retro::coll
 	private:
 
 		CArray<TYPE, ARG_TYPE> m_arrBuffer;
+		INT_PTR m_nHead;
+		INT_PTR m_nTail;
 
 #pragma endregion
 #pragma region Operations
 
 	public:
 
+		void SetSize(INT_PTR nSize);
 		INT_PTR Push(ARG_TYPE newElement);
-		void Pop();
-		const TYPE& Top() const;
-		TYPE& Top();
+		TYPE& GetAt(INT_PTR nIndex);
+		const TYPE& GetAt(INT_PTR nIndex) const;
+		INT_PTR GetCount() const;
 		void RemoveAll();
 		INT_PTR GetSize() const;
 		BOOL IsEmpty() const;
@@ -92,4 +95,4 @@ namespace retro::coll
 
 }
 
-#include "Stack.inl"
+#include "Circular.inl"

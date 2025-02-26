@@ -58,6 +58,9 @@
     <ClInclude Include="..\..\include\RetroCode\Collection\Queue.h">
       <Filter>include\Collection</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Collection\Circular.h">
+      <Filter>include\Collection</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroCode-Collection.rc">
