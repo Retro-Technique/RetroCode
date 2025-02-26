@@ -40,89 +40,165 @@
 namespace retro::coll
 {
 
+#pragma region Constructors
+
+	template<typename TYPE, typename ARG_TYPE>
+	CCircular<TYPE, ARG_TYPE>::CCircular()
+		: m_nHead(0ll)
+		, m_nTail(0ll)
+	{
+
+	}
+
+#pragma endregion
 #pragma region Operations
 
 	template<typename TYPE, typename ARG_TYPE>
-	INT_PTR CQueue<TYPE, ARG_TYPE>::Push(ARG_TYPE newElement)
+	void CCircular<TYPE, ARG_TYPE>::SetSize(INT_PTR nSize)
 	{
-		return m_arrBuffer.Add(newElement);
+		m_nHead = 0ll;
+		m_nTail = 0ll;
+
+		m_arrBuffer.SetSize(nSize);
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
-	void CQueue<TYPE, ARG_TYPE>::Pop()
+	INT_PTR CCircular<TYPE, ARG_TYPE>::Push(ARG_TYPE newElement)
 	{
-		m_arrBuffer.RemoveAt(0);
+		const INT_PTR nIndex = m_nTail;
+
+		m_arrBuffer.SetAt(nIndex, newElement);
+
+		m_nTail++;
+
+		if (m_nTail >= GetSize())
+		{
+			m_nTail -= GetSize();
+		}
+
+		if (m_nTail == m_nHead && ++m_nHead >= GetSize())
+		{
+			m_nHead -= GetSize();
+		}
+
+		return nIndex;
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
-	TYPE& CQueue<TYPE, ARG_TYPE>::Front()
+	TYPE& CCircular<TYPE, ARG_TYPE>::GetAt(INT_PTR nIndex)
 	{
-		return m_arrBuffer.GetAt(0);
+		ASSERT(nIndex >= 0);
+		ASSERT(nIndex < GetCount());
+
+		if (nIndex >= GetCount())
+		{
+			AfxThrowInvalidArgException();
+		}
+
+		INT_PTR nOffset = m_nHead + nIndex;
+
+		if (nOffset >= GetSize())
+		{
+			nOffset -= GetSize();
+		}
+
+		return m_arrBuffer.GetAt(nOffset);
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
-	const TYPE& CQueue<TYPE, ARG_TYPE>::Front() const
+	const TYPE& CCircular<TYPE, ARG_TYPE>::GetAt(INT_PTR nIndex) const
 	{
-		return m_arrBuffer.GetAt(0);
+		ASSERT(nIndex >= 0);
+		ASSERT(nIndex < GetCount());
+
+		if (nIndex >= GetCount())
+		{
+			AfxThrowInvalidArgException();
+		}
+
+		const INT_PTR nOffset = m_nHead + nIndex;
+
+		if (nOffset >= GetSize())
+		{
+			return nOffset -= GetSize();
+		}
+
+		return m_arrBuffer.GetAt(nOffset);
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
-	TYPE& CQueue<TYPE, ARG_TYPE>::Back()
+	INT_PTR CCircular<TYPE, ARG_TYPE>::GetCount() const
 	{
-		return m_arrBuffer.GetAt(m_arrBuffer.GetUpperBound());
+		if (m_nTail >= m_nHead)
+		{
+			return m_nTail - m_nHead;
+		}
+
+		//FIXME: Problème ici, voir #44
+
+		return GetSize() - m_nHead + m_nTail + 1;
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
-	const TYPE& CQueue<TYPE, ARG_TYPE>::Back() const
+	void CCircular<TYPE, ARG_TYPE>::RemoveAll()
 	{
-		return m_arrBuffer.GetAt(m_arrBuffer.GetUpperBound());
+		m_nHead = 0ll;
+		m_nTail = 0ll;
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
-	void CQueue<TYPE, ARG_TYPE>::RemoveAll()
-	{
-		m_arrBuffer.RemoveAll();
-	}
-
-	template<typename TYPE, typename ARG_TYPE>
-	INT_PTR CQueue<TYPE, ARG_TYPE>::GetSize() const
+	INT_PTR CCircular<TYPE, ARG_TYPE>::GetSize() const
 	{
 		return m_arrBuffer.GetSize();
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
-	BOOL CQueue<TYPE, ARG_TYPE>::IsEmpty() const
+	BOOL CCircular<TYPE, ARG_TYPE>::IsEmpty() const
 	{
-		return m_arrBuffer.IsEmpty();
+		return m_nHead == m_nTail;
 	}
 
 #pragma endregion
 #pragma region Overridables
 
 	template<typename TYPE, typename ARG_TYPE>
-	void CQueue<TYPE, ARG_TYPE>::Serialize(CArchive& ar)
+	void CCircular<TYPE, ARG_TYPE>::Serialize(CArchive& ar)
 	{
 		CObject::Serialize(ar);
 
 		m_arrBuffer.Serialize(ar);
+		if (ar.IsStoring())
+		{
+			ar << m_nHead << m_nTail;
+		}
+		else
+		{
+			ar >> m_nHead >> m_nTail;
+		}
 	}
 
 #ifdef _DEBUG
 
 	template<typename TYPE, typename ARG_TYPE>
-	void CQueue<TYPE, ARG_TYPE>::Dump(CDumpContext& dc) const
+	void CCircular<TYPE, ARG_TYPE>::Dump(CDumpContext& dc) const
 	{
 		CObject::Dump(dc);
 
 		m_arrBuffer.Dump(dc);
+		dc << _T("m_nHead = ") << m_nHead << _T("\n");
+		dc << _T("m_nTail = ") << m_nTail << _T("\n");
 	}
 
 	template<typename TYPE, typename ARG_TYPE>
-	void CQueue<TYPE, ARG_TYPE>::AssertValid() const
+	void CCircular<TYPE, ARG_TYPE>::AssertValid() const
 	{
 		CObject::AssertValid();
-
+		
 		m_arrBuffer.AssertValid();
+		ASSERT(m_nHead >= 0ll);
+		ASSERT(m_nHead < GetSize());
+		ASSERT(m_nTail >= 0ll);
+		ASSERT(m_nTail < GetSize());
 	}
 
 #endif

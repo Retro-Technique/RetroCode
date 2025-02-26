@@ -46,5 +46,6 @@
 
 #include "Collection/Stack.h"
 #include "Collection/Queue.h"
+#include "Collection/Circular.h"
 
 #endif

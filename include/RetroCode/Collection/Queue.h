@@ -47,7 +47,7 @@ namespace retro::coll
 {
 
 	template<typename TYPE, typename ARG_TYPE = const TYPE&>
-	class CQueue : protected CArray<TYPE, ARG_TYPE>
+	class CQueue : public CObject
 	{
 #pragma region Constructors
 
@@ -55,6 +55,13 @@ namespace retro::coll
 
 		CQueue() = default;
 		~CQueue() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+		
+		CArray<TYPE, ARG_TYPE> m_arrBuffer;
 
 #pragma endregion
 #pragma region Operations
@@ -70,6 +77,17 @@ namespace retro::coll
 		void RemoveAll();
 		INT_PTR GetSize() const;
 		BOOL IsEmpty() const;
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+		void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+		void Dump(CDumpContext& dc) const override;
+		void AssertValid() const override;
+#endif
 
 #pragma endregion
 	};
