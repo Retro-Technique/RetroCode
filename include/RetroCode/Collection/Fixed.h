@@ -37,16 +37,59 @@
  *
  */
 
+#ifndef __RETRO_COLLECTION_H_INCLUDED__
+#error Do not include Fixed.h directly, include the Collection.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_COLLECTION_H_INCLUDED__
-#define __RETRO_COLLECTION_H_INCLUDED__
+namespace retro::coll
+{
 
-#include <afxwin.h>
+	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE = const TYPE&>
+	class CFixed : public CObject
+	{
+#pragma region Constructors
 
-#include "Collection/Stack.h"
-#include "Collection/Queue.h"
-#include "Collection/Circular.h"
-#include "Collection/Fixed.h"
+	public:
 
+		CFixed();
+		~CFixed() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+
+		TYPE m_pData[SIZE];
+
+#pragma endregion
+#pragma region Operations
+
+	public:
+
+		INT_PTR GetSize() const;
+		INT_PTR GetUpperBound() const;
+		const TYPE& GetAt(INT_PTR nIndex) const;
+		TYPE& GetAt(INT_PTR nIndex);
+		const TYPE* GetData() const;
+		TYPE* GetData();
+		void SetAt(INT_PTR nIndex, ARG_TYPE newElement);
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+		void Serialize(CArchive& ar) override;
+#ifdef _DEBUG
+		void Dump(CDumpContext& dc) const override;
+		void AssertValid() const override;
 #endif
+
+#pragma endregion
+	};
+
+}
+
+#include "Fixed.inl"
