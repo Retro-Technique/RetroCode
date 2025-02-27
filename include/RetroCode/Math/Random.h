@@ -63,6 +63,7 @@ namespace retro::math
 
 	public:
 
+		void Seed();
 		void Seed(UINT uSeed);
 		INT NextInteger() const;
 		INT NextInteger(INT nMaxValueExcluded) const;
