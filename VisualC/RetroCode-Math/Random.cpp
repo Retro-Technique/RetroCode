@@ -48,11 +48,7 @@ namespace retro::math
 
 	CRandom::CRandom()
 	{
-		const CTime dtNow = CTime::GetCurrentTime();
-		const time_t nTimestamp = dtNow.GetTime();
-		const UINT uSeed = static_cast<UINT>(nTimestamp);
-
-		Seed(uSeed);
+		Seed();
 	}
 
 	CRandom::CRandom(UINT uSeed)
@@ -62,6 +58,15 @@ namespace retro::math
 
 #pragma endregion
 #pragma region Operations
+
+	void CRandom::Seed()
+	{
+		const CTime dtNow = CTime::GetCurrentTime();
+		const time_t nTimestamp = dtNow.GetTime();
+		const UINT uSeed = static_cast<UINT>(nTimestamp);
+
+		Seed(uSeed);
+	}
 
 	void CRandom::Seed(UINT uSeed)
 	{
