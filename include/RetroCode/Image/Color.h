@@ -37,13 +37,72 @@
  *
  */
 
+#ifndef __RETRO_IMAGE_H_INCLUDED__
+#error Do not include Color.h directly, include the Image.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_IMAGE_H_INCLUDED__
-#define __RETRO_IMAGE_H_INCLUDED__
+namespace retro
+{
+	namespace image
+	{
 
-#include <afxwin.h>
+		class AFX_EXT_CLASS CColorRGBA
+		{
+		public:
 
-#include "Image/Color.h"
+#pragma region Constructors
 
+			CColorRGBA();
+			CColorRGBA(const CColorRGBA& Other);
+			explicit CColorRGBA(COLORREF uColor, BYTE uAlpha = ALPHA_OPAQUE);
+			CColorRGBA(BYTE uRed, BYTE uGreen, BYTE uBlue, BYTE uAlpha = ALPHA_OPAQUE);
+			~CColorRGBA();
+
+#pragma endregion
+#pragma region Attributes
+
+		public:
+
+			static constexpr const BYTE ALPHA_OPAQUE = 255;
+			static constexpr const BYTE ALPHA_TRANSPARENT = 0;
+
+		public:
+
+			BYTE Red;
+			BYTE Green;
+			BYTE Blue;
+			BYTE Alpha;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			void FromCOLORREF(COLORREF uColor);
+			COLORREF ToCOLORREF() const;
+			void Serialize(CArchive& ar);
+#ifdef _DEBUG
+			void Dump(CDumpContext& dc) const;
 #endif
+
+#pragma endregion
+#pragma region Overridables
+
+		public:
+
+			BOOL operator==(const CColorRGBA& Other);
+			BOOL operator!=(const CColorRGBA& Other);
+			CColorRGBA operator+(const CColorRGBA& Other);
+			CColorRGBA operator-(const CColorRGBA& Other);
+			CColorRGBA operator*(const CColorRGBA& Other);
+			CColorRGBA& operator+=(const CColorRGBA& Other);
+			CColorRGBA& operator-=(const CColorRGBA& Other);
+			CColorRGBA& operator*=(const CColorRGBA& Other);
+
+#pragma endregion
+		};
+
+	}
+}
