@@ -27,6 +27,9 @@
     <ClCompile Include="pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Image.def">
@@ -51,6 +54,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Image.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Image\Color.h">
+      <Filter>include\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
