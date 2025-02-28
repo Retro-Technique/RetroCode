@@ -74,7 +74,7 @@ namespace RetroCodeCollectionTest
 				Ints.Push(2);
 				Ints.Push(3);
 
-				const INT nAt4 = Ints.GetAt(4);
+				Ints.GetAt(4);
 			});
 		}
 
