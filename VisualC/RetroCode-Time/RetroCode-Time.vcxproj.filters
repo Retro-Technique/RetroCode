@@ -30,6 +30,9 @@
     <ClCompile Include="Clock.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="StopWatch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Time.def">
@@ -56,6 +59,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Time\Clock.h">
+      <Filter>include\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Time\StopWatch.h">
       <Filter>include\Time</Filter>
     </ClInclude>
   </ItemGroup>

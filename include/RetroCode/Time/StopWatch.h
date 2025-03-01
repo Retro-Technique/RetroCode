@@ -37,14 +37,61 @@
  *
  */
 
+#ifndef __RETRO_TIME_H_INCLUDED__
+#error Do not include StopWatch.h directly, include the Time.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_TIME_H_INCLUDED__
-#define __RETRO_TIME_H_INCLUDED__
+namespace retro
+{
+	namespace time
+	{
 
-#include <afxwin.h>
+		class AFX_EXT_CLASS CStopWatch : public CObject
+		{
+#pragma region Constructors
 
-#include "Time/Clock.h"
-#include "Time/StopWatch.h"
+			DECLARE_DYNAMIC(CStopWatch)
 
+		public:
+
+			CStopWatch();
+			~CStopWatch() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+		private:
+
+			CClock		m_Clock;
+			ULONGLONG	m_uTimeBuffer;
+			BOOL		m_bRunning;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			ULONGLONG GetElapsedTime() const;
+			BOOL IsRunning() const;
+			void Start();
+			void Stop();
+			void Reset();
+			void Restart();
+
+#pragma endregion
+#pragma region Overridables
+
+		public:
+
+#ifdef _DEBUG
+			void AssertValid() const override;
+			void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+		};
+
+	}
+}
