@@ -191,6 +191,15 @@
       <Project>{95ad5d1f-fe07-a28e-2899-c20ea671801c}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\TR.BMP" />
+    <Image Include="res\TR.GIF" />
+    <Image Include="res\TR.JPG" />
+    <Image Include="res\TR.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\DATA.DLL" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

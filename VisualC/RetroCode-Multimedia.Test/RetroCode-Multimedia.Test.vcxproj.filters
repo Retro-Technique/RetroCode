@@ -30,4 +30,31 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\BOURB1M1.WAV">
+      <Filter>Fichiers de ressources</Filter>
+    </Media>
+    <Media Include="res\GRPLAFF1.WAV">
+      <Filter>Fichiers de ressources</Filter>
+    </Media>
+    <Media Include="res\HELLO.WAV">
+      <Filter>Fichiers de ressources</Filter>
+    </Media>
+    <Media Include="res\SIREN1.WAV">
+      <Filter>Fichiers de ressources</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\DEADCITY.AVI">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="res\PLANET.AVI">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\EQUITATION.PNG">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

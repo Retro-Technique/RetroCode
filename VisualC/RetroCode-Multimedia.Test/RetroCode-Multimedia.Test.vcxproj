@@ -192,6 +192,19 @@
       <Project>{9a3a22ea-646c-5732-4cee-98ddbad683b1}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="res\BOURB1M1.WAV" />
+    <Media Include="res\GRPLAFF1.WAV" />
+    <Media Include="res\HELLO.WAV" />
+    <Media Include="res\SIREN1.WAV" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\DEADCITY.AVI" />
+    <None Include="res\PLANET.AVI" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\EQUITATION.PNG" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

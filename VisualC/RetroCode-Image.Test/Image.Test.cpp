@@ -51,22 +51,22 @@ namespace RetroCodeImageTest
 
 		TEST_METHOD(TestLoadBMP)
 		{
-			TestLoadFromFile(_T("res\\TR.bmp"));
+			TestLoadFromFile(_T("res\\TR.BMP"));
 		}
 
 		TEST_METHOD(TestLoadJPG)
 		{
-			TestLoadFromFile(_T("res\\TR.jpg"));
+			TestLoadFromFile(_T("res\\TR.JPG"));
 		}
 
 		TEST_METHOD(TestLoadPNG)
 		{
-			TestLoadFromFile(_T("res\\TR.png"));
+			TestLoadFromFile(_T("res\\TR.PNG"));
 		}
 
 		TEST_METHOD(TestLoadGIF)
 		{
-			TestLoadFromFile(_T("res\\TR.gif"));
+			TestLoadFromFile(_T("res\\TR.GIF"));
 		}
 
 		TEST_METHOD(TestLoadResourceFromDLL)
@@ -82,7 +82,7 @@ namespace RetroCodeImageTest
 
 				retro::image::CBitmapRGBA Bitmap;
 				
-				Bitmap.LoadFromResource(_T("res\\data.dll"), MAKEINTRESOURCE(102));
+				Bitmap.LoadFromResource(_T("res\\DATA.DLL"), MAKEINTRESOURCE(102));
 
 				bIsMemDifferent = mlc.End();
 			}
@@ -174,7 +174,7 @@ namespace RetroCodeImageTest
 	private:
 
 		static constexpr const INT ERROR_MESSAGE_COUNT = 256;
-		static constexpr LPCTSTR OUTPUT_FILE = _T("res \\output.png");
+		static constexpr LPCTSTR OUTPUT_FILE = _T("res \\OUTPUT.PNG");
 
 	private:
 
