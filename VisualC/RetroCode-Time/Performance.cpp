@@ -37,16 +37,66 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#ifndef __RETRO_TIME_H_INCLUDED__
-#define __RETRO_TIME_H_INCLUDED__
+namespace retro
+{
+	namespace time
+	{
 
-#include <afxwin.h>
+#pragma region Constructors
 
-#include "Time/Clock.h"
-#include "Time/StopWatch.h"
-#include "Time/Timer.h"
-#include "Time/Performance.h"
+		IMPLEMENT_DYNAMIC(CPerformance, CObject)
+
+		CPerformance::CPerformance()
+			: m_Frequency { 0 }
+			, m_Start { 0 }
+		{
+			QueryPerformanceFrequency(&m_Frequency);
+		}
+
+#pragma endregion
+#pragma region Operations
+
+		void CPerformance::Begin()
+		{
+			QueryPerformanceCounter(&m_Start); 
+		}
+
+		DOUBLE CPerformance::End()
+		{
+			LARGE_INTEGER Stop = { 0 };
+
+			QueryPerformanceCounter(&Stop);
+
+			const DOUBLE fElapsedSeconds = static_cast<DOUBLE>(Stop.QuadPart - m_Start.QuadPart) / m_Frequency.QuadPart;
+
+			return fElapsedSeconds;
+		}
+
+#pragma endregion
+#pragma region Overridables
+
+#ifdef _DEBUG
+
+		void CPerformance::AssertValid() const
+		{
+			CObject::AssertValid();
+
+			ASSERT(m_Frequency.QuadPart > 0ll);
+		}
+
+		void CPerformance::Dump(CDumpContext& dc) const
+		{
+			CObject::Dump(dc);
+
+			dc << _T("m_Frequency = ") << m_Frequency.QuadPart << _T("\n");
+			dc << _T("m_Start = ") << m_Start.QuadPart << _T("\n");
+		}
 
 #endif
+
+#pragma endregion
+
+	}
+}

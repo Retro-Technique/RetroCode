@@ -37,16 +37,57 @@
  *
  */
 
+#ifndef __RETRO_TIME_H_INCLUDED__
+#error Do not include Performance.h directly, include the Time.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_TIME_H_INCLUDED__
-#define __RETRO_TIME_H_INCLUDED__
+namespace retro
+{
+	namespace time
+	{
 
-#include <afxwin.h>
+		class AFX_EXT_CLASS CPerformance : public CObject
+		{
+#pragma region Constructors
 
-#include "Time/Clock.h"
-#include "Time/StopWatch.h"
-#include "Time/Timer.h"
-#include "Time/Performance.h"
+			DECLARE_DYNAMIC(CPerformance)
 
+		public:
+
+			CPerformance();
+			~CPerformance() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+		private:
+
+			LARGE_INTEGER	m_Frequency;
+			LARGE_INTEGER	m_Start;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			void Begin();
+			DOUBLE End();
+
+#pragma endregion
+#pragma endregion
+#pragma region Overridables
+
+		public:
+
+#ifdef _DEBUG
+			void AssertValid() const override;
+			void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+		};
+
+	}
+}
