@@ -37,13 +37,66 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#ifndef __RETRO_TIME_H_INCLUDED__
-#define __RETRO_TIME_H_INCLUDED__
+namespace retro
+{
+	namespace time
+	{
 
-#include <afxwin.h>
+#pragma region Constructors
 
-#include "Time/Clock.h"
+		IMPLEMENT_DYNAMIC(CClock, CObject)
+
+		CClock::CClock()
+			: m_uStartTime(GetTickCount64())
+		{
+
+		}
+
+#pragma endregion
+#pragma region Operations
+
+		ULONGLONG CClock::GetElapsedTime() const
+		{
+			const ULONGLONG uNow = GetTickCount64();
+			const ULONGLONG uElapsed = uNow - m_uStartTime;
+
+			return uElapsed;
+		}
+
+		ULONGLONG CClock::Restart()
+		{
+			const ULONGLONG uNow = GetTickCount64();
+			const ULONGLONG uElapsed = uNow - m_uStartTime;
+			m_uStartTime = uNow;
+
+			return uElapsed;
+		}
+
+#pragma endregion
+#pragma region Overridables
+
+#ifdef _DEBUG
+
+		void CClock::AssertValid() const
+		{
+			CObject::AssertValid();
+
+			ASSERT(m_uStartTime <= GetTickCount64());
+		}
+
+		void CClock::Dump(CDumpContext& dc) const
+		{
+			CObject::Dump(dc);
+
+			dc << _T("m_uStartTime = ") << m_uStartTime;
+		}
 
 #endif
+
+#pragma endregion
+
+
+	}
+}

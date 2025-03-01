@@ -10,4 +10,6 @@
 // ajouter les en-têtes à précompiler ici
 #include "framework.h"
 
+#include <RetroCode/Time.h>
+
 #endif //PCH_H

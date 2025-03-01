@@ -37,13 +37,56 @@
  *
  */
 
+#ifndef __RETRO_TIME_H_INCLUDED__
+#error Do not include Clock.h directly, include the Time.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_TIME_H_INCLUDED__
-#define __RETRO_TIME_H_INCLUDED__
+namespace retro
+{
+	namespace time
+	{
 
-#include <afxwin.h>
+		class AFX_EXT_CLASS CClock : public CObject
+		{
+#pragma region Constructors
 
-#include "Time/Clock.h"
+			DECLARE_DYNAMIC(CClock)
 
+		public:
+
+			CClock();
+			~CClock() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+		private:
+
+			ULONGLONG m_uStartTime;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			ULONGLONG GetElapsedTime() const;
+			ULONGLONG Restart();
+
+#pragma endregion
+#pragma endregion
+#pragma region Overridables
+
+		public:
+
+#ifdef _DEBUG
+			void AssertValid() const override;
+			void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+		};
+
+	}
+}
