@@ -108,7 +108,6 @@ namespace retro
 			CObject::AssertValid();
 
 			m_Clock.AssertValid();
-			ASSERT(m_uTimeBuffer >= 0ull);
 		}
 
 		void CStopWatch::Dump(CDumpContext& dc) const

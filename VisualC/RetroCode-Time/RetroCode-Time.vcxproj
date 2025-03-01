@@ -233,6 +233,7 @@
     </ClCompile>
     <ClCompile Include="RetroCode-Time.cpp" />
     <ClCompile Include="StopWatch.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\RetroCode-Time.rc2" />
@@ -242,6 +243,7 @@
     <ClInclude Include="..\..\include\RetroCode\Time.h" />
     <ClInclude Include="..\..\include\RetroCode\Time\Clock.h" />
     <ClInclude Include="..\..\include\RetroCode\Time\StopWatch.h" />
+    <ClInclude Include="..\..\include\RetroCode\Time\Timer.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
