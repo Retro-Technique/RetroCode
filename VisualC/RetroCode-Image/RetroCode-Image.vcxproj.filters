@@ -30,6 +30,9 @@
     <ClCompile Include="Color.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Image.def">
@@ -56,6 +59,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Image\Color.h">
+      <Filter>include\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Image\Bitmap.h">
       <Filter>include\Image</Filter>
     </ClInclude>
   </ItemGroup>

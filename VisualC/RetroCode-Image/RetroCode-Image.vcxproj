@@ -207,6 +207,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -236,6 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\RetroCode\Image.h" />
+    <ClInclude Include="..\..\include\RetroCode\Image\Bitmap.h" />
     <ClInclude Include="..\..\include\RetroCode\Image\Color.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
