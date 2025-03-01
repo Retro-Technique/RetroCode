@@ -37,15 +37,61 @@
  *
  */
 
+#ifndef __RETRO_TIME_H_INCLUDED__
+#error Do not include Timer.h directly, include the Time.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_TIME_H_INCLUDED__
-#define __RETRO_TIME_H_INCLUDED__
+namespace retro
+{
+	namespace time
+	{
 
-#include <afxwin.h>
+		class AFX_EXT_CLASS CTimer : public CObject
+		{
+#pragma region Constructors
 
-#include "Time/Clock.h"
-#include "Time/StopWatch.h"
-#include "Time/Timer.h"
+			DECLARE_DYNAMIC(CTimer)
 
+		public:
+
+			CTimer();
+			~CTimer() = default;
+
+#pragma endregion
+#pragma region Atributes
+
+		private:
+
+			CStopWatch	m_StopWatch;
+			ULONGLONG	m_uLimit;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			ULONGLONG GetRemainingTime() const;
+			BOOL IsRunning() const;
+			BOOL IsExpired() const;
+			void Start();
+			void Stop();
+			void Reset(ULONGLONG uTimeLimit);
+			void Restart(ULONGLONG uTimeLimit);
+
+#pragma endregion
+#pragma region Overridables
+
+		public:
+
+#ifdef _DEBUG
+			void AssertValid() const override;
+			void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+		};
+
+	}
+}

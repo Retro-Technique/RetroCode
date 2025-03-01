@@ -37,15 +37,91 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#ifndef __RETRO_TIME_H_INCLUDED__
-#define __RETRO_TIME_H_INCLUDED__
+namespace retro
+{
+	namespace time
+	{
 
-#include <afxwin.h>
+#pragma region Constructors
 
-#include "Time/Clock.h"
-#include "Time/StopWatch.h"
-#include "Time/Timer.h"
+		IMPLEMENT_DYNAMIC(CTimer, CObject)
+
+		CTimer::CTimer()
+			: m_uLimit(0ull)
+		{
+
+		}
+
+#pragma endregion
+#pragma region Operations
+
+		ULONGLONG CTimer::GetRemainingTime() const
+		{
+			return m_uLimit - m_StopWatch.GetElapsedTime();
+		}
+
+		BOOL CTimer::IsRunning() const
+		{
+			return m_StopWatch.IsRunning() && !IsExpired();
+		}
+
+		BOOL CTimer::IsExpired() const
+		{
+			return m_StopWatch.GetElapsedTime() >= m_uLimit;
+		}
+
+		void CTimer::Start()
+		{
+			m_StopWatch.Start();
+		}
+
+		void CTimer::Stop()
+		{
+			m_StopWatch.Stop();
+		}
+
+		void CTimer::Reset(ULONGLONG uTimeLimit)
+		{
+			if (uTimeLimit <= 0ull)
+			{
+				return;
+			}
+
+			m_uLimit = uTimeLimit;
+			m_StopWatch.Reset();
+		}
+
+		void CTimer::Restart(ULONGLONG uTimeLimit)
+		{
+			Reset(uTimeLimit);
+			Start();
+		}
+
+#pragma endregion
+#pragma region Overridables
+
+#ifdef _DEBUG
+
+		void CTimer::AssertValid() const
+		{
+			CObject::AssertValid();
+
+			m_StopWatch.AssertValid();
+		}
+
+		void CTimer::Dump(CDumpContext& dc) const
+		{
+			CObject::Dump(dc);
+
+			m_StopWatch.Dump(dc);
+			dc << _T("m_uLimit = ") << m_uLimit << _T("\n");
+		}
 
 #endif
+
+#pragma endregion
+
+	}
+}
