@@ -50,9 +50,9 @@ namespace retro
 
 		class AFX_EXT_CLASS CColorRGBA
 		{
-		public:
-
 #pragma region Constructors
+
+		public:
 
 			CColorRGBA();
 			CColorRGBA(const CColorRGBA& Other);

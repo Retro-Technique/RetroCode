@@ -37,14 +37,69 @@
  *
  */
 
+#ifndef __RETRO_IMAGE_H_INCLUDED__
+#error Do not include Bitmap.h directly, include the Image.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_IMAGE_H_INCLUDED__
-#define __RETRO_IMAGE_H_INCLUDED__
+namespace retro
+{
+	namespace image
+	{
 
-#include <afxwin.h>
+		class AFX_EXT_CLASS CBitmapRGBA : public CObject
+		{
+#pragma region Constructors
 
-#include "Image/Color.h"
-#include "Image/Bitmap.h"
+			DECLARE_DYNAMIC(CBitmapRGBA);
 
+		public:
+
+			CBitmapRGBA();
+			explicit CBitmapRGBA(IWICImagingFactory* pExternalFactory);
+			~CBitmapRGBA() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+		private:
+
+			CComPtr<IWICImagingFactory>		m_spFactory;
+			CComPtr<IWICBitmap>				m_spBitmap;
+			mutable CComPtr<IWICBitmapLock>	m_spLock;
+
+#pragma endregion
+#pragma region Operations
+
+		public:
+
+			void Create(UINT uWidth, UINT uHeight);
+			void Create(const CSize& szBitmap);
+			void LoadFromFile(LPCTSTR pszFileName);
+			void LoadFromMemory(LPCVOID pData, DWORD uSize);
+			void LoadFromResource(HMODULE hModule, LPCTSTR pszResourceName);
+			void LoadFromResource(LPCTSTR pszModule, LPCTSTR pszResourceName);
+			void SaveToFile(LPCTSTR pszFileName, const GUID& tFormat = GUID_ContainerFormatPng);
+			void SaveToMemory(LPVOID* ppData, DWORD& uSize, const GUID& tFormat = GUID_ContainerFormatPng);
+			CSize GetSize() const;
+			const CColorRGBA* LockForRead() const;
+			CColorRGBA* LockForWrite();
+			void Unlock();
+			void Flip(WICBitmapTransformOptions tOptions);
+
+#pragma endregion
+#pragma region Overridables
+
+		public:
+
+#ifdef _DEBUG
+			void AssertValid() const override;
+			void Dump(CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+		};
+
+	}
+}
