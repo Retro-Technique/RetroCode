@@ -37,14 +37,92 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#ifndef __RETRO_TIME_H_INCLUDED__
-#define __RETRO_TIME_H_INCLUDED__
+namespace retro
+{
+	namespace time
+	{
 
-#include <afxwin.h>
+#pragma region Constructors
 
-#include "Time/Clock.h"
-#include "Time/StopWatch.h"
+		IMPLEMENT_DYNAMIC(CStopWatch, CObject)
+
+		CStopWatch::CStopWatch()
+			: m_uTimeBuffer(0ull)
+			, m_bRunning(FALSE)
+		{
+
+		}
+
+#pragma endregion
+#pragma region Operations
+
+		ULONGLONG CStopWatch::GetElapsedTime() const
+		{
+			return m_bRunning ? m_uTimeBuffer + m_Clock.GetElapsedTime() : m_uTimeBuffer;
+		}
+
+		BOOL CStopWatch::IsRunning() const
+		{
+			return m_bRunning;
+		}
+
+		void CStopWatch::Start()
+		{
+			if (!m_bRunning)
+			{
+				m_bRunning = TRUE;
+				m_Clock.Restart();
+			}
+		}
+
+		void CStopWatch::Stop()
+		{
+			if (m_bRunning)
+			{
+				m_bRunning = FALSE;
+				m_uTimeBuffer += m_Clock.GetElapsedTime();
+			}
+		}
+
+		void CStopWatch::Reset()
+		{
+			m_uTimeBuffer = 0ull;
+			m_bRunning = FALSE;
+		}
+
+		void CStopWatch::Restart()
+		{
+			Reset();
+			Start();
+		}
+
+#pragma endregion
+#pragma region Overridables
+
+#ifdef _DEBUG
+
+		void CStopWatch::AssertValid() const
+		{
+			CObject::AssertValid();
+
+			m_Clock.AssertValid();
+			ASSERT(m_uTimeBuffer >= 0ull);
+		}
+
+		void CStopWatch::Dump(CDumpContext& dc) const
+		{
+			CObject::Dump(dc);
+
+			m_Clock.Dump(dc);
+			dc << _T("m_uTimeBuffer = ") << m_uTimeBuffer;
+			dc << _T("m_bRunning = ") << m_bRunning;				
+		}
 
 #endif
+
+#pragma endregion
+
+	}
+}
