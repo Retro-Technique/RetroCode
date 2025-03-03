@@ -77,8 +77,8 @@ namespace retro
 			BOOL IsExpired() const;
 			void Start();
 			void Stop();
-			void Reset(ULONGLONG uTimeLimit);
-			void Restart(ULONGLONG uTimeLimit);
+			void Reset(_In_ ULONGLONG uTimeLimit);
+			void Restart(_In_ ULONGLONG uTimeLimit);
 
 #pragma endregion
 #pragma region Overridables
@@ -87,7 +87,7 @@ namespace retro
 
 #ifdef _DEBUG
 			void AssertValid() const override;
-			void Dump(CDumpContext& dc) const override;
+			void Dump(_In_ CDumpContext& dc) const override;
 #endif
 
 #pragma endregion
