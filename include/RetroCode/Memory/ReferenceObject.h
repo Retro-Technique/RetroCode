@@ -77,7 +77,7 @@ namespace retro::memory
 
 #ifdef _DEBUG
 		void AssertValid() const override;
-		void Dump(CDumpContext& dc) const override;
+		void Dump(_In_ CDumpContext& dc) const override;
 #endif
 
 #pragma endregion
