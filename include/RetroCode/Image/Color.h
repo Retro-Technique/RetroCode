@@ -55,9 +55,9 @@ namespace retro
 		public:
 
 			CColorRGBA();
-			CColorRGBA(const CColorRGBA& Other);
-			explicit CColorRGBA(COLORREF uColor, BYTE uAlpha = ALPHA_OPAQUE);
-			CColorRGBA(BYTE uRed, BYTE uGreen, BYTE uBlue, BYTE uAlpha = ALPHA_OPAQUE);
+			CColorRGBA(_In_ const CColorRGBA& Other);
+			explicit CColorRGBA(_In_ COLORREF uColor, _In_opt_ BYTE uAlpha = ALPHA_OPAQUE);
+			CColorRGBA(_In_ BYTE uRed, _In_ BYTE uGreen, _In_ BYTE uBlue, _In_opt_ BYTE uAlpha = ALPHA_OPAQUE);
 			~CColorRGBA();
 
 #pragma endregion
@@ -80,11 +80,11 @@ namespace retro
 
 		public:
 
-			void FromCOLORREF(COLORREF uColor);
+			void FromCOLORREF(_In_ COLORREF uColor);
 			COLORREF ToCOLORREF() const;
-			void Serialize(CArchive& ar);
+			void Serialize(_Inout_ CArchive& ar);
 #ifdef _DEBUG
-			void Dump(CDumpContext& dc) const;
+			void Dump(_Inout_ CDumpContext& dc) const;
 #endif
 
 #pragma endregion

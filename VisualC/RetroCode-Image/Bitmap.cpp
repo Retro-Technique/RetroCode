@@ -465,7 +465,7 @@ namespace retro
 			m_spLock.Release();
 		}
 
-		void CBitmapRGBA::Flip(WICBitmapTransformOptions tOptions)
+		void CBitmapRGBA::Flip(WICBitmapTransformOptions eOption)
 		{
 			if (!m_spBitmap)
 			{
@@ -478,7 +478,7 @@ namespace retro
 				throw hr;
 			}
 
-			if (const HRESULT hr = spFlipRotator->Initialize(m_spBitmap, tOptions); FAILED(hr))
+			if (const HRESULT hr = spFlipRotator->Initialize(m_spBitmap, eOption); FAILED(hr))
 			{
 				throw hr;
 			}
