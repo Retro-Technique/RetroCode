@@ -68,7 +68,7 @@ namespace retro::coll
 
 	public:
 
-		INT_PTR Push(ARG_TYPE newElement);
+		INT_PTR Push(_In_ ARG_TYPE newElement);
 		void Pop();
 		const TYPE& Top() const;
 		TYPE& Top();
@@ -81,9 +81,9 @@ namespace retro::coll
 
 	public:
 
-		void Serialize(CArchive& ar) override;
+		void Serialize(_Inout_ CArchive& ar) override;
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
 		void AssertValid() const override;
 #endif
 

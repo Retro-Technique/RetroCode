@@ -70,10 +70,10 @@ namespace retro::coll
 
 	public:
 
-		void SetSize(INT_PTR nSize);
-		INT_PTR Push(ARG_TYPE newElement);
-		TYPE& GetAt(INT_PTR nIndex);
-		const TYPE& GetAt(INT_PTR nIndex) const;
+		void SetSize(_In_ INT_PTR nSize);
+		INT_PTR Push(_In_ ARG_TYPE newElement);
+		TYPE& GetAt(_In_ INT_PTR nIndex);
+		const TYPE& GetAt(_In_ INT_PTR nIndex) const;
 		INT_PTR GetCount() const;
 		void RemoveAll();
 		INT_PTR GetSize() const;
@@ -84,9 +84,9 @@ namespace retro::coll
 
 	public:
 
-		void Serialize(CArchive& ar) override;
+		void Serialize(_Inout_ CArchive& ar) override;
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
 		void AssertValid() const override;
 #endif
 
