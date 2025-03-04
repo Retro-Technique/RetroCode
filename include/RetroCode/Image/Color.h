@@ -56,8 +56,8 @@ namespace retro
 
 			CColorRGBA();
 			CColorRGBA(_In_ const CColorRGBA& Other);
-			explicit CColorRGBA(_In_ COLORREF uColor, _In_opt_ BYTE uAlpha = ALPHA_OPAQUE);
-			CColorRGBA(_In_ BYTE uRed, _In_ BYTE uGreen, _In_ BYTE uBlue, _In_opt_ BYTE uAlpha = ALPHA_OPAQUE);
+			explicit CColorRGBA(_In_ COLORREF uColor, _In_ BYTE uAlpha = ALPHA_OPAQUE);
+			CColorRGBA(_In_ BYTE uRed, _In_ BYTE uGreen, _In_ BYTE uBlue, _In_ BYTE uAlpha = ALPHA_OPAQUE);
 			~CColorRGBA();
 
 #pragma endregion

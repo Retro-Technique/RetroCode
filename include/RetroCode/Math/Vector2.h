@@ -54,11 +54,11 @@ namespace retro::math
 	public:
 
 		CVector2();
-		CVector2(T x, T y);
-		CVector2(const CPoint& ptPoint);
-		CVector2(const CSize& szSize);
+		CVector2(_In_ T x, _In_ T y);
+		CVector2(_In_ const CPoint& ptPoint);
+		CVector2(_In_ const CSize& szSize);
 		template<typename U>
-		explicit CVector2(const CVector2<U>& Vector);
+		explicit CVector2(_In_ const CVector2<U>& Vector);
 		~CVector2() = default;
 
 #pragma endregion
@@ -74,13 +74,13 @@ namespace retro::math
 
 	public:
 
-		void FromPoint(const CPoint& ptPoint);
-		void FromSize(const CSize& szSize);
+		void FromPoint(_In_ const CPoint& ptPoint);
+		void FromSize(_In_ const CSize& szSize);
 		CPoint ToPoint() const;
 		CSize ToSize() const;
-		void Serialize(CArchive& ar);
+		void Serialize(_Inout_ CArchive& ar);
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const;
+		void Dump(_Inout_ CDumpContext& dc) const;
 #endif
 
 #pragma endregion

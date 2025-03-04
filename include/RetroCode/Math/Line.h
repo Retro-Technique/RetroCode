@@ -54,10 +54,10 @@ namespace retro::math
 	public:
 
 		CLine();
-		CLine(T startx, T starty, T endx, T endy);
-		CLine(const CVector2<T>& Start, const CVector2<T>& End);
+		CLine(_In_ T startx, _In_ T starty, _In_ T endx, _In_ T endy);
+		CLine(_In_ const CVector2<T>& Start, _In_ const CVector2<T>& End);
 		template<typename U>
-		explicit CLine(const CLine<U>& Line);
+		explicit CLine(_In_ const CLine<U>& Line);
 		~CLine() = default;
 
 #pragma endregion
@@ -71,9 +71,9 @@ namespace retro::math
 #pragma endregion
 #pragma region Operations
 
-		void Serialize(CArchive& ar);
+		void Serialize(_Inout_ CArchive& ar);
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const;
+		void Dump(_Inout_ CDumpContext& dc) const;
 #endif
 
 #pragma endregion

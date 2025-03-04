@@ -82,7 +82,7 @@ namespace retro::memory
 		ASSERT(0l < m_nReferenceCount);
 	}
 
-	void CReferenceObject::Dump(CDumpContext& dc) const
+	void CReferenceObject::Dump(_Inout_ CDumpContext& dc) const
 	{
 		CObject::Dump(dc);
 

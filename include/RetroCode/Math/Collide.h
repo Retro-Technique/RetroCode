@@ -47,34 +47,34 @@ namespace retro::math
 {
 
 	template<typename T>
-	BOOL IsCollidePointPoint(const CVector2<T>& vLeft, const CVector2<T>& vRight);
+	BOOL IsCollidePointPoint(_In_ const CVector2<T>& vLeft, _In_ const CVector2<T>& vRight);
 
 	template<typename T>
-	BOOL IsCollidePointLine(const CVector2<T>& vLeft, const CLine<T>& lnRight);
+	BOOL IsCollidePointLine(_In_ const CVector2<T>& vLeft, _In_ const CLine<T>& lnRight);
 
 	template<typename T>
-	BOOL IsCollidePointRect(const CVector2<T>& vLeft, const CRect<T>& rcRight);
+	BOOL IsCollidePointRect(_In_ const CVector2<T>& vLeft, _In_ const CRect<T>& rcRight);
 
 	template<typename T>
-	BOOL IsCollidePointCircle(const CVector2<T>& vLeft, const CCircle<T>& circRight);
+	BOOL IsCollidePointCircle(_In_ const CVector2<T>& vLeft, _In_ const CCircle<T>& circRight);
 
 	template<typename T>
-	BOOL IsCollideLineLine(const CLine<T>& lnLeft, const CLine<T>& lnRight);
+	BOOL IsCollideLineLine(_In_ const CLine<T>& lnLeft, _In_ const CLine<T>& lnRight);
 
 	template<typename T>
-	BOOL IsCollideLineRect(const CLine<T>& lnLeft, const CRect<T>& rcRight);
+	BOOL IsCollideLineRect(_In_ const CLine<T>& lnLeft, _In_ const CRect<T>& rcRight);
 
 	template<typename T>
-	BOOL IsCollideLineCircle(const CLine<T>& lnLeft, const CCircle<T>& circRight);
+	BOOL IsCollideLineCircle(_In_ const CLine<T>& lnLeft, _In_ const CCircle<T>& circRight);
 
 	template<typename T>
-	BOOL IsCollideRectRect(const CRect<T>& rcLeft, const CRect<T>& rcRight);
+	BOOL IsCollideRectRect(_In_ const CRect<T>& rcLeft, _In_ const CRect<T>& rcRight);
 
 	template<typename T>
-	BOOL IsCollideRectCircle(const CRect<T>& rcLeft, const CCircle<T>& circRight);
+	BOOL IsCollideRectCircle(_In_ const CRect<T>& rcLeft, _In_ const CCircle<T>& circRight);
 
 	template<typename T>
-	BOOL IsCollideCircleCircle(const CCircle<T>& circLeft, const CCircle<T>& circRight);
+	BOOL IsCollideCircleCircle(_In_ const CCircle<T>& circLeft, _In_ const CCircle<T>& circRight);
 
 }
 

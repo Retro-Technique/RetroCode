@@ -68,7 +68,7 @@ namespace retro::math
 		return Lerp(x, y, s * s * (3. - 2. * s));
 	}
 
-	DOUBLE PerlinNoise(DOUBLE x, DOUBLE y)
+	DOUBLE PerlinNoise(_In_ DOUBLE x, _In_ DOUBLE y)
 	{
 		const INT x_int = static_cast<INT>(x);
 		const INT y_int = static_cast<INT>(y);
@@ -84,7 +84,7 @@ namespace retro::math
 		return SmoothInter(low, high, y_frac);
 	}
 
-	DOUBLE* NoiseMap(DOUBLE* pNoiseMap, UINT uWidth, UINT uHeight, DOUBLE fScale, UINT uOctaveCount, FLOAT fPersistance, FLOAT fLacunarity)
+	DOUBLE* NoiseMap(_Out_writes_(uWidth * uHeight) DOUBLE* pNoiseMap, _In_ UINT uWidth, _In_ UINT uHeight, _In_ DOUBLE fScale, _In_ UINT uOctaveCount, _In_ FLOAT fPersistance, _In_ FLOAT fLacunarity)
 	{
 		if (!pNoiseMap)
 		{

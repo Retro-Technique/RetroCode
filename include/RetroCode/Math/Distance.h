@@ -47,16 +47,16 @@ namespace retro::math
 {
 
 	template<typename T>
-	T EuclidianDistance(const CVector2<T>& vStart, const CVector2<T>& vEnd);
+	T EuclidianDistance(_In_ const CVector2<T>& vStart, _In_ const CVector2<T>& vEnd);
 
 	template<typename T>
-	T EuclidianDistance(T x1, T y1, T x2, T y2);
+	T EuclidianDistance(_In_ T x1, _In_ T y1, _In_ T x2, _In_ T y2);
 
 	template<typename T>
-	T ManhattanDistance(const CVector2<T>& vStart, const CVector2<T>& vEnd);
+	T ManhattanDistance(_In_ const CVector2<T>& vStart, _In_ const CVector2<T>& vEnd);
 
 	template<typename T>
-	T ManhattanDistance(T x1, T y1, T x2, T y2);
+	T ManhattanDistance(_In_ T x1, _In_ T y1, _In_ T x2, _In_ T y2);
 
 }
 

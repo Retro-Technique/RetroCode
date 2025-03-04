@@ -55,7 +55,7 @@ namespace retro::math
 	public:
 
 		CRandom();
-		explicit CRandom(UINT uSeed);
+		explicit CRandom(_In_ UINT uSeed);
 		~CRandom() = default;
 
 #pragma endregion
@@ -64,13 +64,13 @@ namespace retro::math
 	public:
 
 		void Seed();
-		void Seed(UINT uSeed);
+		void Seed(_In_ UINT uSeed);
 		INT NextInteger() const;
-		INT NextInteger(INT nMaxValueExcluded) const;
-		INT NextInteger(INT nMinValueIncluded, INT nMaxValueExcluded) const;
+		INT NextInteger(_In_ INT nMaxValueExcluded) const;
+		INT NextInteger(_In_ INT nMinValueIncluded, _In_ INT nMaxValueExcluded) const;
 		FLOAT NextFloat() const;
 		DOUBLE NextDouble() const;
-		void NextBytes(BYTE* pBytes, UINT uByteCount) const;
+		void NextBytes(_Out_writes_(uByteCount) LPBYTE pBytes, _In_ UINT_PTR uByteCount) const;
 		BOOL NextBoolean() const;
 
 #pragma endregion

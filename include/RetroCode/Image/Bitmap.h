@@ -80,8 +80,8 @@ namespace retro
 			void LoadFromMemory(_In_reads_bytes_(uSize) LPCVOID pData, _In_ DWORD uSize);
 			void LoadFromResource(_In_ HMODULE hModule, _In_z_ LPCTSTR pszResourceName);
 			void LoadFromResource(_In_z_ LPCTSTR pszModule, _In_z_ LPCTSTR pszResourceName);
-			void SaveToFile(_In_z_ LPCTSTR pszFileName, _In_opt_ const GUID& tFormat = GUID_ContainerFormatPng);
-			void SaveToMemory(_Outptr_ LPVOID* ppData, _Out_ DWORD& uSize, _In_opt_ const GUID& tFormat = GUID_ContainerFormatPng);
+			void SaveToFile(_In_z_ LPCTSTR pszFileName, _In_ const GUID& tFormat = GUID_ContainerFormatPng);
+			void SaveToMemory(_Outptr_ LPVOID* ppData, _Out_ DWORD& uSize, _In_ const GUID& tFormat = GUID_ContainerFormatPng);
 			CSize GetSize() const;
 			const CColorRGBA* LockForRead() const;
 			CColorRGBA* LockForWrite();

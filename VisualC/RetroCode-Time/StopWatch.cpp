@@ -110,7 +110,7 @@ namespace retro
 			m_Clock.AssertValid();
 		}
 
-		void CStopWatch::Dump(CDumpContext& dc) const
+		void CStopWatch::Dump(_Inout_ CDumpContext& dc) const
 		{
 			CObject::Dump(dc);
 

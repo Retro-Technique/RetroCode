@@ -55,7 +55,7 @@ namespace retro
 
 		}
 
-		CColorRGBA::CColorRGBA(const CColorRGBA& Other)
+		CColorRGBA::CColorRGBA(_In_ const CColorRGBA& Other)
 			: Red(Other.Red)
 			, Green(Other.Green)
 			, Blue(Other.Blue)
@@ -64,13 +64,13 @@ namespace retro
 
 		}
 
-		CColorRGBA::CColorRGBA(COLORREF uColor, BYTE uAlpha)
+		CColorRGBA::CColorRGBA(_In_ COLORREF uColor, _In_ BYTE uAlpha)
 		{
 			FromCOLORREF(uColor);
 			Alpha = uAlpha;
 		}
 
-		CColorRGBA::CColorRGBA(BYTE uRed, BYTE uGreen, BYTE uBlue, BYTE uAlpha)
+		CColorRGBA::CColorRGBA(_In_ BYTE uRed, _In_ BYTE uGreen, _In_ BYTE uBlue, _In_ BYTE uAlpha)
 			: Red(uRed)
 			, Green(uGreen)
 			, Blue(uBlue)
@@ -87,7 +87,7 @@ namespace retro
 #pragma endregion
 #pragma region Operations
 
-		void CColorRGBA::FromCOLORREF(COLORREF uColor)
+		void CColorRGBA::FromCOLORREF(_In_ COLORREF uColor)
 		{
 			Red = GetRValue(uColor);
 			Green = GetGValue(uColor);
@@ -99,7 +99,7 @@ namespace retro
 			return RGB(Red, Green, Blue);
 		}
 
-		void CColorRGBA::Serialize(CArchive& ar)
+		void CColorRGBA::Serialize(_Inout_ CArchive& ar)
 		{
 			if (ar.IsStoring())
 			{
@@ -113,7 +113,7 @@ namespace retro
 
 #ifdef _DEBUG
 
-		void CColorRGBA::Dump(CDumpContext& dc) const
+		void CColorRGBA::Dump(_Inout_ CDumpContext& dc) const
 		{
 			dc << _T("Red = ") << Red << _T("\n");
 			dc << _T("Green = ") << Green << _T("\n");
