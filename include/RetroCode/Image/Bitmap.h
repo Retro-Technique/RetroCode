@@ -57,7 +57,7 @@ namespace retro
 		public:
 
 			CBitmapRGBA();
-			explicit CBitmapRGBA(IWICImagingFactory* pExternalFactory);
+			explicit CBitmapRGBA(_In_ IWICImagingFactory* pExternalFactory);
 			~CBitmapRGBA() = default;
 
 #pragma endregion
@@ -74,19 +74,19 @@ namespace retro
 
 		public:
 
-			void Create(UINT uWidth, UINT uHeight);
-			void Create(const CSize& szBitmap);
-			void LoadFromFile(LPCTSTR pszFileName);
-			void LoadFromMemory(LPCVOID pData, DWORD uSize);
-			void LoadFromResource(HMODULE hModule, LPCTSTR pszResourceName);
-			void LoadFromResource(LPCTSTR pszModule, LPCTSTR pszResourceName);
-			void SaveToFile(LPCTSTR pszFileName, const GUID& tFormat = GUID_ContainerFormatPng);
-			void SaveToMemory(LPVOID* ppData, DWORD& uSize, const GUID& tFormat = GUID_ContainerFormatPng);
+			void Create(_In_ UINT uWidth, _In_ UINT uHeight);
+			void Create(_In_ const CSize& szBitmap);
+			void LoadFromFile(_In_z_ LPCTSTR pszFileName);
+			void LoadFromMemory(_In_reads_bytes_(uSize) LPCVOID pData, _In_ DWORD uSize);
+			void LoadFromResource(_In_ HMODULE hModule, _In_z_ LPCTSTR pszResourceName);
+			void LoadFromResource(_In_z_ LPCTSTR pszModule, _In_z_ LPCTSTR pszResourceName);
+			void SaveToFile(_In_z_ LPCTSTR pszFileName, _In_opt_ const GUID& tFormat = GUID_ContainerFormatPng);
+			void SaveToMemory(_Outptr_ LPVOID* ppData, _Out_ DWORD& uSize, _In_opt_ const GUID& tFormat = GUID_ContainerFormatPng);
 			CSize GetSize() const;
 			const CColorRGBA* LockForRead() const;
 			CColorRGBA* LockForWrite();
 			void Unlock();
-			void Flip(WICBitmapTransformOptions tOptions);
+			void Flip(_In_ WICBitmapTransformOptions eOption);
 
 #pragma endregion
 #pragma region Overridables
@@ -95,7 +95,7 @@ namespace retro
 
 #ifdef _DEBUG
 			void AssertValid() const override;
-			void Dump(CDumpContext& dc) const override;
+			void Dump(_Inout_ CDumpContext& dc) const override;
 #endif
 
 #pragma endregion
