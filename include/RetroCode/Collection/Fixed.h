@@ -70,20 +70,20 @@ namespace retro::coll
 
 		INT_PTR GetSize() const;
 		INT_PTR GetUpperBound() const;
-		const TYPE& GetAt(INT_PTR nIndex) const;
-		TYPE& GetAt(INT_PTR nIndex);
+		const TYPE& GetAt(_In_ INT_PTR nIndex) const;
+		TYPE& GetAt(_In_ INT_PTR nIndex);
 		const TYPE* GetData() const;
 		TYPE* GetData();
-		void SetAt(INT_PTR nIndex, ARG_TYPE newElement);
+		void SetAt(_In_ INT_PTR nIndex, _In_ ARG_TYPE newElement);
 
 #pragma endregion
 #pragma region Overridables
 
 	public:
 
-		void Serialize(CArchive& ar) override;
+		void Serialize(_Inout_ CArchive& ar) override;
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
 		void AssertValid() const override;
 #endif
 
