@@ -54,11 +54,11 @@ namespace retro::math
 	public:
 
 		CRect();
-		CRect(T x, T y, T width, T height);
-		CRect(const CVector2<T>& Point, const CVector2<T>& Size);
-		CRect(const ::CRect& rcRect);
+		CRect(_In_ T x, _In_ T y, _In_ T width, _In_ T height);
+		CRect(_In_ const CVector2<T>& Point, _In_ const CVector2<T>& Size);
+		CRect(_In_ const ::CRect& rcRect);
 		template<typename U>
-		explicit CRect(const CRect<U>& Rectangle);
+		explicit CRect(_In_ const CRect<U>& Rectangle);
 		~CRect() = default;
 
 #pragma endregion
@@ -80,9 +80,9 @@ namespace retro::math
 		const T& Top() const;
 		T Right() const;
 		T Bottom() const;
-		void Serialize(CArchive& ar);
+		void Serialize(_Inout_ CArchive& ar);
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const;
+		void Dump(_Inout_ CDumpContext& dc) const;
 #endif
 
 #pragma endregion

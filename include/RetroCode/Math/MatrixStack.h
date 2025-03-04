@@ -82,11 +82,11 @@ namespace retro::math
 		void Pop();
 		void Push();
 		void LoadIdentity();
-		void LoadMatrix(const D2D1::Matrix3x2F& mMatrix);
-		void MultiplyMatrix(const D2D1::Matrix3x2F& mMatrix);
-		void Rotate(FLOAT fAngle, const D2D1_POINT_2F& ptOrigin);
-		void Scale(FLOAT fScale, const D2D1_POINT_2F& ptOrigin);
-		void Translate(const D2D1_SIZE_F& szTranslation);
+		void LoadMatrix(_In_ const D2D1::Matrix3x2F& mMatrix);
+		void MultiplyMatrix(_In_ const D2D1::Matrix3x2F& mMatrix);
+		void Rotate(_In_ FLOAT fAngle, _In_ const D2D1_POINT_2F& ptOrigin);
+		void Scale(_In_ FLOAT fScale, _In_ const D2D1_POINT_2F& ptOrigin);
+		void Translate(_In_ const D2D1_SIZE_F& szTranslation);
 
 #pragma endregion
 #pragma region Overridables
@@ -95,7 +95,7 @@ namespace retro::math
 
 #ifdef _DEBUG
 		void AssertValid() const override;
-		void Dump(CDumpContext& dc) const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
 #endif
 
 #pragma endregion

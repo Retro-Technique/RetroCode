@@ -86,7 +86,7 @@ namespace retro
 			ASSERT(m_Frequency.QuadPart > 0ll);
 		}
 
-		void CPerformance::Dump(CDumpContext& dc) const
+		void CPerformance::Dump(_Inout_ CDumpContext& dc) const
 		{
 			CObject::Dump(dc);
 

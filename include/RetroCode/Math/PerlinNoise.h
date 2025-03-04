@@ -46,8 +46,8 @@
 namespace retro::math
 {
 
-	AFX_EXT_API DOUBLE PerlinNoise(DOUBLE x, DOUBLE y);
+	AFX_EXT_API DOUBLE PerlinNoise(_In_ DOUBLE x, _In_ DOUBLE y);
 
-	AFX_EXT_API DOUBLE* NoiseMap(DOUBLE* pNoiseMap, UINT uWidth, UINT uHeight, DOUBLE fScale, UINT uOctaveCount, FLOAT fPersistance, FLOAT fLacunarity);
+	AFX_EXT_API DOUBLE* NoiseMap(_Out_writes_(uWidth * uHeight)  DOUBLE* pNoiseMap, _In_ UINT uWidth, _In_ UINT uHeight, _In_ DOUBLE fScale, _In_ UINT uOctaveCount, _In_ FLOAT fPersistance, _In_ FLOAT fLacunarity);
 
 }

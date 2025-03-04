@@ -82,7 +82,7 @@ namespace retro
 			m_StopWatch.Stop();
 		}
 
-		void CTimer::Reset(ULONGLONG uTimeLimit)
+		void CTimer::Reset(_In_ ULONGLONG uTimeLimit)
 		{
 			if (uTimeLimit <= 0ull)
 			{
@@ -93,7 +93,7 @@ namespace retro
 			m_StopWatch.Reset();
 		}
 
-		void CTimer::Restart(ULONGLONG uTimeLimit)
+		void CTimer::Restart(_In_ ULONGLONG uTimeLimit)
 		{
 			Reset(uTimeLimit);
 			Start();
@@ -111,7 +111,7 @@ namespace retro
 			m_StopWatch.AssertValid();
 		}
 
-		void CTimer::Dump(CDumpContext& dc) const
+		void CTimer::Dump(_Inout_ CDumpContext& dc) const
 		{
 			CObject::Dump(dc);
 

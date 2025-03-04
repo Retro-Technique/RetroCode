@@ -54,10 +54,10 @@ namespace retro::math
 	public:
 
 		CCircle();
-		CCircle(T CenterX, T CenterY, T Radius);
-		CCircle(const CVector2<T>& Center, T Radius);
+		CCircle(_In_ T CenterX, _In_ T CenterY, _In_ T Radius);
+		CCircle(_In_ const CVector2<T>& Center, _In_ T Radius);
 		template<typename U>
-		explicit CCircle(const CCircle<U>& Circle);
+		explicit CCircle(_In_ const CCircle<U>& Circle);
 		~CCircle() = default;
 
 #pragma endregion
@@ -73,9 +73,9 @@ namespace retro::math
 
 	public:
 
-		void Serialize(CArchive& ar);
+		void Serialize(_Inout_ CArchive& ar);
 #ifdef _DEBUG
-		void Dump(CDumpContext& dc) const;
+		void Dump(_Inout_ CDumpContext& dc) const;
 #endif
 
 #pragma endregion

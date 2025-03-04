@@ -56,7 +56,7 @@ namespace retro
 
 		}
 
-		CBitmapRGBA::CBitmapRGBA(IWICImagingFactory* pExternalFactory)
+		CBitmapRGBA::CBitmapRGBA(_In_ IWICImagingFactory* pExternalFactory)
 			: m_spFactory(pExternalFactory)
 			, m_spBitmap(NULL)
 			, m_spLock(NULL)
@@ -67,7 +67,7 @@ namespace retro
 #pragma endregion
 #pragma region Operations
 
-		void CBitmapRGBA::Create(UINT uWidth, UINT uHeight)
+		void CBitmapRGBA::Create(_In_ UINT uWidth, _In_ UINT uHeight)
 		{
 			if (const HRESULT hr = m_spFactory->CreateBitmap(uWidth, uHeight, GUID_WICPixelFormat32bppPRGBA, WICBitmapCacheOnLoad, &m_spBitmap); FAILED(hr))
 			{
@@ -75,12 +75,12 @@ namespace retro
 			}
 		}
 
-		void CBitmapRGBA::Create(const CSize& szBitmap)
+		void CBitmapRGBA::Create(_In_ const CSize& szBitmap)
 		{
 			Create(szBitmap.cx, szBitmap.cy);
 		}
 
-		void CBitmapRGBA::LoadFromFile(LPCTSTR pszFileName)
+		void CBitmapRGBA::LoadFromFile(_In_z_ LPCTSTR pszFileName)
 		{
 			if (!AfxIsValidString(pszFileName, MAX_PATH))
 			{
@@ -122,7 +122,7 @@ namespace retro
 			}
 		}
 
-		void CBitmapRGBA::LoadFromMemory(LPCVOID pData, DWORD uSize)
+		void CBitmapRGBA::LoadFromMemory(_In_reads_bytes_(uSize) LPCVOID pData, _In_ DWORD uSize)
 		{
 			if (!AfxIsValidAddress(pData, uSize, FALSE))
 			{
@@ -169,7 +169,7 @@ namespace retro
 			}
 		}
 
-		void CBitmapRGBA::LoadFromResource(HMODULE hModule, LPCTSTR pszResourceName)
+		void CBitmapRGBA::LoadFromResource(_In_ HMODULE hModule, _In_z_ LPCTSTR pszResourceName)
 		{
 			if (!hModule)
 			{
@@ -210,7 +210,7 @@ namespace retro
 			UnlockResource(hGlobal);
 		}
 
-		void CBitmapRGBA::LoadFromResource(LPCTSTR pszModule, LPCTSTR pszResourceName)
+		void CBitmapRGBA::LoadFromResource(_In_z_ LPCTSTR pszModule, _In_z_ LPCTSTR pszResourceName)
 		{
 			if (!AfxIsValidString(pszModule, MAX_PATH))
 			{
@@ -233,7 +233,7 @@ namespace retro
 			AfxFreeLibrary(hModule);
 		}
 
-		void CBitmapRGBA::SaveToFile(LPCTSTR pszFileName, const GUID& tFormat)
+		void CBitmapRGBA::SaveToFile(_In_z_ LPCTSTR pszFileName, _In_ const GUID& tFormat)
 		{
 			if (!AfxIsValidString(pszFileName, MAX_PATH))
 			{
@@ -290,12 +290,14 @@ namespace retro
 			}
 		}
 
-		void CBitmapRGBA::SaveToMemory(LPVOID* ppData, DWORD& uSize, const GUID& tFormat)
+		void CBitmapRGBA::SaveToMemory(_Outptr_ LPVOID* ppData, _Out_ DWORD& uSize, _In_ const GUID& tFormat)
 		{
-			if (*ppData)
+			if (!ppData)
 			{
 				AfxThrowInvalidArgException();
 			}
+
+			*ppData = NULL;
 
 			CComPtr<IWICStream> spStream;
 			if (const HRESULT hr = m_spFactory->CreateStream(&spStream); FAILED(hr))
@@ -465,7 +467,7 @@ namespace retro
 			m_spLock.Release();
 		}
 
-		void CBitmapRGBA::Flip(WICBitmapTransformOptions eOption)
+		void CBitmapRGBA::Flip(_In_ WICBitmapTransformOptions eOption)
 		{
 			if (!m_spBitmap)
 			{
@@ -496,7 +498,7 @@ namespace retro
 			ASSERT(m_spFactory);
 		}
 
-		void CBitmapRGBA::Dump(CDumpContext& dc) const
+		void CBitmapRGBA::Dump(_Inout_ CDumpContext& dc) const
 		{
 			CObject::Dump(dc);
 

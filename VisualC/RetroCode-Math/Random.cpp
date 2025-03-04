@@ -51,7 +51,7 @@ namespace retro::math
 		Seed();
 	}
 
-	CRandom::CRandom(UINT uSeed)
+	CRandom::CRandom(_In_ UINT uSeed)
 	{
 		Seed(uSeed);
 	}
@@ -68,7 +68,7 @@ namespace retro::math
 		Seed(uSeed);
 	}
 
-	void CRandom::Seed(UINT uSeed)
+	void CRandom::Seed(_In_ UINT uSeed)
 	{
 		srand(uSeed);
 	}
@@ -78,12 +78,12 @@ namespace retro::math
 		return rand();
 	}
 
-	INT CRandom::NextInteger(INT nMaxValueExcluded) const
+	INT CRandom::NextInteger(_In_ INT nMaxValueExcluded) const
 	{
 		return NextInteger() % nMaxValueExcluded;
 	}
 
-	INT CRandom::NextInteger(INT nMinValueIncluded, INT nMaxValueExcluded) const
+	INT CRandom::NextInteger(_In_ INT nMinValueIncluded, _In_ INT nMaxValueExcluded) const
 	{
 		return (NextInteger() % (nMaxValueExcluded - nMinValueIncluded)) + nMinValueIncluded;
 	}
@@ -98,14 +98,14 @@ namespace retro::math
 		return NextInteger() / RAND_MAX;
 	}
 
-	void CRandom::NextBytes(BYTE* pBytes, UINT uByteCount) const
+	void CRandom::NextBytes(_Out_writes_(uByteCount) LPBYTE pBytes, _In_ UINT_PTR uByteCount) const
 	{
 		if (!AfxIsValidAddress(pBytes, uByteCount * sizeof(BYTE), TRUE))
 		{
 			AfxThrowInvalidArgException();
 		}
 
-		for (UINT i = 0; i < uByteCount; i++)
+		for (UINT_PTR i = 0; i < uByteCount; i++)
 		{
 			pBytes[i] = static_cast<BYTE>(NextInteger(0, sizeof(BYTE)));
 		}

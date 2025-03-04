@@ -103,30 +103,30 @@ namespace retro::math
 		m_pStack[m_nCurrent] = D2D1::Matrix3x2F::Identity();
 	}
 
-	void CMatrixStack::LoadMatrix(const D2D1::Matrix3x2F& mMatrix)
+	void CMatrixStack::LoadMatrix(_In_ const D2D1::Matrix3x2F& mMatrix)
 	{
 		m_pStack[m_nCurrent] = mMatrix;
 	}
 
-	void CMatrixStack::MultiplyMatrix(const D2D1::Matrix3x2F& mMatrix)
+	void CMatrixStack::MultiplyMatrix(_In_ const D2D1::Matrix3x2F& mMatrix)
 	{
 		m_pStack[m_nCurrent] = m_pStack[m_nCurrent] * mMatrix;
 	}
 
-	void CMatrixStack::Rotate(FLOAT fAngle, const D2D1_POINT_2F& ptOrigin)
+	void CMatrixStack::Rotate(_In_ FLOAT fAngle, _In_ const D2D1_POINT_2F& ptOrigin)
 	{
 		const D2D1::Matrix3x2F mMatrix = D2D1::Matrix3x2F::Rotation(fAngle, ptOrigin);
 		MultiplyMatrix(mMatrix);
 	}
 
-	void CMatrixStack::Scale(FLOAT fScale, const D2D1_POINT_2F& ptOrigin)
+	void CMatrixStack::Scale(_In_ FLOAT fScale, _In_ const D2D1_POINT_2F& ptOrigin)
 	{
 		const D2D1_SIZE_F vScale = D2D1::SizeF(fScale, fScale);
 		const D2D1::Matrix3x2F mMatrix = D2D1::Matrix3x2F::Scale(vScale, ptOrigin);
 		MultiplyMatrix(mMatrix);
 	}
 
-	void CMatrixStack::Translate(const D2D1_SIZE_F& szTranslation)
+	void CMatrixStack::Translate(_In_ const D2D1_SIZE_F& szTranslation)
 	{
 		const D2D1::Matrix3x2F mMatrix = D2D1::Matrix3x2F::Translation(szTranslation);
 		MultiplyMatrix(mMatrix);
@@ -148,7 +148,7 @@ namespace retro::math
 		ASSERT_POINTER(m_pStack, D2D1::Matrix3x2F);
 	}
 
-	void CMatrixStack::Dump(CDumpContext& dc) const
+	void CMatrixStack::Dump(_Inout_ CDumpContext& dc) const
 	{
 		CObject::Dump(dc);
 

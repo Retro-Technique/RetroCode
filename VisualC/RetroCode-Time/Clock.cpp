@@ -86,7 +86,7 @@ namespace retro
 			ASSERT(m_uStartTime <= GetTickCount64());
 		}
 
-		void CClock::Dump(CDumpContext& dc) const
+		void CClock::Dump(_Inout_ CDumpContext& dc) const
 		{
 			CObject::Dump(dc);
 
