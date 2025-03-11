@@ -50,19 +50,19 @@ namespace retro::math
 	void Swap(_Inout_ T& a, _Inout_ T& b);
 
 	template<typename T>
-	const T& Min(_In_ const T& a, _In_ const T& b);
+	_Check_return_ const T& Min(_In_ const T& a, _In_ const T& b);
 
 	template<typename T>
-	const T& Max(_In_ const T& a, _In_ const T& b);
+	_Check_return_ const T& Max(_In_ const T& a, _In_ const T& b);
 
 	template<typename T>
-	const T& Clamp(_In_ const T& val, _In_ const T& min, _In_ const T& max);
+	_Check_return_ const T& Clamp(_In_ const T& val, _In_ const T& min, _In_ const T& max);
 
 	template<typename T>
-	T Lerp(_In_ const T& a, _In_ const T& b, _In_ const T& t);
+	_Check_return_ T Lerp(_In_ const T& a, _In_ const T& b, _In_ const T& t);
 
 	template<typename T>
-	T InverseLerp(_In_ const T& a, _In_ const T& b, _In_ const T& t);
+	_Check_return_ T InverseLerp(_In_ const T& a, _In_ const T& b, _In_ const T& t);
 
 }
 

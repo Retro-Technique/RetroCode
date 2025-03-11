@@ -59,7 +59,7 @@ namespace retro::memory
 #endif
 	}
 
-	BOOL CMemoryLeakChecker::End()
+	_Check_return_ BOOL CMemoryLeakChecker::End()
 	{
 #ifdef _DEBUG
 		m_Stop.Checkpoint();

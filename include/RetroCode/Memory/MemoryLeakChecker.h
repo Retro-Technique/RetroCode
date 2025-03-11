@@ -4,7 +4,7 @@
  *
  * CEA CNRS INRIA LOGICIEL LIBRE
  *
- * Copyright(c) 2014-2024 Retro Technique
+ * Copyright(c) 2014-2025 Retro Technique
  *
  * This software is a computer program whose purpose is to provide
  * a 2D game engine.
@@ -74,7 +74,7 @@ namespace retro::memory
 	public:
 
 		void Begin();
-		BOOL End();
+		_Check_return_ BOOL End();
 
 #pragma endregion
 	};

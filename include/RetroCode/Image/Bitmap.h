@@ -82,9 +82,9 @@ namespace retro
 			void LoadFromResource(_In_z_ LPCTSTR pszModule, _In_z_ LPCTSTR pszResourceName);
 			void SaveToFile(_In_z_ LPCTSTR pszFileName, _In_ const GUID& tFormat = GUID_ContainerFormatPng);
 			void SaveToMemory(_Outptr_ LPVOID* ppData, _Out_ DWORD& uSize, _In_ const GUID& tFormat = GUID_ContainerFormatPng);
-			CSize GetSize() const;
-			const CColorRGBA* LockForRead() const;
-			CColorRGBA* LockForWrite();
+			_Check_return_ CSize GetSize() const;
+			_Check_return_ const CColorRGBA* LockForRead() const;
+			_Check_return_ CColorRGBA* LockForWrite();
 			void Unlock();
 			void Flip(_In_ WICBitmapTransformOptions eOption);
 

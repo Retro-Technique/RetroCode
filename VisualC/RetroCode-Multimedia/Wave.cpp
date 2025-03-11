@@ -61,7 +61,7 @@ namespace retro::multimedia
 #pragma endregion
 #pragma region Operations
 
-	void CWave::LoadFromFile(LPCTSTR pszFileName)
+	void CWave::LoadFromFile(_In_z_ LPCTSTR pszFileName)
 	{
 		ASSERT(AfxIsValidString(pszFileName, MAX_PATH));
 
@@ -103,7 +103,7 @@ namespace retro::multimedia
 		return m_pData ? TRUE : FALSE;
 	}
 
-	BOOL CWave::Play(BOOL bAsync, BOOL bLooped) const
+	BOOL CWave::Play(_In_ BOOL bAsync, _In_ BOOL bLooped) const
 	{
 		ASSERT_VALID(this);
 		
@@ -119,7 +119,7 @@ namespace retro::multimedia
 		return PlaySound(reinterpret_cast<LPCTSTR>(m_pData), NULL, uFlags);
 	}
 
-	BOOL CWave::GetFormat(WAVEFORMATEX& wfFormat) const
+	BOOL CWave::GetFormat(_Out_ WAVEFORMATEX& wfFormat) const
 	{
 		ASSERT_VALID(this);
 
@@ -173,7 +173,7 @@ namespace retro::multimedia
 		return mmckSubChunk.cksize;
 	}
 
-	DWORD CWave::GetData(LPBYTE pWaveData, DWORD uMaxToCopy) const
+	DWORD CWave::GetData(_Out_writes_bytes_to_(uMaxToCopy, return) LPBYTE pWaveData, _In_ DWORD uMaxToCopy) const
 	{
 		ASSERT_VALID(this);
 
@@ -244,8 +244,14 @@ namespace retro::multimedia
 	{
 		CObject::AssertValid();
 
-		ASSERT_POINTER(m_pData, BYTE);
-		ASSERT(m_uDataLen > 0);
+		if (m_pData)
+		{
+			ASSERT(m_uDataLen > 0ul);
+		}
+		else
+		{
+			ASSERT(m_uDataLen == 0ul);
+		}
 	}
 
 	void CWave::Dump(CDumpContext& dc) const

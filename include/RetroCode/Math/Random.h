@@ -65,13 +65,13 @@ namespace retro::math
 
 		void Seed();
 		void Seed(_In_ UINT uSeed);
-		INT NextInteger() const;
-		INT NextInteger(_In_ INT nMaxValueExcluded) const;
-		INT NextInteger(_In_ INT nMinValueIncluded, _In_ INT nMaxValueExcluded) const;
-		FLOAT NextFloat() const;
-		DOUBLE NextDouble() const;
+		_Check_return_ INT NextInteger() const;
+		_Check_return_ INT NextInteger(_In_ INT nMaxValueExcluded) const;
+		_Check_return_ INT NextInteger(_In_ INT nMinValueIncluded, _In_ INT nMaxValueExcluded) const;
+		_Check_return_ FLOAT NextFloat() const;
+		_Check_return_ DOUBLE NextDouble() const;
 		void NextBytes(_Out_writes_(uByteCount) LPBYTE pBytes, _In_ UINT_PTR uByteCount) const;
-		BOOL NextBoolean() const;
+		_Check_return_ BOOL NextBoolean() const;
 
 #pragma endregion
 	};

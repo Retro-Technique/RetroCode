@@ -63,17 +63,17 @@ namespace retro::math
 #pragma endregion
 #pragma region Operations
 
-	const D2D1::Matrix3x2F CMatrixStack::Top() const
+	_Check_return_ const D2D1::Matrix3x2F CMatrixStack::Top() const
 	{
 		return m_pStack[m_nCurrent];
 	}
 
-	const D2D1::Matrix3x2F* CMatrixStack::GetTop() const
+	_Check_return_ const D2D1::Matrix3x2F* CMatrixStack::GetTop() const
 	{
 		return &m_pStack[m_nCurrent];
 	}
 
-	INT_PTR CMatrixStack::GetSize() const
+	_Check_return_ INT_PTR CMatrixStack::GetSize() const
 	{
 		return m_nCurrent + 1;
 	}

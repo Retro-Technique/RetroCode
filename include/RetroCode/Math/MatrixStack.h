@@ -76,9 +76,9 @@ namespace retro::math
 
 	public:
 
-		const D2D1::Matrix3x2F Top() const;
-		const D2D1::Matrix3x2F* GetTop() const;
-		INT_PTR GetSize() const;
+		_Check_return_ const D2D1::Matrix3x2F Top() const;
+		_Check_return_ const D2D1::Matrix3x2F* GetTop() const;
+		_Check_return_ INT_PTR GetSize() const;
 		void Pop();
 		void Push();
 		void LoadIdentity();
