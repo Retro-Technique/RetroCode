@@ -82,10 +82,7 @@ namespace retro
 
 		void CBitmapRGBA::LoadFromFile(_In_z_ LPCTSTR pszFileName)
 		{
-			if (!AfxIsValidString(pszFileName, MAX_PATH))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(AfxIsValidString(pszFileName, MAX_PATH));
 
 			CComPtr<IWICStream> spStream;
 			if (const HRESULT hr = m_spFactory->CreateStream(&spStream); FAILED(hr))
@@ -124,10 +121,7 @@ namespace retro
 
 		void CBitmapRGBA::LoadFromMemory(_In_reads_bytes_(uSize) LPCVOID pData, _In_ DWORD uSize)
 		{
-			if (!AfxIsValidAddress(pData, uSize, FALSE))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(AfxIsValidAddress(pData, uSize, FALSE));
 
 			CComPtr<IWICStream> spStream;
 			if (const HRESULT hr = m_spFactory->CreateStream(&spStream); FAILED(hr))
@@ -171,15 +165,8 @@ namespace retro
 
 		void CBitmapRGBA::LoadFromResource(_In_ HMODULE hModule, _In_z_ LPCTSTR pszResourceName)
 		{
-			if (!hModule)
-			{
-				AfxThrowInvalidArgException();
-			}
-
-			if (!AfxIsValidString(pszResourceName))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(hModule);
+			ENSURE(AfxIsValidString(pszResourceName));
 
 			HRSRC hrSrc = FindResource(hModule, pszResourceName, RT_RCDATA);
 			if (!hrSrc)
@@ -212,15 +199,8 @@ namespace retro
 
 		void CBitmapRGBA::LoadFromResource(_In_z_ LPCTSTR pszModule, _In_z_ LPCTSTR pszResourceName)
 		{
-			if (!AfxIsValidString(pszModule, MAX_PATH))
-			{
-				AfxThrowInvalidArgException();
-			}
-
-			if (!AfxIsValidString(pszResourceName))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(AfxIsValidString(pszModule, MAX_PATH));
+			ENSURE(AfxIsValidString(pszResourceName));
 
 			HMODULE hModule = AfxLoadLibrary(pszModule);
 			if (!hModule)
@@ -235,10 +215,7 @@ namespace retro
 
 		void CBitmapRGBA::SaveToFile(_In_z_ LPCTSTR pszFileName, _In_ const GUID& tFormat)
 		{
-			if (!AfxIsValidString(pszFileName, MAX_PATH))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(AfxIsValidString(pszFileName, MAX_PATH));
 
 			CComPtr<IWICStream> spStream;
 			if (const HRESULT hr = m_spFactory->CreateStream(&spStream); FAILED(hr))
@@ -292,11 +269,8 @@ namespace retro
 
 		void CBitmapRGBA::SaveToMemory(_Outptr_ LPVOID* ppData, _Out_ DWORD& uSize, _In_ const GUID& tFormat)
 		{
-			if (!ppData)
-			{
-				AfxThrowInvalidArgException();
-			}
-
+			ENSURE(!ppData);
+		
 			*ppData = NULL;
 
 			CComPtr<IWICStream> spStream;

@@ -40,6 +40,13 @@ jobs:
       - name: Run MSBuild
         run: msbuild VisualC/RetroCode.sln -property:Configuration=${{ matrix.configuration }} -property:Platform=${{ matrix.platform }}  
 
+      - name: Run Code Analysis
+        uses: microsoft/msvc-code-analysis-action@v0.1.1
+        with:
+          cmakeBuildDirectory: VisualC
+          buildConfiguration: ${{ matrix.configuration }}
+          ruleset: VisualC/NativeRecommendedRules.ruleset
+
       - name: Run Tests
         uses: rusty-bender/vstest-action@main
         with:
