@@ -74,12 +74,12 @@ namespace retro::math
 
 	public:
 
-		void FromRect(const ::CRect& rcRect);
-		::CRect ToRect() const;
-		const T& Left() const;
-		const T& Top() const;
-		T Right() const;
-		T Bottom() const;
+		void FromRect(_In_ const ::CRect& rcRect);
+		_Check_return_ ::CRect ToRect() const;
+		_Check_return_ const T& Left() const;
+		_Check_return_ const T& Top() const;
+		_Check_return_ T Right() const;
+		_Check_return_ T Bottom() const;
 		void Serialize(_Inout_ CArchive& ar);
 #ifdef _DEBUG
 		void Dump(_Inout_ CDumpContext& dc) const;

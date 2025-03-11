@@ -264,8 +264,6 @@ namespace retro::multimedia
 	void CMMIO::AssertValid() const
 	{
 		CObject::AssertValid();
-
-		ASSERT(m_hMMIO);
 	}
 
 	void CMMIO::Dump(CDumpContext& dc) const

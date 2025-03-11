@@ -47,34 +47,34 @@ namespace retro::math
 {
 
 	template<typename T>
-	BOOL IsCollidePointPoint(_In_ const CVector2<T>& vLeft, _In_ const CVector2<T>& vRight);
+	_Check_return_ BOOL IsCollidePointPoint(_In_ const CVector2<T>& vLeft, _In_ const CVector2<T>& vRight);
 
 	template<typename T>
-	BOOL IsCollidePointLine(_In_ const CVector2<T>& vLeft, _In_ const CLine<T>& lnRight);
+	_Check_return_ BOOL IsCollidePointLine(_In_ const CVector2<T>& vLeft, _In_ const CLine<T>& lnRight);
 
 	template<typename T>
-	BOOL IsCollidePointRect(_In_ const CVector2<T>& vLeft, _In_ const CRect<T>& rcRight);
+	_Check_return_ BOOL IsCollidePointRect(_In_ const CVector2<T>& vLeft, _In_ const CRect<T>& rcRight);
 
 	template<typename T>
-	BOOL IsCollidePointCircle(_In_ const CVector2<T>& vLeft, _In_ const CCircle<T>& circRight);
+	_Check_return_ BOOL IsCollidePointCircle(_In_ const CVector2<T>& vLeft, _In_ const CCircle<T>& circRight);
 
 	template<typename T>
-	BOOL IsCollideLineLine(_In_ const CLine<T>& lnLeft, _In_ const CLine<T>& lnRight);
+	_Check_return_ BOOL IsCollideLineLine(_In_ const CLine<T>& lnLeft, _In_ const CLine<T>& lnRight);
 
 	template<typename T>
-	BOOL IsCollideLineRect(_In_ const CLine<T>& lnLeft, _In_ const CRect<T>& rcRight);
+	_Check_return_ BOOL IsCollideLineRect(_In_ const CLine<T>& lnLeft, _In_ const CRect<T>& rcRight);
 
 	template<typename T>
-	BOOL IsCollideLineCircle(_In_ const CLine<T>& lnLeft, _In_ const CCircle<T>& circRight);
+	_Check_return_ BOOL IsCollideLineCircle(_In_ const CLine<T>& lnLeft, _In_ const CCircle<T>& circRight);
 
 	template<typename T>
-	BOOL IsCollideRectRect(_In_ const CRect<T>& rcLeft, _In_ const CRect<T>& rcRight);
+	_Check_return_ BOOL IsCollideRectRect(_In_ const CRect<T>& rcLeft, _In_ const CRect<T>& rcRight);
 
 	template<typename T>
-	BOOL IsCollideRectCircle(_In_ const CRect<T>& rcLeft, _In_ const CCircle<T>& circRight);
+	_Check_return_ BOOL IsCollideRectCircle(_In_ const CRect<T>& rcLeft, _In_ const CCircle<T>& circRight);
 
 	template<typename T>
-	BOOL IsCollideCircleCircle(_In_ const CCircle<T>& circLeft, _In_ const CCircle<T>& circRight);
+	_Check_return_ BOOL IsCollideCircleCircle(_In_ const CCircle<T>& circLeft, _In_ const CCircle<T>& circRight);
 
 }
 

@@ -94,7 +94,7 @@ namespace retro
 			Blue = GetBValue(uColor);
 		}
 
-		COLORREF CColorRGBA::ToCOLORREF() const
+		_Check_return_ COLORREF CColorRGBA::ToCOLORREF() const
 		{
 			return RGB(Red, Green, Blue);
 		}

@@ -65,7 +65,7 @@ namespace retro::multimedia
 #pragma endregion
 #pragma region Operations
 
-	void CAvi::OpenFromFile(LPCTSTR pszFileName)
+	void CAvi::OpenFromFile(_In_z_ LPCTSTR pszFileName)
 	{
 		ASSERT(AfxIsValidString(pszFileName, MAX_PATH));
 
@@ -76,7 +76,7 @@ namespace retro::multimedia
 			throw new CWin32Exception(hr);
 		}
 
-		if (const HRESULT hr = AVIFileGetStream(m_pAVIFile, &m_pAVIStream, streamtypeVIDEO, 0); FAILED(hr))
+		if (const HRESULT hr = AVIFileGetStream(m_pAVIFile, &m_pAVIStream, streamtypeVIDEO, 0l); FAILED(hr))
 		{
 			throw new CWin32Exception(hr);
 		}
@@ -166,7 +166,7 @@ namespace retro::multimedia
 		return AVIStreamStart(m_pAVIStream);
 	}
 
-	const LPBYTE CAvi::GetFrameBuffer(LONG nIndex) const
+	const LPBYTE CAvi::GetFrameBuffer(_In_ LONG nIndex) const
 	{
 		ASSERT_VALID(this);
 
@@ -187,12 +187,14 @@ namespace retro::multimedia
 	{
 		CObject::AssertValid();
 
-		ASSERT_POINTER(m_pAVIFile, PAVIFILE);
-		ASSERT_POINTER(m_pAVIStream, PAVISTREAM);
-		ASSERT_POINTER(m_pGetFrame, PGETFRAME);
+		if (!m_pAVIFile)
+		{
+			ASSERT_NULL_OR_POINTER(m_pAVIStream, PAVISTREAM);
+			ASSERT_NULL_OR_POINTER(m_pGetFrame, PGETFRAME);
+		}		
 	}
 
-	void CAvi::Dump(CDumpContext& dc) const
+	void CAvi::Dump(_Inout_ CDumpContext& dc) const
 	{
 		CObject::Dump(dc);
 

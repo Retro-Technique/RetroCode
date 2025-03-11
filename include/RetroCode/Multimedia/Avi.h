@@ -71,13 +71,13 @@ namespace retro::multimedia
 
 	public:
 
-		void OpenFromFile(LPCTSTR pszFileName);
+		void OpenFromFile(_In_z_ LPCTSTR pszFileName);
 		void Close();
 		FLOAT GetFrameRate() const;
 		CTimeSpan GetDuration() const;
 		LONG GetFrameCount() const;
 		LONG GetFirstFrameIndex() const;
-		const LPBYTE GetFrameBuffer(LONG nIndex) const;
+		const LPBYTE GetFrameBuffer(_In_ LONG nIndex) const;
 
 #pragma endregion
 #pragma region Overridables
@@ -86,7 +86,7 @@ namespace retro::multimedia
 
 #ifdef _DEBUG
 		void AssertValid() const override;
-		void Dump(CDumpContext& dc) const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
 #endif
 
 #pragma endregion

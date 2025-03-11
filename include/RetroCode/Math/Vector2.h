@@ -76,8 +76,8 @@ namespace retro::math
 
 		void FromPoint(_In_ const CPoint& ptPoint);
 		void FromSize(_In_ const CSize& szSize);
-		CPoint ToPoint() const;
-		CSize ToSize() const;
+		_Check_return_ CPoint ToPoint() const;
+		_Check_return_ CSize ToSize() const;
 		void Serialize(_Inout_ CArchive& ar);
 #ifdef _DEBUG
 		void Dump(_Inout_ CDumpContext& dc) const;

@@ -81,7 +81,7 @@ namespace retro
 		public:
 
 			void FromCOLORREF(_In_ COLORREF uColor);
-			COLORREF ToCOLORREF() const;
+			_Check_return_ COLORREF ToCOLORREF() const;
 			void Serialize(_Inout_ CArchive& ar);
 #ifdef _DEBUG
 			void Dump(_Inout_ CDumpContext& dc) const;

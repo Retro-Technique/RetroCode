@@ -45,7 +45,7 @@
 
 namespace retro::multimedia
 {
-	
+
 	class AFX_EXT_CLASS CWave : public CObject
 	{
 #pragma region Constructors
@@ -70,13 +70,13 @@ namespace retro::multimedia
 
 	public:
 
-		void LoadFromFile(LPCTSTR pszFileName);
+		void LoadFromFile(_In_z_ LPCTSTR pszFileName);
 		void Unload();
 		BOOL IsValid() const;
-		BOOL Play(BOOL bAsync = TRUE, BOOL bLooped = FALSE) const;
-		BOOL GetFormat(WAVEFORMATEX& wfFormat) const;
+		BOOL Play(_In_ BOOL bAsync = TRUE, _In_ BOOL bLooped = FALSE) const;
+		BOOL GetFormat(_Out_ WAVEFORMATEX& wfFormat) const;
 		DWORD GetDataLen() const;
-		DWORD GetData(LPBYTE pWaveData, DWORD uMaxToCopy) const;
+		DWORD GetData(_Out_writes_bytes_to_(uMaxToCopy, return) LPBYTE pWaveData, _In_ DWORD uMaxToCopy) const;
 		CTimeSpan GetDuration() const;
 		WORD GetChannelCount() const;
 		DWORD GetSampleRate() const;

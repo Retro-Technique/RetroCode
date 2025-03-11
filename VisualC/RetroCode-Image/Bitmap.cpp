@@ -400,7 +400,7 @@ namespace retro
 			uSize = static_cast<DWORD>(streamSize.QuadPart);
 		}
 
-		CSize CBitmapRGBA::GetSize() const
+		_Check_return_ CSize CBitmapRGBA::GetSize() const
 		{
 			if (!m_spBitmap)
 			{
@@ -418,7 +418,7 @@ namespace retro
 			return CSize(uWidth, uHeight);
 		}
 
-		const CColorRGBA* CBitmapRGBA::LockForRead() const
+		_Check_return_ const CColorRGBA* CBitmapRGBA::LockForRead() const
 		{
 			if (!m_spBitmap)
 			{
@@ -440,7 +440,7 @@ namespace retro
 			return reinterpret_cast<const CColorRGBA*>(pBuffer);
 		}
 
-		CColorRGBA* CBitmapRGBA::LockForWrite()
+		_Check_return_ CColorRGBA* CBitmapRGBA::LockForWrite()
 		{
 			if (!m_spBitmap)
 			{
