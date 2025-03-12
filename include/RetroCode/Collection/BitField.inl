@@ -43,8 +43,8 @@ namespace retro::coll
 #pragma region Constructors
 
 	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	CFixed<TYPE, SIZE, ARG_TYPE>::CFixed()
-		: m_pData{0}
+	CBitField<TYPE, SIZE, ARG_TYPE>::CBitField()
+		: m_aBytes{0}
 	{
 
 	}
@@ -53,77 +53,97 @@ namespace retro::coll
 #pragma region Operations
 
 	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	INT_PTR CFixed<TYPE, SIZE, ARG_TYPE>::GetSize() const
+	INT_PTR CBitField<TYPE, SIZE, ARG_TYPE>::GetSize() const
 	{
 		return SIZE;
 	}
 
 	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	INT_PTR CFixed<TYPE, SIZE, ARG_TYPE>::GetUpperBound() const
+	INT_PTR CBitField<TYPE, SIZE, ARG_TYPE>::GetCount() const
 	{
-		return (SIZE - 1);
-	}
+		INT_PTR nCount = 0;
 
-	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	const TYPE& CFixed<TYPE, SIZE, ARG_TYPE>::GetAt(INT_PTR nIndex) const
-	{
-		ASSERT(nIndex >= 0);
-		ASSERT(nIndex < SIZE);
-
-		if (nIndex >= 0 && nIndex < SIZE)
+		for (INT_PTR i = 0; i < SIZE; i++)
 		{
-			return m_pData[nIndex];
+			if (GetAt(i))
+			{
+				nCount++;
+			}
 		}
 
-		AfxThrowInvalidArgException();
+		return nCount;
 	}
 
 	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	TYPE& CFixed<TYPE, SIZE, ARG_TYPE>::GetAt(INT_PTR nIndex)
+	void CBitField<TYPE, SIZE, ARG_TYPE>::SetAt(INT_PTR nIndex, BOOL bValue)
 	{
-		ASSERT(nIndex >= 0);
-		ASSERT(nIndex < SIZE);
+		ENSURE(nIndex >= 0);
+		ENSURE(nIndex < SIZE);
 
-		if (nIndex >= 0 && nIndex < SIZE)
+		if (bValue)
 		{
-			return m_pData[nIndex];
+			m_aBytes[nIndex / (sizeof(BYTE) * 8)] |= (1 << (nIndex % (sizeof(BYTE) * 8)));
+		}
+		else
+		{
+			m_aBytes[nIndex / (sizeof(BYTE) * 8)] &= ~(1 << (nIndex % (sizeof(BYTE) * 8)));
+		}
+	}
+
+	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
+	BOOL CBitField<TYPE, SIZE, ARG_TYPE>::GetAt(INT_PTR nIndex) const
+	{
+		ENSURE(nIndex >= 0);
+		ENSURE(nIndex < SIZE);
+
+		return (m_aBytes[nIndex / (sizeof(BYTE) * 8)] & (1 << (nIndex % (sizeof(BYTE) * 8)))) != 0;
+	}
+
+	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
+	void CBitField<TYPE, SIZE, ARG_TYPE>::Reset()
+	{
+		ZeroMemory(m_aBytes, sizeof(m_aBytes));
+	}
+
+	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
+	BOOL CBitField<TYPE, SIZE, ARG_TYPE>::IsAll() const
+	{
+		for (INT_PTR i = 0; i < SIZE; i++)
+		{
+			if (!GetAt(i))
+			{
+				return FALSE;
+			}
 		}
 
-		AfxThrowInvalidArgException();
+		return TRUE;
 	}
 
 	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	const TYPE* CFixed<TYPE, SIZE, ARG_TYPE>::GetData() const
+	BOOL CBitField<TYPE, SIZE, ARG_TYPE>::IsAny() const
 	{
-		return (const TYPE*)m_pData;
-	}
-
-	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	TYPE* CFixed<TYPE, SIZE, ARG_TYPE>::GetData()
-	{
-		return (TYPE*)m_pData;
-	}
-
-	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	void CFixed<TYPE, SIZE, ARG_TYPE>::SetAt(INT_PTR nIndex, ARG_TYPE newElement)
-	{
-		ASSERT(nIndex >= 0);
-		ASSERT(nIndex < SIZE);
-
-		if (nIndex >= 0 && nIndex < SIZE)
+		for (INT_PTR i = 0; i < SIZE; i++)
 		{
-			m_pData[nIndex] = newElement;
-			return;
+			if (GetAt(i))
+			{
+				return TRUE;
+			}
 		}
 
-		AfxThrowInvalidArgException();
+		return FALSE;
+	}
+
+	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
+	BOOL CBitField<TYPE, SIZE, ARG_TYPE>::IsNone() const
+	{
+		return !IsAny();
 	}
 
 #pragma endregion
 #pragma region Overridables
 
 	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	void CFixed<TYPE, SIZE, ARG_TYPE>::Serialize(CArchive& ar)
+	void CBitField<TYPE, SIZE, ARG_TYPE>::Serialize(CArchive& ar)
 	{
 		CObject::Serialize(ar);
 
@@ -132,13 +152,13 @@ namespace retro::coll
 			ar.WriteCount(SIZE);
 		}
 
-		SerializeElements<TYPE>(ar, m_pData, SIZE);
+		SerializeElements<TYPE>(ar, m_aBytes, sizeof(m_aBytes));
 	}
 
 #ifdef _DEBUG
 
 	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	void CFixed<TYPE, SIZE, ARG_TYPE>::Dump(CDumpContext& dc) const
+	void CBitField<TYPE, SIZE, ARG_TYPE>::Dump(CDumpContext& dc) const
 	{
 		CObject::Dump(dc);
 
@@ -146,18 +166,20 @@ namespace retro::coll
 		if (dc.GetDepth() > 0)
 		{
 			dc << "\n";
-			DumpElements<TYPE>(dc, m_pData, SIZE);
+			for (INT_PTR i = 0; i < SIZE; i++)
+			{
+				dc << GetAt(i);
+			}
 		}
-
 		dc << "\n";
 	}
 
 	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE>
-	void CFixed<TYPE, SIZE, ARG_TYPE>::AssertValid() const
+	void CBitField<TYPE, SIZE, ARG_TYPE>::AssertValid() const
 	{
 		CObject::AssertValid();
 
-		ASSERT(AfxIsValidAddress(m_pData, SIZE * sizeof(TYPE)));
+		ASSERT(AfxIsValidAddress(m_aBytes, sizeof(m_aBytes)));
 	}
 
 #endif
