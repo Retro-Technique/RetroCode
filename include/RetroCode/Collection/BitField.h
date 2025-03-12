@@ -71,7 +71,7 @@ namespace retro::coll
 #pragma region Operations
 	public:
 
-		 INT_PTR GetSize() const;
+		INT_PTR GetSize() const;
 		INT_PTR GetCount() const;
 		void SetAt(_In_ INT_PTR nIndex, _In_ BOOL bValue);
 		BOOL GetAt(_In_ INT_PTR nIndex) const;
