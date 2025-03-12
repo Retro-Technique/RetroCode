@@ -172,6 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\tests\Collection\BitField.Test.cpp" />
     <ClCompile Include="..\..\tests\Collection\Circular.Test.cpp" />
     <ClCompile Include="..\..\tests\Collection\Fixed.Test.cpp" />
     <ClCompile Include="..\..\tests\Collection\Queue.Test.cpp" />

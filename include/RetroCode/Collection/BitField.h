@@ -37,17 +37,64 @@
  *
  */
 
+#ifndef __RETRO_COLLECTION_H_INCLUDED__
+#error Do not include BitField.h directly, include the Collection.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_COLLECTION_H_INCLUDED__
-#define __RETRO_COLLECTION_H_INCLUDED__
+namespace retro::coll
+{
 
-#include <afxwin.h>
+	template<typename TYPE, INT_PTR SIZE, typename ARG_TYPE = const TYPE&>
+	class CBitField : public CObject
+	{
+#pragma region Constructors
 
-#include "Collection/Stack.h"
-#include "Collection/Queue.h"
-#include "Collection/Circular.h"
-#include "Collection/Fixed.h"
-#include "Collection/BitField.h"
+	public:
 
+		CBitField();
+		~CBitField() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+
+		static constexpr const INT_PTR BIT_COUNT = SIZE % 8 ? SIZE + 8 - SIZE % 8 : SIZE;
+
+	private:
+
+		BYTE m_aBytes[BIT_COUNT];
+
+#pragma endregion
+#pragma region Operations
+	public:
+
+		 INT_PTR GetSize() const;
+		INT_PTR GetCount() const;
+		void SetAt(_In_ INT_PTR nIndex, _In_ BOOL bValue);
+		BOOL GetAt(_In_ INT_PTR nIndex) const;
+		void Reset();
+		BOOL IsAll() const;
+		BOOL IsAny() const;
+		BOOL IsNone() const;
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+		void Serialize(_Inout_ CArchive& ar) override;
+#ifdef _DEBUG
+		void Dump(_Inout_ CDumpContext& dc) const override;
+		void AssertValid() const override;
 #endif
+
+#pragma endregion
+
+	};
+
+}
+
+#include "BitField.inl"
