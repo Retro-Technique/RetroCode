@@ -20,6 +20,7 @@ jobs:
         configuration: ['Debug', 'Release']
 
     env: 
+    
       VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
 
     steps:
@@ -27,7 +28,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Add MSBuild to PATH
+      - name: Install MSBuild
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Export GitHub Actions cache environment variables
@@ -37,10 +38,10 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      - name: Run MSBuild
+      - name: Run Build and Code Analysis
         run: msbuild VisualC/RetroCode.sln -property:Configuration=${{ matrix.configuration }} -property:Platform=${{ matrix.platform }}  
 
-      - name: Run Tests
+      - name: Run Unit Tests
         uses: rusty-bender/vstest-action@main
         with:
           testAssembly: VisualC/${{ matrix.platform }}/${{ matrix.configuration }}/RetroCode-Math.Test.dll      

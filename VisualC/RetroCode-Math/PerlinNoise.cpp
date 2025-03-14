@@ -89,7 +89,7 @@ namespace retro::math
 
 	_Check_return_
 	DOUBLE* NoiseMap(
-		_Out_writes_(uWidth * uHeight) DOUBLE* pNoiseMap, 
+		_Inout_updates_all_(uWidth * uHeight) DOUBLE* pNoiseMap,
 		_In_ UINT uWidth, 
 		_In_ UINT uHeight, 
 		_In_ DOUBLE fScale,

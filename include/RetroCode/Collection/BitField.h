@@ -69,6 +69,7 @@ namespace retro::coll
 
 #pragma endregion
 #pragma region Operations
+
 	public:
 
 		INT_PTR GetSize() const;
