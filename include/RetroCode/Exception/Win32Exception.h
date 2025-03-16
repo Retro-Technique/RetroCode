@@ -37,12 +37,16 @@
  *
  */
 
+#ifndef __RETRO_EXCEPTION_H_INCLUDED__
+#error Do not include Win32Exception.h directly, include the Exception.h file
+#endif
+
 #pragma once
 
-namespace retro::multimedia
+namespace retro::exception
 {
 
-	class CWin32Exception : public CException
+	class AFX_EXT_CLASS CWin32Exception : public CException
 	{
 #pragma region Constructors
 		
@@ -66,10 +70,20 @@ namespace retro::multimedia
 
 	public:
 
-		BOOL GetErrorMessage(LPTSTR lpszError, UINT nMaxError, PUINT pnHelpContext = NULL) const override;
+		_Success_(return != 0)
+		BOOL GetErrorMessage(
+			_Out_writes_z_(nMaxError) LPTSTR lpszError,
+			_In_ UINT nMaxError,
+			_Out_opt_ PUINT pnHelpContext = NULL) const override;
+
+#ifdef _DEBUG
+		void AssertValid() const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
+#endif
+
+#pragma endregion
 
 #pragma endregion
 	};
-
 
 }

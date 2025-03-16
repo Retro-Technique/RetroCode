@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{D9B803C8-B4C9-7CD6-621A-95A697C04273}</ProjectGuid>
+    <ProjectGuid>{9333065F-AF0A-F5E9-6694-B49051DF9B64}</ProjectGuid>
     <Keyword>MFCDLLProj</Keyword>
-    <RootNamespace>RetroCodeImage</RootNamespace>
+    <RootNamespace>RetroCodeException</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -74,20 +74,20 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
-    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
-    <PublicIncludeDirectories>$(SolutionDir)..\include</PublicIncludeDirectories>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>..\RetroTechniqueRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
     <PublicIncludeDirectories>$(SolutionDir)..\include</PublicIncludeDirectories>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>..\RetroTechniqueRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+    <PublicIncludeDirectories>$(SolutionDir)..\include</PublicIncludeDirectories>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\RetroTechniqueRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -95,7 +95,7 @@
     <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
     <PublicIncludeDirectories>$(SolutionDir)..\include</PublicIncludeDirectories>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\RetroTechniqueRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -103,23 +103,25 @@
     <OutDir>$(SolutionDir)$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
     <PublicIncludeDirectories>$(SolutionDir)..\include</PublicIncludeDirectories>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>..\RetroTechniqueRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_AFXEXT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;_AFXEXT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\include</AdditionalIncludeDirectories>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <ModuleDefinitionFile>.\RetroCode-Image.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\RetroCode-Exception.def</ModuleDefinitionFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -131,20 +133,19 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;_DEBUG;_AFXEXT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_AFXEXT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\include</AdditionalIncludeDirectories>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <ModuleDefinitionFile>.\RetroCode-Image.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\RetroCode-Exception.def</ModuleDefinitionFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -167,13 +168,12 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\include</AdditionalIncludeDirectories>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>.\RetroCode-Image.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\RetroCode-Exception.def</ModuleDefinitionFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -196,13 +196,12 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\include</AdditionalIncludeDirectories>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <ModuleDefinitionFile>.\RetroCode-Image.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>.\RetroCode-Exception.def</ModuleDefinitionFile>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -215,8 +214,6 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bitmap.cpp" />
-    <ClCompile Include="Color.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
@@ -231,34 +228,34 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="MMIOException.cpp" />
     <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="RetroCode-Image.cpp" />
+    <ClCompile Include="ReportException.cpp" />
+    <ClCompile Include="RetroCode-Exception.cpp" />
+    <ClCompile Include="Win32Exception.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\RetroCode-Image.rc2" />
-    <None Include="RetroCode-Image.def" />
+    <None Include="res\RetroCode-Exception.rc2" />
+    <None Include="RetroCode-Exception.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\RetroCode\Image.h" />
-    <ClInclude Include="..\..\include\RetroCode\Image\Bitmap.h" />
-    <ClInclude Include="..\..\include\RetroCode\Image\Color.h" />
+    <ClInclude Include="..\..\include\RetroCode\Exception.h" />
+    <ClInclude Include="..\..\include\RetroCode\Exception\Macros.h" />
+    <ClInclude Include="..\..\include\RetroCode\Exception\MMIOException.h" />
+    <ClInclude Include="..\..\include\RetroCode\Exception\ReportException.h" />
+    <ClInclude Include="..\..\include\RetroCode\Exception\Win32Exception.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RetroCode-Image.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RetroCode-Exception\RetroCode-Exception.vcxproj">
-      <Project>{9333065f-af0a-f5e9-6694-b49051df9b64}</Project>
-    </ProjectReference>
+    <ResourceCompile Include="RetroCode-Exception.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,5 +11,6 @@
 #include "framework.h"
 
 #include <RetroCode/Image.h>
+#include <RetroCode/Exception.h>
 
 #endif //PCH_H

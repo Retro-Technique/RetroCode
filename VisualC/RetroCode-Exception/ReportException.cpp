@@ -38,43 +38,87 @@
  */
 
 #include "pch.h"
-#include "Win32Exception.h"
 
-namespace retro::multimedia
+namespace retro::exception
 {
 
 #pragma region Constructors
 
-	IMPLEMENT_DYNAMIC(CWin32Exception, CException)
+	IMPLEMENT_DYNAMIC(CReportException, CObject)
 
-	CWin32Exception::CWin32Exception(HRESULT hr)
-		: m_hr(hr)
+	CReportException::CReportException(CException* e, LPCTSTR pszMsg, LPCTSTR pszFile, INT nLine, BOOL bToDelete)
+		: m_pException(e)
+		, m_pszMsg(pszMsg)
+		, m_pszFile(pszFile)
+		, m_nLine(nLine)
+		, m_bToDelete(bToDelete)
 	{
 
 	}
 
-	CWin32Exception::CWin32Exception(DWORD dwLastError)
-		: m_hr(HRESULT_FROM_WIN32(dwLastError))
+	CReportException::~CReportException()
 	{
+		if (m_bToDelete)
+		{
+			m_pException->Delete();
+		}
+	}
 
+#pragma endregion
+#pragma region Operations
+
+	LPCTSTR CReportException::Report()
+	{
+		ASSERT_VALID(this);
+
+		static constexpr const INT_PTR EXCEPTION_MAX_ERROR_LENGTH = 512;
+
+		TCHAR m_szErrorMessage[EXCEPTION_MAX_ERROR_LENGTH]{ 0 };
+		if (m_pException->GetErrorMessage(m_szErrorMessage, EXCEPTION_MAX_ERROR_LENGTH, 0))
+		{
+			m_strMessage.Format(_T("%Ts (%Ts:%d)\t%Ts"), m_pszMsg, m_pszFile, m_nLine, m_szErrorMessage);
+		}
+		else
+		{
+			m_strMessage.Format(_T("%Ts (%Ts:%d)"), m_pszMsg, m_pszFile, m_nLine);
+		}
+
+		return m_strMessage.GetString();
 	}
 
 #pragma endregion
 #pragma region Overridables
 
-	BOOL CWin32Exception::GetErrorMessage(LPTSTR lpszError, UINT nMaxError, PUINT pnHelpContext) const
+#ifdef _DEBUG
+
+	void CReportException::AssertValid() const
 	{
-		ASSERT(lpszError && AfxIsValidString(lpszError, nMaxError));
+		CObject::AssertValid();
 
-		if (pnHelpContext)
-		{
-			*pnHelpContext = 0;
-		}
-
-		_stprintf_s(lpszError, nMaxError, _T("Win32 error: %s"), _com_error(m_hr).ErrorMessage());
-
-		return TRUE;
+		ASSERT_POINTER(m_pException, CException);
+		m_pException->AssertValid();
+		ASSERT(AfxIsValidString(m_pszMsg));
+		ASSERT(AfxIsValidString(m_pszFile));
+		ASSERT(m_nLine > 0);
+		ASSERT(m_bToDelete == TRUE || m_bToDelete == FALSE);
 	}
 
+	void CReportException::Dump(_Inout_ CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		if (m_pException)
+		{
+			m_pException->Dump(dc);
+		}
+		dc << _T("m_pszMsg = ") << m_pszMsg << _T("\n");
+		dc << _T("m_pszFile = ") << m_pszFile << _T("\n");
+		dc << _T("m_nLine = ") << m_nLine << _T("\n");
+		dc << _T("m_bToDelete = ") << m_bToDelete << _T("\n");
+	}
+
+#endif
+
 #pragma endregion
+
 }

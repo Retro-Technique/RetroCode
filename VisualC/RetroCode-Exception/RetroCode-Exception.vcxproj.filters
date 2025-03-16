@@ -13,12 +13,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="include\Multimedia">
-      <UniqueIdentifier>{14b9189d-21ac-4b19-bfca-a4db54d34ba2}</UniqueIdentifier>
+    <Filter Include="include\Exception">
+      <UniqueIdentifier>{e1647c9c-79c5-4112-bb44-5676808f18f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RetroCode-Multimedia.cpp">
+    <ClCompile Include="RetroCode-Exception.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
@@ -27,27 +27,21 @@
     <ClCompile Include="pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="MMIO.cpp">
+    <ClCompile Include="Win32Exception.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="MMChunk.cpp">
+    <ClCompile Include="MMIOException.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="MMIOInfo.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Wave.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Avi.cpp">
+    <ClCompile Include="ReportException.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="RetroCode-Multimedia.def">
+    <None Include="RetroCode-Exception.def">
       <Filter>src</Filter>
     </None>
-    <None Include="res\RetroCode-Multimedia.rc2">
+    <None Include="res\RetroCode-Exception.rc2">
       <Filter>Fichiers de ressources</Filter>
     </None>
   </ItemGroup>
@@ -64,27 +58,24 @@
     <ClInclude Include="targetver.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Multimedia.h">
+    <ClInclude Include="..\..\include\RetroCode\Exception\Win32Exception.h">
+      <Filter>include\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Exception.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Multimedia\MMIO.h">
-      <Filter>include\Multimedia</Filter>
+    <ClInclude Include="..\..\include\RetroCode\Exception\Macros.h">
+      <Filter>include\Exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Multimedia\MMIOInfo.h">
-      <Filter>include\Multimedia</Filter>
+    <ClInclude Include="..\..\include\RetroCode\Exception\MMIOException.h">
+      <Filter>include\Exception</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Multimedia\MMChunk.h">
-      <Filter>include\Multimedia</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Multimedia\Wave.h">
-      <Filter>include\Multimedia</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\RetroCode\Multimedia\Avi.h">
-      <Filter>include\Multimedia</Filter>
+    <ClInclude Include="..\..\include\RetroCode\Exception\ReportException.h">
+      <Filter>include\Exception</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RetroCode-Multimedia.rc">
+    <ResourceCompile Include="RetroCode-Exception.rc">
       <Filter>Fichiers de ressources</Filter>
     </ResourceCompile>
   </ItemGroup>
