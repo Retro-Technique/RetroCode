@@ -46,21 +46,112 @@
 namespace retro::math
 {
 
-	AFX_EXT_API 
-	_Check_return_ 
-	DOUBLE PerlinNoise(
-		_In_ DOUBLE x, 
-		_In_ DOUBLE y);
+	class AFX_EXT_CLASS CPerlinNoise : public CObject
+	{
+#pragma region
 
-	AFX_EXT_API 
-	_Check_return_ 
-	DOUBLE* NoiseMap(
-		_Inout_updates_all_(uWidth * uHeight)  DOUBLE* pNoiseMap,
-		_In_ UINT uWidth, 
-		_In_ UINT uHeight, 
-		_In_ DOUBLE fScale, 
-		_In_ UINT uOctaveCount, 
-		_In_ FLOAT fPersistance, 
-		_In_ FLOAT fLacunarity);
+		DECLARE_SERIAL(CPerlinNoise)
+
+	public:
+
+		/**
+		 * @brief Default constructor
+		 */
+		CPerlinNoise();
+
+		/**
+		 * @brief Default destructor
+		 */
+		~CPerlinNoise() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+
+		static constexpr const INT HASH[] = {
+						208,34,231,213,32,248,233,56,161,78,24,140,71,48,140,254,245,255,247,247,40,
+						185,248,251,245,28,124,204,204,76,36,1,107,28,234,163,202,224,245,128,167,204,
+						9,92,217,54,239,174,173,102,193,189,190,121,100,108,167,44,43,77,180,204,8,81,
+						70,223,11,38,24,254,210,210,177,32,81,195,243,125,8,169,112,32,97,53,195,13,
+						203,9,47,104,125,117,114,124,165,203,181,235,193,206,70,180,174,0,167,181,41,
+						164,30,116,127,198,245,146,87,224,149,206,57,4,192,210,65,210,129,240,178,105,
+						228,108,245,148,140,40,35,195,38,58,65,207,215,253,65,85,208,76,62,3,237,55,89,
+						232,50,217,64,244,157,199,121,252,90,17,212,203,149,152,140,187,234,177,73,174,
+						193,100,192,143,97,53,145,135,19,103,13,90,135,151,199,91,239,247,33,39,145,
+						101,120,99,3,186,86,99,41,237,203,111,79,220,135,158,42,30,154,120,67,87,167,
+						135,176,183,191,253,115,184,21,233,58,129,233,142,39,128,211,118,137,139,255,
+						114,20,218,113,154,27,127,246,250,1,8,198,250,209,92,222,173,21,88,102,219 };
+		static constexpr const INT_PTR HASH_COUNT = ARRAYSIZE(HASH);
+		C_ASSERT(256 == HASH_COUNT);
+
+	public:
+
+		static constexpr const INT_PTR WIDTH_MIN = 1;
+		static constexpr const INT_PTR HEIGHT_MIN = 1;
+		static constexpr const INT_PTR OCTAVE_COUNT_MIN = 1;
+		static constexpr const DOUBLE SCALE_MIN = 0.0001;
+		static constexpr const DOUBLE PERSISTENCE_MIN = 1.;
+		static constexpr const DOUBLE LACUNARITY_MIN = 1.;
+
+	private:
+
+		CVector2l	m_vSize;
+		DOUBLE		m_fScale;
+		DOUBLE		m_fPersistence;
+		DOUBLE		m_fLacunarity;
+		INT_PTR		m_nOctaveCount;
+
+	private:
+
+		CArray<DOUBLE> m_arrNoiseMap;
+
+	public:
+
+		typedef BOOL(*MAPENUMPROC)(DOUBLE, LPVOID);
+
+		inline void SetWidth(_In_range_(WIDTH_MIN, INTPTR_MAX) INT_PTR nWidth) { m_vSize.X = nWidth; }
+		inline void SetHeight(_In_range_(HEIGHT_MIN, INTPTR_MAX) INT_PTR nHeight) { m_vSize.Y = nHeight; }
+		inline void SetScale(_In_range_(SCALE_MIN, DBL_MAX) DOUBLE fScale) { m_fScale = fScale; }
+		inline void SetPersistence(_In_range_(PERSISTENCE_MIN, DBL_MAX) DOUBLE fPersistence) { m_fPersistence = fPersistence; }
+		inline void SetLacunarity(_In_range_(LACUNARITY_MIN, DBL_MAX) DOUBLE fLacunarity) { m_fLacunarity = fLacunarity; }		
+		inline void SetOctaveCount(_In_range_(OCTAVE_COUNT_MIN, INTPTR_MAX) INT_PTR nOctaveCount) { m_nOctaveCount = nOctaveCount; }
+
+		inline _Check_return_ const CVector2l& GetSize() const { return m_vSize; }
+		inline _Check_return_ DOUBLE GetScale() const { return m_fScale; }
+		inline _Check_return_ DOUBLE GetPersistence() const { return m_fPersistence; }
+		inline _Check_return_ DOUBLE GetLacunarity() const { return m_fLacunarity; }
+		inline _Check_return_ INT_PTR GetOctaveCount() const { return m_nOctaveCount; }
+
+#pragma endregion
+#pragma region Operations
+
+	public:
+
+		void Generate();
+		void Enumerate(MAPENUMPROC pfnEnum, LPVOID pData = NULL);
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+		void Serialize(_Inout_ CArchive& ar) override;
+#ifdef _DEBUG
+		void AssertValid() const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
+#endif
+
+#pragma endregion
+#pragma region Implementations
+
+	private:
+
+		INT GetNoiseFromHash(INT x, INT y) const;
+		DOUBLE SmoothInterpolation(DOUBLE x, DOUBLE y, DOUBLE s) const;
+		DOUBLE MakeNoise(DOUBLE x, DOUBLE y) const;
+
+#pragma endregion
+	};
 
 }

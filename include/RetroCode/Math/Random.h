@@ -54,8 +54,21 @@ namespace retro::math
 
 	public:
 
+		/**
+		 * @brief Default constructor
+		 */
 		CRandom();
-		explicit CRandom(_In_ UINT uSeed);
+
+		/**
+		 * @brief Constructor with a specific seed
+		 * @param uSeed Seed for the random number generator
+		 */
+		explicit CRandom(
+			_In_ UINT uSeed);
+
+		/**
+		 * @brief Default destructor
+		 */
 		~CRandom() = default;
 
 #pragma endregion
@@ -63,14 +76,67 @@ namespace retro::math
 
 	public:
 
+		/**
+		 * @brief Initializes the random number generator with a default seed
+		 */
 		void Seed();
-		void Seed(_In_ UINT uSeed);
+
+		/**
+		 * @brief Initializes the random number generator with a specific seed
+		 * @param uSeed Seed for the random number generator
+		 */
+		void Seed(
+			_In_ UINT uSeed);
+
+		/**
+		 * @brief Generates a random integer
+		 * @return Random integer
+		 */
 		_Check_return_ INT NextInteger() const;
-		_Check_return_ INT NextInteger(_In_ INT nMaxValueExcluded) const;
-		_Check_return_ INT NextInteger(_In_ INT nMinValueIncluded, _In_ INT nMaxValueExcluded) const;
+
+		/**
+		 * @brief Generates a random integer within a specific range
+		 * @param nMaxValueExcluded Maximum value excluded
+		 * @return Random integer
+		 */
+		_Check_return_ INT NextInteger(
+			_In_ INT nMaxValueExcluded) const;
+
+		/**
+		 * @brief Generates a random integer within a specific range
+		 * @param nMinValueIncluded Minimum value included
+		 * @param nMaxValueExcluded Maximum value excluded
+		 * @return Random integer
+		 */
+		_Check_return_ INT NextInteger(
+			_In_ INT nMinValueIncluded,
+			_In_ INT nMaxValueExcluded) const;
+
+		/**
+		 * @brief Generates a random float
+		 * @return Random float
+		 */
 		_Check_return_ FLOAT NextFloat() const;
+
+		/**
+		 * @brief Generates a random double
+		 * @return Random double
+		 */
 		_Check_return_ DOUBLE NextDouble() const;
-		void NextBytes(_Out_writes_(uByteCount) LPBYTE pBytes, _In_ UINT_PTR uByteCount) const;
+
+		/**
+		 * @brief Generates an array of random bytes
+		 * @param pBytes Pointer to the byte array
+		 * @param uByteCount Number of bytes to generate
+		 */
+		void NextBytes(
+			_Out_writes_(uByteCount) LPBYTE pBytes,
+			_In_ UINT_PTR uByteCount) const;
+
+		/**
+		 * @brief Generates a random boolean
+		 * @return Random boolean
+		 */
 		_Check_return_ BOOL NextBoolean() const;
 
 #pragma endregion

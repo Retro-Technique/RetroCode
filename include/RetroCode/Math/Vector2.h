@@ -86,9 +86,10 @@ namespace retro::math
 #pragma endregion
 	};
 
-	typedef CVector2<INT>	CVector2i;
-	typedef CVector2<FLOAT>	CVector2f;
-	typedef CVector2<UINT>	CVector2u;
+	typedef CVector2<INT>		CVector2i;
+	typedef CVector2<FLOAT>		CVector2f;
+	typedef CVector2<UINT>		CVector2u;
+	typedef CVector2<INT_PTR>	CVector2l;
 
 	template<typename T>
 	CVector2<T> operator+(const CVector2<T>& Left, const CVector2<T>& Right);

@@ -119,6 +119,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\include</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,6 +145,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\include</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -171,6 +173,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\include</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -200,6 +203,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\include</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

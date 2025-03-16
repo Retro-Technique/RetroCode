@@ -42,125 +42,172 @@
 namespace retro::math
 {
 
-	static inline INT Noise2(INT x, INT y)
+#pragma region Constructors
+
+	IMPLEMENT_SERIAL(CPerlinNoise, CObject, 0);
+
+	CPerlinNoise::CPerlinNoise()
+		: m_vSize(500, 500)
+		, m_fScale(25.0)
+		, m_fPersistence(0.5)
+		, m_fLacunarity(2.0)
+		, m_nOctaveCount(5)
 	{
-		static constexpr const INT HASH[] = { 208,34,231,213,32,248,233,56,161,78,24,140,71,48,140,254,245,255,247,247,40,
-						 185,248,251,245,28,124,204,204,76,36,1,107,28,234,163,202,224,245,128,167,204,
-						 9,92,217,54,239,174,173,102,193,189,190,121,100,108,167,44,43,77,180,204,8,81,
-						 70,223,11,38,24,254,210,210,177,32,81,195,243,125,8,169,112,32,97,53,195,13,
-						 203,9,47,104,125,117,114,124,165,203,181,235,193,206,70,180,174,0,167,181,41,
-						 164,30,116,127,198,245,146,87,224,149,206,57,4,192,210,65,210,129,240,178,105,
-						 228,108,245,148,140,40,35,195,38,58,65,207,215,253,65,85,208,76,62,3,237,55,89,
-						 232,50,217,64,244,157,199,121,252,90,17,212,203,149,152,140,187,234,177,73,174,
-						 193,100,192,143,97,53,145,135,19,103,13,90,135,151,199,91,239,247,33,39,145,
-						 101,120,99,3,186,86,99,41,237,203,111,79,220,135,158,42,30,154,120,67,87,167,
-						 135,176,183,191,253,115,184,21,233,58,129,233,142,39,128,211,118,137,139,255,
-						 114,20,218,113,154,27,127,246,250,1,8,198,250,209,92,222,173,21,88,102,219 };
-		static constexpr const INT HASH_COUNT = ARRAYSIZE(HASH);
-
-		const INT nTmp = HASH[y % HASH_COUNT];
-
-		return HASH[(nTmp + x) % HASH_COUNT];
+	
 	}
 
-	static inline DOUBLE SmoothInter(DOUBLE x, DOUBLE y, DOUBLE s)
+#pragma endregion 
+#pragma region Operations
+
+	void CPerlinNoise::Generate()
 	{
-		return Lerp(x, y, s * s * (3. - 2. * s));
-	}
+		ASSERT_VALID(this);
 
-	_Check_return_ 
-	DOUBLE PerlinNoise(
-		_In_ DOUBLE x, 
-		_In_ DOUBLE y)
-	{
-		const INT x_int = static_cast<INT>(x);
-		const INT y_int = static_cast<INT>(y);
-		const DOUBLE x_frac = x - x_int;
-		const DOUBLE y_frac = y - y_int;
-		const INT s = Noise2(x_int, y_int);
-		const INT t = Noise2(x_int + 1, y_int);
-		const INT u = Noise2(x_int, y_int + 1);
-		const INT v = Noise2(x_int + 1, y_int + 1);
-		const DOUBLE low = SmoothInter(s, t, x_frac);
-		const DOUBLE high = SmoothInter(u, v, x_frac);
+		const INT_PTR nSize = m_vSize.X * m_vSize.Y;
 
-		return SmoothInter(low, high, y_frac);
-	}
-
-	_Check_return_
-	DOUBLE* NoiseMap(
-		_Inout_updates_all_(uWidth * uHeight) DOUBLE* pNoiseMap,
-		_In_ UINT uWidth, 
-		_In_ UINT uHeight, 
-		_In_ DOUBLE fScale,
-		_In_ UINT uOctaveCount,
-		_In_ FLOAT fPersistance, 
-		_In_ FLOAT fLacunarity)
-	{
-		if (!pNoiseMap)
-		{
-			return NULL;
-		}
-
-		if (uWidth < 1)
-		{
-			uWidth = 1;
-		}
-
-		if (uHeight < 1)
-		{
-			uHeight = 1;
-		}
-
-		if (fScale <= 0.)
-		{
-			fScale = 0.0001;
-		}
-
-		if (fLacunarity < 1.f)
-		{
-			fLacunarity = 1.f;
-		}
-
-		const UINT uSize = uWidth * uHeight;
+		m_arrNoiseMap.SetSize(nSize);
 
 		DOUBLE fMaxNoiseHeight = 0.;
 		DOUBLE fMinNoiseHeight = DBL_MAX;
 
-		for (UINT col = 0; col < uHeight; col++)
+		for (INT_PTR col = 0; col < m_vSize.Y; col++)
 		{
-			for (UINT row = 0; row < uWidth; row++)
+			for (INT_PTR row = 0; row < m_vSize.X; row++)
 			{
 				DOUBLE fAmplitude = 1.;
 				DOUBLE fFrequency = 1.;
 				DOUBLE fNoiseHeight = 0.;
 
-				for (UINT i = 0; i < uOctaveCount; i++)
+				for (INT_PTR i = 0; i < m_nOctaveCount; i++)
 				{
-					const DOUBLE fSampleX = row / fScale * fFrequency;
-					const DOUBLE fSampleY = col / fScale * fFrequency;
+					const DOUBLE fSampleX = row / m_fScale * fFrequency;
+					const DOUBLE fSampleY = col / m_fScale * fFrequency;
 
-					const DOUBLE fPerlinValue = PerlinNoise(fSampleX, fSampleY) * 2. - 1.;
+					const DOUBLE fPerlinValue = MakeNoise(fSampleX, fSampleY) * 2. - 1.;
 
 					fNoiseHeight += fPerlinValue * fAmplitude;
-					fAmplitude = fAmplitude * fPersistance;
-					fFrequency = fFrequency * fLacunarity;
+					fAmplitude = fAmplitude * m_fPersistence;
+					fFrequency = fFrequency * m_fLacunarity;
 				}
 
 				fMaxNoiseHeight = Max(fMaxNoiseHeight, fNoiseHeight);
 				fMinNoiseHeight = Min(fMinNoiseHeight, fNoiseHeight);
 
-				const UINT uIndex = col * uWidth + row;
-				pNoiseMap[uIndex] = fNoiseHeight;
+				const INT_PTR nIndex = col * m_vSize.Y + row;
+				m_arrNoiseMap.SetAt(nIndex, fNoiseHeight);
 			}
 		}
 
-		for (UINT i = 0; i < uSize; i++)
+		for (INT_PTR i = 0; i < nSize; i++)
 		{
-			pNoiseMap[i] = InverseLerp(fMinNoiseHeight, fMaxNoiseHeight, pNoiseMap[i]);
+			const DOUBLE fNoiseIn = m_arrNoiseMap.GetAt(i);
+			const DOUBLE fNoiseOut = InverseLerp(fMinNoiseHeight, fMaxNoiseHeight, fNoiseIn);
+			m_arrNoiseMap.SetAt(i, fNoiseOut);
 		}
-
-		return pNoiseMap;
 	}
+
+	void CPerlinNoise::Enumerate(MAPENUMPROC pfnEnum, LPVOID pData)
+	{
+		ASSERT_VALID(this);
+		ENSURE(pfnEnum);
+		
+		for (INT_PTR i = 0; i < m_arrNoiseMap.GetSize(); i++)
+		{
+			if (!pfnEnum(m_arrNoiseMap.GetAt(i), pData))
+			{
+				break;
+			}
+		}
+	}
+
+#pragma endregion
+#pragma region Overridables
+
+	void CPerlinNoise::Serialize(_Inout_ CArchive& ar)
+	{
+		CObject::Serialize(ar);
+
+		m_vSize.Serialize(ar);
+
+		if (ar.IsStoring())
+		{
+			ar << m_fScale;
+			ar << m_fPersistence;
+			ar << m_fLacunarity;
+			ar << m_nOctaveCount;
+		}
+		else
+		{
+			ar >> m_fScale;
+			ar >> m_fPersistence;
+			ar >> m_fLacunarity;
+			ar >> m_nOctaveCount;
+		}
+	}
+
+#ifdef _DEBUG
+
+	void CPerlinNoise::AssertValid() const
+	{
+		CObject::AssertValid();
+
+		ASSERT(m_vSize.X >= WIDTH_MIN);
+		ASSERT(m_vSize.Y >= HEIGHT_MIN);
+		ASSERT(m_fScale >= SCALE_MIN);
+		ASSERT(m_fPersistence >= PERSISTENCE_MIN);
+		ASSERT(m_fLacunarity >= LACUNARITY_MIN);
+		ASSERT(m_nOctaveCount >= OCTAVE_COUNT_MIN);
+		if (!m_arrNoiseMap.IsEmpty())
+		{
+			ASSERT(m_arrNoiseMap.GetSize() == m_vSize.X * m_vSize.Y);
+		}
+	}
+
+	void CPerlinNoise::Dump(_Inout_ CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		m_vSize.Dump(dc);
+		dc << _T("m_fScale = ") << m_fScale << _T("\n");
+		dc << _T("m_fPersistence = ") << m_fPersistence << _T("\n");
+		dc << _T("m_fLacunarity = ") << m_fLacunarity << _T("\n");
+		dc << _T("m_nOctaveCount = ") << m_nOctaveCount << _T("\n");
+		dc << _T("m_arrNoiseMap = ") << m_arrNoiseMap << _T("\n");
+	}
+
+#endif
+
+#pragma endregion 
+#pragma region Implementations
+
+	INT CPerlinNoise::GetNoiseFromHash(INT x, INT y) const
+	{
+		const INT nTmp = HASH[y % HASH_COUNT];
+
+		return HASH[(nTmp + x) % HASH_COUNT];
+	}
+
+	DOUBLE CPerlinNoise::SmoothInterpolation(DOUBLE x, DOUBLE y, DOUBLE s) const
+	{
+		return Lerp(x, y, s * s * (3. - 2. * s));
+	}
+
+	DOUBLE CPerlinNoise::MakeNoise(DOUBLE x, DOUBLE y) const
+	{
+		const INT x_int = static_cast<INT>(x);
+		const INT y_int = static_cast<INT>(y);
+		const DOUBLE x_frac = x - x_int;
+		const DOUBLE y_frac = y - y_int;
+		const INT s = GetNoiseFromHash(x_int, y_int);
+		const INT t = GetNoiseFromHash(x_int + 1, y_int);
+		const INT u = GetNoiseFromHash(x_int, y_int + 1);
+		const INT v = GetNoiseFromHash(x_int + 1, y_int + 1);
+		const DOUBLE low = SmoothInterpolation(s, t, x_frac);
+		const DOUBLE high = SmoothInterpolation(u, v, x_frac);
+
+		return SmoothInterpolation(low, high, y_frac);
+	}
+
+#pragma endregion
 
 }
