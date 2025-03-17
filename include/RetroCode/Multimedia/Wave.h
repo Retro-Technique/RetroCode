@@ -74,7 +74,7 @@ namespace retro::multimedia
 		void Unload();
 		BOOL IsValid() const;
 		BOOL Play(_In_ BOOL bAsync = TRUE, _In_ BOOL bLooped = FALSE) const;
-		BOOL GetFormat(_Out_ WAVEFORMATEX& wfFormat) const;
+		WAVEFORMATEX GetFormat() const;
 		DWORD GetDataLen() const;
 		DWORD GetData(_Out_writes_bytes_to_(uMaxToCopy, return) LPBYTE pWaveData, _In_ DWORD uMaxToCopy) const;
 		CTimeSpan GetDuration() const;
