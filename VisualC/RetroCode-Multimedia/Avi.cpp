@@ -38,7 +38,6 @@
  */
 
 #include "pch.h"
-#include "Win32Exception.h"
 
 namespace retro::multimedia
 {
@@ -71,19 +70,15 @@ namespace retro::multimedia
 
 		Close();
 
-		if (const HRESULT hr = AVIFileOpen(&m_pAVIFile, pszFileName, OF_READ, NULL); FAILED(hr))
-		{
-			throw new CWin32Exception(hr);
-		}
+		HRESULT hr = AVIFileOpen(&m_pAVIFile, pszFileName, OF_READ, NULL);
+		ENSURE_HRESULT(hr);
 
-		if (const HRESULT hr = AVIFileGetStream(m_pAVIFile, &m_pAVIStream, streamtypeVIDEO, 0l); FAILED(hr))
-		{
-			throw new CWin32Exception(hr);
-		}
+		hr = AVIFileGetStream(m_pAVIFile, &m_pAVIStream, streamtypeVIDEO, 0l);
+		ENSURE_HRESULT(hr);
 
 		if (m_pGetFrame = AVIStreamGetFrameOpen(m_pAVIStream, NULL); !m_pGetFrame)
 		{
-			throw new CWin32Exception(E_FAIL);
+			THROW_WIN32_EXCEPTION(E_FAIL);
 		}
 	}
 

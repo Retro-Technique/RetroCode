@@ -37,61 +37,65 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#ifndef __RETRO_MULTIMEDIA_H_INCLUDED__
-#error Do not include Wave.h directly, include the Multimedia.h file
-#endif
-
-namespace retro::multimedia
+namespace retro::exception
 {
 
-	class AFX_EXT_CLASS CWave : public CObject
-	{
 #pragma region Constructors
 
-		DECLARE_DYNAMIC(CWave)
+	IMPLEMENT_DYNAMIC(CWin32Exception, CException)
 
-	public:
+		CWin32Exception::CWin32Exception(HRESULT hr)
+		: m_hr(hr)
+	{
 
-		CWave();
-		virtual ~CWave();
+	}
 
-#pragma endregion
-#pragma region Attributes
+	CWin32Exception::CWin32Exception(DWORD dwLastError)
+		: m_hr(HRESULT_FROM_WIN32(dwLastError))
+	{
 
-	private:
-
-		LPBYTE	m_pData;
-		DWORD	m_uDataLen;
-
-#pragma endregion
-#pragma region Operations
-
-	public:
-
-		void LoadFromFile(_In_z_ LPCTSTR pszFileName);
-		void Unload();
-		BOOL IsValid() const;
-		BOOL Play(_In_ BOOL bAsync = TRUE, _In_ BOOL bLooped = FALSE) const;
-		WAVEFORMATEX GetFormat() const;
-		DWORD GetDataLen() const;
-		DWORD GetData(_Out_writes_bytes_to_(uMaxToCopy, return) LPBYTE pWaveData, _In_ DWORD uMaxToCopy) const;
-		CTimeSpan GetDuration() const;
-		WORD GetChannelCount() const;
-		DWORD GetSampleRate() const;
+	}
 
 #pragma endregion
 #pragma region Overridables
 
-	public:
+	_Success_(return != 0)
+	BOOL CWin32Exception::GetErrorMessage(
+			_Out_writes_z_(nMaxError) LPTSTR lpszError,
+			_In_ UINT nMaxError,
+			_Out_opt_ PUINT pnHelpContext) const
+	{
+		ENSURE(AfxIsValidString(lpszError, nMaxError));
+		
+		if (pnHelpContext)
+		{
+			*pnHelpContext = 0;
+		}
+
+		_stprintf_s(lpszError, nMaxError, _T("Win32 error: %s"), _com_error(m_hr).ErrorMessage());
+
+		return TRUE;
+	}
 
 #ifdef _DEBUG
-		void AssertValid() const override;
-		void Dump(CDumpContext& dc) const override;
+
+	void CWin32Exception::AssertValid() const
+	{
+		CObject::AssertValid();
+
+		ASSERT(FAILED(m_hr));
+	}
+
+	void CWin32Exception::Dump(_Inout_ CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		dc << _T("m_hr = ") << m_hr << _T("\n");
+	}
+
 #endif
 
 #pragma endregion
-	};
-
 }

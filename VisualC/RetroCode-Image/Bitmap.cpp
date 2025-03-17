@@ -69,10 +69,8 @@ namespace retro
 
 		void CBitmapRGBA::Create(_In_ UINT uWidth, _In_ UINT uHeight)
 		{
-			if (const HRESULT hr = m_spFactory->CreateBitmap(uWidth, uHeight, GUID_WICPixelFormat32bppPRGBA, WICBitmapCacheOnLoad, &m_spBitmap); FAILED(hr))
-			{
-				throw hr;
-			}
+			const HRESULT hr = m_spFactory->CreateBitmap(uWidth, uHeight, GUID_WICPixelFormat32bppPRGBA, WICBitmapCacheOnLoad, &m_spBitmap);
+			ENSURE_HRESULT(hr);
 		}
 
 		void CBitmapRGBA::Create(_In_ const CSize& szBitmap)
@@ -82,128 +80,77 @@ namespace retro
 
 		void CBitmapRGBA::LoadFromFile(_In_z_ LPCTSTR pszFileName)
 		{
-			if (!AfxIsValidString(pszFileName, MAX_PATH))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(AfxIsValidString(pszFileName, MAX_PATH));
 
 			CComPtr<IWICStream> spStream;
-			if (const HRESULT hr = m_spFactory->CreateStream(&spStream); FAILED(hr))
-			{
-				throw hr;
-			}
+			HRESULT hr = m_spFactory->CreateStream(&spStream);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICBitmapDecoder> spDecoder;
-			if (const HRESULT hr = m_spFactory->CreateDecoderFromFilename(pszFileName, NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &spDecoder); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateDecoderFromFilename(pszFileName, NULL, GENERIC_READ, WICDecodeMetadataCacheOnDemand, &spDecoder);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICBitmapFrameDecode> spFrame;
-			if (const HRESULT hr = spDecoder->GetFrame(0, &spFrame); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spDecoder->GetFrame(0, &spFrame);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICFormatConverter> spConverter;
-			if (const HRESULT hr = m_spFactory->CreateFormatConverter(&spConverter); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateFormatConverter(&spConverter);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spConverter->Initialize(spFrame, GUID_WICPixelFormat32bppPRGBA, WICBitmapDitherTypeNone, NULL, 0.0, WICBitmapPaletteTypeCustom); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spConverter->Initialize(spFrame, GUID_WICPixelFormat32bppPRGBA, WICBitmapDitherTypeNone, NULL, 0.0, WICBitmapPaletteTypeCustom);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = m_spFactory->CreateBitmapFromSource(spConverter, WICBitmapCacheOnLoad, &m_spBitmap); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateBitmapFromSource(spConverter, WICBitmapCacheOnLoad, &m_spBitmap);
+			ENSURE_HRESULT(hr);
 		}
 
 		void CBitmapRGBA::LoadFromMemory(_In_reads_bytes_(uSize) LPCVOID pData, _In_ DWORD uSize)
 		{
-			if (!AfxIsValidAddress(pData, uSize, FALSE))
-			{
-				AfxThrowInvalidArgException();
-			}
-
+			ENSURE(AfxIsValidAddress(pData, uSize, FALSE));
+	
 			CComPtr<IWICStream> spStream;
-			if (const HRESULT hr = m_spFactory->CreateStream(&spStream); FAILED(hr))
-			{
-				throw hr;
-			}
+			HRESULT hr = m_spFactory->CreateStream(&spStream);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spStream->InitializeFromMemory(static_cast<BYTE*>(const_cast<LPVOID>(pData)), uSize); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spStream->InitializeFromMemory(static_cast<BYTE*>(const_cast<LPVOID>(pData)), uSize);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICBitmapDecoder> spDecoder;
-			if (const HRESULT hr = m_spFactory->CreateDecoderFromStream(spStream, NULL, WICDecodeMetadataCacheOnDemand, &spDecoder); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateDecoderFromStream(spStream, NULL, WICDecodeMetadataCacheOnDemand, &spDecoder);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICBitmapFrameDecode> spFrame;
-			if (const HRESULT hr = spDecoder->GetFrame(0, &spFrame); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spDecoder->GetFrame(0, &spFrame);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICFormatConverter> spConverter;
-			if (const HRESULT hr = m_spFactory->CreateFormatConverter(&spConverter); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateFormatConverter(&spConverter);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spConverter->Initialize(spFrame, GUID_WICPixelFormat32bppPRGBA, WICBitmapDitherTypeNone, NULL, 0.0, WICBitmapPaletteTypeCustom); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spConverter->Initialize(spFrame, GUID_WICPixelFormat32bppPRGBA, WICBitmapDitherTypeNone, NULL, 0.0, WICBitmapPaletteTypeCustom);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = m_spFactory->CreateBitmapFromSource(spConverter, WICBitmapCacheOnLoad, &m_spBitmap); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateBitmapFromSource(spConverter, WICBitmapCacheOnLoad, &m_spBitmap);
+			ENSURE_HRESULT(hr);
 		}
 
 		void CBitmapRGBA::LoadFromResource(_In_ HMODULE hModule, _In_z_ LPCTSTR pszResourceName)
 		{
-			if (!hModule)
-			{
-				AfxThrowInvalidArgException();
-			}
-
-			if (!AfxIsValidString(pszResourceName))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(hModule);
+			ENSURE(AfxIsValidString(pszResourceName));
 
 			HRSRC hrSrc = FindResource(hModule, pszResourceName, RT_RCDATA);
-			if (!hrSrc)
-			{
-				throw GetLastError();
-			}
+			ENSURE_LAST_ERROR(hrSrc);
 
 			HGLOBAL hGlobal = LoadResource(hModule, hrSrc);
-			if (!hGlobal)
-			{
-				throw GetLastError();
-			}
+			ENSURE_LAST_ERROR(hGlobal);
 
 			const DWORD uSize = SizeofResource(hModule, hrSrc);
-			if (!uSize)
-			{
-				throw GetLastError();
-			}
+			ENSURE_LAST_ERROR(uSize);
 
 			LPVOID pData = LockResource(hGlobal);
-			if (!pData)
-			{
-				throw GetLastError();
-			}
+			ENSURE_LAST_ERROR(pData);
 
 			LoadFromMemory(pData, uSize);
 
@@ -212,21 +159,11 @@ namespace retro
 
 		void CBitmapRGBA::LoadFromResource(_In_z_ LPCTSTR pszModule, _In_z_ LPCTSTR pszResourceName)
 		{
-			if (!AfxIsValidString(pszModule, MAX_PATH))
-			{
-				AfxThrowInvalidArgException();
-			}
-
-			if (!AfxIsValidString(pszResourceName))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(AfxIsValidString(pszModule, MAX_PATH));
+			ENSURE(AfxIsValidString(pszResourceName));
 
 			HMODULE hModule = AfxLoadLibrary(pszModule);
-			if (!hModule)
-			{
-				throw GetLastError();
-			}
+			ENSURE_LAST_ERROR(hModule);
 
 			LoadFromResource(hModule, pszResourceName);
 
@@ -235,167 +172,108 @@ namespace retro
 
 		void CBitmapRGBA::SaveToFile(_In_z_ LPCTSTR pszFileName, _In_ const GUID& tFormat)
 		{
-			if (!AfxIsValidString(pszFileName, MAX_PATH))
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(AfxIsValidString(pszFileName, MAX_PATH));
 
 			CComPtr<IWICStream> spStream;
-			if (const HRESULT hr = m_spFactory->CreateStream(&spStream); FAILED(hr))
-			{
-				throw hr;
-			}
+			HRESULT hr = m_spFactory->CreateStream(&spStream);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spStream->InitializeFromFilename(pszFileName, GENERIC_WRITE); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spStream->InitializeFromFilename(pszFileName, GENERIC_WRITE);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICBitmapEncoder> spEncoder;
-			if (const HRESULT hr = m_spFactory->CreateEncoder(tFormat, NULL, &spEncoder); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateEncoder(tFormat, NULL, &spEncoder);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spEncoder->Initialize(spStream, WICBitmapEncoderNoCache); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spEncoder->Initialize(spStream, WICBitmapEncoderNoCache);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICBitmapFrameEncode> spFrame;
 			CComPtr<IPropertyBag2> spPropertyBag;
-			if(const HRESULT hr = spEncoder->CreateNewFrame(&spFrame, &spPropertyBag); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spEncoder->CreateNewFrame(&spFrame, &spPropertyBag);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spFrame->Initialize(spPropertyBag); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFrame->Initialize(spPropertyBag);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spFrame->WriteSource(m_spBitmap, NULL); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFrame->WriteSource(m_spBitmap, NULL);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spFrame->Commit(); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFrame->Commit();
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spEncoder->Commit(); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spEncoder->Commit();
+			ENSURE_HRESULT(hr);
 		}
 
 		void CBitmapRGBA::SaveToMemory(_Outptr_ LPVOID* ppData, _Out_ DWORD& uSize, _In_ const GUID& tFormat)
 		{
-			if (!ppData)
-			{
-				AfxThrowInvalidArgException();
-			}
+			ENSURE(ppData);
 
 			*ppData = NULL;
 
 			CComPtr<IWICStream> spStream;
-			if (const HRESULT hr = m_spFactory->CreateStream(&spStream); FAILED(hr))
-			{
-				throw hr;
-			}
+			HRESULT hr = m_spFactory->CreateStream(&spStream);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICComponentInfo> spComponentInfo;
-			if (const HRESULT hr = m_spFactory->CreateComponentInfo(tFormat, &spComponentInfo); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateComponentInfo(tFormat, &spComponentInfo);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICPixelFormatInfo> spPixelFormatInfo;
-			if (const HRESULT hr = spComponentInfo->QueryInterface(IID_IWICPixelFormatInfo, reinterpret_cast<void**>(&spPixelFormatInfo)); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spComponentInfo->QueryInterface(IID_IWICPixelFormatInfo, reinterpret_cast<void**>(&spPixelFormatInfo));
+			ENSURE_HRESULT(hr);
 
 			UINT uBitsPerPixel = 0u;
-			if (const HRESULT hr = spPixelFormatInfo->GetBitsPerPixel(&uBitsPerPixel); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spPixelFormatInfo->GetBitsPerPixel(&uBitsPerPixel);
+			ENSURE_HRESULT(hr);
 
 			UINT uWidth = 0u;
 			UINT uHeight = 0u;
-			if (const HRESULT hr = m_spBitmap->GetSize(&uWidth, &uHeight); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spBitmap->GetSize(&uWidth, &uHeight);
+			ENSURE_HRESULT(hr);
 
 			const UINT uMemSize = uWidth * uHeight * (uBitsPerPixel / 8);
 			*ppData = new BYTE[uMemSize]{ 0 };
-			if (!*ppData)
-			{
-				AfxThrowMemoryException();
-			}
+			ENSURE_THROW(*ppData, AfxThrowMemoryException());
 
-			if (const HRESULT hr = spStream->InitializeFromMemory(reinterpret_cast<WICInProcPointer>(*ppData), uMemSize); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spStream->InitializeFromMemory(reinterpret_cast<WICInProcPointer>(*ppData), uMemSize);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICBitmapEncoder> spEncoder;
-			if (const HRESULT hr = m_spFactory->CreateEncoder(tFormat, NULL, &spEncoder); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spFactory->CreateEncoder(tFormat, NULL, &spEncoder);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spEncoder->Initialize(spStream, WICBitmapEncoderNoCache); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spEncoder->Initialize(spStream, WICBitmapEncoderNoCache);
+			ENSURE_HRESULT(hr);
 
 			CComPtr<IWICBitmapFrameEncode> spFrame;
 			CComPtr<IPropertyBag2> spPropertyBag;
-			if (const HRESULT hr = spEncoder->CreateNewFrame(&spFrame, &spPropertyBag); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spEncoder->CreateNewFrame(&spFrame, &spPropertyBag);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spFrame->Initialize(spPropertyBag); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFrame->Initialize(spPropertyBag);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spFrame->SetSize(uWidth, uHeight); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFrame->SetSize(uWidth, uHeight);
+			ENSURE_HRESULT(hr);
 
 			WICPixelFormatGUID pixelFormat2 = tFormat;
-			if (const HRESULT hr = spFrame->SetPixelFormat(&pixelFormat2); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFrame->SetPixelFormat(&pixelFormat2);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spFrame->WriteSource(m_spBitmap, NULL); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFrame->WriteSource(m_spBitmap, NULL);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spFrame->Commit(); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFrame->Commit();
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spEncoder->Commit(); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spEncoder->Commit();
+			ENSURE_HRESULT(hr);
 
 			ULARGE_INTEGER streamSize;
-			if (const HRESULT hr = spStream->Seek({ 0 }, STREAM_SEEK_CUR, &streamSize); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spStream->Seek({ 0 }, STREAM_SEEK_CUR, &streamSize);
+			ENSURE_HRESULT(hr);
 
 			uSize = static_cast<DWORD>(streamSize.QuadPart);
 		}
@@ -410,10 +288,8 @@ namespace retro
 			UINT uWidth = 0u;
 			UINT uHeight = 0u;
 			
-			if (const HRESULT hr = m_spBitmap->GetSize(&uWidth, &uHeight); FAILED(hr))
-			{
-				throw hr;
-			}
+			HRESULT hr = m_spBitmap->GetSize(&uWidth, &uHeight);
+			ENSURE_HRESULT(hr);
 
 			return CSize(uWidth, uHeight);
 		}
@@ -425,17 +301,13 @@ namespace retro
 				return NULL;
 			}
 
-			if (const HRESULT hr = m_spBitmap->Lock(NULL, WICBitmapLockRead, &m_spLock); FAILED(hr))
-			{
-				throw hr;
-			}
+			HRESULT hr = m_spBitmap->Lock(NULL, WICBitmapLockRead, &m_spLock);
+			ENSURE_HRESULT(hr);
 
 			UINT uBufferSize = 0u;
 			BYTE* pBuffer = NULL;
-			if (const HRESULT hr = m_spLock->GetDataPointer(&uBufferSize, &pBuffer); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spLock->GetDataPointer(&uBufferSize, &pBuffer);
+			ENSURE_HRESULT(hr);
 
 			return reinterpret_cast<const CColorRGBA*>(pBuffer);
 		}
@@ -447,17 +319,13 @@ namespace retro
 				return NULL;
 			}
 ;
-			if (const HRESULT hr = m_spBitmap->Lock(NULL, WICBitmapLockWrite, &m_spLock); FAILED(hr))
-			{
-				throw hr;
-			}
+			HRESULT hr = m_spBitmap->Lock(NULL, WICBitmapLockWrite, &m_spLock);
+			ENSURE_HRESULT(hr); 
 
 			UINT uBufferSize = 0u;
 			BYTE* pBuffer = NULL;
-			if (const HRESULT hr = m_spLock->GetDataPointer(&uBufferSize, &pBuffer); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = m_spLock->GetDataPointer(&uBufferSize, &pBuffer);
+			ENSURE_HRESULT(hr);
 
 			return reinterpret_cast<CColorRGBA*>(pBuffer);
 		}
@@ -475,15 +343,11 @@ namespace retro
 			}
 
 			CComPtr<IWICBitmapFlipRotator> spFlipRotator;
-			if (const HRESULT hr = m_spFactory->CreateBitmapFlipRotator(&spFlipRotator); FAILED(hr))
-			{
-				throw hr;
-			}
+			HRESULT hr = m_spFactory->CreateBitmapFlipRotator(&spFlipRotator);
+			ENSURE_HRESULT(hr);
 
-			if (const HRESULT hr = spFlipRotator->Initialize(m_spBitmap, eOption); FAILED(hr))
-			{
-				throw hr;
-			}
+			hr = spFlipRotator->Initialize(m_spBitmap, eOption);
+			ENSURE_HRESULT(hr);
 		}
 
 #pragma endregion

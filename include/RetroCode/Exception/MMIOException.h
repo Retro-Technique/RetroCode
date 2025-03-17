@@ -37,59 +37,56 @@
  *
  */
 
-#pragma once
-
-#ifndef __RETRO_MULTIMEDIA_H_INCLUDED__
-#error Do not include Wave.h directly, include the Multimedia.h file
+#ifndef __RETRO_EXCEPTION_H_INCLUDED__
+#error Do not include MMIOException.h directly, include the Exception.h file
 #endif
 
-namespace retro::multimedia
+#pragma once
+
+namespace retro::exception
 {
 
-	class AFX_EXT_CLASS CWave : public CObject
+	class AFX_EXT_CLASS CMMIOException : public CException
 	{
 #pragma region Constructors
-
-		DECLARE_DYNAMIC(CWave)
+		
+		DECLARE_DYNAMIC(CMMIOException)
 
 	public:
 
-		CWave();
-		virtual ~CWave();
+		CMMIOException(MMRESULT mmResult);
+		~CMMIOException() = default;
 
 #pragma endregion
 #pragma region Attributes
 
 	private:
 
-		LPBYTE	m_pData;
-		DWORD	m_uDataLen;
-
-#pragma endregion
-#pragma region Operations
-
-	public:
-
-		void LoadFromFile(_In_z_ LPCTSTR pszFileName);
-		void Unload();
-		BOOL IsValid() const;
-		BOOL Play(_In_ BOOL bAsync = TRUE, _In_ BOOL bLooped = FALSE) const;
-		WAVEFORMATEX GetFormat() const;
-		DWORD GetDataLen() const;
-		DWORD GetData(_Out_writes_bytes_to_(uMaxToCopy, return) LPBYTE pWaveData, _In_ DWORD uMaxToCopy) const;
-		CTimeSpan GetDuration() const;
-		WORD GetChannelCount() const;
-		DWORD GetSampleRate() const;
+		MMRESULT m_mmResult;
 
 #pragma endregion
 #pragma region Overridables
 
 	public:
 
+		_Success_(return != 0)
+			BOOL GetErrorMessage(
+				_Out_writes_z_(nMaxError) LPTSTR lpszError,
+				_In_ UINT nMaxError,
+				_Out_opt_ PUINT pnHelpContext = NULL) const override;
+
 #ifdef _DEBUG
 		void AssertValid() const override;
-		void Dump(CDumpContext& dc) const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
 #endif
+
+#pragma endregion
+#pragma region Implementations
+
+	private:
+
+		LPCTSTR ErrorToString(
+			MMRESULT mmResult) const;
 
 #pragma endregion
 	};

@@ -235,7 +235,6 @@
     </ClCompile>
     <ClCompile Include="MMChunk.cpp" />
     <ClCompile Include="MMIO.cpp" />
-    <ClCompile Include="MMIOException.cpp" />
     <ClCompile Include="MMIOInfo.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -245,7 +244,6 @@
     </ClCompile>
     <ClCompile Include="RetroCode-Multimedia.cpp" />
     <ClCompile Include="Wave.cpp" />
-    <ClCompile Include="Win32Exception.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\RetroCode-Multimedia.rc2" />
@@ -259,14 +257,17 @@
     <ClInclude Include="..\..\include\RetroCode\Multimedia\MMIOInfo.h" />
     <ClInclude Include="..\..\include\RetroCode\Multimedia\Wave.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="MMIOException.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Win32Exception.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroCode-Multimedia.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RetroCode-Exception\RetroCode-Exception.vcxproj">
+      <Project>{9333065f-af0a-f5e9-6694-b49051df9b64}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -38,9 +38,8 @@
  */
 
 #include "pch.h"
-#include "MMIOException.h"
 
-namespace retro::multimedia
+namespace retro::exception
 {
 
 #pragma region Constructors
@@ -56,9 +55,13 @@ namespace retro::multimedia
 #pragma endregion
 #pragma region Overridables
 
-	BOOL CMMIOException::GetErrorMessage(LPTSTR lpszError, UINT nMaxError, PUINT pnHelpContext) const
+	_Success_(return != 0)
+	BOOL CMMIOException::GetErrorMessage(
+			_Out_writes_z_(nMaxError) LPTSTR lpszError,
+			_In_ UINT nMaxError,
+			_Out_opt_ PUINT pnHelpContext) const
 	{
-		ASSERT(lpszError && AfxIsValidString(lpszError, nMaxError));
+		ENSURE(AfxIsValidString(lpszError, nMaxError));
 
 		if (pnHelpContext)
 		{
@@ -69,6 +72,24 @@ namespace retro::multimedia
 
 		return TRUE;
 	}
+
+#ifdef _DEBUG
+
+	void CMMIOException::AssertValid() const
+	{
+		CObject::AssertValid();
+
+		ASSERT(m_mmResult != MMSYSERR_NOERROR);
+	}
+
+	void CMMIOException::Dump(_Inout_ CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		dc << _T("m_mmResult = ") << m_mmResult << _T("\n");
+	}
+
+#endif
 
 #pragma endregion
 #pragma region Implementations

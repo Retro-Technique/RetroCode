@@ -119,13 +119,15 @@ namespace retro::multimedia
 		return PlaySound(reinterpret_cast<LPCTSTR>(m_pData), NULL, uFlags);
 	}
 
-	BOOL CWave::GetFormat(_Out_ WAVEFORMATEX& wfFormat) const
+	WAVEFORMATEX CWave::GetFormat() const
 	{
 		ASSERT_VALID(this);
 
+		WAVEFORMATEX wfFormat = { 0 };
+
 		if (!IsValid())
 		{
-			return FALSE;
+			return wfFormat;
 		}
 
 		CMMIO mmio;
@@ -145,7 +147,7 @@ namespace retro::multimedia
 
 		mmio.Close();
 
-		return TRUE;
+		return wfFormat;
 	}
 
 	DWORD CWave::GetDataLen() const
@@ -206,9 +208,7 @@ namespace retro::multimedia
 	{
 		ASSERT_VALID(this);
 
-		WAVEFORMATEX wfFormat = { 0 };
-		GetFormat(wfFormat);
-
+		const WAVEFORMATEX wfFormat = GetFormat();
 		const FLOAT fSeconds = static_cast<FLOAT>(GetDataLen()) / (wfFormat.nAvgBytesPerSec * wfFormat.nBlockAlign);
 		const INT nSeconds = static_cast<INT>(fSeconds);
 
@@ -219,8 +219,7 @@ namespace retro::multimedia
 	{
 		ASSERT_VALID(this);
 
-		WAVEFORMATEX wfFormat = { 0 };
-		GetFormat(wfFormat);
+		const WAVEFORMATEX wfFormat = GetFormat();
 
 		return wfFormat.nChannels;
 	}
@@ -229,8 +228,7 @@ namespace retro::multimedia
 	{
 		ASSERT_VALID(this);
 
-		WAVEFORMATEX wfFormat = { 0 };
-		GetFormat(wfFormat);
+		const WAVEFORMATEX wfFormat = GetFormat();
 
 		return wfFormat.nSamplesPerSec;
 	}

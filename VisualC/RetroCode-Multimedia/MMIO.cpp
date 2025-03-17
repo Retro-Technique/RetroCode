@@ -38,7 +38,6 @@
  */
 
 #include "pch.h"
-#include "MMIOException.h"
 
 namespace retro::multimedia
 {
@@ -66,18 +65,14 @@ namespace retro::multimedia
 		ASSERT(AfxIsValidString(pszFileName, MAX_PATH));
 
 		CMMIOInfo mmioInfo;
-		if (m_hMMIO = mmioOpen(const_cast<LPTSTR>(pszFileName), &mmioInfo, uFlags); !m_hMMIO)
-		{
-			throw new CMMIOException(mmioInfo.wErrorRet);
-		}
+		m_hMMIO = mmioOpen(const_cast<LPTSTR>(pszFileName), &mmioInfo, uFlags);
+		ENSURE_MMIO(mmioInfo.wErrorRet);
 	}
 
 	void CMMIO::OpenFromMemory(CMMMemoryIOInfo& mmioInfo)
 	{
-		if (m_hMMIO = mmioOpen(NULL, &mmioInfo, MMIO_READWRITE); !m_hMMIO)
-		{
-			throw new CMMIOException(mmioInfo.wErrorRet);
-		}
+		m_hMMIO = mmioOpen(NULL, &mmioInfo, MMIO_READWRITE);
+		ENSURE_MMIO(mmioInfo.wErrorRet);
 	}
 
 	void CMMIO::Close(UINT uFlags)
@@ -98,10 +93,8 @@ namespace retro::multimedia
 			return FALSE;
 		}
 
-		if (const MMRESULT mmr = mmioAscend(m_hMMIO, &mmckInfo, uFlags); MMSYSERR_NOERROR != mmr)
-		{
-			throw new CMMIOException(mmr);
-		}
+		const MMRESULT mmr = mmioAscend(m_hMMIO, &mmckInfo, uFlags);
+		ENSURE_MMIO(mmr);
 
 		return TRUE;
 	}
@@ -115,10 +108,8 @@ namespace retro::multimedia
 			return FALSE;
 		}
 
-		if (const MMRESULT mmr = mmioDescend(m_hMMIO, &mmckInfo, 0, uFlags); MMSYSERR_NOERROR != mmr)
-		{
-			throw new CMMIOException(mmr);
-		}
+		const MMRESULT mmr = mmioDescend(m_hMMIO, &mmckInfo, 0, uFlags);
+		ENSURE_MMIO(mmr);
 
 		return TRUE;
 	}
@@ -132,10 +123,8 @@ namespace retro::multimedia
 			return FALSE;
 		}
 
-		if (const MMRESULT mmr = mmioDescend(m_hMMIO, &mmckInfo, &mmckParent, uFlags); MMSYSERR_NOERROR != mmr)
-		{
-			throw new CMMIOException(mmr);
-		}
+		const MMRESULT mmr = mmioDescend(m_hMMIO, &mmckInfo, &mmckParent, uFlags);
+		ENSURE_MMIO(mmr);
 
 		return TRUE;
 	}
@@ -197,10 +186,8 @@ namespace retro::multimedia
 			return FALSE;
 		}
 
-		if (const MMRESULT mmr = mmioSetBuffer(m_hMMIO, pBuffer, nBuffer, uFlags); MMSYSERR_NOERROR != mmr)
-		{
-			throw new CMMIOException(mmr);
-		}
+		const MMRESULT mmr = mmioSetBuffer(m_hMMIO, pBuffer, nBuffer, uFlags);
+		ENSURE_MMIO(mmr);
 
 		return TRUE;
 	}
@@ -214,10 +201,8 @@ namespace retro::multimedia
 			return FALSE;
 		}
 
-		if (const MMRESULT mmr = mmioGetInfo(m_hMMIO, &mmioInfo, uFlags); MMSYSERR_NOERROR != mmr)
-		{
-			throw new CMMIOException(mmr);
-		}
+		const MMRESULT mmr = mmioGetInfo(m_hMMIO, &mmioInfo, uFlags);
+		ENSURE_MMIO(mmr);
 
 		return TRUE;
 	}
@@ -231,10 +216,8 @@ namespace retro::multimedia
 			return FALSE;
 		}
 
-		if (const MMRESULT mmr = mmioSetInfo(m_hMMIO, &mmioInfo, uFlags); MMSYSERR_NOERROR != mmr)
-		{
-			throw new CMMIOException(mmr);
-		}
+		const MMRESULT mmr = mmioSetInfo(m_hMMIO, &mmioInfo, uFlags);
+		ENSURE_MMIO(mmr);
 
 		return TRUE;
 	}
@@ -248,10 +231,8 @@ namespace retro::multimedia
 			return FALSE;
 		}
 
-		if (const MMRESULT mmr = mmioAdvance(m_hMMIO, &mmioInfo, uFlags); MMSYSERR_NOERROR != mmr)
-		{
-			throw new CMMIOException(mmr);
-		}
+		const MMRESULT mmr = mmioAdvance(m_hMMIO, &mmioInfo, uFlags);
+		ENSURE_MMIO(mmr);
 
 		return TRUE;
 	}

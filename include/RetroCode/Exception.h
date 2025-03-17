@@ -39,43 +39,15 @@
 
 #pragma once
 
-namespace retro::multimedia
-{
+#ifndef __RETRO_EXCEPTION_H_INCLUDED__
+#define __RETRO_EXCEPTION_H_INCLUDED__
 
-	class CMMIOException : public CException
-	{
-#pragma region Constructors
-		
-		DECLARE_DYNAMIC(CMMIOException)
+#include <afxwin.h>
+#include <mmsystem.h>
 
-	public:
+#include "Exception/Win32Exception.h"
+#include "Exception/MMIOException.h"
+#include "Exception/ReportException.h"
+#include "Exception/Macros.h"
 
-		CMMIOException(MMRESULT mmResult);
-		~CMMIOException() = default;
-
-#pragma endregion
-#pragma region Attributes
-
-	private:
-
-		MMRESULT m_mmResult;
-
-#pragma endregion
-#pragma region Overridables
-
-	public:
-
-		BOOL GetErrorMessage(LPTSTR lpszError, UINT nMaxError, PUINT pnHelpContext = NULL) const override;
-
-#pragma endregion
-#pragma region Implementations
-
-	private:
-
-		LPCTSTR ErrorToString(MMRESULT mmResult) const;
-
-#pragma endregion
-	};
-
-
-}
+#endif

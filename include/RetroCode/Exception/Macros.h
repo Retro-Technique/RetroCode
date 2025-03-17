@@ -37,61 +37,18 @@
  *
  */
 
+#ifndef __RETRO_EXCEPTION_H_INCLUDED__
+#error Do not include Macros.h directly, include the Exception.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_MULTIMEDIA_H_INCLUDED__
-#error Do not include Wave.h directly, include the Multimedia.h file
-#endif
+#define THROW_WIN32_EXCEPTION(err) throw new retro::exception::CWin32Exception(err)
+#define THROW_MMIO_EXCEPTION(mmr) throw new retro::exception::CMMIOException(mmr)
 
-namespace retro::multimedia
-{
+#define ENSURE_HRESULT(hr) ENSURE_THROW(SUCCEEDED(hr), THROW_WIN32_EXCEPTION(hr))
+#define ENSURE_LAST_ERROR(cond) ENSURE_THROW(cond, THROW_WIN32_EXCEPTION(GetLastError()))
+#define ENSURE_MMIO(mmr) ENSURE_THROW(MMSYSERR_NOERROR == mmr, THROW_MMIO_EXCEPTION(mmr))
 
-	class AFX_EXT_CLASS CWave : public CObject
-	{
-#pragma region Constructors
-
-		DECLARE_DYNAMIC(CWave)
-
-	public:
-
-		CWave();
-		virtual ~CWave();
-
-#pragma endregion
-#pragma region Attributes
-
-	private:
-
-		LPBYTE	m_pData;
-		DWORD	m_uDataLen;
-
-#pragma endregion
-#pragma region Operations
-
-	public:
-
-		void LoadFromFile(_In_z_ LPCTSTR pszFileName);
-		void Unload();
-		BOOL IsValid() const;
-		BOOL Play(_In_ BOOL bAsync = TRUE, _In_ BOOL bLooped = FALSE) const;
-		WAVEFORMATEX GetFormat() const;
-		DWORD GetDataLen() const;
-		DWORD GetData(_Out_writes_bytes_to_(uMaxToCopy, return) LPBYTE pWaveData, _In_ DWORD uMaxToCopy) const;
-		CTimeSpan GetDuration() const;
-		WORD GetChannelCount() const;
-		DWORD GetSampleRate() const;
-
-#pragma endregion
-#pragma region Overridables
-
-	public:
-
-#ifdef _DEBUG
-		void AssertValid() const override;
-		void Dump(CDumpContext& dc) const override;
-#endif
-
-#pragma endregion
-	};
-
-}
+#define REPORT_EXCEPTION_AND_DELETE(szMsg) retro::exception::CReportException(e, szMsg, _T(__FILE__), __LINE__).Report()
+#define REPORT_EXCEPTION_NO_DELETE(szMsg) retro::exception::CReportException(e, szMsg, _T(__FILE__), __LINE__, FALSE).Report()

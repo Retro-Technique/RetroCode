@@ -10,10 +10,8 @@
 // ajouter les en-têtes à précompiler ici
 #include "framework.h"
 
-#include <RetroCode/Multimedia.h>
 #include <RetroCode/Exception.h>
 
-#pragma comment(lib, "Winmm.lib")
-#pragma comment(lib, "Vfw32.lib")
+#include <comdef.h>
 
 #endif //PCH_H
