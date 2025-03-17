@@ -119,13 +119,15 @@ namespace retro::multimedia
 		return PlaySound(reinterpret_cast<LPCTSTR>(m_pData), NULL, uFlags);
 	}
 
-	BOOL CWave::GetFormat(_Out_ WAVEFORMATEX& wfFormat) const
+	WAVEFORMATEX CWave::GetFormat() const
 	{
 		ASSERT_VALID(this);
 
+		WAVEFORMATEX wfFormat = { 0 };
+
 		if (!IsValid())
 		{
-			return FALSE;
+			return wfFormat;
 		}
 
 		CMMIO mmio;
@@ -145,7 +147,7 @@ namespace retro::multimedia
 
 		mmio.Close();
 
-		return TRUE;
+		return wfFormat;
 	}
 
 	DWORD CWave::GetDataLen() const
