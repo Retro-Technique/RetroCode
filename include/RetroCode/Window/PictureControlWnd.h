@@ -37,14 +37,56 @@
  *
  */
 
+#ifndef __RETRO_WINDOW_H_INCLUDED__
+#error Do not include PictureControlWnd.h directly, include the Window.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_WINDOW_H_INCLUDED__
-#define __RETRO_WINDOW_H_INCLUDED__
+namespace retro::wnd
+{
 
-#include <afxwin.h>
+	class CPictureControlWnd : public CStatic
+	{
+#pragma region Constructors
 
-#include "Window/Helpers.h"
-#include "Window/PictureControlWnd.h"
+		DECLARE_DYNAMIC(CPictureControlWnd)
 
-#endif
+	public:
+
+		CPictureControlWnd(UINT uBitmapResourceID);
+		~CPictureControlWnd();
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+
+		UINT m_uBitmapResourceID;
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+		void DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct) override;
+
+#pragma endregion
+#pragma region Implementations
+
+	private:
+
+		void CalcLayout(LPDRAWITEMSTRUCT lpDrawItemStruct, const CSize& szBitmap, CPoint& ptDestination, CSize& szDestination);
+		void DrawPicture(LPDRAWITEMSTRUCT lpDrawItemStruct, const CBitmap& Bitmap, const CSize& szBitmap, const CPoint& ptDestination, const CSize& szDestination);
+
+#pragma endregion
+#pragma region Messages
+
+	protected:
+
+		DECLARE_MESSAGE_MAP()
+
+#pragma endregion
+	};
+
+}
