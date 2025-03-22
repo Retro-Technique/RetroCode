@@ -10,4 +10,8 @@
 // ajouter les en-têtes à précompiler ici
 #include "framework.h"
 
+#include <RetroCode/Window.h>
+
+#include <gdiplus.h>
+
 #endif //PCH_H

@@ -30,6 +30,9 @@
     <ClCompile Include="Helpers.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="PictureControlWnd.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Window.def">
@@ -56,6 +59,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Window\Helpers.h">
+      <Filter>include\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Window\PictureControlWnd.h">
       <Filter>include\Window</Filter>
     </ClInclude>
   </ItemGroup>
