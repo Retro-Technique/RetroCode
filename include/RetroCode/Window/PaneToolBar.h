@@ -37,15 +37,43 @@
  *
  */
 
+#ifndef __RETRO_WINDOW_H_INCLUDED__
+#error Do not include PaneToolBar.h directly, include the Window.h file
+#endif
+
 #pragma once
 
-#ifndef __RETRO_WINDOW_H_INCLUDED__
-#define __RETRO_WINDOW_H_INCLUDED__
+namespace retro::wnd
+{
 
-#include <afxwin.h>
+	class AFX_EXT_CLASS CPaneToolBar : public CMFCToolBar
+	{
+#pragma region Constructors
 
-#include "Window/Helpers.h"
-#include "Window/PictureControlWnd.h"
-#include "Window/PaneToolBar.h"
+		DECLARE_DYNAMIC(CPaneToolBar)
 
-#endif
+	public:
+
+		CPaneToolBar();
+		~CPaneToolBar();
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+		void OnUpdateCmdUI(CFrameWnd* pTarget, BOOL bDisableIfNoHndler) override;
+		BOOL AllowShowOnList() const override;
+		void AdjustLayout() override;
+
+#pragma endregion
+#pragma region Messages
+
+	protected:
+
+		DECLARE_MESSAGE_MAP()
+
+#pragma endregion
+	};
+
+}

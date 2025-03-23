@@ -51,8 +51,8 @@ namespace retro::wnd
 
 }
 
-#define AFX_GET_ACTIVE_DOCUMENT(x) STATIC_DOWNCAST(x, wnd::GetActiveDocument(RUNTIME_CLASS(x)))
-#define AFX_GET_ACTIVE_VIEW(x) STATIC_DOWNCAST(x, wnd::GetActiveView(RUNTIME_CLASS(x)))
+#define GET_ACTIVE_DOCUMENT(x) STATIC_DOWNCAST(x, wnd::GetActiveDocument(RUNTIME_CLASS(x)))
+#define GET_ACTIVE_VIEW(x) STATIC_DOWNCAST(x, wnd::GetActiveView(RUNTIME_CLASS(x)))
 
 #define UPDATE_DATA_BACK_TO_FRONT FALSE
 #define UPDATE_DATA_FRONT_TO_BACK TRUE
