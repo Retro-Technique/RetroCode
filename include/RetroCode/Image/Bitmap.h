@@ -76,6 +76,7 @@ namespace retro
 
 			void Create(_In_ UINT uWidth, _In_ UINT uHeight);
 			void Create(_In_ const CSize& szBitmap);
+			void Copy(_In_ const CBitmapRGBA& Bitmap);
 			void LoadFromFile(_In_z_ LPCTSTR pszFileName);
 			void LoadFromMemory(_In_reads_bytes_(uSize) LPCVOID pData, _In_ DWORD uSize);
 			void LoadFromResource(_In_ HMODULE hModule, _In_z_ LPCTSTR pszResourceName);
@@ -86,6 +87,7 @@ namespace retro
 			_Check_return_ const CColorRGBA* LockForRead() const;
 			_Check_return_ CColorRGBA* LockForWrite();
 			void Unlock();
+			void Unlock() const;
 			void Flip(_In_ WICBitmapTransformOptions eOption);
 
 #pragma endregion
