@@ -37,15 +37,53 @@
  *
  */
 
-#pragma once
+#include "pch.h"
 
-#ifndef __RETRO_WINDOW_H_INCLUDED__
-#define __RETRO_WINDOW_H_INCLUDED__
+namespace retro::wnd
+{
 
-#include <afxwin.h>
+#pragma region Constructors
 
-#include "Window/Helpers.h"
-#include "Window/PictureControlWnd.h"
-#include "Window/PaneToolBar.h"
+	IMPLEMENT_DYNAMIC(CPaneToolBar, CMFCToolBar)
 
-#endif
+	CPaneToolBar::CPaneToolBar()
+	{
+
+	}
+
+	CPaneToolBar::~CPaneToolBar()
+	{
+
+	}
+
+#pragma endregion
+#pragma region Overridables
+
+	void CPaneToolBar::OnUpdateCmdUI(CFrameWnd* pTarget, BOOL bDisableIfNoHndler)
+	{
+		UNREFERENCED_PARAMETER(pTarget);
+
+		CMFCToolBar::OnUpdateCmdUI(static_cast<CFrameWnd*>(GetOwner()), bDisableIfNoHndler);
+	}
+
+	BOOL CPaneToolBar::AllowShowOnList() const
+	{
+		return FALSE;
+	}
+
+	void CPaneToolBar::AdjustLayout()
+	{
+		CMFCToolBar::AdjustLayout();
+
+		STATIC_DOWNCAST(CDockablePane, GetParent())->AdjustLayout();
+	}
+
+#pragma endregion
+#pragma region Messages
+
+	BEGIN_MESSAGE_MAP(CPaneToolBar, CMFCToolBar)
+	END_MESSAGE_MAP()
+
+#pragma endregion
+
+}

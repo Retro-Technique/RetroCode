@@ -46,7 +46,7 @@
 namespace retro::wnd
 {
 
-	class CPictureControlWnd : public CStatic
+	class AFX_EXT_CLASS CPictureControlWnd : public CStatic
 	{
 #pragma region Constructors
 

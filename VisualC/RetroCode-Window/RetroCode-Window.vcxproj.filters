@@ -33,6 +33,9 @@
     <ClCompile Include="PictureControlWnd.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="PaneToolBar.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Window.def">
@@ -62,6 +65,9 @@
       <Filter>include\Window</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Window\PictureControlWnd.h">
+      <Filter>include\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Window\PaneToolBar.h">
       <Filter>include\Window</Filter>
     </ClInclude>
   </ItemGroup>
