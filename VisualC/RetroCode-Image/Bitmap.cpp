@@ -78,6 +78,26 @@ namespace retro
 			Create(szBitmap.cx, szBitmap.cy);
 		}
 
+		void CBitmapRGBA::Copy(_In_ const CBitmapRGBA& Bitmap)
+		{
+			ENSURE_VALID(&Bitmap);
+
+			const CSize szBitmap = Bitmap.GetSize();
+			Create(szBitmap);
+
+			const CColorRGBA* pSrc = Bitmap.LockForRead();
+			CColorRGBA* pDst = LockForWrite();
+			
+			if (pDst && pSrc)
+			{
+				const UINT_PTR uBufferSize = szBitmap.cx * szBitmap.cy;
+				CopyMemory(pDst, pSrc, uBufferSize * sizeof(CColorRGBA));
+			}
+
+			Unlock();
+			Bitmap.Unlock();
+		}
+
 		void CBitmapRGBA::LoadFromFile(_In_z_ LPCTSTR pszFileName)
 		{
 			ENSURE(AfxIsValidString(pszFileName, MAX_PATH));
@@ -331,6 +351,11 @@ namespace retro
 		}
 
 		void CBitmapRGBA::Unlock()
+		{
+			m_spLock.Release();
+		}
+
+		void CBitmapRGBA::Unlock() const
 		{
 			m_spLock.Release();
 		}
