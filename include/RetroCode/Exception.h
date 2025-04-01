@@ -43,10 +43,10 @@
 #define __RETRO_EXCEPTION_H_INCLUDED__
 
 #include <afxwin.h>
-#include <mmsystem.h>
 
 #include "Exception/Win32Exception.h"
 #include "Exception/MMIOException.h"
+#include "Exception/RegExpException.h"
 #include "Exception/ReportException.h"
 #include "Exception/Macros.h"
 

@@ -37,28 +37,58 @@
  *
  */
 
-#ifndef __RETRO_EXCEPTION_H_INCLUDED__
-#error Do not include Macros.h directly, include the Exception.h file
-#endif
-
 #pragma once
 
-#define REPORT_EXCEPTION_AND_DELETE(szMsg) retro::exception::CReportException(e, szMsg, _T(__FILE__), __LINE__).Report()
-#define REPORT_EXCEPTION_NO_DELETE(szMsg) retro::exception::CReportException(e, szMsg, _T(__FILE__), __LINE__, FALSE).Report()
-
-#define THROW_WIN32_EXCEPTION(err) throw new retro::exception::CWin32Exception(err)
-#define ENSURE_HRESULT(hr) ENSURE_THROW(SUCCEEDED(hr), THROW_WIN32_EXCEPTION(hr))
-#define ENSURE_LAST_ERROR(cond) ENSURE_THROW(cond, THROW_WIN32_EXCEPTION(GetLastError()))
-
-#ifdef _INC_MMSYSTEM // Multimedia API's
-#define THROW_MMIO_EXCEPTION(mmr) throw new retro::exception::CMMIOException(mmr)
-#define ENSURE_MMIO(mmr) ENSURE_THROW(MMSYSERR_NOERROR == mmr, THROW_MMIO_EXCEPTION(mmr))
+#ifndef __RETRO_EXCEPTION_H_INCLUDED__
+#error Do not include RegExpException.h directly, include the Exception.h file
 #endif
 
-#ifdef __ATLRX_H__ // ATL Regular Expressions
-#define THROW_REGEX_EXCEPTION(mmr) throw new retro::exception::CRegExpException(mmr)
-#define ENSURE_REGEX(status) ENSURE_THROW(REPARSE_ERROR_OK == status, THROW_REGEX_EXCEPTION(status))
+namespace retro::exception
+{
+
+	class AFX_EXT_CLASS CRegExpException : public CException
+	{
+#pragma region Constructors
+
+		DECLARE_DYNAMIC(CRegExpException)
+
+	public:
+
+		CRegExpException(INT nResult);
+		~CRegExpException() = default;
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+
+		INT m_nResult;
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+		_Success_(return != 0)
+			BOOL GetErrorMessage(
+				_Out_writes_z_(nMaxError) LPTSTR lpszError,
+				_In_ UINT nMaxError,
+				_Out_opt_ PUINT pnHelpContext = NULL) const override;
+
+#ifdef _DEBUG
+		void AssertValid() const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
 #endif
 
+#pragma endregion
+#pragma region Implementations
 
+	private:
 
+		UINT ErrorToIDS(INT nResult) const;
+		CString ErrorToString(INT nResult) const;
+
+#pragma endregion
+	};
+
+}

@@ -9,5 +9,6 @@
 
 // ajouter les en-têtes à précompiler ici
 #include <RetroCode/Regex.h>
+#include <RetroCode/Memory.h>
 
 #endif //PCH_H

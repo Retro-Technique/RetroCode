@@ -238,6 +238,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RegExp.cpp" />
+    <ClCompile Include="RegExpImpl.cpp" />
     <ClCompile Include="RetroCode-Regex.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -246,13 +248,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\RetroCode\Regex.h" />
+    <ClInclude Include="..\..\include\RetroCode\Regex\RegExp.h" />
+    <ClInclude Include="atlrx.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RegExpImpl.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroCode-Regex.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RetroCode-Exception\RetroCode-Exception.vcxproj">
+      <Project>{9333065f-af0a-f5e9-6694-b49051df9b64}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

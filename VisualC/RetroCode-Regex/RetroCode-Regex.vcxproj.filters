@@ -27,6 +27,12 @@
     <ClCompile Include="pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="RegExp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="RegExpImpl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Regex.def">
@@ -51,6 +57,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Regex.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="atlrx.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Regex\RegExp.h">
+      <Filter>include\Regex</Filter>
+    </ClInclude>
+    <ClInclude Include="RegExpImpl.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

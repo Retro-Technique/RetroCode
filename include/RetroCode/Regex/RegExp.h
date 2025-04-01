@@ -37,28 +37,61 @@
  *
  */
 
-#ifndef __RETRO_EXCEPTION_H_INCLUDED__
-#error Do not include Macros.h directly, include the Exception.h file
-#endif
-
 #pragma once
 
-#define REPORT_EXCEPTION_AND_DELETE(szMsg) retro::exception::CReportException(e, szMsg, _T(__FILE__), __LINE__).Report()
-#define REPORT_EXCEPTION_NO_DELETE(szMsg) retro::exception::CReportException(e, szMsg, _T(__FILE__), __LINE__, FALSE).Report()
-
-#define THROW_WIN32_EXCEPTION(err) throw new retro::exception::CWin32Exception(err)
-#define ENSURE_HRESULT(hr) ENSURE_THROW(SUCCEEDED(hr), THROW_WIN32_EXCEPTION(hr))
-#define ENSURE_LAST_ERROR(cond) ENSURE_THROW(cond, THROW_WIN32_EXCEPTION(GetLastError()))
-
-#ifdef _INC_MMSYSTEM // Multimedia API's
-#define THROW_MMIO_EXCEPTION(mmr) throw new retro::exception::CMMIOException(mmr)
-#define ENSURE_MMIO(mmr) ENSURE_THROW(MMSYSERR_NOERROR == mmr, THROW_MMIO_EXCEPTION(mmr))
+#ifndef __RETRO_REGEX_H_INCLUDED__
+#error Do not include RegExp.h directly, include the Regex.h file
 #endif
 
-#ifdef __ATLRX_H__ // ATL Regular Expressions
-#define THROW_REGEX_EXCEPTION(mmr) throw new retro::exception::CRegExpException(mmr)
-#define ENSURE_REGEX(status) ENSURE_THROW(REPARSE_ERROR_OK == status, THROW_REGEX_EXCEPTION(status))
+namespace retro::regex
+{
+
+	namespace priv
+	{
+		class CRegExpImpl;
+	}
+
+	class AFX_EXT_CLASS CRegExp : public CObject
+	{
+#pragma region Constructors
+
+		DECLARE_DYNAMIC(CRegExp)
+
+	public:
+
+		CRegExp();
+		~CRegExp();
+
+#pragma endregion
+#pragma region Attributes
+
+	private:
+
+		priv::CRegExpImpl* m_pImpl;
+
+#pragma endregion
+#pragma region Operations
+
+	public:
+
+		typedef BOOL(* MATCHENUMPROC)(LPCTSTR, LPVOID);
+
+		void Compile(_In_z_ LPCTSTR pszPattern, _In_ BOOL bCaseSensitive = TRUE) const;
+		BOOL Match(_In_z_ LPCTSTR pszText, CStringList& listMatches) const;
+		BOOL Match(_In_z_ LPCTSTR pszText, CStringArray& arrMatches) const;
+		BOOL Match(_In_z_ LPCTSTR pszText, MATCHENUMPROC pfnEnumProc, LPVOID pData = NULL) const;
+
+#pragma endregion
+#pragma region Overridables
+
+	public:
+
+#ifdef _DEBUG
+		void AssertValid() const override;
+		void Dump(_Inout_ CDumpContext& dc) const override;
 #endif
 
+#pragma endregion
+	};
 
-
+}
