@@ -44,5 +44,6 @@
 
 #include <afxwin.h>
 
+#include "Regex/RegExp.h"
 
 #endif

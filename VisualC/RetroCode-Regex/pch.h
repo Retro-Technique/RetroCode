@@ -10,4 +10,9 @@
 // ajouter les en-têtes à précompiler ici
 #include "framework.h"
 
+#include "atlrx.h"	// ATL Regular Expressions
+
+#include <RetroCode/Regex.h>
+#include <RetroCode/Exception.h>
+
 #endif //PCH_H

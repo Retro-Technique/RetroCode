@@ -172,18 +172,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\tests\Regex\Regex.Test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="RetroCode-Regex.Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RetroCode-Memory\RetroCode-Memory.vcxproj">
+      <Project>{95ad5d1f-fe07-a28e-2899-c20ea671801c}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\RetroCode-Regex\RetroCode-Regex.vcxproj">
       <Project>{e74146e5-bedd-3aa5-786a-a390b8a9ce6a}</Project>
     </ProjectReference>

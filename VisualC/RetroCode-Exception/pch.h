@@ -10,8 +10,11 @@
 // ajouter les en-têtes à précompiler ici
 #include "framework.h"
 
-#include <RetroCode/Exception.h>
+#include <RetroCode/Exception.h>	
 
-#include <comdef.h>
+#include <mmsystem.h>	// Multimedia API's
+#include <comdef.h>		// Native C++ compiler COM support
+
+#include "../VisualC/RetroCode-Regex/atlrx.h"	// ATL Regular Expressions
 
 #endif //PCH_H

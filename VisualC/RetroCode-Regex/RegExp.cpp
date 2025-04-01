@@ -37,28 +37,84 @@
  *
  */
 
-#ifndef __RETRO_EXCEPTION_H_INCLUDED__
-#error Do not include Macros.h directly, include the Exception.h file
+#include "pch.h"
+#include "RegExpImpl.h"
+
+namespace retro::regex
+{
+
+#pragma region Constructors
+
+	IMPLEMENT_DYNAMIC(CRegExp, CObject)
+
+	CRegExp::CRegExp()
+		: m_pImpl(new priv::CRegExpImpl)
+	{
+		
+	}
+
+	CRegExp::~CRegExp()
+	{
+		if (m_pImpl)
+		{
+			delete m_pImpl;
+			m_pImpl = NULL;
+		}
+	}
+
+#pragma endregion
+#pragma region Operations
+
+	void CRegExp::Compile(_In_z_ LPCTSTR pszPattern, _In_ BOOL bCaseSensitive) const
+	{
+		ENSURE_THROW(m_pImpl, AfxThrowMemoryException());
+
+		m_pImpl->Compile(pszPattern, bCaseSensitive);
+	}
+
+	BOOL CRegExp::Match(_In_z_ LPCTSTR pszText, CStringList& listMatches) const
+	{
+		ENSURE_THROW(m_pImpl, AfxThrowMemoryException());
+
+		return m_pImpl->Match(pszText, listMatches);
+	}
+
+	BOOL CRegExp::Match(_In_z_ LPCTSTR pszText, CStringArray& arrMatches) const
+	{
+		ENSURE_THROW(m_pImpl, AfxThrowMemoryException());
+
+		return m_pImpl->Match(pszText, arrMatches);
+	}
+
+	BOOL CRegExp::Match(_In_z_ LPCTSTR pszText, MATCHENUMPROC pfnEnumProc, LPVOID pData) const
+	{
+		ENSURE_THROW(m_pImpl, AfxThrowMemoryException());
+
+		return m_pImpl->Match(pszText, pfnEnumProc, pData);
+	}
+
+#pragma endregion
+#pragma region Overridables
+
+#ifdef _DEBUG
+
+	void CRegExp::AssertValid() const
+	{
+		CObject::AssertValid();
+
+		ASSERT_POINTER(m_pImpl, priv::CRegExpImpl);
+		ASSERT_VALID(m_pImpl);
+	}
+
+	void CRegExp::Dump(_Inout_ CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		dc << _T("m_pImpl = ") << m_pImpl;
+	}
+
 #endif
 
-#pragma once
+#pragma endregion
 
-#define REPORT_EXCEPTION_AND_DELETE(szMsg) retro::exception::CReportException(e, szMsg, _T(__FILE__), __LINE__).Report()
-#define REPORT_EXCEPTION_NO_DELETE(szMsg) retro::exception::CReportException(e, szMsg, _T(__FILE__), __LINE__, FALSE).Report()
-
-#define THROW_WIN32_EXCEPTION(err) throw new retro::exception::CWin32Exception(err)
-#define ENSURE_HRESULT(hr) ENSURE_THROW(SUCCEEDED(hr), THROW_WIN32_EXCEPTION(hr))
-#define ENSURE_LAST_ERROR(cond) ENSURE_THROW(cond, THROW_WIN32_EXCEPTION(GetLastError()))
-
-#ifdef _INC_MMSYSTEM // Multimedia API's
-#define THROW_MMIO_EXCEPTION(mmr) throw new retro::exception::CMMIOException(mmr)
-#define ENSURE_MMIO(mmr) ENSURE_THROW(MMSYSERR_NOERROR == mmr, THROW_MMIO_EXCEPTION(mmr))
-#endif
-
-#ifdef __ATLRX_H__ // ATL Regular Expressions
-#define THROW_REGEX_EXCEPTION(mmr) throw new retro::exception::CRegExpException(mmr)
-#define ENSURE_REGEX(status) ENSURE_THROW(REPARSE_ERROR_OK == status, THROW_REGEX_EXCEPTION(status))
-#endif
-
-
-
+}

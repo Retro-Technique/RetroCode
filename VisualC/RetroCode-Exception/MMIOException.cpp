@@ -38,6 +38,7 @@
  */
 
 #include "pch.h"
+#include "resource.h"
 
 namespace retro::exception
 {
@@ -46,7 +47,7 @@ namespace retro::exception
 
 	IMPLEMENT_DYNAMIC(CMMIOException, CException)
 
-	CMMIOException::CMMIOException(MMRESULT mmResult)
+	CMMIOException::CMMIOException(UINT mmResult)
 		: m_mmResult(mmResult)
 	{
 
@@ -68,7 +69,7 @@ namespace retro::exception
 			*pnHelpContext = 0;
 		}
 
-		_stprintf_s(lpszError, nMaxError, _T("MMIO error: %s"), ErrorToString(m_mmResult));
+		_stprintf_s(lpszError, nMaxError, _T("MMIO - %s"), ErrorToString(m_mmResult).GetString());
 
 		return TRUE;
 	}
@@ -94,30 +95,52 @@ namespace retro::exception
 #pragma endregion
 #pragma region Implementations
 
-	LPCTSTR CMMIOException::ErrorToString(MMRESULT mmResult) const
+	UINT CMMIOException::ErrorToIDS(INT nResult) const
 	{
-		switch (mmResult)
+		static constexpr const UINT RESOURCE_IDS[] =
 		{
-		case MMIOERR_FILENOTFOUND: return _T("The file is not opened, and the function does not return a valid multimedia file I/O file handle");
-		case MMIOERR_CANNOTOPEN: return _T("The file cannot be opened");
-		case MMIOERR_CANNOTCLOSE: return _T("The file cannot be closed");
-		case MMIOERR_ACCESSDENIED: return _T("The file is protected and cannot be opened");
-		case MMIOERR_INVALIDFILE: return _T("Another failure condition occurred. This is the default error for an open-file failure");
-		case MMIOERR_NETWORKERROR: return _T("The network is not responding to the request to open a remote file");
-		case MMIOERR_PATHNOTFOUND: return _T("The directory specification is incorrect");
-		case MMIOERR_SHARINGVIOLATION: return _T("The file is being used by another application and is unavailable");
-		case MMIOERR_TOOMANYOPENFILES: return _T("The number of files simultaneously open is at a maximum level. The system has run out of available file handles");
-		case MMIOERR_CHUNKNOTFOUND: return _T("The end of the file (or the end of the parent chunk, if given) was reached before the desired chunk was found");
-		case MMIOERR_CANNOTSEEK: return _T("There was an error while seeking to the end of the chunk");
-		case MMIOERR_CANNOTWRITE: return _T("The contents of the buffer could not be written to disk");
-		case MMIOERR_CANNOTEXPAND: return _T("The specified memory file cannot be expanded, probably because the adwInfo member of the MMIOINFO structure was set to zero in the initial call to the mmioOpen function");
-		case MMIOERR_CANNOTREAD: return _T("An error occurred while refilling the buffer");
-		case MMIOERR_OUTOFMEMORY: return _T("There was not enough memory to expand a memory file for further writing");
-		case MMIOERR_UNBUFFERED: return _T("The specified file is not opened for buffered I/O");
-		default: break;
+			IDS_MMIOERR_FILENOTFOUND,
+			IDS_MMIOERR_OUTOFMEMORY,
+			IDS_MMIOERR_CANNOTOPEN,
+			IDS_MMIOERR_CANNOTCLOSE,
+			IDS_MMIOERR_CANNOTREAD,
+			IDS_MMIOERR_CANNOTWRITE,
+			IDS_MMIOERR_CANNOTSEEK,
+			IDS_MMIOERR_CANNOTEXPAND,
+			IDS_MMIOERR_CHUNKNOTFOUND,
+			IDS_MMIOERR_UNBUFFERED,
+			IDS_MMIOERR_PATHNOTFOUND,
+			IDS_MMIOERR_ACCESSDENIED,
+			IDS_MMIOERR_SHARINGVIOLATION,
+			IDS_MMIOERR_NETWORKERROR,
+			IDS_MMIOERR_TOOMANYOPENFILES,
+			IDS_MMIOERR_INVALIDFILE
+		};
+		static constexpr const INT_PTR RESOURCE_IDS_COUNT = ARRAYSIZE(RESOURCE_IDS);
+
+		C_ASSERT(RESOURCE_IDS_COUNT == (MMIOERR_INVALIDFILE - MMIOERR_BASE));
+
+		ENSURE(nResult > MMIOERR_BASE);
+		ENSURE(nResult <= MMIOERR_INVALIDFILE);
+
+		const INT_PTR nIndex = nResult - MMIOERR_BASE - 1;
+
+		ASSERT(nIndex >= 0);
+		ASSERT(nIndex < RESOURCE_IDS_COUNT);
+
+		return RESOURCE_IDS[nIndex];
+	}
+
+	CString CMMIOException::ErrorToString(UINT mmResult) const
+	{
+		CString strError;
+
+		if (!strError.LoadString(ErrorToIDS(mmResult)))
+		{
+			return _T("<IDS NOT FOUND>");
 		}
 
-		return _T("Unknown MM error");
+		return strError;
 	}
 
 #pragma endregion

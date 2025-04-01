@@ -235,6 +235,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RegExpException.cpp" />
     <ClCompile Include="ReportException.cpp" />
     <ClCompile Include="RetroCode-Exception.cpp" />
     <ClCompile Include="Win32Exception.cpp" />
@@ -247,6 +248,7 @@
     <ClInclude Include="..\..\include\RetroCode\Exception.h" />
     <ClInclude Include="..\..\include\RetroCode\Exception\Macros.h" />
     <ClInclude Include="..\..\include\RetroCode\Exception\MMIOException.h" />
+    <ClInclude Include="..\..\include\RetroCode\Exception\RegExpException.h" />
     <ClInclude Include="..\..\include\RetroCode\Exception\ReportException.h" />
     <ClInclude Include="..\..\include\RetroCode\Exception\Win32Exception.h" />
     <ClInclude Include="framework.h" />

@@ -37,58 +37,106 @@
  *
  */
 
-#ifndef __RETRO_EXCEPTION_H_INCLUDED__
-#error Do not include MMIOException.h directly, include the Exception.h file
-#endif
-
-#pragma once
+#include "pch.h"
+#include "resource.h"
 
 namespace retro::exception
 {
 
-	class AFX_EXT_CLASS CMMIOException : public CException
-	{
 #pragma region Constructors
-		
-		DECLARE_DYNAMIC(CMMIOException)
 
-	public:
+	IMPLEMENT_DYNAMIC(CRegExpException, CException)
 
-		CMMIOException(UINT mmResult);
-		~CMMIOException() = default;
+	CRegExpException::CRegExpException(INT nResult)
+		: m_nResult(nResult)
+	{
 
-#pragma endregion
-#pragma region Attributes
-
-	private:
-
-		UINT m_mmResult;
+	}
 
 #pragma endregion
 #pragma region Overridables
 
-	public:
+	_Success_(return != 0)
+		BOOL CRegExpException::GetErrorMessage(
+			_Out_writes_z_(nMaxError) LPTSTR lpszError,
+			_In_ UINT nMaxError,
+			_Out_opt_ PUINT pnHelpCon_T) const
+	{
+		ENSURE(AfxIsValidString(lpszError, nMaxError));
 
-		_Success_(return != 0)
-			BOOL GetErrorMessage(
-				_Out_writes_z_(nMaxError) LPTSTR lpszError,
-				_In_ UINT nMaxError,
-				_Out_opt_ PUINT pnHelpContext = NULL) const override;
+		if (pnHelpCon_T)
+		{
+			*pnHelpCon_T = 0;
+		}
+
+		_stprintf_s(lpszError, nMaxError, _T("Regex - %s"), ErrorToString(m_nResult).GetString());
+
+		return TRUE;
+	}
 
 #ifdef _DEBUG
-		void AssertValid() const override;
-		void Dump(_Inout_ CDumpContext& dc) const override;
+
+	void CRegExpException::AssertValid() const
+	{
+		CObject::AssertValid();
+
+		ASSERT(m_nResult != REPARSE_ERROR_OK);
+	}
+
+	void CRegExpException::Dump(_Inout_ CDumpContext& dc) const
+	{
+		CObject::Dump(dc);
+
+		dc << _T("m_nResult = ") << m_nResult << _T("\n");
+	}
+
 #endif
 
 #pragma endregion
 #pragma region Implementations
 
-	private:
+	UINT CRegExpException::ErrorToIDS(INT nResult) const
+	{
+		static constexpr const UINT RESOURCE_IDS[] =
+		{
+			IDS_REPARSE_ERROR_OUTOFMEMORY,
+			IDS_REPARSE_ERROR_BRACE_EXPECTED,
+			IDS_REPARSE_ERROR_PAREN_EXPECTED,
+			IDS_REPARSE_ERROR_BRACKET_EXPECTED,
+			IDS_REPARSE_ERROR_UNEXPECTED,
+			IDS_REPARSE_ERROR_EMPTY_RANGE,
+			IDS_REPARSE_ERROR_INVALID_GROUP,
+			IDS_REPARSE_ERROR_INVALID_RANGE,
+			IDS_REPARSE_ERROR_EMPTY_REPEATOP,
+			IDS_REPARSE_ERROR_INVALID_INPUT
+		};
+		static constexpr const INT_PTR RESOURCE_IDS_COUNT = ARRAYSIZE(RESOURCE_IDS);
 
-		UINT ErrorToIDS(INT nResult) const;
-		CString ErrorToString(UINT mmResult) const;
+		C_ASSERT(RESOURCE_IDS_COUNT == (REPARSE_ERROR_INVALID_INPUT - REPARSE_ERROR_OK));
+
+		ENSURE(nResult > REPARSE_ERROR_OK);
+		ENSURE(nResult <= REPARSE_ERROR_INVALID_INPUT);
+
+		const INT_PTR nIndex = nResult - REPARSE_ERROR_OK - 1;
+
+		ASSERT(nIndex >= 0);
+		ASSERT(nIndex < RESOURCE_IDS_COUNT);
+
+		return RESOURCE_IDS[nIndex];
+	}
+
+	CString CRegExpException::ErrorToString(INT nResult) const
+	{
+		CString strError;
+		
+		if (!strError.LoadString(ErrorToIDS(nResult)))
+		{
+			return _T("<IDS NOT FOUND>");
+		}
+		
+		return strError;
+	}
 
 #pragma endregion
-	};
 
 }

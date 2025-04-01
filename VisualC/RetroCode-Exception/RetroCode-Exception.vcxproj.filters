@@ -36,6 +36,9 @@
     <ClCompile Include="ReportException.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="RegExpException.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Exception.def">
@@ -71,6 +74,9 @@
       <Filter>include\Exception</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\RetroCode\Exception\ReportException.h">
+      <Filter>include\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\RetroCode\Exception\RegExpException.h">
       <Filter>include\Exception</Filter>
     </ClInclude>
   </ItemGroup>
