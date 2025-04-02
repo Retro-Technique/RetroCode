@@ -33,6 +33,9 @@
     <ClCompile Include="RegExpImpl.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="SimulationDlg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="RetroCode-Regex.def">
@@ -67,10 +70,18 @@
     <ClInclude Include="RegExpImpl.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="SimulationDlg.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="RetroCode-Regex.rc">
       <Filter>Fichiers de ressources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\logo.bmp">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

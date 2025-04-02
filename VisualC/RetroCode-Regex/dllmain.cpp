@@ -5,6 +5,7 @@
 #include "framework.h"
 #include <afxwin.h>
 #include <afxdllx.h>
+#include "SimulationDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -39,7 +40,6 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 		//  seront générés.
 
 		new CDynLinkLibrary(RetroCodeRegexDLL);
-
 	}
 	else if (dwReason == DLL_PROCESS_DETACH)
 	{
@@ -49,4 +49,28 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 		AfxTermExtensionModule(RetroCodeRegexDLL);
 	}
 	return 1;   // ok
+}
+
+#ifdef _WIN64
+#pragma comment(linker, "/EXPORT:Simulation=Simulation")
+#else
+#pragma comment(linker, "/EXPORT:Simulation=Simulation@16")
+#endif
+
+
+extern "C" void CALLBACK Simulation(HWND hwnd, HINSTANCE hinst, LPSTR lpszCmdLine, int nCmdShow)
+{
+	UNREFERENCED_PARAMETER(hinst);
+	UNREFERENCED_PARAMETER(lpszCmdLine);
+	UNREFERENCED_PARAMETER(nCmdShow);
+
+	if (!AfxWinInit(::GetModuleHandle(NULL), NULL, ::GetCommandLine(), 0))
+	{
+		return;
+	}
+
+	CWnd* pWnd = CWnd::FromHandle(hwnd);
+
+	CSimulationDlg dlg(pWnd);
+	dlg.DoModal();
 }
