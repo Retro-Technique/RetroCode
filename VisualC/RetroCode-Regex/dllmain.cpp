@@ -54,7 +54,7 @@ DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 #ifdef _WIN64
 #pragma comment(linker, "/EXPORT:Simulation=Simulation")
 #else
-#pragma comment(linker, "/EXPORT:Simulation=Simulation@16")
+#pragma comment(linker, "/EXPORT:Simulation=_Simulation@16")
 #endif
 
 
